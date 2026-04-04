@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+	base: process.env.GITHUB_ACTIONS ? '/accessible-d-stack-landscape/' : '/',
 	build: {
 		dynamicImportVarsOptions: {
 			exclude: [],
