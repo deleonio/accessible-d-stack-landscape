@@ -1,4 +1,4 @@
-import { KolBadge } from '@public-ui/react-v19';
+import { KolBadge, KolCard } from '@public-ui/react-v19';
 import { Article } from '../types';
 
 interface ArticleCardProps {
@@ -7,22 +7,23 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <kol-card className="article-card">
-      <div slot="header" className="card-header">
-        {article.logo && <img src={article.logo} alt={article.name} className="card-logo" />}
-        <div className="card-title">
-          <h3>{article.name}</h3>
-          {article.featured && (
-            <KolBadge _label="Featured" _color="#003d82" className="featured-badge" />
-          )}
+    <div className="article-card-wrapper">
+      <KolCard _label={article.name} className="article-card">
+        <div className="card-content">
+          {article.logo && <img src={article.logo} alt={article.name} className="card-logo" />}
+          <p className="card-description">{article.description}</p>
+          <div className="card-tags">
+            {article.tags.map((tag) => (
+              <KolBadge key={tag} _label={tag} _color="#f0f0f0" className="tag-badge" />
+            ))}
+          </div>
         </div>
-      </div>
-      <p className="card-description">{article.description}</p>
-      <div slot="footer" className="card-tags">
-        {article.tags.map((tag) => (
-          <KolBadge key={tag} _label={tag} _color="#f0f0f0" className="tag-badge" />
-        ))}
-      </div>
-    </kol-card>
+      </KolCard>
+      {article.featured && (
+        <div className="featured-indicator">
+          <KolBadge _label="Featured" _color="#003d82" />
+        </div>
+      )}
+    </div>
   );
 }

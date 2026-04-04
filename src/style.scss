@@ -97,12 +97,29 @@ kol-card.article-card {
   }
 }
 
+.article-card-wrapper {
+  position: relative;
+}
+
+.featured-indicator {
+  position: absolute;
+  top: var(--kol-spacing-small);
+  right: var(--kol-spacing-small);
+}
+
 .article-card {
-  .card-header {
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .card-content {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
     gap: var(--kol-spacing-medium);
-    margin-bottom: var(--kol-spacing-medium);
 
     .card-logo {
       width: 40px;
@@ -112,37 +129,21 @@ kol-card.article-card {
       flex-shrink: 0;
     }
 
-    .card-title {
+    .card-description {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .card-tags {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: var(--kol-spacing-small);
-      flex: 1;
 
-      h3 {
-        font-size: 1.1rem;
-        margin: 0;
-      }
-
-      .featured-badge {
+      .tag-badge {
         flex-shrink: 0;
       }
-    }
-  }
-
-  .card-description {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: var(--kol-spacing-medium);
-    line-height: 1.4;
-  }
-
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--kol-spacing-small);
-
-    .tag-badge {
-      flex-shrink: 0;
     }
   }
 }
