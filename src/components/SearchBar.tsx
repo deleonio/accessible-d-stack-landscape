@@ -9,28 +9,31 @@ interface SearchBarProps {
 
 export function SearchBar({ filters, onFilterChange, categories }: SearchBarProps) {
 	const categoryOptions = [
-		{ label: 'All Categories', value: '' },
-		...categories.map(cat => ({ label: cat.name, value: cat.id }))
+		{ label: 'Alle Kategorien', value: '' },
+		...categories.map((cat) => ({ label: cat.name, value: cat.id })),
 	];
 
 	return (
-		<div className="search-bar">
-			<KolInputText
-				_label="Search"
-				_value={filters.searchQuery}
-				_placeholder="Search articles..."
-				_on={{
-					onInput: (e, value) => onFilterChange({ ...filters, searchQuery: value as string }),
-				}}
-			/>
-			<KolSingleSelect
-				_label="Filter by Category"
-				_options={categoryOptions}
-				_value={filters.selectedCategory || ''}
-				_on={{
-					onChange: (e, value) => onFilterChange({ ...filters, selectedCategory: value ? (value as string) : null }),
-				}}
-			/>
-		</div>
+		<section className="search-bar" aria-label="Suche und Filter">
+			<div className="search-bar__inner">
+				<KolInputText
+					_label="Suche"
+					_value={filters.searchQuery}
+					_placeholder="Technologie oder Stichwort suchen …"
+					_on={{
+						onInput: (_e, value) => onFilterChange({ ...filters, searchQuery: value as string }),
+					}}
+				/>
+				<KolSingleSelect
+					_label="Kategorie"
+					_options={categoryOptions}
+					_value={filters.selectedCategory || ''}
+					_on={{
+						onChange: (_e, value) =>
+							onFilterChange({ ...filters, selectedCategory: value ? (value as string) : null }),
+					}}
+				/>
+			</div>
+		</section>
 	);
 }

@@ -17,6 +17,7 @@ function App() {
         articles={filtered}
         filters={filters}
         onFilterChange={setFilters}
+        totalCount={ARTICLES.length}
       />
       <Footer />
     </div>
