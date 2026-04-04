@@ -24,7 +24,6 @@ dist/*
 # Playwright
 playwright-report/
 test-results/
-e2e/**/*.png
 
 # Cache
 .sass-cache
