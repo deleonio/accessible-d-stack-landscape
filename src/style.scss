@@ -42,9 +42,9 @@
   // KoliBri colour aliases
   --kol-color-primary: var(--ds-color-primary);
 
-  // Radius
-  --ds-radius-sm: 4px;
-  --ds-radius-md: 6px;
+  // Radius (KERN: small=2px, default=4px, large=8px)
+  --ds-radius-sm: 2px;
+  --ds-radius-md: 4px;
   --ds-radius-lg: 8px;
 
   // Shadow
@@ -113,6 +113,57 @@ html, body {
   background: var(--ds-color-primary);
   color: var(--ds-color-text-inverse);
   border-bottom: 4px solid var(--ds-color-accent);
+
+  // Digitale Dachmarke – offizieller Identitätsstreifen
+  &__official-strip {
+    background: #000000;
+    padding: var(--ds-space-1) var(--ds-space-8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--ds-space-2);
+
+    .official-label {
+      display: flex;
+      align-items: center;
+      gap: var(--ds-space-2);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: var(--ds-text-xs);
+      font-weight: 400;
+
+      // Digitalwappen – vereinfacht als Farb-Icon
+      &__emblem {
+        display: flex;
+        gap: 2px;
+        flex-shrink: 0;
+
+        span {
+          display: block;
+          width: 5px;
+          height: 14px;
+          border-radius: 1px;
+
+          &:nth-child(1) { background: #000000; border: 1px solid rgba(255,255,255,0.5); }
+          &:nth-child(2) { background: #dd0000; }
+          &:nth-child(3) { background: #ffce00; }
+        }
+      }
+    }
+
+    .official-info {
+      font-size: var(--ds-text-xs);
+      color: rgba(255, 255, 255, 0.55);
+
+      a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover, &:focus { color: #ffffff; }
+      }
+    }
+  }
 
   &__brand-bar {
     background: var(--ds-color-primary-dark);
