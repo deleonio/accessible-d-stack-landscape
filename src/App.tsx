@@ -6,21 +6,16 @@ import { useFilters } from './hooks/useFilters';
 import { ARTICLES, CATEGORIES } from './data/articles';
 
 function App() {
-  const { filters, setFilters, filtered } = useFilters(ARTICLES);
+	const { filters, setFilters, filtered } = useFilters(ARTICLES);
 
-  return (
-    <div className="app">
-      <Header />
-      <SearchBar filters={filters} onFilterChange={setFilters} categories={CATEGORIES} />
-      <CategoryGrid
-        categories={CATEGORIES}
-        articles={filtered}
-        filters={filters}
-        onFilterChange={setFilters}
-      />
-      <Footer />
-    </div>
-  );
+	return (
+		<div className="app">
+			<Header />
+			<SearchBar filters={filters} onFilterChange={setFilters} categories={CATEGORIES} />
+			<CategoryGrid categories={CATEGORIES} articles={filtered} filters={filters} onFilterChange={setFilters} />
+			<Footer />
+		</div>
+	);
 }
 
 export default App;

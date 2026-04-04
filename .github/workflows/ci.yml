@@ -30,8 +30,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Type check
+      - name: Type check (tsc)
         run: pnpm lint
+
+      - name: ESLint
+        run: pnpm eslint
+
+      - name: Prettier
+        run: pnpm format
+
+      - name: Knip (unused exports/deps)
+        run: pnpm check-unused
 
       - name: Build
         run: pnpm build

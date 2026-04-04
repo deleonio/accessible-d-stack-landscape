@@ -8,10 +8,7 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ filters, onFilterChange, categories }: SearchBarProps) {
-	const categoryOptions = [
-		{ label: 'All Categories', value: '' },
-		...categories.map(cat => ({ label: cat.name, value: cat.id }))
-	];
+	const categoryOptions = [{ label: 'All Categories', value: '' }, ...categories.map((cat) => ({ label: cat.name, value: cat.id }))];
 
 	return (
 		<div className="search-bar">
