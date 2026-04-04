@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <SearchBar filters={filters} onFilterChange={setFilters} />
+      <SearchBar filters={filters} onFilterChange={setFilters} categories={CATEGORIES} />
       <CategoryGrid
         categories={CATEGORIES}
         articles={filtered}
