@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState } from 'preact/hooks';
 import { Article, FilterState } from '../types';
 
 export function useFilters(articles: Article[]) {

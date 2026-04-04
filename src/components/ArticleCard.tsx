@@ -1,4 +1,4 @@
-import { KolBadge, KolCard } from '@public-ui/react-v19';
+import { KolBadge, KolCard } from '@public-ui/preact';
 import { Article } from '../types';
 import { CATEGORIES } from '../data/articles';
 

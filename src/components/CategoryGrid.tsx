@@ -1,4 +1,4 @@
-import { KolButton } from '@public-ui/react-v19';
+import { KolButton } from '@public-ui/preact';
 import { Article, Category, FilterState } from '../types';
 import { ArticleCard } from './ArticleCard';
 
