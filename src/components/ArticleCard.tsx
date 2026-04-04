@@ -6,16 +6,10 @@ interface ArticleCardProps {
 	article: Article;
 }
 
-const CATEGORY_COLORS: Record<string, string> = {
-	betrieb:       'var(--ds-cat-betrieb)',       // Grün
-	infrastruktur: 'var(--ds-cat-infrastruktur)', // Rot
-	plattform:     'var(--ds-cat-plattform)',     // Blau
-	zugang:        'var(--ds-cat-zugang)',        // Orange
-};
-
 export function ArticleCard({ article }: ArticleCardProps) {
-	const categoryColor = CATEGORY_COLORS[article.category] ?? 'var(--ds-color-primary)';
-	const categoryName = CATEGORIES.find((c) => c.id === article.category)?.name;
+	const category = CATEGORIES.find((c) => c.id === article.category);
+	const categoryColor = category?.color ?? '#003d82';
+	const categoryName = category?.name ?? 'Allgemein';
 
 	return (
 		<div className="article-card-wrapper">

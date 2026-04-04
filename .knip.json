@@ -1,9 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": ["src/main.ts", "src/react.main.tsx"],
+  "entry": ["src/react.main.tsx"],
   "project": ["src/**/*.{ts,tsx}"],
-  "ignore": [
-    "src/declare.d.ts"
-  ],
+  "ignoreDependencies": ["uno.css"],
   "ignoreExportsUsedInFile": true
 }

@@ -1,5 +1,5 @@
 {
-	"name": "react-vite-formik",
+	"name": "accessible-d-stack-landscape",
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
@@ -7,33 +7,36 @@
 		"check-unused": "knip",
 		"check-updates": "ncu",
 		"dev": "vite",
+		"eslint": "eslint src",
 		"format": "prettier --check src",
 		"lint": "tsc --noemit",
+		"stylelint": "stylelint \"src/**/*.scss\"",
 		"prebuild": "npm-run-all2 prebuild:*",
 		"prebuild:components": "cpy \"node_modules/@public-ui/components/assets/**/*\" assets --dot",
 		"prebuild:theme-kern": "cpy \"node_modules/@public-ui/theme-kern/assets/**/*\" assets --dot",
 		"prepare": "pnpm prebuild",
 		"preview": "vite preview",
 		"start": "pnpm run dev",
+		"test:e2e": "playwright test",
+		"test:e2e:ui": "playwright test --ui",
+		"test:e2e:update-snapshots": "playwright test --update-snapshots",
 		"update": "ncu -u && pnpm i"
 	},
 	"dependencies": {
-		"@hookform/resolvers": "^3.3.0",
 		"@public-ui/components": "4.1.2",
 		"@public-ui/react-v19": "4.1.2",
 		"@public-ui/theme-kern": "^4.1.2",
 		"react": "19.2.4",
-		"react-dom": "19.2.4",
-		"react-hook-form": "^7.48.0",
-		"zod": "3.25.76"
+		"react-dom": "19.2.4"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "4.10.2",
 		"@eslint/js": "9.39.4",
+		"@playwright/test": "1.51.1",
 		"@types/react": "18.3.28",
 		"@types/react-dom": "18.3.7",
 		"@typescript-eslint/eslint-plugin": "8.58.0",
 		"@typescript-eslint/parser": "8.58.0",
-		"@unocss/preset-mini": "66.6.7",
 		"@unocss/vite": "66.6.7",
 		"@vitejs/plugin-react-swc": "4.3.0",
 		"cpy-cli": "6.0.0",
@@ -45,9 +48,10 @@
 		"npm-check-updates": "18.3.1",
 		"npm-run-all2": "8.0.4",
 		"prettier": "3.8.1",
-		"prettier-plugin-organize-imports": "4.3.0",
-		"stylelint": "17.6.0",
-		"typescript": "5.9.3",
+		"prettier-plugin-organize-imports": "^4.3.0",
+		"stylelint": "^17.6.0",
+		"stylelint-config-standard-scss": "^17.0.0",
+		"typescript": "6.0.2",
 		"unocss": "0.65.4",
 		"vite": "6.4.1"
 	}

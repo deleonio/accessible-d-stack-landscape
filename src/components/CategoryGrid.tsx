@@ -11,14 +11,6 @@ interface CategoryGridProps {
 }
 
 export function CategoryGrid({ categories, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
-	const countByCategory = categories.reduce<Record<string, number>>((acc, cat) => {
-		acc[cat.id] = 0;
-		return acc;
-	}, {});
-
-	// Count from the full unfiltered set is passed as totalCount; for category buttons
-	// we show counts from all articles matching that category (ignoring active filter).
-	// We only have 'articles' (already filtered), so show the live count per selected category.
 	const activeCount = articles.length;
 
 	return (
