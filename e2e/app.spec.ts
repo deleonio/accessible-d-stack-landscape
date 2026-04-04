@@ -31,7 +31,7 @@ test.describe('Landscape App', () => {
 	});
 
 	test('screenshot – full page on load', async ({ page }) => {
-		await page.waitForLoadState('networkidle');
+await expect(page.locator('.article-card').first()).toBeVisible();
 		await expect(page).toHaveScreenshot('full-page.png', { fullPage: true });
 	});
 
