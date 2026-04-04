@@ -1,9 +1,9 @@
-import { Header } from './components/Header';
-import { SearchBar } from './components/SearchBar';
 import { CategoryGrid } from './components/CategoryGrid';
 import { Footer } from './components/Footer';
-import { useFilters } from './hooks/useFilters';
+import { Header } from './components/Header';
+import { SearchBar } from './components/SearchBar';
 import { ARTICLES, CATEGORIES } from './data/articles';
+import { useFilters } from './hooks/useFilters';
 
 function App() {
 	const { filters, setFilters, filtered } = useFilters(ARTICLES);

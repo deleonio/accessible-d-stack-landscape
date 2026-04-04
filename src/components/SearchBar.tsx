@@ -1,5 +1,5 @@
 import { KolInputText, KolSingleSelect } from '@public-ui/react-v19';
-import { FilterState, Category } from '../types';
+import { Category, FilterState } from '../types';
 
 interface SearchBarProps {
 	filters: FilterState;
