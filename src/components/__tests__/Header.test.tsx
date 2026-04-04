@@ -2,6 +2,7 @@ import { page } from '@vitest/browser/context';
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import { SCREENSHOTS_DIR } from '../../test/constants';
 import { Header } from '../Header';
 
 describe('Header', () => {
@@ -12,7 +13,7 @@ describe('Header', () => {
 		expect(getByRole('heading', { level: 1 })).toBeInTheDocument();
 		expect(getByText('Interactive visualization of the ecosystem')).toBeInTheDocument();
 
-		await page.screenshot({ path: 'screenshots/header.png' });
+		await page.screenshot({ path: `${SCREENSHOTS_DIR}/header.png` });
 	});
 
 	it('has no accessibility violations', async () => {

@@ -2,15 +2,11 @@ import { page } from '@vitest/browser/context';
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import { SCREENSHOTS_DIR } from '../../test/constants';
 import { ArticleCard } from '../ArticleCard';
 import type { Article } from '../../types';
 
-vi.mock('@public-ui/react-v19', () => ({
-	KolCard: ({ _label, children }: { _label: string; children: React.ReactNode }) => (
-		<article aria-label={_label}>{children}</article>
-	),
-	KolBadge: ({ _label }: { _label: string }) => <span className="badge">{_label}</span>,
-}));
+vi.mock('@public-ui/react-v19');
 
 const mockArticle: Article = {
 	id: '1',
@@ -38,7 +34,7 @@ describe('ArticleCard', () => {
 		expect(getByText('test')).toBeInTheDocument();
 		expect(getByText('automation')).toBeInTheDocument();
 
-		await page.screenshot({ path: 'screenshots/article-card.png' });
+		await page.screenshot({ path: `${SCREENSHOTS_DIR}/article-card.png` });
 	});
 
 	it('shows featured indicator for featured articles', async () => {
@@ -46,7 +42,7 @@ describe('ArticleCard', () => {
 
 		expect(getByText('Featured')).toBeInTheDocument();
 
-		await page.screenshot({ path: 'screenshots/article-card-featured.png' });
+		await page.screenshot({ path: `${SCREENSHOTS_DIR}/article-card-featured.png` });
 	});
 
 	it('renders logo when provided', () => {

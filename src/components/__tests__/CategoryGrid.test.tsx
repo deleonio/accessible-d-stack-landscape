@@ -2,28 +2,11 @@ import { page } from '@vitest/browser/context';
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import { SCREENSHOTS_DIR } from '../../test/constants';
 import { CategoryGrid } from '../CategoryGrid';
 import type { Article, Category, FilterState } from '../../types';
 
-vi.mock('@public-ui/react-v19', () => ({
-	KolButton: ({
-		_label,
-		_on,
-		_variant,
-	}: {
-		_label: string;
-		_on?: { onClick?: () => void };
-		_variant?: string;
-	}) => (
-		<button onClick={_on?.onClick} data-variant={_variant}>
-			{_label}
-		</button>
-	),
-	KolCard: ({ _label, children }: { _label: string; children: React.ReactNode }) => (
-		<article aria-label={_label}>{children}</article>
-	),
-	KolBadge: ({ _label }: { _label: string }) => <span className="badge">{_label}</span>,
-}));
+vi.mock('@public-ui/react-v19');
 
 const categories: Category[] = [
 	{ id: 'cat1', name: 'Category 1', color: '#ff0000' },
@@ -65,7 +48,7 @@ describe('CategoryGrid', () => {
 		expect(getByText('Category 1')).toBeInTheDocument();
 		expect(getByText('Category 2')).toBeInTheDocument();
 
-		await page.screenshot({ path: 'screenshots/category-grid.png' });
+		await page.screenshot({ path: `${SCREENSHOTS_DIR}/category-grid.png` });
 	});
 
 	it('renders all articles', () => {
