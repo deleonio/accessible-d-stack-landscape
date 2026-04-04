@@ -7,10 +7,10 @@ interface ArticleCardProps {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-	betrieb:         'var(--ds-cat-betrieb)',
-	infrastruktur:   'var(--ds-cat-infrastruktur)',
-	plattform:       'var(--ds-cat-plattform)',
-	zugang:          'var(--ds-cat-zugang)',
+	betrieb:       'var(--ds-cat-betrieb)',       // Grün
+	infrastruktur: 'var(--ds-cat-infrastruktur)', // Rot
+	plattform:     'var(--ds-cat-plattform)',     // Blau
+	zugang:        'var(--ds-cat-zugang)',        // Orange
 };
 
 export function ArticleCard({ article }: ArticleCardProps) {
