@@ -8,7 +8,7 @@ describe('Footer', () => {
 	it('renders copyright text', async () => {
 		const { getByRole } = render(<Footer />);
 
-		expect(getByRole('contentinfo')).toBeInTheDocument();
+expect(getByRole('contentinfo')).toHaveTextContent(/© \d{4} Landscape\. Built with KoliBri/);
 
 		await page.screenshot({ path: 'screenshots/footer.png' });
 	});
