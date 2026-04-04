@@ -17,7 +17,7 @@ test.describe('Landscape App', () => {
 	test('renders article cards', async ({ page }) => {
 		await expect(page.locator('.articles-grid')).toBeVisible();
 		const cards = page.locator('.article-card');
-		await expect(cards).not.toHaveCount(0);
+await expect(cards).toHaveCount({ min: 1 });
 	});
 
 	test('renders category filter buttons', async ({ page }) => {
