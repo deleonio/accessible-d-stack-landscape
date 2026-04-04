@@ -1,27 +1,42 @@
 import { KolBadge, KolCard } from '@public-ui/react-v19';
 import { Article } from '../types';
+import { CATEGORIES } from '../data/articles';
 
 interface ArticleCardProps {
 	article: Article;
 }
 
 export function ArticleCard({ article }: ArticleCardProps) {
+	const category = CATEGORIES.find((c) => c.id === article.category);
+	const categoryColor = category?.color ?? '#003d82';
+	const categoryName = category?.name ?? 'Allgemein';
+
 	return (
 		<div className="article-card-wrapper">
 			<KolCard _label={article.name} className="article-card">
 				<div className="card-content">
-					{article.logo && <img src={article.logo} alt={article.name} className="card-logo" />}
+					<div className="card-header">
+						{article.logo && (
+							<img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />
+						)}
+						<span
+							className="card-category-dot"
+							style={{ background: categoryColor }}
+							title={categoryName}
+							aria-label={`Kategorie: ${categoryName}`}
+						/>
+					</div>
 					<p className="card-description">{article.description}</p>
 					<div className="card-tags">
-						{article.tags.map((tag) => (
-							<KolBadge key={tag} _label={tag} _color="#f0f0f0" className="tag-badge" />
+						{article.tags.slice(0, 4).map((tag) => (
+							<KolBadge key={tag} _label={tag} _color="#e8eaed" className="tag-badge" />
 						))}
 					</div>
 				</div>
 			</KolCard>
 			{article.featured && (
 				<div className="featured-indicator">
-					<KolBadge _label="Featured" _color="#003d82" />
+					<KolBadge _label="Empfohlen" _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />
 				</div>
 			)}
 		</div>
