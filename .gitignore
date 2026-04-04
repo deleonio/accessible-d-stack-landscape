@@ -21,6 +21,10 @@ npm-debug.log
 assets/*
 dist/*
 
+# Playwright
+playwright-report/
+test-results/
+
 # Cache
 .sass-cache
 .cache

@@ -1,4 +1,4 @@
-import { KoliBri, KoliBriDevHelper, register } from '@public-ui/components';
+import { KoliBriDevHelper, register } from '@public-ui/components';
 import { defineCustomElements } from '@public-ui/components/loader';
 import { KERN_V2 } from '@public-ui/theme-kern';
 

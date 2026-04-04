@@ -1,5 +1,5 @@
 import { KolInputText, KolSingleSelect } from '@public-ui/react-v19';
-import { FilterState, Category } from '../types';
+import { Category, FilterState } from '../types';
 
 interface SearchBarProps {
 	filters: FilterState;
@@ -8,10 +8,7 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ filters, onFilterChange, categories }: SearchBarProps) {
-	const categoryOptions = [
-		{ label: 'All Categories', value: '' },
-		...categories.map(cat => ({ label: cat.name, value: cat.id }))
-	];
+	const categoryOptions = [{ label: 'All Categories', value: '' }, ...categories.map((cat) => ({ label: cat.name, value: cat.id }))];
 
 	return (
 		<div className="search-bar">
