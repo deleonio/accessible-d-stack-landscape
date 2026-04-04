@@ -98,17 +98,20 @@ accessible-d-stack/
 ## Phase 1b: SETUP Checkliste
 
 ### Schritt 1: Dependencies hinzufügen
+
 ```bash
 pnpm add react-router-dom zustand
 pnpm add -D @types/react-router-dom
 ```
 
 **Warum?**
+
 - `react-router-dom`: Client-side Routing (/, /category/:id, /search)
 - `zustand`: Leichte State Management für Filter (besser als Context für diesen Use-Case)
 - Optional: `axios` für Phase 2 (API-Integration)
 
 ### Schritt 2: Verzeichnisse erstellen
+
 ```bash
 mkdir -p src/{types,data,hooks,components/{layout,sections,search-filter,article,common},pages,styles,utils}
 ```
@@ -122,6 +125,7 @@ Siehe DESIGN_PLAN_MVP.md Abschnitt 8.2 - direkt copy-paste
 ### Schritt 4: Global Styles einbinden
 
 **Datei:** `src/main.ts` (Update Import)
+
 ```typescript
 import './styles/theme.css';
 import './styles/global.css';
@@ -131,6 +135,7 @@ import './styles/global.css';
 ### Schritt 5: KoliBri Theme Registration
 
 **Datei:** `src/react.main.tsx` (Update)
+
 ```typescript
 import { register } from '@public-ui/components';
 import { BWSt } from '@public-ui/theme-bwst'; // oder DEFAULT Theme
@@ -139,10 +144,10 @@ import { defineCustomElements } from '@public-ui/components/loader';
 // ← Schon vorhanden? Nur updaten falls nötig
 
 register(BWSt, defineCustomElements)
-  .then(() => {
-    console.log('KoliBri + KERN Theme loaded');
-  })
-  .catch(console.warn);
+	.then(() => {
+		console.log('KoliBri + KERN Theme loaded');
+	})
+	.catch(console.warn);
 ```
 
 ### Schritt 6: TypeScript Types definieren
@@ -166,20 +171,21 @@ export type FilterState = { ... };
 Siehe DESIGN_PLAN_MVP.md Abschnitt 6.2-6.5
 
 **Beispiel src/data/categories.ts:**
+
 ```typescript
 import { Category } from '@/types';
 
 export const CATEGORIES: Category[] = [
-  {
-    id: 'infrastruktur',
-    name: 'Infrastruktur',
-    description: 'Netzwerke, Protokolle, Hardware und Cloud-Services',
-    icon: 'server',
-    color: 'var(--cat-infrastruktur)',
-    articleCount: 12,
-    featured: true,
-  },
-  // ... weitere 6 Kategorien
+	{
+		id: 'infrastruktur',
+		name: 'Infrastruktur',
+		description: 'Netzwerke, Protokolle, Hardware und Cloud-Services',
+		icon: 'server',
+		color: 'var(--cat-infrastruktur)',
+		articleCount: 12,
+		featured: true,
+	},
+	// ... weitere 6 Kategorien
 ];
 ```
 
@@ -216,8 +222,9 @@ export default function App() {
 Erstelle leere Komponenten-Dateien mit Export-Stubs:
 
 **src/components/layout/Header.tsx**
+
 ```typescript
-import { KolNav } from '@public-ui/react';
+import { KolNav } from '@public-ui/react-v19';
 
 export default function Header() {
   return (
@@ -231,6 +238,7 @@ export default function Header() {
 ```
 
 Gleiches für:
+
 - Footer.tsx
 - MainLayout.tsx
 - HeroSection.tsx
@@ -243,35 +251,37 @@ Gleiches für:
 ### Schritt 10: Hooks Scaffold
 
 **src/hooks/useFilters.ts**
+
 ```typescript
 import { useState } from 'react';
 import { FilterState } from '@/types';
 
 const DEFAULT_FILTERS: FilterState = {
-  searchQuery: '',
-  selectedCategory: undefined,
-  selectedSubcategories: [],
-  selectedTags: [],
-  maturityFilter: ['sandbox', 'incubating', 'graduated'],
-  sortBy: 'name',
+	searchQuery: '',
+	selectedCategory: undefined,
+	selectedSubcategories: [],
+	selectedTags: [],
+	maturityFilter: ['sandbox', 'incubating', 'graduated'],
+	sortBy: 'name',
 };
 
 export function useFilters() {
-  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
+	const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
 
-  const updateFilter = (newFilter: Partial<FilterState>) => {
-    setFilters(prev => ({ ...prev, ...newFilter }));
-  };
+	const updateFilter = (newFilter: Partial<FilterState>) => {
+		setFilters((prev) => ({ ...prev, ...newFilter }));
+	};
 
-  const resetFilters = () => {
-    setFilters(DEFAULT_FILTERS);
-  };
+	const resetFilters = () => {
+		setFilters(DEFAULT_FILTERS);
+	};
 
-  return { filters, updateFilter, resetFilters };
+	return { filters, updateFilter, resetFilters };
 }
 ```
 
 Gleiches für:
+
 - useSearch.ts
 - usePagination.ts
 - useFilterSync.ts
@@ -283,12 +293,13 @@ Gleiches für:
 Siehe DESIGN_PLAN_MVP.md Abschnitt 3.3 - direkt copy-paste
 
 **src/utils/constants.ts**
+
 ```typescript
 export const BREAKPOINTS = {
-  mobile: 320,
-  tablet: 600,
-  desktop: 1024,
-  wide: 1440,
+	mobile: 320,
+	tablet: 600,
+	desktop: 1024,
+	wide: 1440,
 };
 
 export const ARTICLES_PER_PAGE = 12; // oder infinite für MVP
@@ -302,6 +313,7 @@ pnpm run dev
 ```
 
 **Erwartung:**
+
 - App startet auf `http://localhost:5173`
 - Keine TypeScript Errors
 - KoliBri Web Components registriert (Console prüfen)
@@ -312,23 +324,27 @@ pnpm run dev
 ## Phase 1c: KOMPONENTEN Implementierungs-Reihenfolge
 
 ### Priorität 1 (Tag 1):
+
 1. **Header.tsx** - Navigation, Logo, Search-Input Placeholder
 2. **Footer.tsx** - Links, Copyright
 3. **MainLayout.tsx** - Wrapper
 4. **HeroSection.tsx** - Headline, CTA Button
 
 ### Priorität 2 (Tag 2):
+
 5. **ArticleCard.tsx** - Design nach Abschnitt 4.2
 6. **CategoryPreview.tsx** - 7 Category Cards
 7. **Badge.tsx** - Category & Maturity Badges
 8. **Tag.tsx** - Tag Component
 
 ### Priorität 3 (Tag 3):
+
 9. **ArticleGrid.tsx** - CSS Grid Layout
 10. **SearchBar.tsx** - KolInputText + KolSelect + KolInputCheckbox
 11. **HomePage.tsx** - Kombiniert alle vorherigen
 
 ### Priorität 4 (Tag 4):
+
 12. **CategoryPage.tsx** - Kategorie-gefilterte Seite
 13. **SearchPage.tsx** - Such-Ergebnisse
 14. **NoResults.tsx** - "Keine Artikel" State
@@ -338,16 +354,19 @@ pnpm run dev
 ## Phase 1d: LOGIC Implementierungs-Reihenfolge
 
 ### Priorität 1:
+
 1. **filterArticles() Utility** - Core-Logik (Abschnitt 3.3)
 2. **useFilters Hook** - State Management
 3. **ArticleGrid.tsx** - Filter-Anwendung
 
 ### Priorität 2:
+
 4. **useSearch Hook** - Debouncing, Real-time Filter
 5. **useFilterSync Hook** - URL-Sync (Deep-Links)
 6. **SearchBar onChange Handler**
 
 ### Priorität 3:
+
 7. **Kategorie-Click Handler** → Route zu /category/:id
 8. **Reset Button** → clearFilters()
 9. **Sort Dropdown** Logic

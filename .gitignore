@@ -18,6 +18,7 @@ npm-debug.log
 
 # Build and test tools
 *.zip
+assets/*
 dist/*
 
 # Cache

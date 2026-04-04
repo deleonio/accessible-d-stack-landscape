@@ -154,7 +154,7 @@ Approved & Finalized:
   - React Router v6 (Routing)
   - TypeScript 5.9.3 (Type Safety)
   - KoliBri v4.1.2 (Web Components)
-  - @public-ui/react 4.1.2 (Component Wrapper)
+  - @public-ui/react-v19 4.1.2 (Component Wrapper)
   - @public-ui/theme-default 4.1.2 (Theme, KERN compatible)
   - Zustand (State Management)
   - UnoCSS 0.65.4 (Styling, not Tailwind)

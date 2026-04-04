@@ -1,4 +1,5 @@
 # Architecture Summary: Landscape2-ähnliche Übersichtsseite MVP
+
 ## Executive Brief für Stakeholder & Developer
 
 ---
@@ -40,12 +41,14 @@ Eine **interaktive Ökosystem-Landkarte** mit 70-80 Technologien, gruppiert in 7
 ### 1. Component Library: KoliBri v4.1.2 (Web Components)
 
 **Warum?**
-- Bereits im Projekt vorhanden (@public-ui/react)
+
+- Bereits im Projekt vorhanden (@public-ui/react-v19)
 - Framework-agnostisch (funktioniert mit React/Vue/Vanilla)
 - Built-in Accessibility (WCAG AA)
 - KERN-Theme-kompatibel
 
 **Genutzte Komponenten:**
+
 - KolNav (Header Navigation)
 - KolButton, KolButtonLink (CTAs)
 - KolCard (Artikel-Karten)
@@ -55,11 +58,13 @@ Eine **interaktive Ökosystem-Landkarte** mit 70-80 Technologien, gruppiert in 7
 ### 2. State Management: Zustand (nicht Redux)
 
 **Warum?**
+
 - Filter-State ist lokal (nicht global)
 - Zustand = leicht & schnell zu laden
 - URL-Sync ersetzt viel Boilerplate
 
 **Alternativen überlegt:**
+
 - ❌ Redux: Overkill für MVP
 - ❌ Context API: Re-render-Issues bei vielen Filter-Changes
 - ✓ Zustand: Perfekt für Filter-State
@@ -67,12 +72,14 @@ Eine **interaktive Ökosystem-Landkarte** mit 70-80 Technologien, gruppiert in 7
 ### 3. Styling: CSS Custom Properties + UnoCSS
 
 **Warum?**
+
 - KoliBri erwartet CSS Custom Properties
 - UnoCSS bereits im Projekt (unocss.config.ts vorhanden)
 - Tailwind würde mit KoliBri kollidieren
 - Mobile-First Approach mit @media (min-width)
 
 **KERN-Farbpalette:**
+
 ```
 Primär: #003d82 (Blau - Government-Standard)
 Sekundär: #00883d (Grün - Erfolg)
@@ -83,6 +90,7 @@ Danger: #c5192d (Rot - Warnung)
 ### 4. Routing: React Router v6
 
 **Routes:**
+
 - `/` = Homepage (Hero + Grid)
 - `/category/:id` = Kategorie-Filter
 - `/search?q=...&category=...` = Such-Ergebnisse
@@ -96,6 +104,7 @@ Danger: #c5192d (Rot - Warnung)
 **Phase 2:** API-Integration (axios/fetch)
 
 **Struktur:**
+
 ```
 src/data/
 ├── articles.ts (70-80 Items)
@@ -113,13 +122,8 @@ src/data/
 Alle CSS Variablen in `src/styles/theme.css`:
 
 ```css
---kol-color-primary: #003d82 (überall blau)
---kol-color-success: #00883d (Buttons, Badges)
---kol-color-danger: #c5192d (Warnings)
---cat-infrastruktur: #c5192d (Rot)
---cat-plattform: #003d82 (Blau)
---cat-ki: #5b2c6f (Indigo)
-... (7 Kategorien total)
+--kol-color-primary: #003d82 (überall blau) --kol-color-success: #00883d (Buttons, Badges) --kol-color-danger: #c5192d (Warnings) --cat-infrastruktur: #c5192d
+	(Rot) --cat-plattform: #003d82 (Blau) --cat-ki: #5b2c6f (Indigo)... (7 Kategorien total);
 ```
 
 ### Responsive Breakpoints
@@ -181,35 +185,35 @@ src/
 
 ## IMPLEMENTATION TIMELINE
 
-| Phase | Task | Duration | Output |
-|-------|------|----------|--------|
-| 1a | **Architecture** ✓ DONE | 1 Tag | DESIGN_PLAN_MVP.md + Templates |
-| 1b | Setup & Foundation | 1-2 Tage | Projekt-Grundgerüst, lädt fehlerfrei |
-| 1c | Layout & Components | 2-3 Tage | UI sieht aus wie Design |
-| 1d | Logic & Interactivity | 2-3 Tage | Filter/Search funktionieren |
-| 1e | Polish & Responsive | 1-2 Tage | Mobile/Tablet/Desktop QA |
-| 1f | Review & Launch | 0.5-1 Tag | MVP Live, Link zum Share |
-| **Phase 1 TOTAL** | | **~1 Woche** | **MVP-Produktiv** |
-| 2 | Detail-Pages, Advanced Filters | TBD | Phase 2+ Roadmap |
+| Phase             | Task                           | Duration     | Output                               |
+| ----------------- | ------------------------------ | ------------ | ------------------------------------ |
+| 1a                | **Architecture** ✓ DONE        | 1 Tag        | DESIGN_PLAN_MVP.md + Templates       |
+| 1b                | Setup & Foundation             | 1-2 Tage     | Projekt-Grundgerüst, lädt fehlerfrei |
+| 1c                | Layout & Components            | 2-3 Tage     | UI sieht aus wie Design              |
+| 1d                | Logic & Interactivity          | 2-3 Tage     | Filter/Search funktionieren          |
+| 1e                | Polish & Responsive            | 1-2 Tage     | Mobile/Tablet/Desktop QA             |
+| 1f                | Review & Launch                | 0.5-1 Tag    | MVP Live, Link zum Share             |
+| **Phase 1 TOTAL** |                                | **~1 Woche** | **MVP-Produktiv**                    |
+| 2                 | Detail-Pages, Advanced Filters | TBD          | Phase 2+ Roadmap                     |
 
 ---
 
 ## KEY NUMBERS
 
-| Metrik | MVP Phase 1 |
-|--------|-------------|
-| Artikel | 70-80 |
-| Kategorien | 7 |
-| Subcategories | 21-28 |
-| Tags | ~50 |
-| Pages/Routes | 3 (+1 Fallback) |
-| Komponenten | 12-15 React Components |
-| KoliBri Komponenten | ~10 |
-| CSS Custom Properties | ~30+ |
-| TypeScript Types | ~5 Core Types |
-| Responsive Breakpoints | 4 |
-| Search Debounce | 300ms |
-| Accessibilities Coverage | WCAG AA |
+| Metrik                   | MVP Phase 1            |
+| ------------------------ | ---------------------- |
+| Artikel                  | 70-80                  |
+| Kategorien               | 7                      |
+| Subcategories            | 21-28                  |
+| Tags                     | ~50                    |
+| Pages/Routes             | 3 (+1 Fallback)        |
+| Komponenten              | 12-15 React Components |
+| KoliBri Komponenten      | ~10                    |
+| CSS Custom Properties    | ~30+                   |
+| TypeScript Types         | ~5 Core Types          |
+| Responsive Breakpoints   | 4                      |
+| Search Debounce          | 300ms                  |
+| Accessibilities Coverage | WCAG AA                |
 
 ---
 
@@ -237,6 +241,7 @@ src/
 Developer kann **"MVP ist fertig"** sagen wenn:
 
 ### Funktionalität ✓
+
 - [ ] Homepage laden → 70-80 Artikel im Grid
 - [ ] Such-Input → Real-time Filter (z.B. "python" zeigt 5+ Python-Items)
 - [ ] Kategorie-Filter → nur KI-Items wenn "KI" ausgewählt
@@ -247,6 +252,7 @@ Developer kann **"MVP ist fertig"** sagen wenn:
 - [ ] Artikel-Karten → zeigen Logo, Name, Desc, Tags, Badges
 
 ### Design & UX ✓
+
 - [ ] KERN-Farben sichtbar (Blau, Grün, Rot für Kategorien)
 - [ ] Responsive: Mobile (375px) → Tablet (768px) → Desktop (1024px)
 - [ ] Artikel-Grid passt sich an (2→3→4 Spalten)
@@ -254,6 +260,7 @@ Developer kann **"MVP ist fertig"** sagen wenn:
 - [ ] Karten-Hover-Effect (Scale, Shadow)
 
 ### Accessibility ✓
+
 - [ ] Keyboard-Navigation funktioniert (Tab, Enter, Esc)
 - [ ] Focus-Rings sichtbar und logisch
 - [ ] Contrast WCAG AA (Lighthouse Score ≥80)
@@ -261,6 +268,7 @@ Developer kann **"MVP ist fertig"** sagen wenn:
 - [ ] Alt-Text für Logos
 
 ### Code Quality ✓
+
 - [ ] TypeScript strict mode (keine any)
 - [ ] ESLint/Prettier ohne Errors
 - [ ] Keine Console-Errors beim Starten
@@ -271,14 +279,14 @@ Developer kann **"MVP ist fertig"** sagen wenn:
 
 ## RISKS & MITIGATIONS
 
-| Risk | Impact | Mitigation |
-|------|--------|-----------|
-| KoliBri Theme nicht richtig geladen | Komponenten sehen komisch aus | CSS Assets kopieren (siehe README) |
-| Zu viele Items auf 1 Seite | Performance-Probleme | Phase 1: 70-80 OK, Phase 2: Pagination |
-| Filter-Logic zu komplex | Bugs bei Kombinationen | Unittest useFilter Hook, Abschnitt 3.3 |
-| KERN-Farben nicht sichtbar | Design wirkt falsch | CSS Custom Properties checken, Browser DevTools |
-| Mobile-Responsive nicht funktioniert | Looks schiech auf Phone | Testing auf echtem Handy, nicht nur DevTools |
-| URL-Sync Fehler | Deep-Links funktionieren nicht | useFilterSync Hook gut testen |
+| Risk                                 | Impact                         | Mitigation                                      |
+| ------------------------------------ | ------------------------------ | ----------------------------------------------- |
+| KoliBri Theme nicht richtig geladen  | Komponenten sehen komisch aus  | CSS Assets kopieren (siehe README)              |
+| Zu viele Items auf 1 Seite           | Performance-Probleme           | Phase 1: 70-80 OK, Phase 2: Pagination          |
+| Filter-Logic zu komplex              | Bugs bei Kombinationen         | Unittest useFilter Hook, Abschnitt 3.3          |
+| KERN-Farben nicht sichtbar           | Design wirkt falsch            | CSS Custom Properties checken, Browser DevTools |
+| Mobile-Responsive nicht funktioniert | Looks schiech auf Phone        | Testing auf echtem Handy, nicht nur DevTools    |
+| URL-Sync Fehler                      | Deep-Links funktionieren nicht | useFilterSync Hook gut testen                   |
 
 ---
 
@@ -287,23 +295,27 @@ Developer kann **"MVP ist fertig"** sagen wenn:
 Nach MVP erfolgreich:
 
 ### Phase 2: Enhancement
+
 - [x] Article Detail Pages (/article/:id)
 - [x] Advanced Filters (Tags, Subcategories)
 - [x] Pagination / Infinite Scroll
 - [x] Dark Mode Toggle
 
 ### Phase 3: Intelligence
+
 - [ ] Statistics Page (Charts, Trends)
 - [ ] Guide/Tutorial Area
 - [ ] Search Suggestions/Autocomplete
 
 ### Phase 4: Integration
+
 - [ ] Real API (nicht Mock-Daten)
 - [ ] User Accounts & Favorites
 - [ ] Share & Export (CSV, PDF)
 - [ ] Admin Panel (CRUD)
 
 ### Phase 5+: Advanced
+
 - [ ] Multi-Language (i18n)
 - [ ] Full-Text Search (Elasticsearch)
 - [ ] Recommendation Engine
@@ -318,24 +330,24 @@ Frontend:
   React 18.3.1 (UI Framework)
   React Router v6 (Client-Side Routing)
   TypeScript 5.9.3 (Type Safety)
-  
+
 Component Library:
   KoliBri v4.1.2 (Web Components)
-  @public-ui/react 4.1.2 (React Wrapper)
+  @public-ui/react-v19 4.1.2 (React Wrapper)
   @public-ui/theme-default 4.1.2 (Theme, wird durch KERN ersetzt)
-  
+
 State Management:
   Zustand (lightweight, für Filter-State)
-  
+
 Styling:
   UnoCSS 0.65.4 (Utility CSS)
   CSS Custom Properties (KERN Design Tokens)
   SCSS optional (nicht erzwungen)
-  
+
 Form Handling:
   React Hook Form 7.48.0 (nur falls erweiterte Forms nötig)
   Zod 3.25.76 (Validierung, optional)
-  
+
 Build:
   Vite 6.4.1 (Dev Server & Build)
   TypeScript Compiler (tsc)
@@ -383,6 +395,7 @@ pnpm run dev
 **Ein Developer kann mit dieser Dokumentation sofort anfangen zu coden.**
 
 Die Architecture ist:
+
 - ✓ **Klar:** 3 Dokumente mit genauen Specs
 - ✓ **Vollständig:** Types, Daten, Komponenten, Styling alles definiert
 - ✓ **Praktisch:** Copy-paste-ready Code-Snippets
@@ -401,11 +414,11 @@ Die Architecture ist:
 
 ### Appendix: Dokumente Quick-Reference
 
-| Dokument | Zweck | Leser | Länge |
-|----------|-------|-------|-------|
-| **DESIGN_PLAN_MVP.md** | Vollständiger Architektur-Plan | Developer, Architect | ~500 Zeilen |
-| **FILE_STRUCTURE_TEMPLATE.md** | Setup & Implementation Guide | Developer | ~350 Zeilen |
-| **ARCHITECT_SUMMARY.md** | Executive Brief (dieses Doc) | Stakeholder, PM, Developer | ~400 Zeilen |
+| Dokument                       | Zweck                          | Leser                      | Länge       |
+| ------------------------------ | ------------------------------ | -------------------------- | ----------- |
+| **DESIGN_PLAN_MVP.md**         | Vollständiger Architektur-Plan | Developer, Architect       | ~500 Zeilen |
+| **FILE_STRUCTURE_TEMPLATE.md** | Setup & Implementation Guide   | Developer                  | ~350 Zeilen |
+| **ARCHITECT_SUMMARY.md**       | Executive Brief (dieses Doc)   | Stakeholder, PM, Developer | ~400 Zeilen |
 
 **Gesamte Dokumentation:** ~1250 Zeilen = Developer kann 3-5 Tage lang damit arbeiten, ohne Fragen zu stellen.
 

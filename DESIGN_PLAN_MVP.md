@@ -1,4 +1,5 @@
 # Landscape2-ähnliche Übersichtsseite | UI/UX Design Plan MVP
+
 ## KoliBri + KERN-Theme Integration
 
 **Status:** Architecture Phase (Level 4)  
@@ -43,61 +44,62 @@ Browser
 ```typescript
 // Core Types
 type Category = {
-  id: string;
-  name: string;
-  description: string;
-  icon: string; // Lucide-Icon-Name oder SVG-Pfad
-  color: string; // Hex oder CSS-Variable: var(--kol-color-primary)
-  articleCount: number;
-  featured: boolean;
+	id: string;
+	name: string;
+	description: string;
+	icon: string; // Lucide-Icon-Name oder SVG-Pfad
+	color: string; // Hex oder CSS-Variable: var(--kol-color-primary)
+	articleCount: number;
+	featured: boolean;
 };
 
 type Subcategory = {
-  id: string;
-  categoryId: string;
-  name: string;
-  description?: string;
+	id: string;
+	categoryId: string;
+	name: string;
+	description?: string;
 };
 
 type Tag = {
-  id: string;
-  name: string;
-  slug: string;
+	id: string;
+	name: string;
+	slug: string;
 };
 
 type Article = {
-  id: string;
-  name: string;
-  description: string;
-  category: Category['id'];
-  subcategories: Subcategory['id'][];
-  tags: Tag['id'][];
-  logo?: string; // URL zu Logo-Image
-  homepage?: string;
-  organization?: string;
-  maturity: 'sandbox' | 'incubating' | 'graduated' | 'archived';
-  featured: boolean;
-  metadata?: {
-    createdAt?: string;
-    updatedAt?: string;
-    rating?: number;
-    views?: number;
-  };
+	id: string;
+	name: string;
+	description: string;
+	category: Category['id'];
+	subcategories: Subcategory['id'][];
+	tags: Tag['id'][];
+	logo?: string; // URL zu Logo-Image
+	homepage?: string;
+	organization?: string;
+	maturity: 'sandbox' | 'incubating' | 'graduated' | 'archived';
+	featured: boolean;
+	metadata?: {
+		createdAt?: string;
+		updatedAt?: string;
+		rating?: number;
+		views?: number;
+	};
 };
 
 type FilterState = {
-  searchQuery: string;
-  selectedCategory?: string;
-  selectedSubcategories: string[];
-  selectedTags: string[];
-  maturityFilter: ('sandbox' | 'incubating' | 'graduated')[];
-  sortBy: 'name' | 'category' | 'recent' | 'popular';
+	searchQuery: string;
+	selectedCategory?: string;
+	selectedSubcategories: string[];
+	selectedTags: string[];
+	maturityFilter: ('sandbox' | 'incubating' | 'graduated')[];
+	sortBy: 'name' | 'category' | 'recent' | 'popular';
 };
 ```
 
 ### 1.3 Dummy-Daten für MVP
 
 **Kategorien (7):**
+
 1. Infrastruktur (rot / danger)
 2. Plattform (blau / primary)
 3. Betrieb (grün / success)
@@ -159,6 +161,7 @@ type FilterState = {
 ### 2.2 Abschnitte Detail
 
 #### Header
+
 - **Logo** + Brand-Name (links)
 - **Navigation** (Home, Categories, About, Docs)
 - **Suchbox** (mit Magnifying Glass Icon)
@@ -166,6 +169,7 @@ type FilterState = {
 - **KoliBri-Komponenten:** KolNav, KolLink, KolInputText, KolButton
 
 #### Hero Section
+
 - **Headline:** "Tech-Ökosystem Landkarte"
 - **Subline:** "Interaktive Übersicht von 80+ Technologien, Plattformen und Infrastrukturen"
 - **CTAs:** [Erkunden] [Mehr Infos]
@@ -173,6 +177,7 @@ type FilterState = {
 - **KoliBri-Komponenten:** KolHeading, KolButton, KolButtonLink
 
 #### Kategorie-Preview (7 Cards, Horizontal)
+
 - Responsive: 7 Spalten (Desktop) → 3 Spalten (Tablet) → 1 Spalte (Mobile)
 - Jede Card:
   - **Icon** (Kategorie-Symbol)
@@ -182,6 +187,7 @@ type FilterState = {
 - **KoliBri-Komponenten:** KolCard, KolButton (als Link)
 
 #### Such- & Filter-Bar
+
 - **Position:** Sticky am Top (nach Header), nur auf >600px
 - **Felder:**
   1. **Search Input** (Freitext-Suche, Real-time)
@@ -193,6 +199,7 @@ type FilterState = {
 - **KoliBri-Komponenten:** KolInput, KolSelect, KolInputCheckbox, KolButton
 
 #### Artikel-Grid / Cluster-Layout
+
 - **Layout:** CSS Grid mit Auto-Fit
   - Desktop: 4 Spalten
   - Tablet: 3 Spalten
@@ -202,6 +209,7 @@ type FilterState = {
 - **KoliBri-Komponenten:** KolCard, KolGrid (wenn verfügbar)
 
 #### Footer
+
 - Copyright, Links (GitHub, Kontakt), KERN-Branding
 - **KoliBri-Komponenten:** KolLink, KolButtonLink
 
@@ -210,14 +218,15 @@ type FilterState = {
 ```typescript
 // Mobile-First Approach
 const breakpoints = {
-  mobile: '0px',     // 320px - 599px
-  tablet: '600px',   // 600px - 1023px
-  desktop: '1024px', // 1024px+
-  wide: '1440px',    // für extra wide displays
+	mobile: '0px', // 320px - 599px
+	tablet: '600px', // 600px - 1023px
+	desktop: '1024px', // 1024px+
+	wide: '1440px', // für extra wide displays
 };
 ```
 
 **Grid-Spalten pro Breakpoint:**
+
 - Mobile (320px): 2 Spalten, Stack Filter-Bar
 - Tablet (600px): 3 Spalten, Filter-Bar Inline
 - Desktop (1024px): 4 Spalten, Filter-Bar Sticky
@@ -229,46 +238,46 @@ const breakpoints = {
 /* Basierend auf KERN-Standard (deutsches Government Design) */
 
 :root {
-  /* Primär (Blau - Vertrauen, Stabilität) */
-  --kol-color-primary: #003d82;
-  --kol-color-primary-hover: #002550;
-  --kol-color-primary-active: #001a33;
-  
-  /* Sekundär (Grün - Erfolg) */
-  --kol-color-success: #00883d;
-  --kol-color-success-hover: #006b2e;
-  --kol-color-success-active: #004d1f;
-  
-  /* Warnung/Danger (Rot - Achtung) */
-  --kol-color-danger: #c5192d;
-  --kol-color-danger-hover: #a00e22;
-  --kol-color-danger-active: #7b0a18;
-  
-  /* Neutral/Gray Skala */
-  --kol-color-text: #1a1a1a;
-  --kol-color-text-light: #4a4a4a;
-  --kol-color-bg: #ffffff;
-  --kol-color-bg-light: #f5f5f5;
-  --kol-color-border: #d3d3d3;
-  
-  /* Kategorie-spezifische Farben */
-  --cat-infrastruktur: #c5192d; /* Rot */
-  --cat-plattform: #003d82; /* Blau */
-  --cat-betrieb: #00883d; /* Grün */
-  --cat-zugang: #f39c12; /* Orange */
-  --cat-entwicklung: #8e44ad; /* Lila */
-  --cat-sicherheit: #6f4a3a; /* Braun */
-  --cat-ki: #5b2c6f; /* Indigo */
+	/* Primär (Blau - Vertrauen, Stabilität) */
+	--kol-color-primary: #003d82;
+	--kol-color-primary-hover: #002550;
+	--kol-color-primary-active: #001a33;
+
+	/* Sekundär (Grün - Erfolg) */
+	--kol-color-success: #00883d;
+	--kol-color-success-hover: #006b2e;
+	--kol-color-success-active: #004d1f;
+
+	/* Warnung/Danger (Rot - Achtung) */
+	--kol-color-danger: #c5192d;
+	--kol-color-danger-hover: #a00e22;
+	--kol-color-danger-active: #7b0a18;
+
+	/* Neutral/Gray Skala */
+	--kol-color-text: #1a1a1a;
+	--kol-color-text-light: #4a4a4a;
+	--kol-color-bg: #ffffff;
+	--kol-color-bg-light: #f5f5f5;
+	--kol-color-border: #d3d3d3;
+
+	/* Kategorie-spezifische Farben */
+	--cat-infrastruktur: #c5192d; /* Rot */
+	--cat-plattform: #003d82; /* Blau */
+	--cat-betrieb: #00883d; /* Grün */
+	--cat-zugang: #f39c12; /* Orange */
+	--cat-entwicklung: #8e44ad; /* Lila */
+	--cat-sicherheit: #6f4a3a; /* Braun */
+	--cat-ki: #5b2c6f; /* Indigo */
 }
 
 /* Dark Mode (Optional Phase 2) */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --kol-color-bg: #1a1a1a;
-    --kol-color-bg-light: #2d2d2d;
-    --kol-color-text: #ffffff;
-    --kol-color-text-light: #b0b0b0;
-  }
+	:root {
+		--kol-color-bg: #1a1a1a;
+		--kol-color-bg-light: #2d2d2d;
+		--kol-color-text: #ffffff;
+		--kol-color-text-light: #b0b0b0;
+	}
 }
 ```
 
@@ -279,16 +288,19 @@ const breakpoints = {
 ### 3.1 Platzierung & UX-Verhalten
 
 **Desktop (≥1024px):**
+
 - Position: Sticky am Top (unter Header), bleibt sichtbar beim Scrollen
 - Breite: Full-Width Container
 - Layout: 1 Reihe, Inline (Search | Category | Maturity | Sort | Reset)
 
 **Tablet (600px-1023px):**
+
 - Position: Sticky, aber zusammenfassbar
 - Layout: Können in 2 Reihen gehen oder Collapsible sein
 - Icon-basierte Buttons für Kompaktheit
 
 **Mobile (<600px):**
+
 - Position: Sticky (unter Header)
 - Layout: Collapsible Drawer/Accordion
 - Icon-Button: "Filter" (KolButton mit hamburger icon)
@@ -297,14 +309,16 @@ const breakpoints = {
 ### 3.2 Filter-Optionen
 
 #### 1. Suche (Text-Input)
+
 - **Typ:** Real-time (live Filterung, kein Submit-Button nötig)
 - **Suchbereich:** Name, Beschreibung, Tags, Organisation
 - **Debounce:** 300ms (um Performance zu optimieren)
 - **Placeholder:** "Suche nach Technologien, Projekten..."
 - **Clear-Button:** X-Icon zum Löschen
-- **KoliBri:** KolInput mit _touched, _msg-Prop für Feedback
+- **KoliBri:** KolInput mit \_touched, \_msg-Prop für Feedback
 
 #### 2. Kategorie-Filter
+
 - **Typ:** Multi-Select (Checkbox oder Dropdown)
 - **Verhalten:** AND-Logik (alle ausgewählten müssen matchen)
 - **Optionen:** Alle 7 Kategorien + "Alle" Option
@@ -312,13 +326,15 @@ const breakpoints = {
 - **KoliBri:** KolSelect (für Desktop) oder KolInputCheckbox (für Mobile)
 
 #### 3. Subcategory-Filter (Conditional)
+
 - **Nur sichtbar wenn Kategorie gewählt**
 - **Typ:** Checkbox-Gruppe
 - **Verhalten:** OR-Logik innerhalb Kategorie
 - **KoliBri:** KolInputCheckbox (Array)
 
 #### 4. Maturity-Filter
-- **Optionen:** 
+
+- **Optionen:**
   - [x] Sandbox
   - [x] Incubating
   - [x] Graduated
@@ -327,11 +343,13 @@ const breakpoints = {
 - **KoliBri:** KolInputCheckbox-Gruppe
 
 #### 5. Tags-Filter (Optional, Phase 1.5)
+
 - **Typ:** Checkbox-Liste (max 10 häufigste Tags anzeigen)
 - **Expandable:** "Mehr Tags zeigen" Link
 - **KoliBri:** KolInputCheckbox, KolButton
 
 #### 6. Sortierung
+
 - **Optionen:**
   - Alphabetisch (A-Z)
   - Kategorie
@@ -341,64 +359,58 @@ const breakpoints = {
 - **KoliBri:** KolSelect
 
 #### 7. Reset-Button
+
 - **Aktion:** Alle Filter auf Default zurücksetzen
-- **KoliBri:** KolButton (_type="button")
+- **KoliBri:** KolButton (\_type="button")
 
 ### 3.3 Such-Verhalten
 
 ```typescript
 // Filter Application Flow
 const filterArticles = (articles: Article[], filters: FilterState) => {
-  return articles
-    .filter(a => {
-      // Text-Suche (ODER-Logik über Felder)
-      if (filters.searchQuery) {
-        const q = filters.searchQuery.toLowerCase();
-        const matchesSearch = 
-          a.name.toLowerCase().includes(q) ||
-          a.description.toLowerCase().includes(q) ||
-          a.tags.some(t => t.toLowerCase().includes(q));
-        if (!matchesSearch) return false;
-      }
-      
-      // Kategorie-Filter (ODER-Logik)
-      if (filters.selectedCategory && filters.selectedCategory !== '*') {
-        if (a.category !== filters.selectedCategory) return false;
-      }
-      
-      // Subcategories (ODER-Logik, wenn kategorisiert)
-      if (filters.selectedSubcategories.length > 0) {
-        const hasSubcat = a.subcategories.some(sc => 
-          filters.selectedSubcategories.includes(sc)
-        );
-        if (!hasSubcat) return false;
-      }
-      
-      // Maturity (ODER-Logik)
-      if (filters.maturityFilter.length > 0) {
-        if (!filters.maturityFilter.includes(a.maturity)) return false;
-      }
-      
-      // Tags (ODER-Logik)
-      if (filters.selectedTags.length > 0) {
-        const hasTag = a.tags.some(t => 
-          filters.selectedTags.includes(t)
-        );
-        if (!hasTag) return false;
-      }
-      
-      return true;
-    })
-    .sort((a, b) => {
-      switch (filters.sortBy) {
-        case 'name':
-          return a.name.localeCompare(b.name);
-        case 'category':
-          return a.category.localeCompare(b.category);
-        default:
-          return 0;
-      }
-    });
+	return articles
+		.filter((a) => {
+			// Text-Suche (ODER-Logik über Felder)
+			if (filters.searchQuery) {
+				const q = filters.searchQuery.toLowerCase();
+				const matchesSearch = a.name.toLowerCase().includes(q) || a.description.toLowerCase().includes(q) || a.tags.some((t) => t.toLowerCase().includes(q));
+				if (!matchesSearch) return false;
+			}
+
+			// Kategorie-Filter (ODER-Logik)
+			if (filters.selectedCategory && filters.selectedCategory !== '*') {
+				if (a.category !== filters.selectedCategory) return false;
+			}
+
+			// Subcategories (ODER-Logik, wenn kategorisiert)
+			if (filters.selectedSubcategories.length > 0) {
+				const hasSubcat = a.subcategories.some((sc) => filters.selectedSubcategories.includes(sc));
+				if (!hasSubcat) return false;
+			}
+
+			// Maturity (ODER-Logik)
+			if (filters.maturityFilter.length > 0) {
+				if (!filters.maturityFilter.includes(a.maturity)) return false;
+			}
+
+			// Tags (ODER-Logik)
+			if (filters.selectedTags.length > 0) {
+				const hasTag = a.tags.some((t) => filters.selectedTags.includes(t));
+				if (!hasTag) return false;
+			}
+
+			return true;
+		})
+		.sort((a, b) => {
+			switch (filters.sortBy) {
+				case 'name':
+					return a.name.localeCompare(b.name);
+				case 'category':
+					return a.category.localeCompare(b.category);
+				default:
+					return 0;
+			}
+		});
 };
 ```
 
@@ -418,26 +430,26 @@ const filterArticles = (articles: Article[], filters: FilterState) => {
 ```css
 /* CSS Grid - Mobile-First */
 .article-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem; /* var(--spacing-lg) */
-  padding: var(--spacing-md);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1.5rem; /* var(--spacing-lg) */
+	padding: var(--spacing-md);
 }
 
 /* Kategorie-Cluster (optionale visuelle Gruppierung) */
 .category-cluster {
-  border: 1px solid var(--kol-color-border);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
-  background: var(--kol-color-bg-light);
+	border: 1px solid var(--kol-color-border);
+	border-radius: var(--border-radius);
+	padding: var(--spacing-md);
+	margin-bottom: var(--spacing-lg);
+	background: var(--kol-color-bg-light);
 }
 
 .category-cluster-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--kol-color-primary);
-  margin-bottom: var(--spacing-md);
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--kol-color-primary);
+	margin-bottom: var(--spacing-md);
 }
 ```
 
@@ -482,21 +494,21 @@ interface ArticleCardProps {
       {article.maturity}
     </span>
   </div>
-  
+
   {/* Logo */}
   {article.logo && (
-    <img 
-      src={article.logo} 
+    <img
+      src={article.logo}
       alt={article.name}
       className="card-logo"
       loading="lazy"
     />
   )}
-  
+
   {/* Name & Description */}
   <h3 className="card-title">{article.name}</h3>
   <p className="card-description">{article.description}</p>
-  
+
   {/* Tags */}
   <div className="card-tags">
     {article.tags.slice(0, 3).map(tag => (
@@ -506,9 +518,9 @@ interface ArticleCardProps {
       <span className="tag-more">+{article.tags.length - 3}</span>
     )}
   </div>
-  
+
   {/* CTA Button */}
-  <KolButton 
+  <KolButton
     _label="Mehr erfahren"
     _on={{ onClick: () => onClickHandler?.(article.id) }}
     className="card-cta"
@@ -520,101 +532,115 @@ interface ArticleCardProps {
 
 ```css
 .article-card {
-  padding: 1.5rem;
-  border: 1px solid var(--kol-color-border);
-  border-radius: var(--border-radius);
-  background: var(--kol-color-bg);
-  transition: all 0.2s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
+	padding: 1.5rem;
+	border: 1px solid var(--kol-color-border);
+	border-radius: var(--border-radius);
+	background: var(--kol-color-bg);
+	transition: all 0.2s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-sm);
 }
 
 /* Hover-Effect (Desktop only) */
 @media (hover: hover) {
-  .article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border-color: var(--kol-color-primary);
-  }
+	.article-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+		border-color: var(--kol-color-primary);
+	}
 }
 
 /* Maturity Badges */
 .maturity-badge {
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.125rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.125rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
 }
 
 .maturity-sandbox {
-  background: var(--kol-color-danger);
-  color: white;
+	background: var(--kol-color-danger);
+	color: white;
 }
 
 .maturity-incubating {
-  background: var(--kol-color-warning, #f39c12);
-  color: white;
+	background: var(--kol-color-warning, #f39c12);
+	color: white;
 }
 
 .maturity-graduated {
-  background: var(--kol-color-success);
-  color: white;
+	background: var(--kol-color-success);
+	color: white;
 }
 
 .maturity-archived {
-  background: var(--kol-color-text-light);
-  color: white;
+	background: var(--kol-color-text-light);
+	color: white;
 }
 
 /* Category-Farben */
-.cat-infrastruktur { --cat-color: var(--cat-infrastruktur); }
-.cat-plattform { --cat-color: var(--cat-plattform); }
-.cat-betrieb { --cat-color: var(--cat-betrieb); }
-.cat-zugang { --cat-color: var(--cat-zugang); }
-.cat-entwicklung { --cat-color: var(--cat-entwicklung); }
-.cat-sicherheit { --cat-color: var(--cat-sicherheit); }
-.cat-ki { --cat-color: var(--cat-ki); }
+.cat-infrastruktur {
+	--cat-color: var(--cat-infrastruktur);
+}
+.cat-plattform {
+	--cat-color: var(--cat-plattform);
+}
+.cat-betrieb {
+	--cat-color: var(--cat-betrieb);
+}
+.cat-zugang {
+	--cat-color: var(--cat-zugang);
+}
+.cat-entwicklung {
+	--cat-color: var(--cat-entwicklung);
+}
+.cat-sicherheit {
+	--cat-color: var(--cat-sicherheit);
+}
+.cat-ki {
+	--cat-color: var(--cat-ki);
+}
 
 .category-badge {
-  display: inline-block;
-  padding: 0.5rem 0.75rem;
-  background: var(--cat-color);
-  color: white;
-  border-radius: var(--border-radius);
-  font-size: 0.875rem;
-  font-weight: 600;
+	display: inline-block;
+	padding: 0.5rem 0.75rem;
+	background: var(--cat-color);
+	color: white;
+	border-radius: var(--border-radius);
+	font-size: 0.875rem;
+	font-weight: 600;
 }
 
 /* Logo Styling */
 .card-logo {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin: var(--spacing-md) auto;
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	margin: var(--spacing-md) auto;
 }
 
 /* Tags */
 .card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-size: 0.75rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	font-size: 0.75rem;
 }
 
 .tag {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  background: var(--kol-color-bg-light);
-  border: 1px solid var(--kol-color-border);
-  border-radius: 0.25rem;
-  color: var(--kol-color-text-light);
+	display: inline-block;
+	padding: 0.25rem 0.5rem;
+	background: var(--kol-color-bg-light);
+	border: 1px solid var(--kol-color-border);
+	border-radius: 0.25rem;
+	color: var(--kol-color-text-light);
 }
 
 .tag-more {
-  color: var(--kol-color-primary);
-  font-weight: 600;
+	color: var(--kol-color-primary);
+	font-weight: 600;
 }
 ```
 
@@ -633,7 +659,7 @@ interface ArticleCardProps {
 ### 5.1 KoliBri-Komponenten (Verfügbar v4.1.2)
 
 ```typescript
-// Aus package.json: "@public-ui/react": "4.1.2"
+// Aus package.json: "@public-ui/react-v19": "4.1.2"
 
 // Strukturelle Komponenten
 ✓ KolNav - Hauptnavigation (Header)
@@ -698,17 +724,20 @@ interface ArticleCardProps {
 ### 5.3 Externe Dependencies
 
 **Bereits vorhanden (package.json):**
+
 - `react` 18.3.1
 - `react-hook-form` 7.48.0 (nur für Form-Handling falls nötig)
-- `@public-ui/react` 4.1.2 (KoliBri)
+- `@public-ui/react-v19` 4.1.2 (KoliBri)
 - `@public-ui/theme-default` 4.1.2 (default theme, wird durch KERN ersetzt)
 - `zod` 3.25.76 (Validierung, optional)
 
 **Empfohlen hinzufügen (Phase 1):**
+
 - `react-router-dom` ^6.x - Client-Side Routing (für Navigation zwischen /category/:id, /search)
 - `zustand` oder `jotai` - State Management (lighter als Redux, für Filter-State)
 
 **Optional (Phase 2+):**
+
 - `axios` oder `fetch` - HTTP-Client für API-Integration
 - `framer-motion` - Animations-Library (für fancy Transitions)
 - `react-virtualization` - Für sehr große Listen (>1000 Items)
@@ -716,11 +745,13 @@ interface ArticleCardProps {
 ### 5.4 Styling-Infrastruktur
 
 **Aktuell im Projekt:**
+
 - `unocss` (UnoCSS Config vorhanden: unocss.config.ts)
 - `@leanup/stack` 1.3.54 (CSS Framework)
 - Keine reinen Tailwind-Dependenzen
 
 **Empfehlung für Phase 1:**
+
 - **Nutze UnoCSS + CSS Custom Properties** für KERN-Theme-Integration
 - **NICHT: Tailwind hinzufügen** (würde mit UnoCSS & KoliBri-Styling kollidieren)
 - **CSS-Strategie:**
@@ -742,69 +773,69 @@ interface ArticleCardProps {
 
 ```typescript
 const CATEGORIES: Category[] = [
-  {
-    id: 'infrastruktur',
-    name: 'Infrastruktur',
-    description: 'Netzwerke, Protokolle, Hardware und Cloud-Services',
-    icon: 'server', // Lucide icon name
-    color: 'var(--cat-infrastruktur)',
-    articleCount: 12,
-    featured: true,
-  },
-  {
-    id: 'plattform',
-    name: 'Plattform',
-    description: 'Frameworks, Runtimes und Entwicklungs-Plattformen',
-    icon: 'package',
-    color: 'var(--cat-plattform)',
-    articleCount: 11,
-    featured: true,
-  },
-  {
-    id: 'betrieb',
-    name: 'Betrieb',
-    description: 'DevOps, CI/CD, Monitoring und Orchestrierung',
-    icon: 'sliders',
-    color: 'var(--cat-betrieb)',
-    articleCount: 10,
-    featured: true,
-  },
-  {
-    id: 'zugang',
-    name: 'Zugang',
-    description: 'Browser, Mobile Apps, Zugänglichkeit',
-    icon: 'globe',
-    color: 'var(--cat-zugang)',
-    articleCount: 9,
-    featured: false,
-  },
-  {
-    id: 'entwicklung',
-    name: 'Entwicklung',
-    description: 'Programmiersprachen, Tools und IDEs',
-    icon: 'code',
-    color: 'var(--cat-entwicklung)',
-    articleCount: 9,
-    featured: false,
-  },
-  {
-    id: 'sicherheit',
-    name: 'Sicherheit',
-    description: 'Kryptographie, Authentifizierung, Compliance',
-    icon: 'shield',
-    color: 'var(--cat-sicherheit)',
-    articleCount: 8,
-    featured: false,
-  },
-  {
-    id: 'ki',
-    name: 'KI',
-    description: 'Machine Learning, NLP, Deep Learning',
-    icon: 'brain',
-    color: 'var(--cat-ki)',
-    articleCount: 11,
-    featured: true,
-  },
+	{
+		id: 'infrastruktur',
+		name: 'Infrastruktur',
+		description: 'Netzwerke, Protokolle, Hardware und Cloud-Services',
+		icon: 'server', // Lucide icon name
+		color: 'var(--cat-infrastruktur)',
+		articleCount: 12,
+		featured: true,
+	},
+	{
+		id: 'plattform',
+		name: 'Plattform',
+		description: 'Frameworks, Runtimes und Entwicklungs-Plattformen',
+		icon: 'package',
+		color: 'var(--cat-plattform)',
+		articleCount: 11,
+		featured: true,
+	},
+	{
+		id: 'betrieb',
+		name: 'Betrieb',
+		description: 'DevOps, CI/CD, Monitoring und Orchestrierung',
+		icon: 'sliders',
+		color: 'var(--cat-betrieb)',
+		articleCount: 10,
+		featured: true,
+	},
+	{
+		id: 'zugang',
+		name: 'Zugang',
+		description: 'Browser, Mobile Apps, Zugänglichkeit',
+		icon: 'globe',
+		color: 'var(--cat-zugang)',
+		articleCount: 9,
+		featured: false,
+	},
+	{
+		id: 'entwicklung',
+		name: 'Entwicklung',
+		description: 'Programmiersprachen, Tools und IDEs',
+		icon: 'code',
+		color: 'var(--cat-entwicklung)',
+		articleCount: 9,
+		featured: false,
+	},
+	{
+		id: 'sicherheit',
+		name: 'Sicherheit',
+		description: 'Kryptographie, Authentifizierung, Compliance',
+		icon: 'shield',
+		color: 'var(--cat-sicherheit)',
+		articleCount: 8,
+		featured: false,
+	},
+	{
+		id: 'ki',
+		name: 'KI',
+		description: 'Machine Learning, NLP, Deep Learning',
+		icon: 'brain',
+		color: 'var(--cat-ki)',
+		articleCount: 11,
+		featured: true,
+	},
 ];
 ```
 
@@ -812,146 +843,146 @@ const CATEGORIES: Category[] = [
 
 ```typescript
 const ARTICLES: Article[] = [
-  // Infrastruktur
-  {
-    id: 'dns',
-    name: 'Domain Name System (DNS)',
-    description: 'Adressvergabe und Netzwerk-Namensauflösung im Internet.',
-    category: 'infrastruktur',
-    subcategories: ['adresse', 'netzwerk'],
-    tags: ['adresse', 'netzwerk', 'protokoll', 'internet'],
-    logo: 'logos/dns.png',
-    homepage: 'https://www.ietf.org/rfc/rfc1035.txt',
-    organization: 'IETF',
-    maturity: 'graduated',
-    featured: true,
-    metadata: {
-      createdAt: '1983-11-01',
-      updatedAt: '2025-03-31',
-      rating: 4.8,
-      views: 15420,
-    },
-  },
-  {
-    id: 'bgp',
-    name: 'Border Gateway Protocol (BGP)',
-    description: 'Routing-Protokoll für autonome Systeme im Internet.',
-    category: 'infrastruktur',
-    subcategories: ['netzwerk', 'routing'],
-    tags: ['netzwerk', 'isp', 'routing', 'internet'],
-    logo: 'logos/bgp.png',
-    homepage: 'https://tools.ietf.org/html/rfc4271',
-    organization: 'IETF',
-    maturity: 'graduated',
-    featured: false,
-    metadata: {
-      createdAt: '1989-01-01',
-      updatedAt: '2024-02-12',
-      rating: 4.7,
-      views: 8920,
-    },
-  },
+	// Infrastruktur
+	{
+		id: 'dns',
+		name: 'Domain Name System (DNS)',
+		description: 'Adressvergabe und Netzwerk-Namensauflösung im Internet.',
+		category: 'infrastruktur',
+		subcategories: ['adresse', 'netzwerk'],
+		tags: ['adresse', 'netzwerk', 'protokoll', 'internet'],
+		logo: 'logos/dns.png',
+		homepage: 'https://www.ietf.org/rfc/rfc1035.txt',
+		organization: 'IETF',
+		maturity: 'graduated',
+		featured: true,
+		metadata: {
+			createdAt: '1983-11-01',
+			updatedAt: '2025-03-31',
+			rating: 4.8,
+			views: 15420,
+		},
+	},
+	{
+		id: 'bgp',
+		name: 'Border Gateway Protocol (BGP)',
+		description: 'Routing-Protokoll für autonome Systeme im Internet.',
+		category: 'infrastruktur',
+		subcategories: ['netzwerk', 'routing'],
+		tags: ['netzwerk', 'isp', 'routing', 'internet'],
+		logo: 'logos/bgp.png',
+		homepage: 'https://tools.ietf.org/html/rfc4271',
+		organization: 'IETF',
+		maturity: 'graduated',
+		featured: false,
+		metadata: {
+			createdAt: '1989-01-01',
+			updatedAt: '2024-02-12',
+			rating: 4.7,
+			views: 8920,
+		},
+	},
 
-  // Plattform
-  {
-    id: 'angular',
-    name: 'Angular',
-    description: 'Modernes Webframework für die Erstellung schneller und zuverlässiger Anwendungen.',
-    category: 'plattform',
-    subcategories: ['webframework', 'user-interface'],
-    tags: ['webframework', 'user-interface', 'typescript', 'spa'],
-    logo: 'logos/angular.png',
-    homepage: 'https://angular.dev/',
-    organization: 'Google',
-    maturity: 'graduated',
-    featured: true,
-    metadata: {
-      createdAt: '2014-11-25',
-      updatedAt: '2025-09-17',
-      rating: 4.5,
-      views: 22100,
-    },
-  },
-  {
-    id: 'react',
-    name: 'React',
-    description: 'JavaScript-Bibliothek für interaktive UI-Komponenten mit Virtual DOM.',
-    category: 'plattform',
-    subcategories: ['webframework', 'user-interface'],
-    tags: ['webframework', 'javascript', 'ui', 'spa'],
-    logo: 'logos/react.png',
-    homepage: 'https://react.dev/',
-    organization: 'Meta',
-    maturity: 'graduated',
-    featured: true,
-    metadata: {
-      createdAt: '2013-05-29',
-      updatedAt: '2025-10-01',
-      rating: 4.9,
-      views: 38700,
-    },
-  },
-  {
-    id: 'kubernetes',
-    name: 'Kubernetes',
-    description: 'Orchestrierungs-Plattform für Container-Deployment und -Verwaltung.',
-    category: 'betrieb',
-    subcategories: ['orchestrierung', 'container'],
-    tags: ['orchestrierung', 'container', 'devops', 'skalierung'],
-    logo: 'logos/kubernetes.png',
-    homepage: 'https://kubernetes.io/',
-    organization: 'CNCF',
-    maturity: 'graduated',
-    featured: true,
-    metadata: {
-      createdAt: '2014-06-06',
-      updatedAt: '2025-10-15',
-      rating: 4.8,
-      views: 35200,
-    },
-  },
+	// Plattform
+	{
+		id: 'angular',
+		name: 'Angular',
+		description: 'Modernes Webframework für die Erstellung schneller und zuverlässiger Anwendungen.',
+		category: 'plattform',
+		subcategories: ['webframework', 'user-interface'],
+		tags: ['webframework', 'user-interface', 'typescript', 'spa'],
+		logo: 'logos/angular.png',
+		homepage: 'https://angular.dev/',
+		organization: 'Google',
+		maturity: 'graduated',
+		featured: true,
+		metadata: {
+			createdAt: '2014-11-25',
+			updatedAt: '2025-09-17',
+			rating: 4.5,
+			views: 22100,
+		},
+	},
+	{
+		id: 'react',
+		name: 'React',
+		description: 'JavaScript-Bibliothek für interaktive UI-Komponenten mit Virtual DOM.',
+		category: 'plattform',
+		subcategories: ['webframework', 'user-interface'],
+		tags: ['webframework', 'javascript', 'ui', 'spa'],
+		logo: 'logos/react.png',
+		homepage: 'https://react.dev/',
+		organization: 'Meta',
+		maturity: 'graduated',
+		featured: true,
+		metadata: {
+			createdAt: '2013-05-29',
+			updatedAt: '2025-10-01',
+			rating: 4.9,
+			views: 38700,
+		},
+	},
+	{
+		id: 'kubernetes',
+		name: 'Kubernetes',
+		description: 'Orchestrierungs-Plattform für Container-Deployment und -Verwaltung.',
+		category: 'betrieb',
+		subcategories: ['orchestrierung', 'container'],
+		tags: ['orchestrierung', 'container', 'devops', 'skalierung'],
+		logo: 'logos/kubernetes.png',
+		homepage: 'https://kubernetes.io/',
+		organization: 'CNCF',
+		maturity: 'graduated',
+		featured: true,
+		metadata: {
+			createdAt: '2014-06-06',
+			updatedAt: '2025-10-15',
+			rating: 4.8,
+			views: 35200,
+		},
+	},
 
-  // KI
-  {
-    id: 'huggingface-transformers',
-    name: 'Hugging Face Transformers',
-    description: 'State-of-the-Art NLP-Bibliothek mit vortrainierten Modellen.',
-    category: 'ki',
-    subcategories: ['deep-learning', 'nlp'],
-    tags: ['deep-learning', 'transformer', 'nlp', 'ml', 'python'],
-    logo: 'logos/huggingface.png',
-    homepage: 'https://huggingface.co/transformers/',
-    organization: 'Hugging Face',
-    maturity: 'graduated',
-    featured: true,
-    metadata: {
-      createdAt: '2018-11-17',
-      updatedAt: '2025-09-17',
-      rating: 4.9,
-      views: 28500,
-    },
-  },
-  {
-    id: 'pytorch',
-    name: 'PyTorch',
-    description: 'Deep Learning Framework mit dynamischen Graphen und Eager Execution.',
-    category: 'ki',
-    subcategories: ['deep-learning'],
-    tags: ['deep-learning', 'ml', 'python', 'gpu', 'tensor'],
-    logo: 'logos/pytorch.png',
-    homepage: 'https://pytorch.org/',
-    organization: 'Meta AI',
-    maturity: 'graduated',
-    featured: true,
-    metadata: {
-      createdAt: '2016-01-01',
-      updatedAt: '2025-10-10',
-      rating: 4.8,
-      views: 31400,
-    },
-  },
-  
-  // Weitere Artikel... (insgesamt 70-80 Items)
+	// KI
+	{
+		id: 'huggingface-transformers',
+		name: 'Hugging Face Transformers',
+		description: 'State-of-the-Art NLP-Bibliothek mit vortrainierten Modellen.',
+		category: 'ki',
+		subcategories: ['deep-learning', 'nlp'],
+		tags: ['deep-learning', 'transformer', 'nlp', 'ml', 'python'],
+		logo: 'logos/huggingface.png',
+		homepage: 'https://huggingface.co/transformers/',
+		organization: 'Hugging Face',
+		maturity: 'graduated',
+		featured: true,
+		metadata: {
+			createdAt: '2018-11-17',
+			updatedAt: '2025-09-17',
+			rating: 4.9,
+			views: 28500,
+		},
+	},
+	{
+		id: 'pytorch',
+		name: 'PyTorch',
+		description: 'Deep Learning Framework mit dynamischen Graphen und Eager Execution.',
+		category: 'ki',
+		subcategories: ['deep-learning'],
+		tags: ['deep-learning', 'ml', 'python', 'gpu', 'tensor'],
+		logo: 'logos/pytorch.png',
+		homepage: 'https://pytorch.org/',
+		organization: 'Meta AI',
+		maturity: 'graduated',
+		featured: true,
+		metadata: {
+			createdAt: '2016-01-01',
+			updatedAt: '2025-10-10',
+			rating: 4.8,
+			views: 31400,
+		},
+	},
+
+	// Weitere Artikel... (insgesamt 70-80 Items)
 ];
 ```
 
@@ -959,26 +990,26 @@ const ARTICLES: Article[] = [
 
 ```typescript
 const SUBCATEGORIES: Subcategory[] = [
-  // Infrastruktur
-  { id: 'adresse', categoryId: 'infrastruktur', name: 'Adresse & Naming', description: 'IP-Adressierung, DNS, Domänen' },
-  { id: 'netzwerk', categoryId: 'infrastruktur', name: 'Netzwerk', description: 'Protokolle, Routing, Switching' },
-  { id: 'kabelgebunden', categoryId: 'infrastruktur', name: 'Kabelgebunden', description: 'Ethernet, Fasern, Kabel' },
-  { id: 'drahtlos', categoryId: 'infrastruktur', name: 'Drahtlos', description: 'Bluetooth, WiFi, 5G' },
-  
-  // Plattform
-  { id: 'webframework', categoryId: 'plattform', name: 'Web Frameworks', description: 'React, Vue, Angular, etc.' },
-  { id: 'datenbank', categoryId: 'plattform', name: 'Datenbanken', description: 'SQL, NoSQL, Vektor-DB' },
-  { id: 'runtime', categoryId: 'plattform', name: 'Runtimes', description: 'Node.js, JVM, Python Runtime' },
-  
-  // Betrieb
-  { id: 'ci-cd', categoryId: 'betrieb', name: 'CI/CD', description: 'Pipeline, Automatisierung, Deployment' },
-  { id: 'orchestrierung', categoryId: 'betrieb', name: 'Orchestrierung', description: 'Container-Management, Skalierung' },
-  { id: 'monitoring', categoryId: 'betrieb', name: 'Monitoring', description: 'Logs, Metriken, Tracing' },
-  
-  // KI
-  { id: 'deep-learning', categoryId: 'ki', name: 'Deep Learning', description: 'Neural Networks, Transformer' },
-  { id: 'nlp', categoryId: 'ki', name: 'NLP', description: 'Language Models, Text Processing' },
-  { id: 'ml', categoryId: 'ki', name: 'Machine Learning', description: 'Classical ML, Feature Engineering' },
+	// Infrastruktur
+	{ id: 'adresse', categoryId: 'infrastruktur', name: 'Adresse & Naming', description: 'IP-Adressierung, DNS, Domänen' },
+	{ id: 'netzwerk', categoryId: 'infrastruktur', name: 'Netzwerk', description: 'Protokolle, Routing, Switching' },
+	{ id: 'kabelgebunden', categoryId: 'infrastruktur', name: 'Kabelgebunden', description: 'Ethernet, Fasern, Kabel' },
+	{ id: 'drahtlos', categoryId: 'infrastruktur', name: 'Drahtlos', description: 'Bluetooth, WiFi, 5G' },
+
+	// Plattform
+	{ id: 'webframework', categoryId: 'plattform', name: 'Web Frameworks', description: 'React, Vue, Angular, etc.' },
+	{ id: 'datenbank', categoryId: 'plattform', name: 'Datenbanken', description: 'SQL, NoSQL, Vektor-DB' },
+	{ id: 'runtime', categoryId: 'plattform', name: 'Runtimes', description: 'Node.js, JVM, Python Runtime' },
+
+	// Betrieb
+	{ id: 'ci-cd', categoryId: 'betrieb', name: 'CI/CD', description: 'Pipeline, Automatisierung, Deployment' },
+	{ id: 'orchestrierung', categoryId: 'betrieb', name: 'Orchestrierung', description: 'Container-Management, Skalierung' },
+	{ id: 'monitoring', categoryId: 'betrieb', name: 'Monitoring', description: 'Logs, Metriken, Tracing' },
+
+	// KI
+	{ id: 'deep-learning', categoryId: 'ki', name: 'Deep Learning', description: 'Neural Networks, Transformer' },
+	{ id: 'nlp', categoryId: 'ki', name: 'NLP', description: 'Language Models, Text Processing' },
+	{ id: 'ml', categoryId: 'ki', name: 'Machine Learning', description: 'Classical ML, Feature Engineering' },
 ];
 ```
 
@@ -986,77 +1017,77 @@ const SUBCATEGORIES: Subcategory[] = [
 
 ```typescript
 const TAGS: Tag[] = [
-  // Allgemein
-  { id: 'open-source', name: 'Open Source', slug: 'open-source' },
-  { id: 'foss', name: 'FOSS', slug: 'foss' },
-  { id: 'cloud-native', name: 'Cloud Native', slug: 'cloud-native' },
-  { id: 'distributed', name: 'Distributed', slug: 'distributed' },
-  
-  // Tech-Kategorien
-  { id: 'kubernetes', name: 'Kubernetes', slug: 'kubernetes' },
-  { id: 'docker', name: 'Docker', slug: 'docker' },
-  { id: 'microservices', name: 'Microservices', slug: 'microservices' },
-  { id: 'rest-api', name: 'REST API', slug: 'rest-api' },
-  { id: 'graphql', name: 'GraphQL', slug: 'graphql' },
-  
-  // Sprachen & Runtimes
-  { id: 'python', name: 'Python', slug: 'python' },
-  { id: 'javascript', name: 'JavaScript', slug: 'javascript' },
-  { id: 'typescript', name: 'TypeScript', slug: 'typescript' },
-  { id: 'go', name: 'Go', slug: 'go' },
-  { id: 'rust', name: 'Rust', slug: 'rust' },
-  { id: 'java', name: 'Java', slug: 'java' },
-  
-  // Machine Learning
-  { id: 'machine-learning', name: 'Machine Learning', slug: 'machine-learning' },
-  { id: 'deep-learning', name: 'Deep Learning', slug: 'deep-learning' },
-  { id: 'nlp', name: 'NLP', slug: 'nlp' },
-  { id: 'llm', name: 'LLM', slug: 'llm' },
-  { id: 'transformer', name: 'Transformer', slug: 'transformer' },
-  
-  // Infrastruktur
-  { id: 'devops', name: 'DevOps', slug: 'devops' },
-  { id: 'ci-cd', name: 'CI/CD', slug: 'ci-cd' },
-  { id: 'container', name: 'Container', slug: 'container' },
-  { id: 'serverless', name: 'Serverless', slug: 'serverless' },
-  { id: 'edge-computing', name: 'Edge Computing', slug: 'edge-computing' },
-  
-  // Security
-  { id: 'security', name: 'Security', slug: 'security' },
-  { id: 'encryption', name: 'Encryption', slug: 'encryption' },
-  { id: 'privacy', name: 'Privacy', slug: 'privacy' },
-  { id: 'authentication', name: 'Authentication', slug: 'authentication' },
-  { id: 'compliance', name: 'Compliance', slug: 'compliance' },
-  
-  // Frontend/Web
-  { id: 'web-framework', name: 'Web Framework', slug: 'web-framework' },
-  { id: 'ui-components', name: 'UI Components', slug: 'ui-components' },
-  { id: 'css', name: 'CSS', slug: 'css' },
-  { id: 'responsive-design', name: 'Responsive Design', slug: 'responsive-design' },
-  { id: 'accessibility', name: 'Accessibility', slug: 'accessibility' },
-  { id: 'wcag', name: 'WCAG', slug: 'wcag' },
-  
-  // Database
-  { id: 'database', name: 'Database', slug: 'database' },
-  { id: 'sql', name: 'SQL', slug: 'sql' },
-  { id: 'nosql', name: 'NoSQL', slug: 'nosql' },
-  { id: 'postgresql', name: 'PostgreSQL', slug: 'postgresql' },
-  { id: 'mongodb', name: 'MongoDB', slug: 'mongodb' },
-  
-  // Data & Analytics
-  { id: 'data-lake', name: 'Data Lake', slug: 'data-lake' },
-  { id: 'analytics', name: 'Analytics', slug: 'analytics' },
-  { id: 'big-data', name: 'Big Data', slug: 'big-data' },
-  { id: 'etl', name: 'ETL', slug: 'etl' },
-  { id: 'data-science', name: 'Data Science', slug: 'data-science' },
-  
-  // Sonstiges
-  { id: 'testing', name: 'Testing', slug: 'testing' },
-  { id: 'monitoring', name: 'Monitoring', slug: 'monitoring' },
-  { id: 'logging', name: 'Logging', slug: 'logging' },
-  { id: 'documentation', name: 'Documentation', slug: 'documentation' },
-  { id: 'api-gateway', name: 'API Gateway', slug: 'api-gateway' },
-  { id: 'caching', name: 'Caching', slug: 'caching' },
+	// Allgemein
+	{ id: 'open-source', name: 'Open Source', slug: 'open-source' },
+	{ id: 'foss', name: 'FOSS', slug: 'foss' },
+	{ id: 'cloud-native', name: 'Cloud Native', slug: 'cloud-native' },
+	{ id: 'distributed', name: 'Distributed', slug: 'distributed' },
+
+	// Tech-Kategorien
+	{ id: 'kubernetes', name: 'Kubernetes', slug: 'kubernetes' },
+	{ id: 'docker', name: 'Docker', slug: 'docker' },
+	{ id: 'microservices', name: 'Microservices', slug: 'microservices' },
+	{ id: 'rest-api', name: 'REST API', slug: 'rest-api' },
+	{ id: 'graphql', name: 'GraphQL', slug: 'graphql' },
+
+	// Sprachen & Runtimes
+	{ id: 'python', name: 'Python', slug: 'python' },
+	{ id: 'javascript', name: 'JavaScript', slug: 'javascript' },
+	{ id: 'typescript', name: 'TypeScript', slug: 'typescript' },
+	{ id: 'go', name: 'Go', slug: 'go' },
+	{ id: 'rust', name: 'Rust', slug: 'rust' },
+	{ id: 'java', name: 'Java', slug: 'java' },
+
+	// Machine Learning
+	{ id: 'machine-learning', name: 'Machine Learning', slug: 'machine-learning' },
+	{ id: 'deep-learning', name: 'Deep Learning', slug: 'deep-learning' },
+	{ id: 'nlp', name: 'NLP', slug: 'nlp' },
+	{ id: 'llm', name: 'LLM', slug: 'llm' },
+	{ id: 'transformer', name: 'Transformer', slug: 'transformer' },
+
+	// Infrastruktur
+	{ id: 'devops', name: 'DevOps', slug: 'devops' },
+	{ id: 'ci-cd', name: 'CI/CD', slug: 'ci-cd' },
+	{ id: 'container', name: 'Container', slug: 'container' },
+	{ id: 'serverless', name: 'Serverless', slug: 'serverless' },
+	{ id: 'edge-computing', name: 'Edge Computing', slug: 'edge-computing' },
+
+	// Security
+	{ id: 'security', name: 'Security', slug: 'security' },
+	{ id: 'encryption', name: 'Encryption', slug: 'encryption' },
+	{ id: 'privacy', name: 'Privacy', slug: 'privacy' },
+	{ id: 'authentication', name: 'Authentication', slug: 'authentication' },
+	{ id: 'compliance', name: 'Compliance', slug: 'compliance' },
+
+	// Frontend/Web
+	{ id: 'web-framework', name: 'Web Framework', slug: 'web-framework' },
+	{ id: 'ui-components', name: 'UI Components', slug: 'ui-components' },
+	{ id: 'css', name: 'CSS', slug: 'css' },
+	{ id: 'responsive-design', name: 'Responsive Design', slug: 'responsive-design' },
+	{ id: 'accessibility', name: 'Accessibility', slug: 'accessibility' },
+	{ id: 'wcag', name: 'WCAG', slug: 'wcag' },
+
+	// Database
+	{ id: 'database', name: 'Database', slug: 'database' },
+	{ id: 'sql', name: 'SQL', slug: 'sql' },
+	{ id: 'nosql', name: 'NoSQL', slug: 'nosql' },
+	{ id: 'postgresql', name: 'PostgreSQL', slug: 'postgresql' },
+	{ id: 'mongodb', name: 'MongoDB', slug: 'mongodb' },
+
+	// Data & Analytics
+	{ id: 'data-lake', name: 'Data Lake', slug: 'data-lake' },
+	{ id: 'analytics', name: 'Analytics', slug: 'analytics' },
+	{ id: 'big-data', name: 'Big Data', slug: 'big-data' },
+	{ id: 'etl', name: 'ETL', slug: 'etl' },
+	{ id: 'data-science', name: 'Data Science', slug: 'data-science' },
+
+	// Sonstiges
+	{ id: 'testing', name: 'Testing', slug: 'testing' },
+	{ id: 'monitoring', name: 'Monitoring', slug: 'monitoring' },
+	{ id: 'logging', name: 'Logging', slug: 'logging' },
+	{ id: 'documentation', name: 'Documentation', slug: 'documentation' },
+	{ id: 'api-gateway', name: 'API Gateway', slug: 'api-gateway' },
+	{ id: 'caching', name: 'Caching', slug: 'caching' },
 ];
 ```
 
@@ -1083,7 +1114,7 @@ export function AppRoutes() {
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/article/:articleId" element={<ArticleDetailPage />} /> {/* Phase 2 */}
-        
+
         {/* Fallback */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
@@ -1095,19 +1126,22 @@ export function AppRoutes() {
 ### 7.2 Route-Details
 
 #### `/` - Homepage
+
 - **Komponenten:** HeroSection, CategoryPreview, SearchBar, ArticleGrid
 - **Default State:** Alle Artikel, kategorisiert angezeigt
 - **URL-Parameter:** Keine (oder optionale `?highlight=kategorie-id`)
 
 #### `/category/:categoryId` - Kategorie-Seite
+
 - **Komponenten:** CategoryHeader, SearchBar, FilterSidebar, ArticleGrid
 - **Default State:** Nur Artikel der ausgewählten Kategorie
-- **URL-Parameter:** 
+- **URL-Parameter:**
   - `:categoryId` - Erforderlich (z.B. `/category/plattform`)
   - `?subcategory=...` - Optional, Subcategory-Filter
   - `?sort=...` - Optional, Sortierung
 
 #### `/search` - Such-Ergebnisse
+
 - **Komponenten:** SearchBar, FilterSidebar, ArticleGrid, ResultStats
 - **URL-Parameter:**
   - `?q=...` - Such-Query (erforderlich)
@@ -1120,12 +1154,14 @@ export function AppRoutes() {
 **Beispiel:** `/search?q=machine+learning&category=ki&maturity=graduated&sort=name&page=1`
 
 #### `/article/:articleId` - Artikel-Detail (Phase 2)
+
 - **Komponenten:** ArticleHeader, ArticleContent, RelatedArticles
 - **URL-Parameter:** `:articleId` - Erforderlich
 
 ### 7.3 Deep-Linking & URL-Sync
 
 **Strategie:**
+
 - Filter-State in URL-Parametern speichern (für Deep-Linking & Sharing)
 - URL bei Filter-Änderung automatisch aktualisieren
 - Seite laden → URL-Parameter auslesen → Filter-State setzen
@@ -1133,39 +1169,39 @@ export function AppRoutes() {
 ```typescript
 // useFilterSync Hook
 const useFilterSync = () => {
-  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
-  const { search } = useLocation();
-  const navigate = useNavigate();
+	const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
+	const { search } = useLocation();
+	const navigate = useNavigate();
 
-  // Beim Laden: URL auslesen
-  useEffect(() => {
-    const params = new URLSearchParams(search);
-    const filterState: FilterState = {
-      searchQuery: params.get('q') || '',
-      selectedCategory: params.get('category') || undefined,
-      selectedSubcategories: params.get('subcategories')?.split(',') || [],
-      selectedTags: params.get('tags')?.split(',') || [],
-      maturityFilter: (params.get('maturity')?.split(',') as any) || ['sandbox', 'incubating', 'graduated'],
-      sortBy: (params.get('sort') as any) || 'name',
-    };
-    setFilters(filterState);
-  }, [search]);
+	// Beim Laden: URL auslesen
+	useEffect(() => {
+		const params = new URLSearchParams(search);
+		const filterState: FilterState = {
+			searchQuery: params.get('q') || '',
+			selectedCategory: params.get('category') || undefined,
+			selectedSubcategories: params.get('subcategories')?.split(',') || [],
+			selectedTags: params.get('tags')?.split(',') || [],
+			maturityFilter: (params.get('maturity')?.split(',') as any) || ['sandbox', 'incubating', 'graduated'],
+			sortBy: (params.get('sort') as any) || 'name',
+		};
+		setFilters(filterState);
+	}, [search]);
 
-  // Beim Ändern: URL updaten
-  const updateFilters = (newFilters: FilterState) => {
-    setFilters(newFilters);
-    const params = new URLSearchParams({
-      q: newFilters.searchQuery,
-      category: newFilters.selectedCategory || '*',
-      subcategories: newFilters.selectedSubcategories.join(','),
-      tags: newFilters.selectedTags.join(','),
-      maturity: newFilters.maturityFilter.join(','),
-      sort: newFilters.sortBy,
-    });
-    navigate(`/search?${params.toString()}`);
-  };
+	// Beim Ändern: URL updaten
+	const updateFilters = (newFilters: FilterState) => {
+		setFilters(newFilters);
+		const params = new URLSearchParams({
+			q: newFilters.searchQuery,
+			category: newFilters.selectedCategory || '*',
+			subcategories: newFilters.selectedSubcategories.join(','),
+			tags: newFilters.selectedTags.join(','),
+			maturity: newFilters.maturityFilter.join(','),
+			sort: newFilters.sortBy,
+		});
+		navigate(`/search?${params.toString()}`);
+	};
 
-  return { filters, updateFilters };
+	return { filters, updateFilters };
 };
 ```
 
@@ -1193,86 +1229,86 @@ const useFilterSync = () => {
 /* src/styles/theme.css */
 
 :root {
-  /* ===== KERN-Theme Farbpalette ===== */
-  
-  /* Primär (Blau - Government-Standard) */
-  --kol-color-primary: #003d82;
-  --kol-color-primary-hover: #002550;
-  --kol-color-primary-active: #001a33;
-  
-  /* Sekundär (Grün) */
-  --kol-color-success: #00883d;
-  --kol-color-success-hover: #006b2e;
-  
-  /* Warnung */
-  --kol-color-warning: #f39c12;
-  --kol-color-warning-hover: #e67e22;
-  
-  /* Danger */
-  --kol-color-danger: #c5192d;
-  --kol-color-danger-hover: #a00e22;
-  
-  /* Text & Background */
-  --kol-color-text: #1a1a1a;
-  --kol-color-text-light: #4a4a4a;
-  --kol-color-bg: #ffffff;
-  --kol-color-bg-light: #f5f5f5;
-  --kol-color-border: #d3d3d3;
-  
-  /* ===== Spacing (basierend auf 8px-Raster) ===== */
-  --spacing-xs: 0.25rem; /* 4px */
-  --spacing-sm: 0.5rem;  /* 8px */
-  --spacing-md: 1rem;    /* 16px */
-  --spacing-lg: 1.5rem;  /* 24px */
-  --spacing-xl: 2rem;    /* 32px */
-  --spacing-2xl: 3rem;   /* 48px */
-  
-  /* ===== Borders & Radius ===== */
-  --border-radius: 0.25rem; /* 4px (KERN-Standard) */
-  --border-radius-lg: 0.5rem; /* 8px */
-  --border-width: 1px;
-  
-  /* ===== Typography ===== */
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;      /* 16px */
-  --font-size-lg: 1.125rem;    /* 18px */
-  --font-size-xl: 1.5rem;      /* 24px */
-  --font-size-2xl: 2rem;       /* 32px */
-  --font-weight-normal: 400;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  
-  /* ===== Shadow (einfach, KERN-konform) ===== */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
-  
-  /* ===== Kategorie-Farben ===== */
-  --cat-infrastruktur: #c5192d; /* Rot */
-  --cat-plattform: #003d82;     /* Blau */
-  --cat-betrieb: #00883d;       /* Grün */
-  --cat-zugang: #f39c12;        /* Orange */
-  --cat-entwicklung: #8e44ad;   /* Lila */
-  --cat-sicherheit: #6f4a3a;    /* Braun */
-  --cat-ki: #5b2c6f;            /* Indigo */
-  
-  /* ===== Transitions ===== */
-  --transition-fast: 0.15s ease-in-out;
-  --transition-normal: 0.25s ease-in-out;
-  --transition-slow: 0.35s ease-in-out;
+	/* ===== KERN-Theme Farbpalette ===== */
+
+	/* Primär (Blau - Government-Standard) */
+	--kol-color-primary: #003d82;
+	--kol-color-primary-hover: #002550;
+	--kol-color-primary-active: #001a33;
+
+	/* Sekundär (Grün) */
+	--kol-color-success: #00883d;
+	--kol-color-success-hover: #006b2e;
+
+	/* Warnung */
+	--kol-color-warning: #f39c12;
+	--kol-color-warning-hover: #e67e22;
+
+	/* Danger */
+	--kol-color-danger: #c5192d;
+	--kol-color-danger-hover: #a00e22;
+
+	/* Text & Background */
+	--kol-color-text: #1a1a1a;
+	--kol-color-text-light: #4a4a4a;
+	--kol-color-bg: #ffffff;
+	--kol-color-bg-light: #f5f5f5;
+	--kol-color-border: #d3d3d3;
+
+	/* ===== Spacing (basierend auf 8px-Raster) ===== */
+	--spacing-xs: 0.25rem; /* 4px */
+	--spacing-sm: 0.5rem; /* 8px */
+	--spacing-md: 1rem; /* 16px */
+	--spacing-lg: 1.5rem; /* 24px */
+	--spacing-xl: 2rem; /* 32px */
+	--spacing-2xl: 3rem; /* 48px */
+
+	/* ===== Borders & Radius ===== */
+	--border-radius: 0.25rem; /* 4px (KERN-Standard) */
+	--border-radius-lg: 0.5rem; /* 8px */
+	--border-width: 1px;
+
+	/* ===== Typography ===== */
+	--font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	--font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+	--font-size-sm: 0.875rem; /* 14px */
+	--font-size-base: 1rem; /* 16px */
+	--font-size-lg: 1.125rem; /* 18px */
+	--font-size-xl: 1.5rem; /* 24px */
+	--font-size-2xl: 2rem; /* 32px */
+	--font-weight-normal: 400;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* ===== Shadow (einfach, KERN-konform) ===== */
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+	--shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+
+	/* ===== Kategorie-Farben ===== */
+	--cat-infrastruktur: #c5192d; /* Rot */
+	--cat-plattform: #003d82; /* Blau */
+	--cat-betrieb: #00883d; /* Grün */
+	--cat-zugang: #f39c12; /* Orange */
+	--cat-entwicklung: #8e44ad; /* Lila */
+	--cat-sicherheit: #6f4a3a; /* Braun */
+	--cat-ki: #5b2c6f; /* Indigo */
+
+	/* ===== Transitions ===== */
+	--transition-fast: 0.15s ease-in-out;
+	--transition-normal: 0.25s ease-in-out;
+	--transition-slow: 0.35s ease-in-out;
 }
 
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --kol-color-text: #ffffff;
-    --kol-color-text-light: #b0b0b0;
-    --kol-color-bg: #1a1a1a;
-    --kol-color-bg-light: #2d2d2d;
-    --kol-color-border: #4a4a4a;
-  }
+	:root {
+		--kol-color-text: #ffffff;
+		--kol-color-text-light: #b0b0b0;
+		--kol-color-bg: #1a1a1a;
+		--kol-color-bg-light: #2d2d2d;
+		--kol-color-border: #4a4a4a;
+	}
 }
 ```
 
@@ -1282,56 +1318,67 @@ const useFilterSync = () => {
 /* src/styles/global.css */
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  line-height: 1.5;
-  color: var(--kol-color-text);
-  background-color: var(--kol-color-bg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: var(--font-family-base);
+	font-size: var(--font-size-base);
+	line-height: 1.5;
+	color: var(--kol-color-text);
+	background-color: var(--kol-color-bg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	font-weight: var(--font-weight-bold);
+	line-height: 1.2;
 }
 
-h1 { font-size: var(--font-size-2xl); }
-h2 { font-size: var(--font-size-xl); }
-h3 { font-size: var(--font-size-lg); }
+h1 {
+	font-size: var(--font-size-2xl);
+}
+h2 {
+	font-size: var(--font-size-xl);
+}
+h3 {
+	font-size: var(--font-size-lg);
+}
 
 p {
-  margin: 0;
+	margin: 0;
 }
 
 a {
-  color: var(--kol-color-primary);
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
+	color: var(--kol-color-primary);
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 button {
-  cursor: pointer;
-  font-family: inherit;
-  border: none;
-  background: none;
+	cursor: pointer;
+	font-family: inherit;
+	border: none;
+	background: none;
 }
 
 /* Accessible Focus Ring */
 :focus-visible {
-  outline: 2px solid var(--kol-color-primary);
-  outline-offset: 2px;
+	outline: 2px solid var(--kol-color-primary);
+	outline-offset: 2px;
 }
 
 /* KoliBri Component overrides */
@@ -1340,9 +1387,9 @@ kol-button-link,
 kol-input-text,
 kol-select,
 kol-input-checkbox {
-  --kol-color-primary: var(--kol-color-primary);
-  --kol-color-success: var(--kol-color-success);
-  --kol-border-radius: var(--border-radius);
+	--kol-color-primary: var(--kol-color-primary);
+	--kol-color-success: var(--kol-color-success);
+	--kol-border-radius: var(--border-radius);
 }
 ```
 
@@ -1352,103 +1399,103 @@ kol-input-checkbox {
 /* src/components/ArticleCard.css */
 
 .article-card {
-  padding: var(--spacing-lg);
-  border: var(--border-width) solid var(--kol-color-border);
-  border-radius: var(--border-radius);
-  background-color: var(--kol-color-bg);
-  transition: all var(--transition-normal);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
+	padding: var(--spacing-lg);
+	border: var(--border-width) solid var(--kol-color-border);
+	border-radius: var(--border-radius);
+	background-color: var(--kol-color-bg);
+	transition: all var(--transition-normal);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-md);
 }
 
 @media (hover: hover) {
-  .article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--kol-color-primary);
-  }
+	.article-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--kol-color-primary);
+	}
 }
 
 .article-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--spacing-sm);
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: var(--spacing-sm);
 }
 
 .article-card-logo {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  flex-shrink: 0;
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	flex-shrink: 0;
 }
 
 .article-card-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--kol-color-text);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--kol-color-text);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 .article-card-description {
-  font-size: var(--font-size-sm);
-  color: var(--kol-color-text-light);
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+	font-size: var(--font-size-sm);
+	color: var(--kol-color-text-light);
+	line-height: 1.4;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .article-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-xs);
 }
 
 .tag {
-  display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: var(--kol-color-bg-light);
-  border: var(--border-width) solid var(--kol-color-border);
-  border-radius: calc(var(--border-radius) * 2);
-  font-size: 0.75rem;
-  color: var(--kol-color-text-light);
+	display: inline-block;
+	padding: var(--spacing-xs) var(--spacing-sm);
+	background-color: var(--kol-color-bg-light);
+	border: var(--border-width) solid var(--kol-color-border);
+	border-radius: calc(var(--border-radius) * 2);
+	font-size: 0.75rem;
+	color: var(--kol-color-text-light);
 }
 
 /* Badge Styles */
 .badge {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: calc(var(--border-radius) * 2);
-  font-size: 0.75rem;
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
+	display: inline-block;
+	padding: 0.25rem 0.5rem;
+	border-radius: calc(var(--border-radius) * 2);
+	font-size: 0.75rem;
+	font-weight: var(--font-weight-bold);
+	text-transform: uppercase;
 }
 
 .badge-primary {
-  background-color: var(--kol-color-primary);
-  color: white;
+	background-color: var(--kol-color-primary);
+	color: white;
 }
 
 .badge-success {
-  background-color: var(--kol-color-success);
-  color: white;
+	background-color: var(--kol-color-success);
+	color: white;
 }
 
 .badge-danger {
-  background-color: var(--kol-color-danger);
-  color: white;
+	background-color: var(--kol-color-danger);
+	color: white;
 }
 
 .badge-warning {
-  background-color: var(--kol-color-warning);
-  color: white;
+	background-color: var(--kol-color-warning);
+	color: white;
 }
 ```
 
@@ -1459,30 +1506,30 @@ kol-input-checkbox {
 
 /* Base (Mobile) */
 .article-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-lg);
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--spacing-lg);
 }
 
 /* Tablet */
 @media (min-width: 600px) {
-  .article-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+	.article-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
-  .article-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+	.article-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
 }
 
 /* Wide */
 @media (min-width: 1440px) {
-  .article-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
+	.article-grid {
+		grid-template-columns: repeat(5, 1fr);
+	}
 }
 ```
 
@@ -1595,7 +1642,7 @@ Phase 1f: REVIEW & LAUNCH (0.5-1 Tag)
 ├─ Code-Review
 ├─ Testing (manuell)
 ├─ Deploy zu Demo-Server (Vercel/Netlify)
-└─ Output: MVP Live, Link zum Sharegit 
+└─ Output: MVP Live, Link zum Sharegit
 
 Phase 2: ENHANCEMENT (später)
 ├─ Article-Detail-Pages
@@ -1620,6 +1667,7 @@ Phase 2: ENHANCEMENT (später)
 - [ ] Vite Dev-Server startet: `pnpm run dev`
 
 **Developer-Fragen vorab:**
+
 - "Wie werden Artikel-Logos geladen? (Static, CDN, URL-Property?)"
 - "Welche Icon-Library für Kategorie-Icons? (Lucide, Codicon, SVG?)"
 - "Pagination nötig oder Infinite Scroll?" (MVP: weder noch, nur Alle auf 1 Seite)

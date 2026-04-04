@@ -1,4 +1,5 @@
 # Architecture Documentation Index
+
 ## Landscape2-ähnliche Übersichtsseite | KoliBri + KERN Theme
 
 **Created:** 2026-04-04  
@@ -10,9 +11,11 @@
 ## Documents Overview
 
 ### 1. DESIGN_PLAN_MVP.md (51 KB, ~500 Zeilen)
+
 **Das Haupt-Dokument** - Vollständiger UI/UX Design-Plan
 
 **Inhalte:**
+
 - 1. Informations-Architektur (Seiten, Datenstruktur, MVP-Größe)
 - 2. Übersichtsseite Layout (Wireframe, Komponenten, Breakpoints, KERN-Colors)
 - 3. Such- und Filter-Funktionalität (UX, Filter-Types, Search-Logic)
@@ -30,9 +33,11 @@
 ---
 
 ### 2. FILE_STRUCTURE_TEMPLATE.md (13 KB, ~350 Zeilen)
+
 **Das Setup-Manual** - Schritt-für-Schritt Implementierungs-Anleitung
 
 **Inhalte:**
+
 - Directory Layout (Exakte Dateistruktur für Phase 1b)
 - Phase 1b: SETUP Checkliste (12 konkrete Schritte)
 - Phase 1c: Komponenten Implementierungs-Reihenfolge
@@ -47,9 +52,11 @@
 ---
 
 ### 3. ARCHITECT_SUMMARY.md (12 KB, ~400 Zeilen)
+
 **Die Executive Brief** - Zusammenfassung für Stakeholder
 
 **Inhalte:**
+
 - Status & Deliverables
 - The Big Picture (Was wird gebaut?)
 - Architecture Decisions (Warum KoliBri? Warum Zustand? Warum CSS Custom Properties?)
@@ -70,6 +77,7 @@
 ---
 
 ### 4. ARCHITECTURE_INDEX.md (diese Datei)
+
 **Das Navigation Hub** - Überblick über alle Dokumente
 
 ---
@@ -98,18 +106,18 @@
 
 ## FAQ: Welches Dokument für welche Frage?
 
-| Frage | Antwort in |
-|-------|------------|
-| "Was bauen wir genau?" | ARCHITECT_SUMMARY.md + DESIGN_PLAN_MVP.md Section 1 |
-| "Wie sieht die UI aus?" | DESIGN_PLAN_MVP.md Section 2 (Wireframe) + Section 4 (Karten) |
-| "Welche Komponenten brauchen wir?" | DESIGN_PLAN_MVP.md Section 5 + FILE_STRUCTURE_TEMPLATE.md |
-| "Wo schreibe ich Code?" | FILE_STRUCTURE_TEMPLATE.md Directory Layout |
-| "Was ist die Sortier-Logik?" | DESIGN_PLAN_MVP.md Section 3.3 + Section 4 |
-| "Welche Farben nutzen wir?" | DESIGN_PLAN_MVP.md Section 2.4 + Section 8.2 |
-| "Wie starte ich mit Phase 1b?" | FILE_STRUCTURE_TEMPLATE.md Phase 1b Checkliste |
-| "Was ist in MVP, was nicht?" | DESIGN_PLAN_MVP.md Section 9 |
-| "Timeline für MVP?" | ARCHITECT_SUMMARY.md Technical Timeline |
-| "Was sind die Risiken?" | ARCHITECT_SUMMARY.md Risks & Mitigations |
+| Frage                              | Antwort in                                                    |
+| ---------------------------------- | ------------------------------------------------------------- |
+| "Was bauen wir genau?"             | ARCHITECT_SUMMARY.md + DESIGN_PLAN_MVP.md Section 1           |
+| "Wie sieht die UI aus?"            | DESIGN_PLAN_MVP.md Section 2 (Wireframe) + Section 4 (Karten) |
+| "Welche Komponenten brauchen wir?" | DESIGN_PLAN_MVP.md Section 5 + FILE_STRUCTURE_TEMPLATE.md     |
+| "Wo schreibe ich Code?"            | FILE_STRUCTURE_TEMPLATE.md Directory Layout                   |
+| "Was ist die Sortier-Logik?"       | DESIGN_PLAN_MVP.md Section 3.3 + Section 4                    |
+| "Welche Farben nutzen wir?"        | DESIGN_PLAN_MVP.md Section 2.4 + Section 8.2                  |
+| "Wie starte ich mit Phase 1b?"     | FILE_STRUCTURE_TEMPLATE.md Phase 1b Checkliste                |
+| "Was ist in MVP, was nicht?"       | DESIGN_PLAN_MVP.md Section 9                                  |
+| "Timeline für MVP?"                | ARCHITECT_SUMMARY.md Technical Timeline                       |
+| "Was sind die Risiken?"            | ARCHITECT_SUMMARY.md Risks & Mitigations                      |
 
 ---
 
@@ -118,26 +126,31 @@
 Diese Architecture basiert auf folgenden Entscheidungen:
 
 ### 1. **Framework: React + React Router**
+
 **Entscheidung:** Client-Side SPA mit React Hook Form out, React Router in  
 **Grund:** Landscape2 ist ein Single-Page-App Use-Case, nicht ein Form-Builder  
 **Dokument:** DESIGN_PLAN_MVP.md Abschnitt 1, ARCHITECT_SUMMARY.md
 
 ### 2. **Component Library: KoliBri Web Components**
-**Entscheidung:** Nutze @public-ui/react 4.1.2 Komponenten  
+
+**Entscheidung:** Nutze @public-ui/react-v19 4.1.2 Komponenten  
 **Grund:** Bereits vorhanden, Accessibility + KERN-Theme-Support built-in  
 **Dokument:** DESIGN_PLAN_MVP.md Abschnitt 5, ARCHITECT_SUMMARY.md Technical Stack
 
 ### 3. **Styling: CSS Custom Properties + UnoCSS (nicht Tailwind)**
+
 **Entscheidung:** Keine zusätzlichen CSS-Frameworks, nur KERN-Theme-Variables  
 **Grund:** KoliBri braucht Custom Properties, Tailwind würde kollidieren  
 **Dokument:** DESIGN_PLAN_MVP.md Abschnitt 8, ARCHITECT_SUMMARY.md Design System
 
 ### 4. **Data: Dummy-Daten, kein API**
+
 **Entscheidung:** Phase 1 nutzt Mock-Daten aus CSV, Phase 2 API  
 **Grund:** MVP schneller bauen, API-Integration ist Scope-Expansion  
 **Dokument:** DESIGN_PLAN_MVP.md Abschnitt 6, ARCHITECT_SUMMARY.md Phase 2
 
 ### 5. **Scope: Nur Übersichtsseite + Such/Filter**
+
 **Entscheidung:** Keine Detail-Pages, kein Dark Mode, keine Pagination  
 **Grund:** MVP = Minimal Viable Product, nicht "Alles machen"  
 **Dokument:** DESIGN_PLAN_MVP.md Abschnitt 9, ARCHITECT_SUMMARY.md Success Criteria
@@ -187,13 +200,13 @@ Diese Architecture basiert auf folgenden Entscheidungen:
 
 ## Document Sizes & Read Times
 
-| Dokument | Größe | Zeilen | Read Time |
-|----------|-------|--------|-----------|
-| DESIGN_PLAN_MVP.md | 51 KB | ~500 | 3-4 Stunden |
-| FILE_STRUCTURE_TEMPLATE.md | 13 KB | ~350 | 1-1.5 Stunden |
-| ARCHITECT_SUMMARY.md | 12 KB | ~400 | 1 Stunde |
-| ARCHITECTURE_INDEX.md | 8 KB | ~250 | 15 Minuten |
-| **TOTAL** | **84 KB** | **~1500** | **5-7 Stunden** |
+| Dokument                   | Größe     | Zeilen    | Read Time       |
+| -------------------------- | --------- | --------- | --------------- |
+| DESIGN_PLAN_MVP.md         | 51 KB     | ~500      | 3-4 Stunden     |
+| FILE_STRUCTURE_TEMPLATE.md | 13 KB     | ~350      | 1-1.5 Stunden   |
+| ARCHITECT_SUMMARY.md       | 12 KB     | ~400      | 1 Stunde        |
+| ARCHITECTURE_INDEX.md      | 8 KB      | ~250      | 15 Minuten      |
+| **TOTAL**                  | **84 KB** | **~1500** | **5-7 Stunden** |
 
 **Total Read Time:** Ein Developer braucht ~5-7 Stunden zum Durchlesen, dann kann er code.
 
@@ -201,26 +214,27 @@ Diese Architecture basiert auf folgenden Entscheidungen:
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2026-04-04 | Initial Release - All 4 documents |
+| Version | Date       | Changes                           |
+| ------- | ---------- | --------------------------------- |
+| 1.0     | 2026-04-04 | Initial Release - All 4 documents |
 
 ---
 
 ## Stakeholder Signoff
 
-| Role | Name | Date | Status |
-|------|------|------|--------|
-| Architect | Claude Code | 2026-04-04 | ✓ APPROVED |
-| Developer | (awaiting) | TBD | ⏳ TO START |
-| Tech Lead | (review) | TBD | ⏳ PENDING |
-| Product | (review) | TBD | ⏳ PENDING |
+| Role      | Name        | Date       | Status      |
+| --------- | ----------- | ---------- | ----------- |
+| Architect | Claude Code | 2026-04-04 | ✓ APPROVED  |
+| Developer | (awaiting)  | TBD        | ⏳ TO START |
+| Tech Lead | (review)    | TBD        | ⏳ PENDING  |
+| Product   | (review)    | TBD        | ⏳ PENDING  |
 
 ---
 
 ## Next Steps
 
 ### For Architect (Claude Code)
+
 - [x] Write DESIGN_PLAN_MVP.md
 - [x] Write FILE_STRUCTURE_TEMPLATE.md
 - [x] Write ARCHITECT_SUMMARY.md
@@ -228,12 +242,14 @@ Diese Architecture basiert auf folgenden Entscheidungen:
 - [ ] Answer Developer questions (before Phase 1b)
 
 ### For Tech Lead
+
 - [ ] Review all 4 documents (target: ~2 hours)
 - [ ] Approve scope & architecture
 - [ ] Answer Developer questions (if Architect unavailable)
 - [ ] Schedule kickoff with Developer
 
 ### For Developer
+
 - [ ] Read ARCHITECT_SUMMARY.md (1 hour)
 - [ ] Read DESIGN_PLAN_MVP.md (3-4 hours)
 - [ ] Read FILE_STRUCTURE_TEMPLATE.md (1-1.5 hours)
@@ -242,6 +258,7 @@ Diese Architecture basiert auf folgenden Entscheidungen:
 - [ ] Target: MVP live in ~1 week
 
 ### For Product / Stakeholder
+
 - [ ] Skim ARCHITECT_SUMMARY.md (30 min)
 - [ ] Review MVP Scope (DESIGN_PLAN_MVP.md Section 9)
 - [ ] Review Success Criteria (ARCHITECT_SUMMARY.md)
@@ -274,6 +291,7 @@ See ARCHITECT_SUMMARY.md Section "Success Criteria" (Funktionalität, Design, Ac
 ## Appendix: File Locations
 
 All files are in:
+
 ```
 /Users/moppitz/Workspace/kolibri/themes/accessible-d-stack/
 ```
@@ -290,6 +308,6 @@ All files are in:
 
 ---
 
-*Last Updated: 2026-04-04*  
-*Architect: Claude Code (Level 4)*  
-*Status: READY FOR DEVELOPER HANDOFF*
+_Last Updated: 2026-04-04_  
+_Architect: Claude Code (Level 4)_  
+_Status: READY FOR DEVELOPER HANDOFF_
