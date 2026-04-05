@@ -32,6 +32,7 @@ jobs:
       - name: Build
         run: pnpm build
         env:
+          VITE_COMMIT_SHA: ${{ github.sha }}
           VITE_BASE_URL: >-
             ${{ github.event_name == 'pull_request'
               && format('/accessible-d-stack-landscape/pr-preview/pr-{0}/', github.event.number)

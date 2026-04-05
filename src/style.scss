@@ -480,4 +480,17 @@ kol-card.article-card,
     padding-top: var(--ds-space-4);
     border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
+
+  &__meta {
+    font-size: var(--ds-text-xs);
+    color: rgba(255, 255, 255, 0.5);
+
+    code {
+      font-family: var(--ds-font-mono);
+      color: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--ds-radius-sm);
+      padding: 0 var(--ds-space-1);
+    }
+  }
 }

@@ -1,5 +1,7 @@
 export function Footer() {
 	const year = new Date().getFullYear();
+	const commitSha = import.meta.env.VITE_COMMIT_SHA;
+	const commitDisplay = commitSha ? commitSha.slice(0, 7) : 'lokal';
 
 	return (
 		<footer className="footer">
@@ -27,6 +29,9 @@ export function Footer() {
 						KoliBri
 					</a>{' '}
 					und dem KERN-Theme · Lizenz: EUPL-1.2
+				</p>
+				<p className="footer__meta" aria-label={`Build Commit ${commitDisplay}`}>
+					Build-Commit: <code>{commitDisplay}</code>
 				</p>
 			</div>
 		</footer>
