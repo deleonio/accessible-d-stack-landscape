@@ -1,14 +1,14 @@
 # D-Stack Landscape
 
-Interaktive Technologie-Übersicht des [Deutschland-Stacks](https://deutschland-stack.gov.de) — der digitalen Infrastruktur der deutschen öffentlichen Verwaltung.
+Interaktive Technologie-Übersicht für ein modernes, barrierefreies Digital-Ökosystem.
 
-**Live:** [deleonio.github.io/accessible-d-stack-landscape](https://deleonio.github.io/accessible-d-stack-landscape/)
+**Live:** [Projekt-Demo auf GitHub Pages](https://deleonio.github.io/accessible-d-stack-landscape/)
 
 ---
 
 ## Über das Projekt
 
-Die D-Stack Landscape visualisiert die Technologien, Komponenten und Protokolle, die im Rahmen des Deutschland-Stacks eingesetzt oder evaluiert werden. Technologien sind in vier Kategorien unterteilt:
+Die D-Stack Landscape visualisiert Technologien, Komponenten und Protokolle, die in einer modularen Plattformarchitektur eingesetzt oder evaluiert werden. Technologien sind in vier Kategorien unterteilt:
 
 | Kategorie | Farbe | Beschreibung |
 |---|---|---|
@@ -18,7 +18,7 @@ Die D-Stack Landscape visualisiert die Technologien, Komponenten und Protokolle,
 | **Zugang** | Orange | Nutzer-Zugang und Endgeräte |
 
 Die Anwendung ist **barrierefrei** entwickelt:
-- Barrierefreie UI-Komponenten via [KoliBri](https://public-ui.github.io/) (deutsches Behörden-Design-System)
+- Barrierefreie UI-Komponenten via [KoliBri](https://public-ui.github.io/) (accessible component system)
 - Automatisierte Accessibility-Tests mit [axe-core](https://github.com/dequelabs/axe-core) (WCAG 2.1 AA)
 - ESLint-Plugin `jsx-a11y` für statische Barrierefreiheitsprüfung
 
