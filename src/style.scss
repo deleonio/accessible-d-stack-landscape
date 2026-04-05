@@ -399,6 +399,24 @@ kol-card.article-card,
 	z-index: 1;
 }
 
+.drawer-related {
+	margin-top: var(--ds-space-6);
+	padding-top: var(--ds-space-4);
+	border-top: 1px solid var(--ds-color-border-light);
+
+	&__title {
+		font-size: var(--ds-text-sm);
+		font-weight: 600;
+		margin-bottom: var(--ds-space-2);
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--ds-space-2);
+	}
+}
+
 // ─── Empty state ──────────────────────────────────────────────────────────────
 .empty-state {
 	text-align: center;
