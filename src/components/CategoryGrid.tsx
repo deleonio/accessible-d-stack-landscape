@@ -8,9 +8,10 @@ interface CategoryGridProps {
 	filters: FilterState;
 	onFilterChange: (filters: FilterState) => void;
 	totalCount: number;
+	onArticleSelect: (article: Article) => void;
 }
 
-export function CategoryGrid({ categories, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
+export function CategoryGrid({ categories, articles, filters, onFilterChange, totalCount, onArticleSelect }: CategoryGridProps) {
 	const activeCount = articles.length;
 
 	return (
@@ -69,7 +70,7 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 			) : (
 				<div className="articles-grid">
 					{articles.map((article) => (
-						<ArticleCard key={article.id} article={article} />
+						<ArticleCard key={article.id} article={article} onSelect={onArticleSelect} />
 					))}
 				</div>
 			)}

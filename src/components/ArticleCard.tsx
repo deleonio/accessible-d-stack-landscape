@@ -4,15 +4,31 @@ import { CATEGORIES } from '../data/articles';
 
 interface ArticleCardProps {
 	article: Article;
+	onSelect: (article: Article) => void;
 }
 
-export function ArticleCard({ article }: ArticleCardProps) {
+export function ArticleCard({ article, onSelect }: ArticleCardProps) {
 	const category = CATEGORIES.find((c) => c.id === article.category);
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = category?.name ?? 'Allgemein';
 
+	const handleClick = () => onSelect(article);
+	const handleKeyDown = (e: KeyboardEvent) => {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			onSelect(article);
+		}
+	};
+
 	return (
-		<div className="article-card-wrapper">
+		<div
+			className="article-card-wrapper"
+			role="button"
+			tabIndex={0}
+			aria-label={`${article.name} – Details anzeigen`}
+			onClick={handleClick}
+			onKeyDown={handleKeyDown}
+		>
 			<KolCard _label={article.name} className="article-card">
 				<div className="card-content">
 					<div className="card-header">
