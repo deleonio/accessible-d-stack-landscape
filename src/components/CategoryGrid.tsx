@@ -49,7 +49,7 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 						{filters.selectedCategory && (
 							<> in <em>{categories.find((c) => c.id === filters.selectedCategory)?.name}</em></>
 						)}
-						{filters.searchQuery && <> für „{filters.searchQuery}"</>}
+						{filters.searchQuery && <> für „{filters.searchQuery}“</>}
 					</>
 				) : (
 					<>

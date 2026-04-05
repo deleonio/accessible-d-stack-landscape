@@ -21,7 +21,7 @@ export function SearchBar({ filters, onFilterChange, categories }: SearchBarProp
 					_value={filters.searchQuery}
 					_placeholder="Technologie oder Stichwort suchen …"
 					_on={{
-						onInput: (_e: Event, value: unknown) => onFilterChange({ ...filters, searchQuery: value as string }),
+						onInput: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, searchQuery: value as string }),
 					}}
 				/>
 				<KolSingleSelect
@@ -29,7 +29,7 @@ export function SearchBar({ filters, onFilterChange, categories }: SearchBarProp
 					_options={categoryOptions}
 					_value={filters.selectedCategory || ''}
 					_on={{
-						onChange: (_e: Event, value: unknown) =>
+						onChange: (_e: globalThis.Event, value: unknown) =>
 							onFilterChange({ ...filters, selectedCategory: value ? (value as string) : null }),
 					}}
 				/>
