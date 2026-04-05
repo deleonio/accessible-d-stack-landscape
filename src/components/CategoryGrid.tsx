@@ -47,9 +47,12 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 					<>
 						<strong>{activeCount}</strong> von {totalCount} Einträgen
 						{filters.selectedCategory && (
-							<> in <em>{categories.find((c) => c.id === filters.selectedCategory)?.name}</em></>
+							<>
+								{' '}
+								in <em>{categories.find((c) => c.id === filters.selectedCategory)?.name}</em>
+							</>
 						)}
-						{filters.searchQuery && <> für „{filters.searchQuery}"</>}
+						{filters.searchQuery && <> für „{filters.searchQuery}“</>}
 					</>
 				) : (
 					<>
@@ -61,7 +64,9 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 			{articles.length === 0 ? (
 				<div className="articles-grid">
 					<div className="empty-state">
-						<div className="empty-state__icon" aria-hidden="true">🔍</div>
+						<div className="empty-state__icon" aria-hidden="true">
+							🔍
+						</div>
 						<p className="empty-state__title">Keine Einträge gefunden</p>
 						<p>Bitte passen Sie Ihre Suche oder den Kategoriefilter an.</p>
 					</div>

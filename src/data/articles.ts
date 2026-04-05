@@ -1,10 +1,10 @@
 import { Article, Category } from '../types';
 
 export const CATEGORIES: Category[] = [
-	{ id: 'betrieb',       name: 'Betrieb',       color: '#00883d' }, // Grün   – operativer Betrieb
+	{ id: 'betrieb', name: 'Betrieb', color: '#00883d' }, // Grün   – operativer Betrieb
 	{ id: 'infrastruktur', name: 'Infrastruktur', color: '#c5192d' }, // Rot    – Infrastruktur
-	{ id: 'plattform',     name: 'Plattform',     color: '#003d82' }, // Blau   – Plattform (Bundesblau)
-	{ id: 'zugang',        name: 'Zugang',        color: '#f39c12' }, // Orange – Zugang / Nutzer
+	{ id: 'plattform', name: 'Plattform', color: '#003d82' }, // Blau   – Plattform (Bundesblau)
+	{ id: 'zugang', name: 'Zugang', color: '#f39c12' }, // Orange – Zugang / Nutzer
 ];
 
 export const ARTICLES: Article[] = [

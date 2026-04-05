@@ -32,8 +32,7 @@ export function Header() {
 					<p className="header__eyebrow">Digitale Verwaltung · Deutschland Stack</p>
 					<h1>Technologie-Landscape</h1>
 					<p className="header__subtitle">
-						Interaktive Übersicht der Technologien, Standards und Komponenten des Deutschland Stack – dem digitalen
-						Ökosystem der öffentlichen Verwaltung.
+						Interaktive Übersicht der Technologien, Standards und Komponenten des Deutschland Stack – dem digitalen Ökosystem der öffentlichen Verwaltung.
 					</p>
 				</div>
 			</header>

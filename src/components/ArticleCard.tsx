@@ -1,6 +1,6 @@
 import { KolBadge, KolCard } from '@public-ui/preact';
-import { Article } from '../types';
 import { CATEGORIES } from '../data/articles';
+import { Article } from '../types';
 
 interface ArticleCardProps {
 	article: Article;
@@ -16,15 +16,8 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			<KolCard _label={article.name} className="article-card">
 				<div className="card-content">
 					<div className="card-header">
-						{article.logo && (
-							<img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />
-						)}
-						<span
-							className="card-category-dot"
-							style={{ background: categoryColor }}
-							title={categoryName}
-							aria-label={`Kategorie: ${categoryName}`}
-						/>
+						{article.logo && <img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />}
+						<span className="card-category-dot" style={{ background: categoryColor }} title={categoryName} aria-label={`Kategorie: ${categoryName}`} />
 					</div>
 					<p className="card-description">{article.description}</p>
 					<div className="card-tags">
