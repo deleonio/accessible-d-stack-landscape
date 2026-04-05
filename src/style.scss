@@ -421,116 +421,49 @@ kol-card.article-card,
   }
 }
 
-// ─── Card details dialog ──────────────────────────────────────────────────────
-.card-details-dialog {
-  border: none;
-  border-radius: var(--ds-radius-lg);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  padding: 0;
-  max-width: min(640px, 95vw);
-  width: 100%;
-  max-height: 90vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-
-  &::backdrop {
+// ─── Card details dialog (KolDialog _variant="card") ─────────────────────────
+// KolDialog renders a native <dialog> + KolCard (header + close button) inside.
+// We only style the dialog backdrop and our slot content here.
+kol-dialog {
+  // Backdrop for the native <dialog> rendered inside the web component
+  dialog::backdrop {
     background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(2px);
   }
+}
 
-  &__content {
+.card-details-dialog {
+  &__body {
+    padding: var(--ds-space-4);
     display: flex;
     flex-direction: column;
-    max-height: 90vh;
-    overflow: hidden;
+    gap: var(--ds-space-4);
+    max-height: 70vh;
+    overflow-y: auto;
   }
 
-  &__header {
+  &__meta {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--ds-space-4);
-    padding: var(--ds-space-6);
-    background: var(--ds-color-primary);
-    color: var(--ds-color-text-inverse);
-    flex-shrink: 0;
-  }
-
-  &__title-row {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--ds-space-4);
-    flex: 1;
-    min-width: 0;
+    align-items: center;
+    gap: var(--ds-space-3);
   }
 
   &__logo {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     border-radius: var(--ds-radius-md);
     object-fit: contain;
     flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.15);
-    padding: var(--ds-space-1);
-  }
-
-  &__title-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--ds-space-1);
-    min-width: 0;
-  }
-
-  &__title {
-    font-size: var(--ds-text-xl);
-    font-weight: 700;
-    line-height: var(--ds-lh-heading);
-    color: #ffffff;
-    margin: 0;
+    background: var(--ds-color-bg);
+    padding: 2px;
   }
 
   &__category {
     font-size: var(--ds-text-sm);
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--ds-color-text-muted);
     padding-left: var(--ds-space-2);
     border-left: 3px solid;
     font-weight: 500;
-  }
-
-  &__close {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #ffffff;
-    border-radius: var(--ds-radius-md);
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background 0.15s ease;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    &:focus-visible {
-      outline: 2px solid #ffffff;
-      outline-offset: 2px;
-    }
-  }
-
-  &__body {
-    padding: var(--ds-space-6);
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--ds-space-4);
-    background: var(--ds-color-surface);
   }
 
   &__featured {
@@ -576,15 +509,6 @@ kol-card.article-card,
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-
-  &__tag {
-    background: var(--ds-color-border-light);
-    color: var(--ds-color-text);
-    border-radius: var(--ds-radius-md);
-    padding: var(--ds-space-1) var(--ds-space-3);
-    font-size: var(--ds-text-sm);
-    font-weight: 500;
   }
 }
 

@@ -1,3 +1,4 @@
+import { KolBadge, KolDialog } from '@public-ui/preact';
 import { useEffect, useRef } from 'preact/hooks';
 import { Article } from '../types';
 import { CATEGORIES } from '../data/articles';
@@ -7,86 +8,49 @@ interface CardDetailsDialogProps {
 	onClose: () => void;
 }
 
+type KolDialogElement = {
+	openModal: () => Promise<void>;
+	closeModal: () => Promise<void>;
+};
+
 export function CardDetailsDialog({ article, onClose }: CardDetailsDialogProps) {
-	const dialogRef = useRef<HTMLDialogElement>(null);
-	const closeButtonRef = useRef<HTMLButtonElement>(null);
+	const dialogRef = useRef<KolDialogElement>(null);
 
 	useEffect(() => {
-		const dialog = dialogRef.current;
-		if (!dialog) return;
-
+		if (!dialogRef.current) return;
 		if (article) {
-			dialog.showModal();
-			closeButtonRef.current?.focus();
+			void dialogRef.current.openModal();
 		} else {
-			dialog.close();
+			void dialogRef.current.closeModal();
 		}
 	}, [article]);
 
-	useEffect(() => {
-		const dialog = dialogRef.current;
-		if (!dialog) return;
-
-		const handleClose = () => onClose();
-		dialog.addEventListener('close', handleClose);
-		return () => dialog.removeEventListener('close', handleClose);
-	}, [onClose]);
-
-	const handleBackdropClick = (e: MouseEvent) => {
-		if (e.target === dialogRef.current) {
-			onClose();
-		}
-	};
-
-	if (!article) {
-		return <dialog ref={dialogRef} className="card-details-dialog" aria-modal="true" onClick={handleBackdropClick} />;
-	}
-
-	const category = CATEGORIES.find((c) => c.id === article.category);
+	const category = article ? CATEGORIES.find((c) => c.id === article.category) : null;
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = category?.name ?? 'Allgemein';
 
 	return (
-		<dialog
+		<KolDialog
 			ref={dialogRef}
-			className="card-details-dialog"
-			aria-modal="true"
-			aria-labelledby="dialog-title"
-			onClick={handleBackdropClick}
+			_label={article?.name ?? ''}
+			_variant="card"
+			_width="min(640px, 95vw)"
+			_on={{ onClose }}
 		>
-			<div className="card-details-dialog__content">
-				<header className="card-details-dialog__header">
-					<div className="card-details-dialog__title-row">
+			{article && (
+				<div className="card-details-dialog__body">
+					<div className="card-details-dialog__meta">
 						{article.logo && (
 							<img src={article.logo} alt="" role="presentation" className="card-details-dialog__logo" loading="lazy" />
 						)}
-						<div className="card-details-dialog__title-group">
-							<h2 id="dialog-title" className="card-details-dialog__title">
-								{article.name}
-							</h2>
-							<span
-								className="card-details-dialog__category"
-								style={{ borderLeftColor: categoryColor }}
-							>
-								{categoryName}
-							</span>
-						</div>
+						<span className="card-details-dialog__category" style={{ borderLeftColor: categoryColor }}>
+							{categoryName}
+						</span>
 					</div>
-					<button
-						ref={closeButtonRef}
-						className="card-details-dialog__close"
-						onClick={onClose}
-						aria-label="Dialog schließen"
-						type="button"
-					>
-						&times;
-					</button>
-				</header>
 
-				<div className="card-details-dialog__body">
 					{article.featured && (
 						<div className="card-details-dialog__featured" role="note">
-							<span>&#9733;</span> Empfohlene Technologie
+							<span aria-hidden="true">&#9733;</span> Empfohlene Technologie
 						</div>
 					)}
 
@@ -97,15 +61,15 @@ export function CardDetailsDialog({ article, onClose }: CardDetailsDialogProps) 
 							<h3 className="card-details-dialog__tags-label">Schlagwörter</h3>
 							<ul className="card-details-dialog__tags-list" role="list">
 								{article.tags.map((tag) => (
-									<li key={tag} className="card-details-dialog__tag">
-										{tag}
+									<li key={tag}>
+										<KolBadge _label={tag} _color="#e8eaed" />
 									</li>
 								))}
 							</ul>
 						</div>
 					)}
 				</div>
-			</div>
-		</dialog>
+			)}
+		</KolDialog>
 	);
 }
