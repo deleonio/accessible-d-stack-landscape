@@ -8,15 +8,15 @@
 
   // Neutral palette
   --ds-color-bg:             #f6f7f8;
-  --ds-color-bg-white:       #ffffff;
-  --ds-color-surface:        #ffffff;
+  --ds-color-bg-white:       #fff;
+  --ds-color-surface:        #fff;
   --ds-color-border:         #d0d3d9;
   --ds-color-border-light:   #e8eaed;
 
   // Text
   --ds-color-text:           #1d2129;
   --ds-color-text-muted:     #6b7280;
-  --ds-color-text-inverse:   #ffffff;
+  --ds-color-text-inverse:   #fff;
 
   // Category colours – semantisch (KERN Dachmarke Farbpalette)
   --ds-cat-betrieb:          #00883d; // Grün   – operativer Betrieb
@@ -48,8 +48,8 @@
   --ds-radius-lg: 8px;
 
   // Shadow
-  --ds-shadow-card:       0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
-  --ds-shadow-card-hover: 0 8px 16px rgba(0, 0, 0, 0.1);
+  --ds-shadow-card:       0 1px 3px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 5%);
+  --ds-shadow-card-hover: 0 8px 16px rgb(0 0 0 / 10%);
 
   // Typography
   --ds-font-body:    'Fira Sans', system-ui, -apple-system, sans-serif;
@@ -116,7 +116,7 @@ html, body {
 
   // Digitale Dachmarke – offizieller Identitätsstreifen
   &__official-strip {
-    background: #000000;
+    background: #000;
     padding: var(--ds-space-1) var(--ds-space-8);
     display: flex;
     align-items: center;
@@ -128,7 +128,7 @@ html, body {
       display: flex;
       align-items: center;
       gap: var(--ds-space-2);
-      color: rgba(255, 255, 255, 0.9);
+      color: rgb(255 255 255 / 90%);
       font-size: var(--ds-text-xs);
       font-weight: 400;
 
@@ -144,23 +144,32 @@ html, body {
           height: 14px;
           border-radius: 1px;
 
-          &:nth-child(1) { background: #000000; border: 1px solid rgba(255,255,255,0.5); }
-          &:nth-child(2) { background: #dd0000; }
-          &:nth-child(3) { background: #ffce00; }
+          &:nth-child(1) {
+            background: #000;
+            border: 1px solid rgb(255 255 255 / 50%);
+          }
+
+          &:nth-child(2) {
+            background: #d00;
+          }
+
+          &:nth-child(3) {
+            background: #ffce00;
+          }
         }
       }
     }
 
     .official-info {
       font-size: var(--ds-text-xs);
-      color: rgba(255, 255, 255, 0.55);
+      color: rgb(255 255 255 / 55%);
 
       a {
-        color: rgba(255, 255, 255, 0.75);
+        color: rgb(255 255 255 / 75%);
         text-decoration: underline;
         text-underline-offset: 2px;
 
-        &:hover, &:focus { color: #ffffff; }
+        &:hover, &:focus { color: #fff; }
       }
     }
   }
@@ -177,7 +186,7 @@ html, body {
       align-items: center;
       gap: var(--ds-space-2);
       text-decoration: none;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgb(255 255 255 / 85%);
       font-size: var(--ds-text-xs);
       font-weight: 500;
       letter-spacing: 0.02em;
@@ -207,7 +216,7 @@ html, body {
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgb(255 255 255 / 65%);
     margin-bottom: var(--ds-space-2);
   }
 
@@ -221,7 +230,7 @@ html, body {
 
   &__subtitle {
     font-size: var(--ds-text-lg);
-    color: rgba(255, 255, 255, 0.82);
+    color: rgb(255 255 255 / 82%);
     max-width: 52ch;
     line-height: var(--ds-lh-body);
   }
@@ -305,15 +314,15 @@ html, body {
   grid-template-columns: repeat(2, 1fr);
   gap: var(--ds-space-4);
 
-  @media (min-width: 600px) {
+  @media (width >= 600px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (min-width: 1024px) {
+  @media (width >= 1024px) {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media (min-width: 1440px) {
+  @media (width >= 1440px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
@@ -424,7 +433,7 @@ kol-card.article-card,
 // ─── Footer ───────────────────────────────────────────────────────────────────
 .footer {
   background: var(--ds-color-primary-dark);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgb(255 255 255 / 75%);
   padding: var(--ds-space-8);
   margin-top: auto;
 
@@ -435,7 +444,7 @@ kol-card.article-card,
     flex-direction: column;
     gap: var(--ds-space-4);
 
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-end;
@@ -446,13 +455,13 @@ kol-card.article-card,
     .footer-title {
       font-size: var(--ds-text-sm);
       font-weight: 700;
-      color: #ffffff;
+      color: #fff;
       margin-bottom: var(--ds-space-1);
     }
 
     .footer-sub {
       font-size: var(--ds-text-xs);
-      color: rgba(255, 255, 255, 0.55);
+      color: rgb(255 255 255 / 55%);
     }
   }
 
@@ -463,11 +472,11 @@ kol-card.article-card,
     font-size: var(--ds-text-xs);
 
     a {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgb(255 255 255 / 60%);
       text-decoration: none;
 
       &:hover, &:focus {
-        color: #ffffff;
+        color: #fff;
         text-decoration: underline;
       }
     }
@@ -475,9 +484,9 @@ kol-card.article-card,
 
   &__copy {
     font-size: var(--ds-text-xs);
-    color: rgba(255, 255, 255, 0.45);
+    color: rgb(255 255 255 / 45%);
     margin-top: var(--ds-space-6);
     padding-top: var(--ds-space-4);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid rgb(255 255 255 / 12%);
   }
 }
