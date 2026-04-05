@@ -1,6 +1,6 @@
 import { KolBadge, KolButton, KolCard, KolDrawer } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
-import { CATEGORIES } from '../data/articles';
+import { ARTICLES, CATEGORIES } from '../data/articles';
 import { Article } from '../types';
 
 interface ArticleCardProps {
@@ -9,9 +9,11 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article }: ArticleCardProps) {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-	const category = CATEGORIES.find((c) => c.id === article.category);
+	const [selectedArticle, setSelectedArticle] = useState(article);
+	const category = CATEGORIES.find((c) => c.id === selectedArticle.category);
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = category?.name ?? 'Allgemein';
+	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id);
 
 	return (
 		<div className="article-card-wrapper">
@@ -31,7 +33,10 @@ export function ArticleCard({ article }: ArticleCardProps) {
 						_label="Details öffnen"
 						_variant="secondary"
 						_on={{
-							onClick: () => setIsDrawerOpen(true),
+							onClick: () => {
+								setSelectedArticle(article);
+								setIsDrawerOpen(true);
+							},
 						}}
 					/>
 				</div>
@@ -43,7 +48,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			)}
 
 			<KolDrawer
-				_label={`Details zu ${article.name}`}
+				_label={`Details zu ${selectedArticle.name}`}
 				_align="right"
 				_hasCloser
 				_open={isDrawerOpen}
@@ -52,21 +57,38 @@ export function ArticleCard({ article }: ArticleCardProps) {
 				}}
 			>
 				<div className="drawer-content">
-					<KolCard _label={article.name} className="drawer-card">
+					<KolCard _label={selectedArticle.name} className="drawer-card">
 						<div className="drawer-details">
 							<div className="drawer-headline">
-								{article.logo && <img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />}
+								{selectedArticle.logo && <img src={selectedArticle.logo} alt="" role="presentation" className="card-logo" loading="lazy" />}
 								<div>
 									<p className="drawer-category">Kategorie: {categoryName}</p>
-									{article.featured && <KolBadge _label="Empfohlen" _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />}
+									{selectedArticle.featured && <KolBadge _label="Empfohlen" _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />}
 								</div>
 							</div>
-							<p className="drawer-description">{article.description}</p>
+							<p className="drawer-description">{selectedArticle.description}</p>
 							<div className="drawer-tags">
-								{article.tags.map((tag) => (
-									<KolBadge key={`${article.id}-${tag}`} _label={tag} _color="#e8eaed" className="tag-badge" />
+								{selectedArticle.tags.map((tag) => (
+									<KolBadge key={`${selectedArticle.id}-${tag}`} _label={tag} _color="#e8eaed" className="tag-badge" />
 								))}
 							</div>
+							{relatedArticles.length > 0 && (
+								<div className="drawer-related">
+									<p className="drawer-related__title">Verwandte Einträge aus dieser Kategorie</p>
+									<div className="drawer-related__list">
+										{relatedArticles.map((relatedArticle) => (
+											<KolButton
+												key={relatedArticle.id}
+												_label={relatedArticle.name}
+												_variant="secondary"
+												_on={{
+													onClick: () => setSelectedArticle(relatedArticle),
+												}}
+											/>
+										))}
+									</div>
+								</div>
+							)}
 						</div>
 					</KolCard>
 				</div>
