@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - 'stand/**'
   workflow_dispatch:
 
 concurrency:
@@ -36,8 +38,24 @@ jobs:
   build:
     needs: validate-pages-config
     runs-on: ubuntu-latest
+    outputs:
+      slug: ${{ steps.slug.outputs.slug }}
+      base: ${{ steps.slug.outputs.base }}
     steps:
       - uses: actions/checkout@v6
+
+      - name: Compute slug and base URL
+        id: slug
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          if [ "$BRANCH" = "main" ]; then
+            echo "slug=" >> "$GITHUB_OUTPUT"
+            echo "base=/accessible-d-stack-landscape/" >> "$GITHUB_OUTPUT"
+          else
+            SLUG="${BRANCH#stand/}"
+            echo "slug=${SLUG}" >> "$GITHUB_OUTPUT"
+            echo "base=/accessible-d-stack-landscape/${SLUG}/" >> "$GITHUB_OUTPUT"
+          fi
 
       - uses: pnpm/action-setup@v5
         with:
@@ -55,7 +73,7 @@ jobs:
         env:
           VITE_COMMIT_SHA: ${{ github.sha }}
           VITE_ENABLE_PWA: 'true'
-          VITE_BASE_URL: '/accessible-d-stack-landscape/'
+          VITE_BASE_URL: ${{ steps.slug.outputs.base }}
 
       - uses: actions/upload-artifact@v7
         with:
@@ -73,10 +91,11 @@ jobs:
           name: dist
           path: dist/
 
-      - name: Publish to gh-pages (full replace)
+      - name: Publish to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
+          SLUG: ${{ needs.build.outputs.slug }}
         run: |
           set -euo pipefail
           REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
@@ -92,15 +111,44 @@ jobs:
           fi
 
           cd gh-pages
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -a ../dist/. .
+
+          if [ -z "${SLUG}" ]; then
+            # main → Root ersetzen, alle Stand-Unterordner erhalten
+            # Lies .stands Manifest um Stand-Ordner zu kennen
+            PRESERVE=(".git" ".stands")
+            if [ -f .stands ]; then
+              while IFS= read -r line; do
+                [ -n "$line" ] && PRESERVE+=("$line")
+              done < .stands
+            fi
+            # Lösche alles außer .git, .stands und den Stand-Ordnern
+            for entry in . .. .* *; do
+              [ "$entry" = "." ] || [ "$entry" = ".." ] && continue
+              keep=false
+              for p in "${PRESERVE[@]}"; do
+                [ "$entry" = "$p" ] && keep=true && break
+              done
+              $keep || rm -rf "$entry"
+            done
+            cp -a ../dist/. .
+          else
+            # stand/* → nur eigenen Unterordner ersetzen + Manifest aktualisieren
+            rm -rf "${SLUG}"
+            cp -a ../dist/. "${SLUG}/"
+            # Slug in .stands eintragen falls noch nicht vorhanden
+            touch .stands
+            if ! grep -qx "${SLUG}" .stands; then
+              echo "${SLUG}" >> .stands
+              sort -o .stands .stands
+            fi
+          fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
-            git commit -m "Deploy main site (${GITHUB_SHA})"
+            git commit -m "Deploy ${SLUG:-main} (${GITHUB_SHA})"
             git push origin gh-pages
           else
             echo "No changes to deploy."
