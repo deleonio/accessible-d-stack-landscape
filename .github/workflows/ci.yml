@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     name: Build & Playwright Tests
+    if: github.event_name != 'push' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -47,6 +48,11 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          VITE_COMMIT_SHA: >-
+            ${{ github.event_name == 'pull_request'
+              && github.event.pull_request.head.sha
+              || github.sha }}
 
       - name: Get installed Playwright version
         id: playwright-version

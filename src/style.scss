@@ -499,4 +499,17 @@ kol-card.article-card,
 		padding-top: var(--ds-space-4);
 		border-top: 1px solid rgb(255 255 255 / 12%);
 	}
+
+	&__meta {
+		font-size: var(--ds-text-xs);
+		color: rgb(255 255 255 / 50%);
+
+		code {
+			font-family: var(--ds-font-mono);
+			color: rgb(255 255 255 / 82%);
+			background: rgb(255 255 255 / 8%);
+			border-radius: var(--ds-radius-sm);
+			padding: 0 var(--ds-space-1);
+		}
+	}
 }
