@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/accessible-d-stack-landscape/sw.js', { scope: '/accessible-d-stack-landscape/' })})}
