@@ -12,7 +12,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate-pages-config:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - name: Validate GitHub Pages source
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          PAGE_CONFIG="$(curl -fsSL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${REPOSITORY}/pages")"
+
+          SOURCE_BRANCH="$(echo "${PAGE_CONFIG}" | jq -r '.source.branch // empty')"
+          SOURCE_PATH="$(echo "${PAGE_CONFIG}" | jq -r '.source.path // empty')"
+
+          if [ "${SOURCE_BRANCH}" != "gh-pages" ] || [ "${SOURCE_PATH}" != "/" ]; then
+            echo "GitHub Pages must publish from branch 'gh-pages' and path '/'."
+            echo "Current config: branch='${SOURCE_BRANCH}', path='${SOURCE_PATH}'"
+            exit 1
+          fi
+
   build:
+    needs: validate-pages-config
     runs-on: ubuntu-latest
     if: github.event.action != 'closed'
     steps:

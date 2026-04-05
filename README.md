@@ -53,6 +53,16 @@ Die Anwendung wird automatisch auf **GitHub Pages** deployed.
 
 Der Deployment-Workflow befindet sich in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
+### Troubleshooting: PR-Preview zeigt nur Main
+
+Wenn `.../pr-preview/pr-{nr}/` statt des PR-Standes immer wie Main aussieht, liegt es häufig an den **GitHub Pages Settings**:
+
+1. Repository Settings → **Pages**
+2. **Build and deployment** muss auf **Deploy from a branch** stehen
+3. Branch: **`gh-pages`**, Folder: **`/ (root)`**
+
+Wenn stattdessen z. B. `main`/`docs` oder `GitHub Actions` als Quelle aktiv ist, werden die von `pr-preview-action` geschriebenen Dateien unter `gh-pages/pr-preview/...` nicht ausgeliefert.
+
 ---
 
 ## Lokale Entwicklung
