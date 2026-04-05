@@ -8,27 +8,30 @@ export function Footer() {
 			<div className="footer__inner">
 				<div className="footer__brand">
 					<p className="footer-title">D-Stack Landscape</p>
-					<p className="footer-sub">Technologie-Übersicht des Deutschland Stack</p>
+					<p className="footer-sub">Technology landscape for public-sector platforms</p>
 				</div>
 				<nav className="footer__links" aria-label="Footer-Navigation">
-					<a href="https://technologie.deutschland-stack.gov.de/" rel="noopener noreferrer">
-						Deutschland Stack
+					<a
+						href="https://github.com/deleonio/accessible-d-stack-landscape"
+						rel="noopener noreferrer"
+					>
+						Projekt-Repository
 					</a>
-					<a href="https://www.digitale-verwaltung.de/" rel="noopener noreferrer">
-						Digitale Verwaltung
+					<a href="https://vite.dev/guide/" rel="noopener noreferrer">
+						Vite Dokumentation
 					</a>
-					<a href="https://public-ui.github.io/" rel="noopener noreferrer">
-						KoliBri Design System
+					<a href="https://preactjs.com/guide/v10/getting-started" rel="noopener noreferrer">
+						Preact Dokumentation
 					</a>
 				</nav>
 			</div>
 			<div className="footer__inner">
 				<p className="footer__copy">
-					© {year} Digitale Verwaltung Deutschland · Erstellt mit{' '}
-					<a href="https://public-ui.github.io/" rel="noopener noreferrer">
-						KoliBri
+					© {year} D-Stack Landscape · Erstellt mit{' '}
+					<a href="https://preactjs.com/" rel="noopener noreferrer">
+						Preact
 					</a>{' '}
-					und dem KERN-Theme · Lizenz: EUPL-1.2
+					und <a href="https://vite.dev/" rel="noopener noreferrer">Vite</a> · Lizenz: EUPL-1.2
 				</p>
 				<p className="footer__meta" aria-label={`Build Commit ${commitDisplay}`}>
 					Build-Commit: <code>{commitDisplay}</code>
