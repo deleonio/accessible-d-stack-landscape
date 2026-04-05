@@ -1,7 +1,7 @@
-import { useState } from 'preact/hooks';
 import { KolBadge, KolButton, KolCard, KolDrawer } from '@public-ui/preact';
-import { Article } from '../types';
+import { useState } from 'preact/hooks';
 import { CATEGORIES } from '../data/articles';
+import { Article } from '../types';
 
 interface ArticleCardProps {
 	article: Article;
@@ -18,15 +18,8 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			<KolCard _label={article.name} className="article-card">
 				<div className="card-content">
 					<div className="card-header">
-						{article.logo && (
-							<img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />
-						)}
-						<span
-							className="card-category-dot"
-							style={{ background: categoryColor }}
-							title={categoryName}
-							aria-label={`Kategorie: ${categoryName}`}
-						/>
+						{article.logo && <img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />}
+						<span className="card-category-dot" style={{ background: categoryColor }} title={categoryName} aria-label={`Kategorie: ${categoryName}`} />
 					</div>
 					<p className="card-description">{article.description}</p>
 					<div className="card-tags">
@@ -65,9 +58,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 								{article.logo && <img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />}
 								<div>
 									<p className="drawer-category">Kategorie: {categoryName}</p>
-									{article.featured && (
-										<KolBadge _label="Empfohlen" _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />
-									)}
+									{article.featured && <KolBadge _label="Empfohlen" _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />}
 								</div>
 							</div>
 							<p className="drawer-description">{article.description}</p>
