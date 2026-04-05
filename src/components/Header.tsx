@@ -1,5 +1,6 @@
 export function Header() {
-	const brandUrl = import.meta.env.VITE_BRAND_URL ?? '/';
+	const baseUrl = import.meta.env.BASE_URL;
+	const brandUrl = import.meta.env.VITE_BRAND_URL ?? baseUrl;
 
 	return (
 		<>
@@ -25,7 +26,7 @@ export function Header() {
 						<span className="brand-logo__badge">MVP</span>
 					</a>
 					<nav className="header__nav" aria-label="Hauptnavigation">
-						<a href="/">Home</a>
+						<a href={baseUrl}>Home</a>
 						<a href="#main-content">Kategorien</a>
 						<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
 							Docs
