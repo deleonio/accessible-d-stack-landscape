@@ -30,13 +30,13 @@
 	},
 	"dependencies": {
 		"@capacitor/core": "^8.3.0",
-		"@hookform/resolvers": "^3.3.0",
+		"@hookform/resolvers": "^5.2.2",
 		"@public-ui/components": "4.1.2",
 		"@public-ui/preact": "^4.1.2",
 		"@public-ui/theme-kern": "^4.1.2",
 		"preact": "^10.29.1",
 		"react-hook-form": "^7.48.0",
-		"zod": "3.25.76"
+		"zod": "4.3.6"
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "4.11.1",
