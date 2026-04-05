@@ -47,6 +47,11 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          VITE_COMMIT_SHA: >-
+            ${{ github.event_name == 'pull_request'
+              && github.event.pull_request.head.sha
+              || github.sha }}
 
       - name: Get installed Playwright version
         id: playwright-version
