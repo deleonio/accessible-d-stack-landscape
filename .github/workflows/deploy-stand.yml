@@ -1,0 +1,156 @@
+name: Deploy Ständer
+
+on:
+  push:
+    branches-ignore: [main, gh-pages]
+  workflow_dispatch:
+
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.check.outputs.deploy }}
+      slug: ${{ steps.check.outputs.slug }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Check for .stand file
+        id: check
+        run: |
+          if [ ! -f .stand ]; then
+            echo "No .stand file found — skipping deployment."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          SLUG="$(cat .stand | tr -d '[:space:]')"
+
+          if [ -z "$SLUG" ]; then
+            echo ".stand file is empty — skipping deployment."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Slug darf nur alphanumerische Zeichen und Bindestriche enthalten
+          if ! echo "$SLUG" | grep -qE '^[a-z0-9][a-z0-9-]*[a-z0-9]$'; then
+            echo "Invalid slug '${SLUG}' in .stand — only lowercase letters, digits and hyphens allowed."
+            exit 1
+          fi
+
+          echo "Deploying as stand: ${SLUG}"
+          echo "deploy=true" >> "$GITHUB_OUTPUT"
+          echo "slug=${SLUG}" >> "$GITHUB_OUTPUT"
+
+  validate-pages-config:
+    needs: check
+    if: needs.check.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate GitHub Pages source
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          PAGE_CONFIG="$(curl -fsSL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${REPOSITORY}/pages")"
+
+          SOURCE_BRANCH="$(echo "${PAGE_CONFIG}" | jq -r '.source.branch // empty')"
+          SOURCE_PATH="$(echo "${PAGE_CONFIG}" | jq -r '.source.path // empty')"
+
+          if [ "${SOURCE_BRANCH}" != "gh-pages" ] || [ "${SOURCE_PATH}" != "/" ]; then
+            echo "GitHub Pages must publish from branch 'gh-pages' and path '/'."
+            echo "Current config: branch='${SOURCE_BRANCH}', path='${SOURCE_PATH}'"
+            exit 1
+          fi
+
+  build:
+    needs: [check, validate-pages-config]
+    if: needs.check.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+        env:
+          VITE_COMMIT_SHA: ${{ github.sha }}
+          VITE_ENABLE_PWA: 'true'
+          VITE_BASE_URL: /accessible-d-stack-landscape/${{ needs.check.outputs.slug }}/
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist-${{ needs.check.outputs.slug }}
+          path: dist/
+
+  deploy:
+    needs: [check, build]
+    if: needs.check.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist-${{ needs.check.outputs.slug }}
+          path: dist/
+
+      - name: Publish Ständer to gh-pages subfolder
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          SLUG: ${{ needs.check.outputs.slug }}
+        run: |
+          set -euo pipefail
+          REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
+
+          if git ls-remote --exit-code --heads "${REMOTE_URL}" gh-pages >/dev/null 2>&1; then
+            git clone --depth 1 --branch gh-pages "${REMOTE_URL}" gh-pages
+          else
+            git clone --depth 1 "${REMOTE_URL}" gh-pages
+            cd gh-pages
+            git checkout --orphan gh-pages
+            git rm -rf . >/dev/null 2>&1 || true
+            cd ..
+          fi
+
+          cd gh-pages
+
+          # Unterordner des Ständers ersetzen
+          rm -rf "${SLUG}"
+          cp -a ../dist/. "${SLUG}/"
+
+          # Slug im .stands Manifest registrieren
+          touch .stands
+          if ! grep -qx "${SLUG}" .stands; then
+            echo "${SLUG}" >> .stands
+            sort -o .stands .stands
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Deploy Ständer '${SLUG}' (${GITHUB_SHA})"
+            git push origin gh-pages
+          else
+            echo "No changes to deploy."
+          fi
