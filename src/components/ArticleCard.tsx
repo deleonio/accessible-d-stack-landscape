@@ -1,4 +1,4 @@
-import { KolBadge, KolCard } from '@public-ui/preact';
+import { KolBadge, KolButton, KolCard } from '@public-ui/preact';
 import { Article } from '../types';
 import { CATEGORIES } from '../data/articles';
 
@@ -12,23 +12,8 @@ export function ArticleCard({ article, onSelect }: ArticleCardProps) {
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = category?.name ?? 'Allgemein';
 
-	const handleClick = () => onSelect(article);
-	const handleKeyDown = (e: KeyboardEvent) => {
-		if (e.key === 'Enter' || e.key === ' ') {
-			e.preventDefault();
-			onSelect(article);
-		}
-	};
-
 	return (
-		<div
-			className="article-card-wrapper"
-			role="button"
-			tabIndex={0}
-			aria-label={`${article.name} – Details anzeigen`}
-			onClick={handleClick}
-			onKeyDown={handleKeyDown}
-		>
+		<div className="article-card-wrapper">
 			<KolCard _label={article.name} className="article-card">
 				<div className="card-content">
 					<div className="card-header">
@@ -47,6 +32,14 @@ export function ArticleCard({ article, onSelect }: ArticleCardProps) {
 						{article.tags.slice(0, 4).map((tag) => (
 							<KolBadge key={tag} _label={tag} _color="#e8eaed" className="tag-badge" />
 						))}
+					</div>
+					<div className="card-actions">
+						<KolButton
+							_label="Details"
+							_variant="ghost"
+							_icons={{ left: { icon: 'kolicon-info' } }}
+							_on={{ onClick: () => onSelect(article) }}
+						/>
 					</div>
 				</div>
 			</KolCard>

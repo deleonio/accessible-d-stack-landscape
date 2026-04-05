@@ -385,11 +385,16 @@ kol-card.article-card,
     display: flex;
     flex-wrap: wrap;
     gap: var(--ds-space-1);
-    margin-top: auto;
 
     .tag-badge {
       flex-shrink: 0;
     }
+  }
+
+  .card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
