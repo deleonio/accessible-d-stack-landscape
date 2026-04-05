@@ -199,7 +199,11 @@ html, body {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-    padding: var(--ds-space-8) var(--ds-space-8) var(--ds-space-12);
+    padding: var(--ds-space-6) var(--ds-space-4) var(--ds-space-8);
+
+    @media (min-width: 768px) {
+      padding: var(--ds-space-8) var(--ds-space-8) var(--ds-space-12);
+    }
   }
 
   &__eyebrow {
@@ -231,41 +235,59 @@ html, body {
 .search-bar {
   background: var(--ds-color-bg-white);
   border-bottom: 1px solid var(--ds-color-border);
-  padding: var(--ds-space-6) var(--ds-space-8);
-  display: flex;
-  gap: var(--ds-space-4);
-  align-items: flex-end;
-  flex-wrap: wrap;
+  padding: var(--ds-space-4) var(--ds-space-4);
+
+  @media (min-width: 768px) {
+    padding: var(--ds-space-6) var(--ds-space-8);
+  }
 
   &__inner {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
     display: flex;
-    gap: var(--ds-space-4);
-    align-items: flex-end;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--ds-space-3);
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: var(--ds-space-4);
+    }
   }
 
   kol-input-text {
-    flex: 2;
-    min-width: 240px;
+    width: 100%;
+
+    @media (min-width: 600px) {
+      flex: 2;
+      min-width: 200px;
+    }
   }
 
   kol-single-select {
-    flex: 1;
-    min-width: 200px;
-    max-width: 280px;
+    width: 100%;
+
+    @media (min-width: 600px) {
+      flex: 1;
+      min-width: 160px;
+      max-width: 280px;
+    }
   }
 }
 
 // ─── Main content ─────────────────────────────────────────────────────────────
 .category-container {
   flex: 1;
-  padding: var(--ds-space-8);
+  padding: var(--ds-space-4);
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+
+  @media (min-width: 768px) {
+    padding: var(--ds-space-8);
+  }
 }
 
 // ─── Category filter bar ──────────────────────────────────────────────────────
@@ -299,13 +321,17 @@ html, body {
   margin-bottom: var(--ds-space-4);
 }
 
-// ─── Articles grid ────────────────────────────────────────────────────────────
+// ─── Articles grid (mobile-first) ────────────────────────────────────────────
 .articles-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;          // mobile: 1 Spalte
   gap: var(--ds-space-4);
 
-  @media (min-width: 600px) {
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
   }
 

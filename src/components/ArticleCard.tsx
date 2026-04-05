@@ -35,9 +35,8 @@ export function ArticleCard({ article, onSelect }: ArticleCardProps) {
 					</div>
 					<div className="card-actions">
 						<KolButton
-							_label="Details"
-							_variant="ghost"
-							_icons={{ left: { icon: 'kolicon-info' } }}
+							_label="Details anzeigen"
+							_variant="secondary"
 							_on={{ onClick: () => onSelect(article) }}
 						/>
 					</div>
