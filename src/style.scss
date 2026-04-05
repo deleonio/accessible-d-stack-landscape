@@ -209,6 +209,7 @@ body {
 			font-size: var(--ds-text-xs);
 			font-weight: 500;
 			letter-spacing: 0.02em;
+
 			// Ensure minimum touch target
 			min-height: 44px;
 
@@ -252,6 +253,7 @@ body {
 		max-width: 1400px;
 		margin: 0 auto;
 		width: 100%;
+
 		// Mobile: reduced padding
 		padding: var(--ds-space-6) var(--ds-space-4) var(--ds-space-8);
 
@@ -293,6 +295,7 @@ body {
 .search-bar {
 	background: var(--ds-color-bg-white);
 	border-bottom: 1px solid var(--ds-color-border);
+
 	// Mobile: reduced padding
 	padding: var(--ds-space-4);
 	display: flex;
@@ -309,6 +312,7 @@ body {
 		margin: 0 auto;
 		width: 100%;
 		display: flex;
+
 		// Mobile: stack vertically
 		flex-direction: column;
 		gap: var(--ds-space-4);
@@ -347,6 +351,7 @@ body {
 // ─── Main content ─────────────────────────────────────────────────────────────
 .category-container {
 	flex: 1;
+
 	// Mobile: reduced padding
 	padding: var(--ds-space-4);
 	max-width: 1400px;
@@ -363,6 +368,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--ds-space-2);
+
 	// Mobile: reduced spacing
 	margin-bottom: var(--ds-space-6);
 	padding-bottom: var(--ds-space-4);
@@ -398,6 +404,7 @@ body {
 // ─── Articles grid ────────────────────────────────────────────────────────────
 .articles-grid {
 	display: grid;
+
 	// Mobile first: single column
 	grid-template-columns: 1fr;
 	gap: var(--ds-space-3);
@@ -548,6 +555,7 @@ kol-card.article-card,
 .footer {
 	background: var(--ds-color-primary-dark);
 	color: rgb(255 255 255 / 75%);
+
 	// Mobile: reduced padding
 	padding: var(--ds-space-6) var(--ds-space-4);
 	margin-top: auto;
@@ -560,6 +568,7 @@ kol-card.article-card,
 		max-width: 1400px;
 		margin: 0 auto;
 		display: flex;
+
 		// Mobile first: column layout
 		flex-direction: column;
 		gap: var(--ds-space-4);
@@ -603,6 +612,7 @@ kol-card.article-card,
 		a {
 			color: rgb(255 255 255 / 60%);
 			text-decoration: none;
+
 			// Ensure minimum touch target height
 			min-height: 44px;
 			display: inline-flex;
@@ -619,6 +629,7 @@ kol-card.article-card,
 	&__copy {
 		font-size: var(--ds-text-xs);
 		color: rgb(255 255 255 / 45%);
+
 		a {
 			color: rgb(255 255 255 / 75%);
 		}
