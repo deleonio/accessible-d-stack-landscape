@@ -1,3 +1,0 @@
-/*!
- * KoliBri - The accessible HTML-Standard
- */var b=typeof global=="object"&&global&&global.Object===Object&&global,g=typeof self=="object"&&self&&self.Object===Object&&self,s=b||g||Function("return this")(),o=s.Symbol,a=Object.prototype,j=a.hasOwnProperty,f=a.toString,t=o?o.toStringTag:void 0;function u(e){var n=j.call(e,t),l=e[t];try{e[t]=void 0;var i=!0}catch{}var c=f.call(e);return i&&(n?e[t]=l:delete e[t]),c}var y=Object.prototype,v=y.toString;function S(e){return v.call(e)}var T="[object Null]",O="[object Undefined]",r=o?o.toStringTag:void 0;function d(e){return e==null?e===void 0?O:T:r&&r in Object(e)?u(e):S(e)}function h(e){return e!=null&&typeof e=="object"}var m=Array.isArray;export{o as S,h as a,d as b,b as f,m as i,s as r};
