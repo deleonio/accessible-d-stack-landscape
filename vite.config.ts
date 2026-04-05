@@ -19,7 +19,7 @@ export default defineConfig({
 			manifest: {
 				name: 'D-Stack Landscape',
 				short_name: 'D-Stack',
-				description: 'Interaktive Technologie-Landkarte des Deutschland-Stacks',
+				description: 'Interaktive Technologie-Landkarte für modernes digitales Ökosystem',
 				theme_color: '#004B76',
 				background_color: '#ffffff',
 				display: 'standalone',
