@@ -83,12 +83,12 @@ Logos in den Artikeldaten werden als relative Pfade (z. B. `/logos/...png`) gesp
 Beispiele:
 
 - **Nicht gesetzt** → Logos werden relativ zur aktuellen Domain geladen.
-- `VITE_ASSET_BASE_URL=https://technologie.deutschland-stack.gov.de` → Logos werden von dieser Domain geladen.
+- `VITE_ASSET_BASE_URL=https://example.com` → Logos werden von dieser Domain geladen.
 
 Für lokale Entwicklung kannst du eine `.env.local` anlegen:
 
 ```bash
-VITE_ASSET_BASE_URL=https://technologie.deutschland-stack.gov.de
+VITE_ASSET_BASE_URL=https://example.com
 ```
 
 ### Produktions-Build

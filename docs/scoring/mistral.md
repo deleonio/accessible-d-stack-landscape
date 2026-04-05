@@ -16,7 +16,7 @@ Hier ist das **präzise Konzept für einen Souveränitäts-Score** – fokussier
 #### **B. Digitale Projekte/Standards**
 | Kriterium                     | Metriken                                                                                     | Gewichtung | Beispiel                                  |
 |-------------------------------|---------------------------------------------------------------------------------------------|------------|-------------------------------------------|
-| **Trägerschaft**              | - Wer trägt das Projekt? (Öffentliche Hand = 100, Privat/USA/CN = 20)                        | 30%        | Deutschland-Stack (100), AWS GovCloud (20)|
+| **Trägerschaft**              | - Wer trägt das Projekt? (Öffentliche Träger = 100, Privat/USA/CN = 20)                        | 30%        | Technologie-Landkarte (100), AWS GovCloud (20)|
 | **Offenheit**                 | - Sind Spezifikationen offen? (Ja = 100, Nein = 0)                                           | 20%        | ODF (100), DOCX (0)                       |
 | **Implementierungs-Kontrolle**| - Wer kontrolliert die Implementierung? (EU/OS = 100, Closed = 0)                             | 20%        | Matrix (100), Zoom (0)                    |
 | **Abhängigkeiten**            | - Nutzt das Projekt souveräne Technologien? (Ja = 100, Nein = 0)                               | 15%        | eIDAS (100), FedRAMP (50)                  |
@@ -55,7 +55,7 @@ Hier ist das **präzise Konzept für einen Souveränitäts-Score** – fokussier
   - **Detailaufschlüsselung** per Donut-Chart (z. B. "20% durch US-Herkunft").
   - **Vergleichsmöglichkeit** mit Alternativen (z. B. "React vs. Vue").
 
-#### **B. Gesamt-Stack (z. B. Deutschland-Stack)**
+#### **B. Gesamt-Stack (z. B. Technologie-Landkarte)**
 - **Stack-Zusammensetzung**:
   - Liste aller Komponenten (Frameworks, Bibliotheken, Dienste) mit **individuellen Scores**.
   - **Gesamt-Score des Stacks** = Durchschnitt aller Einzel-Scores (gewichtet nach Relevanz).
@@ -76,7 +76,7 @@ Hier ist das **präzise Konzept für einen Souveränitäts-Score** – fokussier
 |----------------------------|--------------------------------------------------------------------------|-----------------------------------|
 | **GitHub**                 | Lizenz, Herkunft der Commits, Abhängigkeiten (package.json)             | GitHub API                       |
 | **NPM/CRAN/PyPI**          | Abhängigkeiten von Bibliotheken                                         | NPM API, Libraries.io            |
-| **Regierungsdokumente**   | Offizielle Stack-Dokumentation (z. B. Deutschland-Stack)                | BSI/PDFs                         |
+| **Dokumentation**   | Offizielle Stack-Dokumentation (z. B. technische Standards)                | Spezifikationen                         |
 | **Cloud-Anbieter**         | Hosting-Standorte (z. B. AWS vs. OVH)                                    | Cloud-Harmonize                  |
 | **Compliance-Datenbanken** | GDPR/ISO-Zertifizierungen                                                | ENISA, BSI                       |
 | **Community-Feedback**     | Nutzer melden Fehler/Korrekturen                                         | GitHub Issues, Discord            |
@@ -93,7 +93,7 @@ Hier ist das **präzise Konzept für einen Souveränitäts-Score** – fokussier
 | **Datenpipeline**         | Apache Airflow (für regelmäßige Updates der Scores).                          |
 
 ---
-### **6. Beispiel: Deutschland-Stack Analyse**
+### **6. Beispiel: Technologie-Stack Analyse**
 | Komponente               | Technologie          | Souveränitäts-Score | Begründung                                                                 |
 |---------------------------|----------------------|---------------------|-----------------------------------------------------------------------------|
 | **Cloud-Infrastruktur**   | Open Telekom Cloud   | 95                   | EU-Hosting, BSI-zertifiziert.                                               |
