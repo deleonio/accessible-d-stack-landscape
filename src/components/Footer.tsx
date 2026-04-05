@@ -5,33 +5,35 @@ export function Footer() {
 
 	return (
 		<footer className="footer">
-			<div className="footer__inner">
+			<div className="footer__inner footer__inner--top">
 				<div className="footer__brand">
 					<p className="footer-title">D-Stack Landscape</p>
-					<p className="footer-sub">Technology landscape for public-sector platforms</p>
+					<p className="footer-sub">Barrierefreie Technologie-Landkarte für öffentliche Plattformen</p>
 				</div>
 				<nav className="footer__links" aria-label="Footer-Navigation">
-					<a
-						href="https://github.com/deleonio/accessible-d-stack-landscape"
-						rel="noopener noreferrer"
-					>
-						Projekt-Repository
+					<a href="https://github.com/deleonio/accessible-d-stack-landscape" rel="noopener noreferrer">
+						GitHub
 					</a>
-					<a href="https://vite.dev/guide/" rel="noopener noreferrer">
-						Vite Dokumentation
+					<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
+						Dokumentation
 					</a>
-					<a href="https://preactjs.com/guide/v10/getting-started" rel="noopener noreferrer">
-						Preact Dokumentation
+					<a href="mailto:opensource@example.org">Kontakt</a>
+					<a href="https://github.com/deleonio/accessible-d-stack-landscape/discussions" rel="noopener noreferrer">
+						Community
 					</a>
 				</nav>
 			</div>
-			<div className="footer__inner">
+
+			<div className="footer__inner footer__inner--bottom">
 				<p className="footer__copy">
-					© {year} D-Stack Landscape · Erstellt mit{' '}
+					© {year} D-Stack Landscape · Lizenz: EUPL-1.2 · Built with{' '}
 					<a href="https://preactjs.com/" rel="noopener noreferrer">
 						Preact
 					</a>{' '}
-					und <a href="https://vite.dev/" rel="noopener noreferrer">Vite</a> · Lizenz: EUPL-1.2
+					and{' '}
+					<a href="https://vite.dev/" rel="noopener noreferrer">
+						Vite
+					</a>
 				</p>
 				<p className="footer__meta" aria-label={`Build Commit ${commitDisplay}`}>
 					Build-Commit: <code>{commitDisplay}</code>
