@@ -76,6 +76,21 @@ pnpm start
 
 Die Anwendung läuft dann unter [http://localhost:5173](http://localhost:5173).
 
+### Konfigurierbare Asset-Basis-URL
+
+Logos in den Artikeldaten werden als relative Pfade (z. B. `/logos/...png`) gespeichert und zur Laufzeit über `VITE_ASSET_BASE_URL` aufgelöst.
+
+Beispiele:
+
+- **Nicht gesetzt** → Logos werden relativ zur aktuellen Domain geladen.
+- `VITE_ASSET_BASE_URL=https://technologie.deutschland-stack.gov.de` → Logos werden von dieser Domain geladen.
+
+Für lokale Entwicklung kannst du eine `.env.local` anlegen:
+
+```bash
+VITE_ASSET_BASE_URL=https://technologie.deutschland-stack.gov.de
+```
+
 ### Produktions-Build
 
 ```bash
@@ -103,6 +118,7 @@ pnpm preview
 | `pnpm eslint` | ESLint-Analyse ausführen |
 | `pnpm stylelint` | CSS/SCSS-Linting ausführen |
 | `pnpm format` | Prettier-Formatierung prüfen |
+| `pnpm generate:articles` | `src/data/articles.generated.ts` aus `data/items.csv` neu erzeugen |
 | `pnpm check-unused` | Ungenutzte Abhängigkeiten prüfen (Knip) |
 | `pnpm check-updates` | Verfügbare Paket-Updates anzeigen |
 | `pnpm update` | Alle Pakete aktualisieren |
@@ -165,11 +181,16 @@ Statische Sicherheitsanalyse des Quellcodes.
 ```
 src/
 ├── components/       # UI-Komponenten (Header, SearchBar, CategoryGrid, Footer, ArticleCard)
-├── data/             # Technologie-Daten (articles.ts)
+├── data/             # Kategorien + exportierte Artikeldaten (articles.ts, articles.generated.ts)
 ├── hooks/            # Custom Hooks (useFilters.ts)
 ├── types/            # TypeScript-Typen
 ├── App.tsx           # Haupt-Komponente
 └── preact.main.tsx   # Einstiegspunkt mit KoliBri-Setup
+scripts/
+└── generate_articles.py # Generator für src/data/articles.generated.ts aus data/items.csv
+data/
+├── items.csv         # Primäre Datenquelle für Artikelinhalte
+└── projects.csv      # Ergänzende Projektdaten (derzeit nicht im Frontend importiert)
 e2e/                  # Playwright E2E- und Accessibility-Tests
 .github/workflows/    # CI/CD-Konfiguration
 ```
