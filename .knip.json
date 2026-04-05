@@ -1,7 +1,19 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": ["src/react.main.tsx"],
-  "project": ["src/**/*.{ts,tsx}"],
-  "ignoreDependencies": ["uno.css"],
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "project": [
+    "src/**/*.{ts,tsx}"
+  ],
+  "ignore": [
+    "src/data/articles.generated.ts"
+  ],
+  "ignoreDependencies": [
+    "uno.css",
+    "@capacitor/core",
+    "@hookform/resolvers",
+    "react-hook-form",
+    "zod",
+    "@capacitor/android",
+    "@capacitor/ios"
+  ],
   "ignoreExportsUsedInFile": true
 }
