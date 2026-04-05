@@ -12,13 +12,7 @@ function App() {
 		<div className="app">
 			<Header />
 			<SearchBar filters={filters} onFilterChange={setFilters} categories={CATEGORIES} />
-			<CategoryGrid
-				categories={CATEGORIES}
-				articles={filtered}
-				filters={filters}
-				onFilterChange={setFilters}
-				totalCount={ARTICLES.length}
-			/>
+			<CategoryGrid categories={CATEGORIES} articles={filtered} filters={filters} onFilterChange={setFilters} totalCount={ARTICLES.length} />
 			<Footer />
 		</div>
 	);

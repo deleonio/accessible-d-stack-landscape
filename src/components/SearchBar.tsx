@@ -1,5 +1,5 @@
 import { KolInputText, KolSingleSelect } from '@public-ui/preact';
-import { FilterState, Category } from '../types';
+import { Category, FilterState } from '../types';
 
 interface SearchBarProps {
 	filters: FilterState;
@@ -8,10 +8,7 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ filters, onFilterChange, categories }: SearchBarProps) {
-	const categoryOptions = [
-		{ label: 'Alle Kategorien', value: '' },
-		...categories.map((cat) => ({ label: cat.name, value: cat.id })),
-	];
+	const categoryOptions = [{ label: 'Alle Kategorien', value: '' }, ...categories.map((cat) => ({ label: cat.name, value: cat.id }))];
 
 	return (
 		<section className="search-bar" aria-label="Suche und Filter">
@@ -29,8 +26,7 @@ export function SearchBar({ filters, onFilterChange, categories }: SearchBarProp
 					_options={categoryOptions}
 					_value={filters.selectedCategory || ''}
 					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) =>
-							onFilterChange({ ...filters, selectedCategory: value ? (value as string) : null }),
+						onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedCategory: value ? (value as string) : null }),
 					}}
 				/>
 			</div>
