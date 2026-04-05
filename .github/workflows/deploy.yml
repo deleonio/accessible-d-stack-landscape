@@ -36,6 +36,10 @@ jobs:
             ${{ github.event_name == 'pull_request'
               && github.event.pull_request.head.sha
               || github.sha }}
+          VITE_ENABLE_PWA: >-
+            ${{ github.event_name == 'pull_request'
+              && 'false'
+              || 'true' }}
           VITE_BASE_URL: >-
             ${{ github.event_name == 'pull_request'
               && format('/accessible-d-stack-landscape/pr-preview/pr-{0}/', github.event.number)
