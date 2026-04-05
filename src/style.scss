@@ -192,6 +192,8 @@ body {
 		padding: var(--ds-space-2) var(--ds-space-4);
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
 		gap: var(--ds-space-3);
 
 		@media (width >= 768px) {
@@ -219,6 +221,29 @@ body {
 				border-radius: var(--ds-radius-sm);
 				letter-spacing: 0.04em;
 				text-transform: uppercase;
+			}
+		}
+	}
+
+	&__nav {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--ds-space-3);
+
+		a {
+			color: rgb(255 255 255 / 85%);
+			text-decoration: none;
+			font-size: var(--ds-text-sm);
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+
+			&:hover,
+			&:focus {
+				color: #fff;
+				text-decoration: underline;
+				text-underline-offset: 2px;
 			}
 		}
 	}
@@ -546,6 +571,15 @@ kol-card.article-card,
 		}
 	}
 
+	&__inner--top {
+		padding-bottom: var(--ds-space-4);
+		border-bottom: 1px solid rgb(255 255 255 / 12%);
+	}
+
+	&__inner--bottom {
+		padding-top: var(--ds-space-2);
+	}
+
 	&__brand {
 		.footer-title {
 			font-size: var(--ds-text-sm);
@@ -585,9 +619,9 @@ kol-card.article-card,
 	&__copy {
 		font-size: var(--ds-text-xs);
 		color: rgb(255 255 255 / 45%);
-		margin-top: var(--ds-space-6);
-		padding-top: var(--ds-space-4);
-		border-top: 1px solid rgb(255 255 255 / 12%);
+		a {
+			color: rgb(255 255 255 / 75%);
+		}
 	}
 
 	&__meta {
