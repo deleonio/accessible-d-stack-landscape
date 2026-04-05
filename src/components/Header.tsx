@@ -5,18 +5,13 @@ export function Header() {
 				Direkt zum Inhalt springen
 			</a>
 			<header className="header">
-				<div className="header__official-strip" role="banner">
-					<div className="official-label">
-						<span className="official-label__emblem" aria-hidden="true">
-							<span />
-							<span />
-							<span />
-						</span>
-						Eine offizielle Website der Bundesrepublik Deutschland
+				<div className="header__utility-bar" role="banner">
+					<div className="utility-label">
+						Öffentliche Digital-Services · Technologieverzeichnis
 					</div>
-					<span className="official-info">
-						<a href="https://www.bund.de/DE/Service/Hinweis-Bundeswebseiten/hinweis-bundeswebseiten.html" rel="noopener noreferrer">
-							Wie Sie offizielle Websites erkennen
+					<span className="utility-info">
+						<a href="#main-content">
+							Zum Hauptinhalt
 						</a>
 					</span>
 				</div>

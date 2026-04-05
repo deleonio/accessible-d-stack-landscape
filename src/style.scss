@@ -1,6 +1,6 @@
-// ─── Digitale Dachmarke – Brand Tokens ────────────────────────────────────────
+// ─── Design System – Brand Tokens ─────────────────────────────────────────────
 :root {
-	// Brand colours (Bundesblau palette)
+	// Brand colours (brand-primary palette)
 	--ds-color-primary: #003d82;
 	--ds-color-primary-dark: #002d62;
 	--ds-color-primary-light: #1a56a0;
@@ -18,10 +18,10 @@
 	--ds-color-text-muted: #6b7280;
 	--ds-color-text-inverse: #fff;
 
-	// Category colours – semantisch (KERN Dachmarke Farbpalette)
+	// Category colours – semantic product palette
 	--ds-cat-betrieb: #00883d; // Grün   – operativer Betrieb
 	--ds-cat-infrastruktur: #c5192d; // Rot    – Infrastruktur
-	--ds-cat-plattform: #003d82; // Blau   – Plattform (Bundesblau)
+	--ds-cat-plattform: #003d82; // Blau   – Plattform (brand-primary)
 	--ds-cat-zugang: #f39c12; // Orange – Zugang / Nutzer
 
 	// Spacing (8 px base)
@@ -63,6 +63,15 @@
 	--ds-text-3xl: 2rem;
 	--ds-lh-body: 1.6;
 	--ds-lh-heading: 1.2;
+}
+
+// Optional theme hook: override brand tokens via [data-theme='custom'] without
+// changing semantic token names in component styles.
+[data-theme='custom'] {
+	--ds-color-primary: #003d82;
+	--ds-color-primary-dark: #002d62;
+	--ds-color-primary-light: #1a56a0;
+	--ds-color-accent: #0070cb;
 }
 
 // ─── Reset ────────────────────────────────────────────────────────────────────
@@ -117,9 +126,9 @@ body {
 	color: var(--ds-color-text-inverse);
 	border-bottom: 4px solid var(--ds-color-accent);
 
-	// Digitale Dachmarke – offizieller Identitätsstreifen
-	&__official-strip {
-		background: #000;
+	// Neutrale Utility-Bar
+	&__utility-bar {
+		background: var(--ds-color-primary-dark);
 		padding: var(--ds-space-1) var(--ds-space-8);
 		display: flex;
 		align-items: center;
@@ -127,43 +136,15 @@ body {
 		flex-wrap: wrap;
 		gap: var(--ds-space-2);
 
-		.official-label {
+		.utility-label {
 			display: flex;
 			align-items: center;
-			gap: var(--ds-space-2);
 			color: rgb(255 255 255 / 90%);
 			font-size: var(--ds-text-xs);
 			font-weight: 400;
-
-			// Digitalwappen – vereinfacht als Farb-Icon
-			&__emblem {
-				display: flex;
-				gap: 2px;
-				flex-shrink: 0;
-
-				span {
-					display: block;
-					width: 5px;
-					height: 14px;
-					border-radius: 1px;
-
-					&:nth-child(1) {
-						background: #000;
-						border: 1px solid rgb(255 255 255 / 50%);
-					}
-
-					&:nth-child(2) {
-						background: #d00;
-					}
-
-					&:nth-child(3) {
-						background: #ffce00;
-					}
-				}
-			}
 		}
 
-		.official-info {
+		.utility-info {
 			font-size: var(--ds-text-xs);
 			color: rgb(255 255 255 / 55%);
 
@@ -181,7 +162,7 @@ body {
 	}
 
 	&__brand-bar {
-		background: var(--ds-color-primary-dark);
+		background: var(--ds-color-primary);
 		padding: var(--ds-space-2) var(--ds-space-8);
 		display: flex;
 		align-items: center;
