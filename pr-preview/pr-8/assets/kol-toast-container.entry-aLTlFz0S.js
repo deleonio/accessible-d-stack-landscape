@@ -1,0 +1,424 @@
+import{r as d,h as i,a7 as h,H as f}from"./index-D2HA3l2I.js";import{t as m}from"./i18n-BVaUp6qp-AH3SScv1.js";import{n as b}from"./dev.utils-BL9Lx_uf-Gyvsp91l.js";import{K as p}from"./Alert-Ccw-DwxA-B9kAm3Ck.js";import"./variant-quote-CHD0qMkY-BNzDdLYt.js";import"./component-DpGGeM3i-BiIO8rWY.js";import{_ as u}from"./tslib.es6-CxX45GIN-CNLfoBeZ.js";import{c as k}from"./clsx-COFh-Vc8-XoI9wUSr.js";import"./component-D3oJtEcp-C099JPRM.js";import"./normalizers-DnkJhVYZ-DXVhldNo.js";import"./_Uint8Array-kJHDjtoP-Dy4Yhf8F.js";import"./isArray-CcrBs4JM-Cx3brLAR.js";import"./Heading-D3N3WLAQ-DoQoLF0M.js";/*!
+ * KoliBri - The accessible HTML-Standard
+ */const g=n=>{var{status:t,toast:e,onClose:o}=n,a=u(n,["status","toast","onClose"]);const{type:s,label:l,description:r,variant:c}=e;return i("div",{class:k("kol-toast-item",`kol-toast-item--${t}`)},i(p,{class:"kol-toast-item__alert",alert:!0,label:l,level:0,hasCloser:!0,type:s,variant:c||"card",onCloserClick:o},i("div",Object.assign({},a),r)))},y=`@charset "UTF-8";
+/*
+* This file defines the layer order for all CSS layers used in KoliBri.
+* The order is important as it determines the cascade priority.
+*
+* Layer order (lowest to highest priority):
+* 1. kol-a11y - Accessibility defaults and requirements
+* 2. kol-global - Global component styles and resets
+* 3. kol-component - Component-specific styles
+* 4. kol-theme-global - Theme-specific global styles
+* 5. kol-theme-component - Theme-specific component styles
+*/
+@layer kol-a11y, kol-global, kol-component, kol-theme-global, kol-theme-component;
+/* forward the rem function */
+/*
+ * This file contains all rules for accessibility.
+ */
+@layer kol-a11y {
+  :host {
+    /*
+                   * Minimum size of interactive elements.
+                   */
+    --a11y-min-size: calc(44 * 1rem / var(--kolibri-root-font-size, 16));
+    /*
+     * No element should be used without verifying the contrast ratio of its background and font colors.
+     * By initially setting the background color to white and the font color to black,
+     * the contrast ratio is ensured and explicit adjustment is forced.
+     */
+    color: black;
+    background-color: white;
+    /*
+     * Verdana is an accessible font that can be used without requiring additional loading time.
+     */
+    font-family: Verdana;
+    /*
+     * Letter spacing is required for all texts.
+     */
+    letter-spacing: inherit;
+    /*
+     * Word spacing is required for all texts.
+     */
+    word-spacing: inherit;
+    /*
+     * Text should be aligned left by default to provide a predictable starting point.
+     */
+    text-align: left;
+  }
+  * {
+    /*
+     * This rule enables the word dividing for all texts. That is important for high zoom levels.
+     */
+    hyphens: auto;
+    /*
+     * This rule enables the word dividing for all texts. That is important for high zoom levels.
+     */
+    word-break: break-word;
+  }
+  /*
+   * All interactive elements should have a minimum size of to-rem(44).
+   */
+  /* input:not([type='checkbox'], [type='radio'], [type='range']), */
+  /* option, */
+  /* select, */
+  /* textarea, */
+  button,
+  .kol-input .input {
+    min-width: var(--a11y-min-size);
+    min-height: var(--a11y-min-size);
+  }
+  /*
+   * Some interactive elements should not inherit the font-family and font-size.
+   */
+  a,
+  button,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  input,
+  option,
+  select,
+  textarea {
+    /*
+     * All elements should inherit the text color from his parent element.
+     */
+    color: inherit;
+    /*
+     * All elements should inherit the font family from his parent element.
+     */
+    font-family: inherit;
+    /*
+     * All elements should inherit the font size from his parent element.
+     */
+    font-size: inherit;
+    /*
+     * Letter spacing is required for all texts.
+     */
+    letter-spacing: inherit;
+    /*
+     * Word spacing is required for all texts.
+     */
+    word-spacing: inherit;
+  }
+  /**
+  * Sometimes we need the semantic element for accessibility reasons,
+  * but we don't want to show it.
+  *
+  * - https://www.a11yproject.com/posts/how-to-hide-content/
+  */
+  .visually-hidden {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+}
+@layer kol-global {
+  /*
+   * Dieses CSS stellt sicher, dass der Standard-Style
+   * von A und Button resettet werden.
+   */
+  :is(a, button) {
+    background-color: transparent;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    /* 100% needed for custom width from outside */
+  }
+  /*
+   * Ensure elements with hidden attribute to be actually not visible
+   * @see https://meowni.ca/hidden.is.a.lie.html
+   */
+  [hidden] {
+    display: none !important;
+  }
+  .badge-text-hint {
+    color: black;
+    background-color: lightgray;
+  }
+}
+@layer kol-global {
+  :host {
+    /*
+     * The max-width is needed to prevent the table from overflowing the
+     * parent node, if the table is wider than the parent node.
+     */
+    max-width: 100%;
+    font-size: calc(16 * 1rem / var(--kolibri-root-font-size, 16));
+  }
+  * {
+    /*
+     * We prefer to box-sizing: border-box for all elements.
+     */
+    box-sizing: border-box;
+  }
+  .kol-span {
+    /* KolSpan is a layout component with icons in all directions and a label text in the middle. */
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    /* The sub span in KolSpan is the horizontal span with icon left and right and the label text in the middle. */
+  }
+  .kol-span__container {
+    display: flex;
+    align-items: center;
+  }
+  a,
+  button {
+    cursor: pointer;
+  }
+  .kol-span .kol-span__label--hide-label .kol-span__label {
+    display: none;
+  }
+  /* Reset browser agent style. */
+  button:disabled {
+    color: unset;
+  }
+  .disabled label,
+  .disabled:focus-within label,
+  [aria-disabled=true],
+  [aria-disabled=true]:focus,
+  [disabled],
+  [disabled]:focus {
+    opacity: 0.5;
+    outline: none;
+    cursor: not-allowed;
+  }
+  [aria-disabled=true]:focus .kol-span,
+  [disabled]:focus .kol-span {
+    outline: none !important;
+  }
+  .hastooltip {
+    z-index: 900 !important;
+  }
+}
+@layer kol-component {
+  :host {
+    display: block;
+  }
+}
+@font-face {
+  font-family: "kolicons";
+  src: url("kolicons.eot?t=1775135018085"); /* IE9*/
+  src: url("kolicons.eot?t=1775135018085#iefix") format("embedded-opentype"), url("kolicons.woff2?t=1775135018085") format("woff2"), url("kolicons.woff?t=1775135018085") format("woff"), url("kolicons.ttf?t=1775135018085") format("truetype"), url("kolicons.svg?t=1775135018085#kolicons") format("svg"); /* iOS 4.1- */
+}
+@layer kol-component {
+  [class^=kolicon-], [class*=" kolicon-"] {
+    font-family: "kolicons";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .kolicon-alert-error::before {
+    content: "\\ea01";
+  }
+  .kolicon-alert-info::before {
+    content: "\\ea02";
+  }
+  .kolicon-alert-success::before {
+    content: "\\ea03";
+  }
+  .kolicon-alert-warning::before {
+    content: "\\ea04";
+  }
+  .kolicon-check::before {
+    content: "\\ea05";
+  }
+  .kolicon-chevron-double-left::before {
+    content: "\\ea06";
+  }
+  .kolicon-chevron-double-right::before {
+    content: "\\ea07";
+  }
+  .kolicon-chevron-down::before {
+    content: "\\ea08";
+  }
+  .kolicon-chevron-left::before {
+    content: "\\ea09";
+  }
+  .kolicon-chevron-right::before {
+    content: "\\ea0a";
+  }
+  .kolicon-chevron-up::before {
+    content: "\\ea0b";
+  }
+  .kolicon-cogwheel::before {
+    content: "\\ea0c";
+  }
+  .kolicon-cross::before {
+    content: "\\ea0d";
+  }
+  .kolicon-eye-closed::before {
+    content: "\\ea0e";
+  }
+  .kolicon-eye::before {
+    content: "\\ea0f";
+  }
+  .kolicon-house::before {
+    content: "\\ea10";
+  }
+  .kolicon-kolibri::before {
+    content: "\\ea11";
+  }
+  .kolicon-link-external::before {
+    content: "\\ea12";
+  }
+  .kolicon-link::before {
+    content: "\\ea13";
+  }
+  .kolicon-minus::before {
+    content: "\\ea14";
+  }
+  .kolicon-plus::before {
+    content: "\\ea15";
+  }
+  .kolicon-settings::before {
+    content: "\\ea16";
+  }
+  .kolicon-sort-asc::before {
+    content: "\\ea17";
+  }
+  .kolicon-sort-desc::before {
+    content: "\\ea18";
+  }
+  .kolicon-sort-neutral::before {
+    content: "\\ea19";
+  }
+  .kolicon-up::before {
+    content: "\\ea1a";
+  }
+  .kolicon-version::before {
+    content: "\\ea1b";
+  }
+}
+@layer kol-component {
+  .kol-icon {
+    color: inherit;
+    display: inline-block;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+  .kol-tooltip {
+    display: contents;
+  }
+  .kol-tooltip__floating {
+    opacity: 0;
+    display: none;
+    position: fixed;
+    /* Avoid layout interference - see https://floating-ui.com/docs/computePosition */
+    top: 0;
+    left: 0;
+    /* Can be used to specify the tooltip-width from the outside. Unset by default.  */
+    width: var(--kol-tooltip-width, max-content);
+    min-width: calc(8 * 1rem / var(--kolibri-root-font-size, 16));
+    max-width: 90vw;
+    max-height: 90vh;
+    animation-direction: normal;
+    /* Can be used to specify the animation duration from the outside. 250ms by default. */
+    animation-duration: var(--kolibri-tooltip-animation-duration, 250ms);
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+  }
+  .kol-tooltip__floating.hide {
+    animation-name: hideTooltip;
+  }
+  .kol-tooltip__floating.show {
+    animation-name: showTooltip;
+  }
+  .kol-tooltip__arrow {
+    transform: rotate(45deg);
+    color: #000;
+    background-color: #fff;
+    position: absolute;
+    z-index: 999;
+    width: calc(10 * 1rem / var(--kolibri-root-font-size, 16));
+    height: calc(10 * 1rem / var(--kolibri-root-font-size, 16));
+  }
+  .kol-tooltip__content {
+    color: #000;
+    background-color: #fff;
+    position: relative;
+    z-index: 1000;
+  }
+  @keyframes hideTooltip {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: none;
+    }
+  }
+  @keyframes showTooltip {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+@layer kol-component {
+  .kol-alert .kol-icon {
+    color: inherit;
+    display: inline-block;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+  .kol-alert :host {
+    display: inline-block;
+  }
+  .kol-alert .kol-button {
+    display: flex;
+    min-height: var(--a11y-min-size);
+    font-style: calc(16 * 1rem / var(--kolibri-root-font-size, 16));
+    text-decoration-line: none;
+  }
+  .kol-alert .kol-button::before {
+    /* Render zero-width character as first element to set the baseline correctly. */
+    content: "​";
+  }
+  .kol-alert .kol-button__text {
+    flex: 1 0 100%;
+  }
+  .kol-alert {
+    display: grid;
+  }
+  .kol-alert__container {
+    display: flex;
+    place-items: center;
+  }
+  .kol-alert__container-content {
+    flex-grow: 1;
+  }
+  .kol-alert__closer {
+    /* Visible with forced colors */
+    outline: transparent solid calc(1 * 1rem / var(--kolibri-root-font-size, 16));
+  }
+  :host {
+    display: flex;
+    position: fixed;
+    z-index: 200;
+    max-width: 90vw;
+    flex-direction: column;
+  }
+  .kol-toast-container__close-all {
+    align-self: flex-end;
+  }
+}`,w=class{constructor(n){d(this,n),this.state={_toastStates:[]},this.translateToastCloseAll=m("kol-toast-close-all"),this.knownRenderFunctions=new Set}async enqueue(n){const t={toast:Object.assign(Object.assign({},n),{variant:"card"}),status:"adding",id:`toast-${b()}`};return this.state=Object.assign(Object.assign({},this.state),{_toastStates:[t,...this.state._toastStates]}),setTimeout(()=>{this.state=Object.assign(Object.assign({},this.state),{_toastStates:this.state._toastStates.map(e=>e.id===t.id&&e.status!=="removing"?Object.assign(Object.assign({},e),{status:"settled"}):e)})},300),()=>{this.handleClose(t)}}handleClose(n){this.state=Object.assign(Object.assign({},this.state),{_toastStates:this.state._toastStates.map(t=>(t.id===n.id&&(t.status="removing"),t))}),setTimeout(()=>{var t,e;this.state=Object.assign(Object.assign({},this.state),{_toastStates:this.state._toastStates.filter(o=>o.id!==n.id)}),(e=(t=n.toast).onClose)===null||e===void 0||e.call(t)},300)}async closeAll(n=!1){if(n)this.state=Object.assign(Object.assign({},this.state),{_toastStates:[]});else{const t=[...this.state._toastStates];this.state=Object.assign(Object.assign({},this.state),{_toastStates:t.map(e=>Object.assign(Object.assign({},e),{status:"removing"}))}),setTimeout(()=>{this.state=Object.assign(Object.assign({},this.state),{_toastStates:this.state._toastStates.filter(e=>t.every(o=>o.id!==e.id))}),t.forEach(e=>{var o,a;(a=(o=e.toast).onClose)===null||a===void 0||a.call(o)})},300)}}handleToastRef(n,t){t&&typeof n.toast.render=="function"&&!this.knownRenderFunctions.has(n.toast.render)&&(this.knownRenderFunctions.add(n.toast.render),n.toast.render(t,{close:()=>this.handleClose(n)}))}render(){return i(f,{key:"8f8256c2e4a929fcef039c3b88058b7aae6df105",class:"kol-toast-container"},this.state._toastStates.length>1&&i(h,{key:"1a72d21da9d3cbd5a65cb6a9c220d37a8e237da8",_label:this.translateToastCloseAll,class:"kol-toast-container__button-close-all",_on:{onClick:()=>{this.closeAll()}}}),this.state._toastStates.map(n=>i(g,{key:n.id,onClose:()=>this.handleClose(n),ref:t=>this.handleToastRef(n,t),toast:n.toast,status:n.status})))}};w.style={default:y};export{w as kol_toast_container};
