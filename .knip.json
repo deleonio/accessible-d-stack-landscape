@@ -3,8 +3,8 @@
   "project": [
     "src/**/*.{ts,tsx}"
   ],
-  "ignore": [
-    "src/data/articles.generated.ts"
+  "ignoreBinaries": [
+    "python3"
   ],
   "ignoreDependencies": [
     "uno.css",
