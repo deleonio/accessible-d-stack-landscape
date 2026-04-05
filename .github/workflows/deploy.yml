@@ -3,8 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
 
 concurrency:
@@ -14,7 +12,6 @@ concurrency:
 jobs:
   validate-pages-config:
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - name: Validate GitHub Pages source
         env:
@@ -39,7 +36,6 @@ jobs:
   build:
     needs: validate-pages-config
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@v6
 
@@ -57,27 +53,17 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          VITE_COMMIT_SHA: >-
-            ${{ github.event_name == 'pull_request'
-              && github.event.pull_request.head.sha
-              || github.sha }}
-          VITE_ENABLE_PWA: >-
-            ${{ github.event_name == 'pull_request'
-              && 'false'
-              || 'true' }}
-          VITE_BASE_URL: >-
-            ${{ github.event_name == 'pull_request'
-              && format('/accessible-d-stack-landscape/pr-preview/pr-{0}/', github.event.number)
-              || '/accessible-d-stack-landscape/' }}
+          VITE_COMMIT_SHA: ${{ github.sha }}
+          VITE_ENABLE_PWA: 'true'
+          VITE_BASE_URL: '/accessible-d-stack-landscape/'
 
       - uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/
 
-  deploy-main:
+  deploy:
     needs: build
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -87,7 +73,7 @@ jobs:
           name: dist
           path: dist/
 
-      - name: Publish main site and preserve PR previews
+      - name: Publish to gh-pages (full replace)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
@@ -106,7 +92,7 @@ jobs:
           fi
 
           cd gh-pages
-          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name pr-preview -exec rm -rf {} +
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -a ../dist/. .
 
           git config user.name "github-actions[bot]"
@@ -119,38 +105,3 @@ jobs:
           else
             echo "No changes to deploy."
           fi
-
-  deploy-preview:
-    needs: build
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/download-artifact@v8
-        with:
-          name: dist
-          path: dist/
-
-      - uses: rossjrw/pr-preview-action@v1
-        with:
-          source-dir: dist/
-          umbrella-dir: pr-preview
-
-  cleanup-preview:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: rossjrw/pr-preview-action@v1
-        with:
-          source-dir: dist/
-          umbrella-dir: pr-preview
-          action: remove
