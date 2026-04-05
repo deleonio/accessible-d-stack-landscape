@@ -9,6 +9,7 @@
 		"dev": "vite",
 		"eslint": "eslint src",
 		"format": "prettier --check src",
+		"generate:articles": "python3 scripts/generate_articles.py",
 		"lint": "tsc --noemit",
 		"stylelint": "stylelint \"src/**/*.scss\"",
 		"prebuild": "npm-run-all2 prebuild:*",
