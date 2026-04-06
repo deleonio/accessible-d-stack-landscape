@@ -46,7 +46,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 25
-          cache: true
+          cache: pnpm
 
       - run: pnpm install --frozen-lockfile
 
