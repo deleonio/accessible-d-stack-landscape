@@ -1,0 +1,40 @@
+name: Post Preview Comment
+description: Find or create a comment with the preview URL on a PR
+
+inputs:
+  slug:
+    description: The slug/subdirectory for the preview
+    required: true
+  repository-owner:
+    description: The repository owner username
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Find comment
+      uses: peter-evans/find-comment@v3
+      id: fc
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: 'Preview deployed'
+
+    - name: Create or update comment
+      uses: peter-evans/create-or-update-comment@v4
+      with:
+        comment-id: ${{ steps.fc.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          ## 🚀 Preview Deployed
+
+          | | |
+          |---|---|
+          | **Preview URL** | [🔗 Open Preview](https://${{ inputs.repository-owner }}.github.io/accessible-d-stack-landscape/${{ inputs.slug }}/) |
+          | **Slug** | `${{ inputs.slug }}` |
+          | **Commit** | ${{ github.sha }} |
+
+          **Access with QR Code:**
+
+          ![QR Code](https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://${{ inputs.repository-owner }}.github.io/accessible-d-stack-landscape/${{ inputs.slug }}/)
+        edit-mode: replace

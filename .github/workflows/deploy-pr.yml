@@ -8,6 +8,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  pull-requests: write
 
 concurrency:
   group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
@@ -132,3 +133,10 @@ jobs:
           else
             echo "No changes to deploy."
           fi
+
+      - name: Post Preview Comment
+        if: needs.check.outputs.deploy == 'true'
+        uses: ./.github/actions/post-preview-comment
+        with:
+          slug: ${{ needs.check.outputs.slug }}
+          repository-owner: ${{ github.repository_owner }}
