@@ -27,12 +27,12 @@ export function Footer() {
 			<div className="footer__inner footer__inner--bottom">
 				<p className="footer__copy">
 					© {year} StackAtlas · Lizenz: EUPL-1.2 · Built with{' '}
-					<a href="https://preactjs.com/" rel="noopener noreferrer">
-						Preact
-					</a>{' '}
-					and{' '}
-					<a href="https://vite.dev/" rel="noopener noreferrer">
-						Vite
+					<a href="https://www.public-ui.de/" rel="noopener noreferrer">
+						KoliBri
+					</a>
+					, and{' '}
+					<a href="https://www.kern-ux.com/" rel="noopener noreferrer">
+						KERN-UX
 					</a>
 				</p>
 				<p className="footer__meta" aria-label={`Build Commit ${commitDisplay}`}>

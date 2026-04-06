@@ -24,7 +24,7 @@ importers:
       '@public-ui/preact':
         specifier: 4.1.2
         version: 4.1.2(@public-ui/react@4.1.2(@public-ui/components@4.1.2(adopted-style-sheets@1.1.9-rc.21))(react-dom@18.3.1(react@19.2.4))(react@19.2.4))(preact@10.29.1)
-      '@public-ui/theme-default':
+      '@public-ui/theme-kern':
         specifier: 4.1.2
         version: 4.1.2(@public-ui/components@4.1.2(adopted-style-sheets@1.1.9-rc.21))
       preact:
@@ -1712,8 +1712,8 @@ packages:
       react: '>=16.14.0 <19'
       react-dom: '>=16.14.0 <19'
 
-  '@public-ui/theme-default@4.1.2':
-    resolution: {integrity: sha512-ny3EM0Ejb9QasnUxxuSCM2zqCMlyzvCSOMlLgM3L2yrQrFpJIJDwQ63WM5zLf6gRbmdINOBqYtjxEAykt4TIqg==}
+  '@public-ui/theme-kern@4.1.2':
+    resolution: {integrity: sha512-9BGoAaIWyiUxo4g9TxzZ8xEoCA5USkNQiVEnHWEf8m1KNDiJhWISXMKYjxQaxo1Y6ctuCu9ms4+io6jHdSfLeg==}
     peerDependencies:
       '@public-ui/components': 4.1.2
 
@@ -6105,7 +6105,7 @@ snapshots:
       react: 19.2.4
       react-dom: 18.3.1(react@19.2.4)
 
-  '@public-ui/theme-default@4.1.2(@public-ui/components@4.1.2(adopted-style-sheets@1.1.9-rc.21))':
+  '@public-ui/theme-kern@4.1.2(@public-ui/components@4.1.2(adopted-style-sheets@1.1.9-rc.21))':
     dependencies:
       '@public-ui/components': 4.1.2(adopted-style-sheets@1.1.9-rc.21)
 
