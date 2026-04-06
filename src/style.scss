@@ -524,9 +524,63 @@ kol-card.article-card,
 	}
 
 	&__list {
+		list-style: none;
 		display: flex;
-		flex-wrap: wrap;
+		flex-direction: column;
 		gap: var(--ds-space-2);
+	}
+
+	&__item {
+		list-style: none;
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		padding: var(--ds-space-2) var(--ds-space-3);
+		background: var(--ds-color-bg);
+		border: 1px solid var(--ds-color-border-light);
+		border-radius: var(--ds-radius-md);
+		color: var(--ds-color-text);
+		font-size: var(--ds-text-sm);
+		font-family: var(--ds-font-body);
+		cursor: pointer;
+		transition: all 0.18s ease;
+		text-align: left;
+
+		&:hover,
+		&:focus {
+			background: var(--ds-color-border-light);
+			border-color: var(--ds-color-primary);
+			color: var(--ds-color-primary);
+			outline: none;
+
+			.drawer-related__link-icon {
+				transform: translateX(4px);
+			}
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--ds-color-primary);
+			outline-offset: 2px;
+		}
+	}
+
+	&__link-text {
+		flex: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	&__link-icon {
+		flex-shrink: 0;
+		margin-left: var(--ds-space-2);
+		font-size: 1.25rem;
+		font-weight: 300;
+		transition: transform 0.18s ease;
 	}
 }
 

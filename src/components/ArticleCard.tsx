@@ -13,7 +13,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 	const category = CATEGORIES.find((c) => c.id === selectedArticle.category);
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = category?.name ?? 'Allgemein';
-	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id);
+	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id).sort((a, b) => a.name.localeCompare(b.name, 'de'));
 
 	return (
 		<div className="article-card-wrapper">
@@ -75,18 +75,19 @@ export function ArticleCard({ article }: ArticleCardProps) {
 							{relatedArticles.length > 0 && (
 								<div className="drawer-related">
 									<p className="drawer-related__title">Verwandte Einträge aus dieser Kategorie</p>
-									<div className="drawer-related__list">
+									<ul className="drawer-related__list">
 										{relatedArticles.map((relatedArticle) => (
-											<KolButton
-												key={relatedArticle.id}
-												_label={relatedArticle.name}
-												_variant="secondary"
-												_on={{
-													onClick: () => setSelectedArticle(relatedArticle),
-												}}
-											/>
+											<li key={relatedArticle.id} className="drawer-related__item">
+												<button
+													className="drawer-related__link"
+													onClick={() => setSelectedArticle(relatedArticle)}
+												>
+													<span className="drawer-related__link-text">{relatedArticle.name}</span>
+													<span className="drawer-related__link-icon" aria-hidden="true">›</span>
+												</button>
+											</li>
 										))}
-									</div>
+									</ul>
 								</div>
 							)}
 						</div>
