@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize, reopened]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
   pull-requests: write
@@ -100,7 +100,7 @@ jobs:
           fi
 
       - name: Post Preview Comment
-        if: needs.check.outputs.deploy == 'true'
         uses: ./.github/actions/post-preview-comment
         with:
-          slug: ${{ env.SLUGitory_owner }}
+          slug: ${{ env.SLUG }}
+          repository-owner: ${{ github.repository_owner }}
