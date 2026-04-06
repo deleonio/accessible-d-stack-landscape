@@ -1,0 +1,64 @@
+{
+	"header": {
+		"skipToContent": "Aller au contenu principal",
+		"instanceInfoAria": "Informations d’instance",
+		"officialProjectSetup": "Configuration officielle du projet",
+		"mvpLayoutAligned": "Aligné sur les exigences de documentation (mise en page MVP)",
+		"commit": "Commit",
+		"mainNavigationAria": "Navigation principale",
+		"nav": {
+			"home": "Accueil",
+			"categories": "Catégories",
+			"docs": "Docs"
+		},
+		"eyebrow": "Public Digital Infrastructure",
+		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique."
+	},
+	"footer": {
+		"subtitle": "Cartographie technologique accessible pour les plateformes publiques",
+		"navigationAria": "Navigation du pied de page",
+		"links": {
+			"github": "GitHub",
+			"documentation": "Documentation",
+			"contact": "Contact",
+			"community": "Communauté"
+		},
+		"license": "Licence : EUPL-1.2",
+		"builtWith": "Built with",
+		"and": "and",
+		"buildCommitAria": "Commit de build {{commit}}",
+		"buildCommitLabel": "Commit de build :"
+	},
+	"search": {
+		"regionAria": "Recherche et filtres",
+		"inputLabel": "Recherche",
+		"placeholder": "Rechercher une technologie ou un mot-clé …",
+		"categoryLabel": "Catégorie",
+		"allCategories": "Toutes les catégories"
+	},
+	"category": {
+		"toolbarAria": "Filtrer les catégories",
+		"label": "Catégorie :",
+		"all": "Toutes",
+		"results": {
+			"filteredPrefix": "sur",
+			"entries": "entrées",
+			"inCategory": "dans {{category}}",
+			"forQuery": "pour « {{query}} »",
+			"totalTechnologiesAndStandards": "technologies et standards"
+		},
+		"paginationLabel": "Parcourir les articles"
+	},
+	"results": {
+		"noneFound": "Aucune entrée trouvée",
+		"adjustFilters": "Veuillez ajuster votre recherche ou le filtre de catégorie."
+	},
+	"article": {
+		"categoryAria": "Catégorie : {{category}}",
+		"openDetails": "Ouvrir les détails",
+		"featured": "Recommandé",
+		"detailsFor": "Détails pour {{name}}",
+		"categoryLabel": "Catégorie : {{category}}",
+		"relatedTitle": "Entrées liées dans cette catégorie"
+	}
+}

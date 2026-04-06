@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 export function Header() {
+	const { t } = useTranslation();
 	const baseUrl = import.meta.env.BASE_URL;
 	const brandUrl = import.meta.env.VITE_BRAND_URL ?? baseUrl;
 	const commitSha = (import.meta.env.VITE_COMMIT_SHA || 'dev').slice(0, 7);
@@ -6,20 +9,20 @@ export function Header() {
 	return (
 		<>
 			<a href="#main-content" className="skip-nav">
-				Direkt zum Inhalt springen
+				{t('header.skipToContent')}
 			</a>
 			<header className="header">
-				<div className="header__instance-strip" role="note" aria-label="Instanz-Informationen">
+				<div className="header__instance-strip" role="note" aria-label={t('header.instanceInfoAria')}>
 					<div className="official-label">
 						<span className="official-label__emblem" aria-hidden="true">
 							<span />
 							<span />
 							<span />
 						</span>
-						Offizielles Projekt-Setup
+						{t('header.officialProjectSetup')}
 					</div>
 					<span className="official-info">
-						Ausgerichtet an den Doku-Vorgaben (MVP Layout) • Commit: <code>{commitSha}</code>
+						{t('header.mvpLayoutAligned')} • {t('header.commit')}: <code>{commitSha}</code>
 					</span>
 				</div>
 
@@ -28,19 +31,19 @@ export function Header() {
 						<span>StackAtlas</span>
 						<span className="brand-logo__badge">MVP</span>
 					</a>
-					<nav className="header__nav" aria-label="Hauptnavigation">
-						<a href={baseUrl}>Home</a>
-						<a href="#main-content">Kategorien</a>
+					<nav className="header__nav" aria-label={t('header.mainNavigationAria')}>
+						<a href={baseUrl}>{t('header.nav.home')}</a>
+						<a href="#main-content">{t('header.nav.categories')}</a>
 						<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
-							Docs
+							{t('header.nav.docs')}
 						</a>
 					</nav>
 				</div>
 
 				<div className="header__content">
-					<p className="header__eyebrow">Public Digital Infrastructure</p>
+					<p className="header__eyebrow">{t('header.eyebrow')}</p>
 					<h1>StackAtlas</h1>
-					<p className="header__subtitle">Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung.</p>
+					<p className="header__subtitle">{t('header.subtitle')}</p>
 				</div>
 			</header>
 		</>
