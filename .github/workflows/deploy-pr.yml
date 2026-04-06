@@ -26,6 +26,8 @@ jobs:
       - name: Check for .stand file
         id: check
         run: |
+          set -euo pipefail
+
           if [ ! -f .stand ]; then
             echo "No .stand file found — skipping deployment."
             echo "deploy=false" >> "$GITHUB_OUTPUT"
@@ -43,7 +45,8 @@ jobs:
           # Slug darf nur alphanumerische Zeichen und Bindestriche enthalten
           if ! echo "$SLUG" | grep -qE '^[a-z0-9][a-z0-9-]*[a-z0-9]$'; then
             echo "Invalid slug '${SLUG}' in .stand — only lowercase letters, digits and hyphens allowed."
-            exit 1
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
           echo "Deploying as stand: ${SLUG}"
