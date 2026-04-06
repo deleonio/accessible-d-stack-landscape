@@ -5,6 +5,12 @@ import deCommon from './locales/de/common.json';
 import enCommon from './locales/en/common.json';
 import frCommon from './locales/fr/common.json';
 
+const MISSING_TRANSLATION_FALLBACK = 'Übersetzung nicht verfügbar';
+
+if (typeof window !== 'undefined') {
+	(window as typeof window & { __STACKATLAS_I18N__?: typeof i18next }).__STACKATLAS_I18N__ = i18next;
+}
+
 void i18next
 	.use(LanguageDetector)
 	.use(initReactI18next)
@@ -18,6 +24,7 @@ void i18next
 		ns: ['common'],
 		supportedLngs: ['de', 'en', 'fr'],
 		fallbackLng: 'de',
+		parseMissingKeyHandler: () => MISSING_TRANSLATION_FALLBACK,
 		detection: {
 			caches: ['localStorage'],
 			lookupQuerystring: 'lng',
