@@ -75,6 +75,10 @@
 				animation-delay: 5.8s;
 				color: #fad78c;
 			}
+			.splash__fixed-label--5 {
+				animation-delay: 9.8s;
+				color: #ffffff;
+			}
 
 			/* ── Pyramid layers with segments ── */
 			.splash__pyramid {
@@ -94,7 +98,7 @@
 				gap: var(--splash-layer-gap);
 			}
 			.splash__seg {
-				height: 28px;
+				height: 18px;
 				border-radius: 6px;
 				opacity: 0;
 				transform: translateY(50px) scale(0.6);
@@ -178,12 +182,9 @@
 					opacity: 0;
 					transform: translateY(-24px);
 				}
-				30% {
+				25% {
 					opacity: 1;
 					transform: translateY(-24px);
-				}
-				88% {
-					transform: translateY(3px);
 				}
 				100% {
 					opacity: 1;
@@ -202,15 +203,15 @@
 				gap: var(--splash-layer-gap);
 			}
 			.splash__sovereign .splash__seg {
-				height: 28px;
+				height: 18px;
 				width: calc((min(330px, 86vw) - (2 - 1) * var(--splash-layer-gap)) / 2);
 				border-radius: 6px;
 				opacity: 0;
-				transform: translateY(-24px);
-				animation: splashSovDrop 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+				transform: translateY(-24px) scale(0.9);
+				animation: splashSovDrop 2.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 				background: linear-gradient(135deg, #f5f5f5, #ffffff);
-				animation-delay: 6s;
+				animation-delay: 7.3s;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -284,8 +285,8 @@
 				border: 0;
 			}
 		</style>
-		<script type="module" crossorigin src="./assets/index-CM5URMgn.js"></script>
-		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-DDUC7qUk.js">
+		<script type="module" crossorigin src="./assets/index-zseMT-gV.js"></script>
+		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-DwFGxOo1.js">
 		<link rel="modulepreload" crossorigin href="./assets/component-names-Dy77vq43-y0h3WhLS.js">
 		<link rel="modulepreload" crossorigin href="./assets/i18n-B2d_exHc-B0S3j5ey.js">
 		<link rel="stylesheet" crossorigin href="./assets/index-DImq3I1W.css">
@@ -299,14 +300,15 @@
 					<span class="splash__fixed-label splash__fixed-label--2">Platform</span>
 					<span class="splash__fixed-label splash__fixed-label--3">Building Blocks</span>
 					<span class="splash__fixed-label splash__fixed-label--4">Applications</span>
+					<span class="splash__fixed-label splash__fixed-label--5">Sovereign Standards</span>
 				</div>
 
 				<div class="splash__pyramid" aria-hidden="true">
 					<!-- Sovereign Standard – crown with 2 segments -->
 					<div class="splash__sovereign">
 						<div class="splash__sovereign-segments">
-							<div class="splash__seg"><span class="splash__seg-label">Sovereign</span></div>
-							<div class="splash__seg"><span class="splash__seg-label">Standards</span></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
 						</div>
 					</div>
 					<!-- Top → Bottom: narrowest to widest (pyramid) -->
