@@ -38,28 +38,29 @@
 				gap: 1.8rem;
 			}
 
-			/* ── Fixed label display ── */
+			/* ── Fixed label display (same spot, one at a time) ── */
 			.splash__labels {
+				position: relative;
 				display: flex;
-				flex-direction: column;
 				align-items: center;
-				gap: 0.25rem;
-				min-height: 5.5rem;
+				justify-content: center;
+				min-height: 1.6rem;
+				min-width: 14rem;
 			}
 			.splash__fixed-label {
+				position: absolute;
 				font-family: 'Fira Sans', system-ui, sans-serif;
-				font-size: clamp(0.72rem, 2vw, 0.88rem);
-				font-weight: 600;
-				letter-spacing: 0.1em;
+				font-size: clamp(0.8rem, 2.2vw, 1rem);
+				font-weight: 700;
+				letter-spacing: 0.12em;
 				text-transform: uppercase;
 				opacity: 0;
-				transform: translateY(6px);
-				animation: splashLabelFade 0.6s ease forwards;
+				animation: splashLabelPulse 1.4s ease forwards;
 			}
-			.splash__fixed-label--1 { animation-delay: 1.2s; color: #f4a0a8; }
-			.splash__fixed-label--2 { animation-delay: 3.0s; color: #8bb8e8; }
-			.splash__fixed-label--3 { animation-delay: 4.8s; color: #7fd4a0; }
-			.splash__fixed-label--4 { animation-delay: 6.2s; color: #fad78c; }
+			.splash__fixed-label--1 { animation-delay: 0.6s;  color: #f4a0a8; }
+			.splash__fixed-label--2 { animation-delay: 2.4s; color: #8bb8e8; }
+			.splash__fixed-label--3 { animation-delay: 4.2s; color: #7fd4a0; }
+			.splash__fixed-label--4 { animation-delay: 5.8s; color: #fad78c; }
 
 			/* ── Pyramid bars ── */
 			.splash__pyramid {
@@ -124,6 +125,24 @@
 				to {
 					opacity: 1;
 					transform: translateY(0);
+				}
+			}
+			@keyframes splashLabelPulse {
+				0% {
+					opacity: 0;
+					transform: translateY(6px);
+				}
+				20% {
+					opacity: 1;
+					transform: translateY(0);
+				}
+				70% {
+					opacity: 1;
+					transform: translateY(0);
+				}
+				100% {
+					opacity: 0;
+					transform: translateY(-4px);
 				}
 			}
 
@@ -205,11 +224,11 @@
 				border: 0;
 			}
 		</style>
-		<script type="module" crossorigin src="./assets/index-QaQsca5F.js"></script>
-		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-D2MUUBCA.js">
+		<script type="module" crossorigin src="./assets/index-Ci-Q-Mue.js"></script>
+		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-DSNrXWoD.js">
 		<link rel="modulepreload" crossorigin href="./assets/component-names-Dy77vq43-y0h3WhLS.js">
 		<link rel="modulepreload" crossorigin href="./assets/i18n-B2d_exHc-B0S3j5ey.js">
-		<link rel="stylesheet" crossorigin href="./assets/index-BMxuPKvQ.css">
+		<link rel="stylesheet" crossorigin href="./assets/index-DImq3I1W.css">
 	</head>
 	<body>
 		<div id="splash" class="splash" role="status" aria-label="Anwendung wird geladen">
