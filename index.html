@@ -64,15 +64,20 @@
 
 			/* ── Pyramid layers with segments ── */
 			.splash__pyramid {
+				--splash-layer-gap: 6px;
+				--splash-row-target-1: min(330px, 86vw);
+				--splash-row-target-2: min(280px, 74vw);
+				--splash-row-target-3: min(220px, 58vw);
+				--splash-row-target-4: min(170px, 46vw);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: 6px;
+				gap: var(--splash-layer-gap);
 			}
 			.splash__layer {
 				display: flex;
 				justify-content: center;
-				gap: 6px;
+				gap: var(--splash-layer-gap);
 			}
 			.splash__seg {
 				height: 18px;
@@ -85,28 +90,28 @@
 
 			/* Layer 1 – Infrastruktur: 8 segments (widest) */
 			.splash__layer--1 .splash__seg {
-				width: min(36px, 8vw);
+				width: calc((var(--splash-row-target-1) - (8 - 1) * var(--splash-layer-gap)) / 8);
 				background: linear-gradient(135deg, #c5192d, #d4303f);
 				animation-delay: 0s;
 			}
 
 			/* Layer 2 – Plattform: 6 segments */
 			.splash__layer--2 .splash__seg {
-				width: min(42px, 9.5vw);
+				width: calc((var(--splash-row-target-2) - (6 - 1) * var(--splash-layer-gap)) / 6);
 				background: linear-gradient(135deg, #1a56a0, #2068bf);
 				animation-delay: 1.8s;
 			}
 
 			/* Layer 3 – Betrieb: 4 segments */
 			.splash__layer--3 .splash__seg {
-				width: min(50px, 11vw);
+				width: calc((var(--splash-row-target-3) - (4 - 1) * var(--splash-layer-gap)) / 4);
 				background: linear-gradient(135deg, #00883d, #00a34a);
 				animation-delay: 3.6s;
 			}
 
 			/* Layer 4 – Zugang: 3 segments (narrowest) */
 			.splash__layer--4 .splash__seg {
-				width: min(48px, 10.5vw);
+				width: calc((var(--splash-row-target-4) - (3 - 1) * var(--splash-layer-gap)) / 3);
 				background: linear-gradient(135deg, #f39c12, #f5b041);
 				animation-delay: 5.2s;
 			}
@@ -156,6 +161,7 @@
 
 			/* ── Sovereign Standard crown ── */
 			.splash__sovereign {
+				width: var(--splash-row-target-4);
 				opacity: 0;
 				transform: translateY(8px);
 				animation: splashLabelFade 0.8s ease forwards;
