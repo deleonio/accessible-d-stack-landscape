@@ -8,9 +8,10 @@
 		"mainNavigationAria": "Main navigation",
 		"nav": {
 			"home": "Home",
-			"categories": "Categories",
-			"docs": "Docs"
+			"imprint": "Imprint",
+			"settings": "Settings"
 		},
+		"homeLogoAria": "Go to home page",
 		"eyebrow": "Public Digital Infrastructure",
 		"subtitle": "Interactive overview of technologies, standards and components for digital public administration.",
 		"languageSwitcher": {
@@ -65,7 +66,19 @@
 		"featured": "Featured",
 		"detailsFor": "Details for {{name}}",
 		"categoryLabel": "Category: {{category}}",
-		"relatedTitle": "Related entries from this category"
+		"relatedTitle": "Related entries from this category",
+		"logoAlt": "Logo of {{name}}"
+	},
+	"pages": {
+		"settings": {
+			"title": "Settings",
+			"text": "Future app settings for mobile usage can be added here."
+		},
+		"imprint": {
+			"title": "Imprint",
+			"text": "StackAtlas – concept demo of an accessible technology landscape.",
+			"contact": "Contact: opensource@example.org"
+		}
 	},
 	"pwa": {
 		"updateAvailable": "A new version of StackAtlas is available.",

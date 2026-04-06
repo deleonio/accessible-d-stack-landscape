@@ -19,6 +19,8 @@ export function ArticleCard({ article }: ArticleCardProps) {
 	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id).sort((a, b) =>
 		getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language),
 	);
+	const articleLogoAlt = t('article.logoAlt', { name: getLocalizedText(article.name, i18n.language) });
+	const selectedLogoAlt = t('article.logoAlt', { name: getLocalizedText(selectedArticle.name, i18n.language) });
 
 	return (
 		<div className="article-card-wrapper">
@@ -28,9 +30,10 @@ export function ArticleCard({ article }: ArticleCardProps) {
 						{article.logo && (
 							<img
 								src={article.logo}
-								alt=""
-								role="presentation"
+								alt={articleLogoAlt}
 								className="card-logo"
+								width="40"
+								height="40"
 								loading="lazy"
 								onError={(e) => {
 									e.currentTarget.src = 'assets/broken-logo.svg';
@@ -84,9 +87,10 @@ export function ArticleCard({ article }: ArticleCardProps) {
 								{selectedArticle.logo && (
 									<img
 										src={selectedArticle.logo}
-										alt=""
-										role="presentation"
+										alt={selectedLogoAlt}
 										className="card-logo"
+										width="40"
+										height="40"
 										loading="lazy"
 										onError={(e) => {
 											e.currentTarget.src = 'assets/broken-logo.svg';

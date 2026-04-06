@@ -1,11 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
-export function Header() {
+interface HeaderProps {
+	route: 'home' | 'settings' | 'imprint';
+}
+
+export function Header({ route }: HeaderProps) {
 	const { t } = useTranslation();
 	const baseUrl = import.meta.env.BASE_URL;
-	const brandUrl = import.meta.env.VITE_BRAND_URL ?? baseUrl;
 	const commitSha = (import.meta.env.VITE_COMMIT_SHA || 'dev').slice(0, 7);
+	const logoSrc = `${baseUrl}favicon.svg`;
 
 	return (
 		<>
@@ -26,27 +30,32 @@ export function Header() {
 						{t('header.mvpLayoutAligned')} • {t('header.commit')}: <code>{commitSha}</code>
 					</span>
 				</div>
-
 				<div className="header__brand-bar">
-					<a href={brandUrl} className="brand-logo" rel="noopener noreferrer">
-						<span>StackAtlas</span>
-						<span className="brand-logo__badge">MVP</span>
+					<a href="#home" className="brand-logo" aria-label={t('header.homeLogoAria')}>
+						<img src={logoSrc} alt="" aria-hidden="true" className="brand-logo__image" width="28" height="28" />
+						<span className="brand-logo__text">StackAtlas</span>
 					</a>
 					<nav className="header__nav" aria-label={t('header.mainNavigationAria')}>
-						<a href={baseUrl}>{t('header.nav.home')}</a>
-						<a href="#main-content">{t('header.nav.categories')}</a>
-						<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
-							{t('header.nav.docs')}
+						<a href="#home" aria-current={route === 'home' ? 'page' : undefined}>
+							{t('header.nav.home')}
+						</a>
+						<a href="#settings" aria-current={route === 'settings' ? 'page' : undefined}>
+							{t('header.nav.settings')}
+						</a>
+						<a href="#imprint" aria-current={route === 'imprint' ? 'page' : undefined}>
+							{t('header.nav.imprint')}
 						</a>
 					</nav>
 					<LanguageSwitcher />
 				</div>
 
-				<div className="header__content">
-					<p className="header__eyebrow">{t('header.eyebrow')}</p>
-					<h1>StackAtlas</h1>
-					<p className="header__subtitle">{t('header.subtitle')}</p>
-				</div>
+				{route === 'home' && (
+					<div className="header__content">
+						<p className="header__eyebrow">{t('header.eyebrow')}</p>
+						<h1>StackAtlas</h1>
+						<p className="header__subtitle">{t('header.subtitle')}</p>
+					</div>
+				)}
 			</header>
 		</>
 	);
