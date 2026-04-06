@@ -2,6 +2,8 @@
 
 Dieses Projekt nutzt externe Logo-URLs von öffentlichen Quellen statt lokaler Speicherung. Das reduziert die Repository-Größe und stellt sicher, dass stets aktuelle offizielle Logos angezeigt werden.
 
+Alle 128 Artikel werden mit einem sichtbaren Logo angezeigt — entweder das echte oder ein Fallback-Placeholder für Einträge ohne öffentliches Logo.
+
 ## Aufruf
 
 ```bash
@@ -116,17 +118,21 @@ const WIKIDATA_SEARCH_HINTS = {
 };
 ```
 
-## Integration
+## Integration & Fallback-Strategie
 
-In `generate-articles.mjs` können die ermittelten URLs als Fallback genutzt werden:
+Die Logos werden automatisch bei der Artikel-Generierung integriert. `generate-articles.mjs` nutzt folgende Priorität:
+
+1. **CSV-Logo** (falls externe http/https-URL)
+2. **logo-urls.json** (falls verifizierte URL vorhanden)
+3. **Fallback: `/assets/broken-logo.svg`** (wenn keine URL verfügbar)
 
 ```js
-import logoUrls from '../src/data/logo-urls.json' assert { type: 'json' };
-
-const item = { name: 'Angular', logo: '' };
-const resolved = logoUrls[item.name];
-const logoUrl = resolved?.verified && resolved.url ? resolved.url : item.logo;
+// Aus generate-articles.mjs:
+// Alle 128 Artikel erhalten automatisch ein Logo:
+const logo = csvLogo || logoUrlsEntry?.url || '/assets/broken-logo.svg';
 ```
+
+**Wichtig:** Alle 128 Artikel sind garantiert mit einem sichtbaren Logo versehen — entweder dem korrekten oder dem Fallback-Placeholder.
 
 ## Wartung
 

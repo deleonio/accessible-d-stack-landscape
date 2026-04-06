@@ -12,7 +12,8 @@ npm-debug.log
 
 # Build and test tools
 dist/
-public/assets/
+public/assets/*
+!public/assets/broken-logo.svg
 src/data/articles.generated.ts
 
 # Playwright
