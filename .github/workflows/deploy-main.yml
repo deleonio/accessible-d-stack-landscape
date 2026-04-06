@@ -5,36 +5,17 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
   group: gh-pages-main-deploy
   cancel-in-progress: true
 
 jobs:
-  validate-pages-config:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate GitHub Pages source
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          PAGE_CONFIG="$(curl -fsSL \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${REPOSITORY}/pages")"
-
-          SOURCE_BRANCH="$(echo "${PAGE_CONFIG}" | jq -r '.source.branch // empty')"
-          SOURCE_PATH="$(echo "${PAGE_CONFIG}" | jq -r '.source.path // empty')"
-
-          if [ "${SOURCE_BRANCH}" != "gh-pages" ] || [ "${SOURCE_PATH}" != "/" ]; then
-            echo "GitHub Pages must publish from branch 'gh-pages' and path '/'."
-            echo "Current config: branch='${SOURCE_BRANCH}', path='${SOURCE_PATH}'"
-            exit 1
-          fi
-
   build:
-    needs: validate-pages-config
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -58,68 +39,17 @@ jobs:
           VITE_COMMIT_SHA: ${{ github.sha }}
           VITE_ENABLE_PWA: 'true'
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-pages-artifact@v3
         with:
-          name: dist
-          path: dist/
+          path: 'dist/'
 
   deploy:
     needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/download-artifact@v8
-        with:
-          name: dist
-          path: dist/
-
-      - name: Publish Hauptstand to gh-pages root
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
-
-          if git ls-remote --exit-code --heads "${REMOTE_URL}" gh-pages >/dev/null 2>&1; then
-            git clone --depth 1 --branch gh-pages "${REMOTE_URL}" gh-pages
-          else
-            git clone --depth 1 "${REMOTE_URL}" gh-pages
-            cd gh-pages
-            git checkout --orphan gh-pages
-            git rm -rf . >/dev/null 2>&1 || true
-            cd ..
-          fi
-
-          cd gh-pages
-
-          # Alle Stand-Unterordner erhalten (aus .stands Manifest)
-          PRESERVE=(".git" ".stands")
-          if [ -f .stands ]; then
-            while IFS= read -r line; do
-              [ -n "$line" ] && PRESERVE+=("$line")
-            done < .stands
-          fi
-
-          for entry in . .. .* *; do
-            [ "$entry" = "." ] || [ "$entry" = ".." ] && continue
-            keep=false
-            for p in "${PRESERVE[@]}"; do
-              [ "$entry" = "$p" ] && keep=true && break
-            done
-            $keep || rm -rf "$entry"
-          done
-
-          cp -a ../dist/. .
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          if [ -n "$(git status --porcelain)" ]; then
-            git add -A
-            git commit -m "Deploy Hauptstand (${GITHUB_SHA})"
-            git push origin gh-pages
-          else
-            echo "No changes to deploy."
-          fi
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
