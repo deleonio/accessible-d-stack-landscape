@@ -22,7 +22,6 @@ export function LanguageSwitcher() {
 				_label={t('header.languageSwitcher.label')}
 				_hideLabel
 				_accessKey={t('header.languageSwitcher.accessKey')}
-				_hint={t('header.languageSwitcher.hint')}
 				_options={languageOptions}
 				_value={activeLanguage}
 				_on={{
