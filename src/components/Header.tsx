@@ -1,6 +1,7 @@
 export function Header() {
 	const baseUrl = import.meta.env.BASE_URL;
 	const brandUrl = import.meta.env.VITE_BRAND_URL ?? baseUrl;
+	const commitSha = (import.meta.env.VITE_COMMIT_SHA || 'dev').slice(0, 7);
 
 	return (
 		<>
@@ -17,7 +18,9 @@ export function Header() {
 						</span>
 						Offizielles Projekt-Setup
 					</div>
-					<span className="official-info">Ausgerichtet an den Doku-Vorgaben (MVP Layout)</span>
+					<span className="official-info">
+						Ausgerichtet an den Doku-Vorgaben (MVP Layout) • Commit: <code>{commitSha}</code>
+					</span>
 				</div>
 
 				<div className="header__brand-bar">
