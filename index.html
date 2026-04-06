@@ -75,6 +75,10 @@
 				animation-delay: 5.8s;
 				color: #fad78c;
 			}
+			.splash__fixed-label--5 {
+				animation-delay: 7.4s;
+				color: #ffffff;
+			}
 
 			/* ── Pyramid layers with segments ── */
 			.splash__pyramid {
@@ -94,7 +98,7 @@
 				gap: var(--splash-layer-gap);
 			}
 			.splash__seg {
-				height: 28px;
+				height: 18px;
 				border-radius: 6px;
 				opacity: 0;
 				transform: translateY(50px) scale(0.6);
@@ -202,7 +206,7 @@
 				gap: var(--splash-layer-gap);
 			}
 			.splash__sovereign .splash__seg {
-				height: 28px;
+				height: 18px;
 				width: calc((min(330px, 86vw) - (2 - 1) * var(--splash-layer-gap)) / 2);
 				border-radius: 6px;
 				opacity: 0;
@@ -294,14 +298,15 @@
 					<span class="splash__fixed-label splash__fixed-label--2">Platform</span>
 					<span class="splash__fixed-label splash__fixed-label--3">Building Blocks</span>
 					<span class="splash__fixed-label splash__fixed-label--4">Applications</span>
+					<span class="splash__fixed-label splash__fixed-label--5">Sovereign Standards</span>
 				</div>
 
 				<div class="splash__pyramid" aria-hidden="true">
 					<!-- Sovereign Standard – crown with 2 segments -->
 					<div class="splash__sovereign">
 						<div class="splash__sovereign-segments">
-							<div class="splash__seg"><span class="splash__seg-label">Sovereign</span></div>
-							<div class="splash__seg"><span class="splash__seg-label">Standards</span></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
 						</div>
 					</div>
 					<!-- Top → Bottom: narrowest to widest (pyramid) -->
