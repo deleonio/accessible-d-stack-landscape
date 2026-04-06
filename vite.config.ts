@@ -21,8 +21,8 @@ export default defineConfig({
 				registerType: 'autoUpdate',
 				includeAssets: ['favicon.ico', 'icons/*.png', 'assets/**/*'],
 				manifest: {
-					name: 'Landscape',
-					short_name: 'Landscape',
+					name: 'StackAtlas',
+					short_name: 'StackAtlas',
 					description: 'Interaktive Technologie-Landkarte für modernes digitales Ökosystem',
 					theme_color: '#004B76',
 					background_color: '#ffffff',

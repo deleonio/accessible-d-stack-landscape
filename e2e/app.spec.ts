@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Landscape App', () => {
+test.describe('StackAtlas App', () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/');
 	});
 
 	test('renders header with title', async ({ page }) => {
-		await expect(page.locator('h1')).toHaveText('Landscape');
+		await expect(page.locator('h1')).toHaveText('StackAtlas');
 		await expect(page.locator('header p')).toContainText('ecosystem');
 	});
 
@@ -27,7 +27,7 @@ await expect(cards).toHaveCount({ min: 1 });
 
 	test('renders footer', async ({ page }) => {
 		await expect(page.locator('footer')).toBeVisible();
-		await expect(page.locator('footer p')).toContainText('Landscape');
+		await expect(page.locator('footer p')).toContainText('StackAtlas');
 	});
 
 	test('screenshot – full page on load', async ({ page }) => {
