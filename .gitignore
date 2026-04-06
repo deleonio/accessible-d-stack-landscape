@@ -13,6 +13,7 @@ npm-debug.log
 # Build and test tools
 dist/
 public/assets/
+src/data/articles.generated.ts
 
 # Playwright
 playwright-report/
