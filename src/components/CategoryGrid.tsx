@@ -93,10 +93,12 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 					</div>
 					{totalPages > 1 && (
 						<KolPagination
-							_currentPage={currentPage}
-							_totalPages={totalPages}
+							_page={currentPage}
+							_max={activeCount}
+							_pageSize={ITEMS_PER_PAGE}
+							_label="Navigiere durch die Artikel"
 							_on={{
-								onChange: (nextPage: number) => setCurrentPage(nextPage),
+								onChangePage: (_event: any, page: number) => setCurrentPage(page),
 							}}
 						/>
 					)}
