@@ -6,9 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: gh-pages-main-deploy
@@ -38,17 +36,53 @@ jobs:
           VITE_COMMIT_SHA: ${{ github.sha }}
           VITE_ENABLE_PWA: 'false'
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-artifact@v7
         with:
-          path: 'dist/'
+          name: dist-main
+          path: dist/
 
   deploy:
     needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - uses: actions/checkout@v6
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist-main
+          path: dist/
+
+      - name: Publish to gh-pages root
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
+
+          if git ls-remote --exit-code --heads "${REMOTE_URL}" gh-pages >/dev/null 2>&1; then
+            git clone --depth 1 --branch gh-pages "${REMOTE_URL}" gh-pages
+          else
+            git clone --depth 1 "${REMOTE_URL}" gh-pages
+            cd gh-pages
+            git checkout --orphan gh-pages
+            git rm -rf . >/dev/null 2>&1 || true
+            cd ..
+          fi
+
+          cd gh-pages
+
+          # Alles löschen und mit neuem dist/ ersetzen
+          rm -rf ./* ./.github ./.gitignore ./.nojekyll
+          cp -a ../dist/. ./
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Deploy main (${GITHUB_SHA})"
+            git push origin gh-pages
+          else
+            echo "No changes to deploy."
+          fi
