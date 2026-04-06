@@ -287,15 +287,23 @@ body {
 				color: var(--ds-color-primary);
 			}
 
-			&:hover,
+			&:hover {
+				background: rgb(255 255 255 / 20%);
+			}
+
 			&:focus-visible {
-				outline: none;
+				outline: 2px solid #fff;
+				outline-offset: 2px;
 				background: rgb(255 255 255 / 20%);
 			}
 
 			&[aria-pressed='true']:hover,
 			&[aria-pressed='true']:focus-visible {
 				background: #fff;
+			}
+
+			&[aria-pressed='true']:focus-visible {
+				outline-color: var(--ds-color-accent);
 			}
 		}
 	}
@@ -476,6 +484,19 @@ body {
 	@media (width >= 1440px) {
 		grid-template-columns: repeat(5, 1fr);
 	}
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	&__item {
+		min-width: 0;
+	}
+}
+
+.articles-grid + kol-pagination {
+	display: block;
+	margin-top: var(--ds-space-6);
 }
 
 // ─── Article card ─────────────────────────────────────────────────────────────
