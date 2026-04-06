@@ -5,6 +5,10 @@ import { DEFAULT } from '@public-ui/theme-default';
 import { render } from 'preact';
 import App from './App';
 
+/**
+ * Splash minimum display time (ms).
+ * Derived from CSS timing: sovereign-delay (4.8s) + sov-duration (1.5s) + 3s hold + 0.7s title fade = ~10s + 1s buffer.
+ */
 const SPLASH_MIN_MS = 11000;
 const splashStart = performance.now();
 
