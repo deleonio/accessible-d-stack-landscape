@@ -5,7 +5,7 @@ import { DEFAULT } from '@public-ui/theme-default';
 import { render } from 'preact';
 import App from './App';
 
-const SPLASH_MIN_MS = 10000;
+const SPLASH_MIN_MS = 999999;
 const splashStart = performance.now();
 
 function dismissSplash(): void {
@@ -22,10 +22,7 @@ function dismissSplash(): void {
 	setTimeout(cleanup, 600);
 }
 
-Promise.all([
-	register(DEFAULT, defineCustomElements, { translation: { name: 'de' } }),
-	new Promise<void>((resolve) => setTimeout(resolve, SPLASH_MIN_MS)),
-])
+Promise.all([register(DEFAULT, defineCustomElements, { translation: { name: 'de' } }), new Promise<void>((resolve) => setTimeout(resolve, SPLASH_MIN_MS))])
 	.then(() => {
 		const htmlElement: HTMLElement | null = document.querySelector<HTMLDivElement>('div#app');
 		if (htmlElement instanceof HTMLElement) {
