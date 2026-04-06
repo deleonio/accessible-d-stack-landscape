@@ -79,7 +79,7 @@ jobs:
 
           cd gh-pages
 
-          # Unterordner des Ständers ersetzen
+          # Unterordner des PRs ersetzen
           rm -rf "${SLUG}"
           cp -a ../dist/. "${SLUG}/"
 
@@ -88,7 +88,7 @@ jobs:
 
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
-            git commit -m "Deploy Ständer '${SLUG}' (${GITHUB_SHA})"
+            git commit -m "Deploy PR preview '${SLUG}' (${GITHUB_SHA})"
             git push origin gh-pages
           else
             echo "No changes to deploy."
