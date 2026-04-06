@@ -4,6 +4,7 @@ import { DEFAULT } from '@public-ui/theme-default';
 
 import { render } from 'preact';
 import App from './App';
+import './i18n';
 
 /**
  * Splash minimum display time (ms).

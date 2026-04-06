@@ -1,5 +1,6 @@
 import { KolButton, KolPagination } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
+import { useTranslation } from 'react-i18next';
 import { Article, Category, FilterState } from '../types';
 import { ArticleCard } from './ArticleCard';
 
@@ -14,6 +15,7 @@ interface CategoryGridProps {
 const ITEMS_PER_PAGE = 12;
 
 export function CategoryGrid({ categories, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
+	const { t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
 	const activeCount = articles.length;
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -28,11 +30,11 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 
 	return (
 		<main id="main-content" className="category-container">
-			<div className="category-filters" role="toolbar" aria-label="Kategorien filtern">
-				<span className="category-filters__label">Kategorie:</span>
+			<div className="category-filters" role="toolbar" aria-label={t('category.toolbarAria')}>
+				<span className="category-filters__label">{t('category.label')}</span>
 
 				<KolButton
-					_label="Alle"
+					_label={t('category.all')}
 					_variant={filters.selectedCategory === null ? 'primary' : 'secondary'}
 					_on={{
 						onClick: () => handleFilterChange({ ...filters, selectedCategory: null }),
@@ -57,18 +59,18 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 			<p className="results-info" aria-live="polite" aria-atomic="true">
 				{filters.searchQuery || filters.selectedCategory ? (
 					<>
-						<strong>{activeCount}</strong> von {totalCount} Einträgen
+						<strong>{activeCount}</strong> {t('category.results.filteredPrefix')} {totalCount} {t('category.results.entries')}
 						{filters.selectedCategory && (
 							<>
 								{' '}
-								in <em>{categories.find((c) => c.id === filters.selectedCategory)?.name}</em>
+								<em>{t('category.results.inCategory', { category: categories.find((c) => c.id === filters.selectedCategory)?.name })}</em>
 							</>
 						)}
-						{filters.searchQuery && <> für „{filters.searchQuery}“</>}
+						{filters.searchQuery && <> {t('category.results.forQuery', { query: filters.searchQuery })}</>}
 					</>
 				) : (
 					<>
-						<strong>{totalCount}</strong> Technologien &amp; Standards
+						<strong>{totalCount}</strong> {t('category.results.totalTechnologiesAndStandards')}
 					</>
 				)}
 			</p>
@@ -79,8 +81,8 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 						<div className="empty-state__icon" aria-hidden="true">
 							🔍
 						</div>
-						<p className="empty-state__title">Keine Einträge gefunden</p>
-						<p>Bitte passen Sie Ihre Suche oder den Kategoriefilter an.</p>
+						<p className="empty-state__title">{t('results.noneFound')}</p>
+						<p>{t('results.adjustFilters')}</p>
 					</div>
 				</div>
 			) : (
@@ -95,7 +97,7 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 							_page={currentPage}
 							_max={activeCount}
 							_pageSize={ITEMS_PER_PAGE}
-							_label="Navigiere durch die Artikel"
+							_label={t('category.paginationLabel')}
 							_on={{
 								onChangePage: (_event: unknown, page: number) => setCurrentPage(page),
 							}}
