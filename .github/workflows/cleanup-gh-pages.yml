@@ -3,6 +3,9 @@ name: Clean GitHub Pages
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 concurrency:
   group: gh-pages-deploy
   cancel-in-progress: false
@@ -10,8 +13,6 @@ concurrency:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Clean all content from gh-pages branch
         env:
