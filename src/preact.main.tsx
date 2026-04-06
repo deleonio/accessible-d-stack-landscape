@@ -5,7 +5,7 @@ import { DEFAULT } from '@public-ui/theme-default';
 import { render } from 'preact';
 import App from './App';
 
-const SPLASH_MIN_MS = 2000;
+const SPLASH_MIN_MS = 4500;
 const splashStart = performance.now();
 
 function dismissSplash(): void {

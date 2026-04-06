@@ -25,7 +25,7 @@ export function Header() {
 
 				<div className="header__brand-bar">
 					<a href={brandUrl} className="brand-logo" rel="noopener noreferrer">
-						<span>Landscape</span>
+						<span>StackAtlas</span>
 						<span className="brand-logo__badge">MVP</span>
 					</a>
 					<nav className="header__nav" aria-label="Hauptnavigation">
@@ -39,7 +39,7 @@ export function Header() {
 
 				<div className="header__content">
 					<p className="header__eyebrow">Public Digital Infrastructure</p>
-					<h1>Tech-Ökosystem Landkarte</h1>
+					<h1>StackAtlas</h1>
 					<p className="header__subtitle">Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung.</p>
 				</div>
 			</header>
