@@ -76,7 +76,7 @@
 				color: #fad78c;
 			}
 			.splash__fixed-label--5 {
-				animation-delay: 7.4s;
+				animation-delay: 9.8s;
 				color: #ffffff;
 			}
 
@@ -182,12 +182,9 @@
 					opacity: 0;
 					transform: translateY(-24px);
 				}
-				30% {
+				25% {
 					opacity: 1;
 					transform: translateY(-24px);
-				}
-				88% {
-					transform: translateY(3px);
 				}
 				100% {
 					opacity: 1;
@@ -210,11 +207,11 @@
 				width: calc((min(330px, 86vw) - (2 - 1) * var(--splash-layer-gap)) / 2);
 				border-radius: 6px;
 				opacity: 0;
-				transform: translateY(-24px);
-				animation: splashSovDrop 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+				transform: translateY(-24px) scale(0.9);
+				animation: splashSovDrop 2.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 				background: linear-gradient(135deg, #f5f5f5, #ffffff);
-				animation-delay: 6s;
+				animation-delay: 7.3s;
 				display: flex;
 				align-items: center;
 				justify-content: center;
