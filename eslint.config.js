@@ -21,6 +21,7 @@ export default [
 				HTMLDivElement: 'readonly',
 				CustomEvent: 'readonly',
 				performance: 'readonly',
+				setInterval: 'readonly',
 				setTimeout: 'readonly',
 			},
 		},
