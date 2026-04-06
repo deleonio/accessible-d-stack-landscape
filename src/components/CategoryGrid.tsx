@@ -2,6 +2,7 @@ import { KolButton, KolPagination } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { Article, Category, FilterState } from '../types';
+import { getLocalizedText } from '../utils';
 import { ArticleCard } from './ArticleCard';
 
 interface CategoryGridProps {
@@ -15,7 +16,7 @@ interface CategoryGridProps {
 const ITEMS_PER_PAGE = 12;
 
 export function CategoryGrid({ categories, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
-	const { t } = useTranslation();
+	const { i18n, t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
 	const activeCount = articles.length;
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -44,7 +45,7 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 				{categories.map((cat) => (
 					<KolButton
 						key={cat.id}
-						_label={cat.name}
+						_label={getLocalizedText(cat.name, i18n.language)}
 						_variant={filters.selectedCategory === cat.id ? 'primary' : 'secondary'}
 						_on={{
 							onClick: () =>
@@ -63,7 +64,11 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 						{filters.selectedCategory && (
 							<>
 								{' '}
-								<em>{t('category.results.inCategory', { category: categories.find((c) => c.id === filters.selectedCategory)?.name })}</em>
+								<em>
+									{t('category.results.inCategory', {
+										category: getLocalizedText(categories.find((c) => c.id === filters.selectedCategory)?.name ?? '', i18n.language),
+									})}
+								</em>
 							</>
 						)}
 						{filters.searchQuery && <> {t('category.results.forQuery', { query: filters.searchQuery })}</>}

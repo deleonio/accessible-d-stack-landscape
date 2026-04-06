@@ -1,6 +1,7 @@
 import { KolInputText, KolSingleSelect } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
 import { Category, FilterState } from '../types';
+import { getLocalizedText } from '../utils';
 
 interface SearchBarProps {
 	filters: FilterState;
@@ -9,8 +10,11 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ filters, onFilterChange, categories }: SearchBarProps) {
-	const { t } = useTranslation();
-	const categoryOptions = [{ label: t('search.allCategories'), value: '' }, ...categories.map((cat) => ({ label: cat.name, value: cat.id }))];
+	const { i18n, t } = useTranslation();
+	const categoryOptions = [
+		{ label: t('search.allCategories'), value: '' },
+		...categories.map((cat) => ({ label: getLocalizedText(cat.name, i18n.language), value: cat.id })),
+	];
 
 	return (
 		<section className="search-bar" aria-label={t('search.regionAria')}>

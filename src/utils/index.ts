@@ -1,0 +1,1 @@
+export { getLocalizedText } from './getLocalizedText';
