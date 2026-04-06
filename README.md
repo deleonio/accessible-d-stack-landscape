@@ -1,27 +1,70 @@
-# Landscape
+# GovStack Landscape
 
-Interaktive Technologie-Übersicht für ein modernes, barrierefreies Digital-Ökosystem.
+Interaktive Vergleichsplattform für staatliche Tech-Stacks. Die Anwendung hilft dabei, digitale Architekturen verschiedener Regierungen transparent zu vergleichen, Synergien zu erkennen und technologische Souveränität nachvollziehbar zu bewerten.
 
 **Live:** [Projekt-Demo auf GitHub Pages](https://deleonio.github.io/accessible-d-stack-landscape/)
 
 ---
 
-## Über das Projekt
+## Zielbild
 
-Die Landscape visualisiert Technologien, Komponenten und Protokolle, die in einer modularen Plattformarchitektur eingesetzt oder evaluiert werden. Technologien sind in vier Kategorien unterteilt:
+Die App unterstützt Teams aus öffentlicher Verwaltung, Architektur und Governance bei drei Kernaufgaben:
 
-| Kategorie         | Farbe  | Beschreibung                      |
-| ----------------- | ------ | --------------------------------- |
-| **Betrieb**       | Grün   | Operativer Betrieb und Sicherheit |
-| **Infrastruktur** | Rot    | Technische Infrastruktur          |
-| **Plattform**     | Blau   | Plattformen und Protokolle        |
-| **Zugang**        | Orange | Nutzer-Zugang und Endgeräte       |
+1. **Vergleichen:** Welche Technologien setzen unterschiedliche Regierungen in den Bereichen Infrastruktur, Plattform, Betrieb und Zugang ein?
+2. **Synergien finden:** Wo gibt es gemeinsame Standards, wiederverwendbare Komponenten und Interoperabilitäts-Potenziale?
+3. **Souveränität scoren:** Wie unabhängig, nachvollziehbar und resilient ist ein Stack entlang definierter Kriterien?
 
-Die Anwendung ist **barrierefrei** entwickelt:
+---
 
-- Barrierefreie UI-Komponenten via [KoliBri](https://public-ui.github.io/) (accessible component system)
-- Automatisierte Accessibility-Tests mit [axe-core](https://github.com/dequelabs/axe-core) (WCAG 2.1 AA)
-- ESLint-Plugin `jsx-a11y` für statische Barrierefreiheitsprüfung
+## Fachliches Modell
+
+Jeder Stack wird in vier Dimensionen strukturiert:
+
+| Dimension         | Fokus                                                                 |
+| ----------------- | --------------------------------------------------------------------- |
+| **Betrieb**       | Betriebssicherheit, Monitoring, Incident- und Compliance-Fähigkeit    |
+| **Infrastruktur** | Hosting, Netzwerk, Basisdienste, Cloud-/On-Prem-Strategie             |
+| **Plattform**     | APIs, Standards, Integrationsschicht, Daten- und Service-Orchestrierung |
+| **Zugang**        | Frontends, Endgeräte, Identität, Nutzerfreundlichkeit und Accessibility |
+
+Zusätzlich können Technologien mit Metadaten angereichert werden, z. B. Reifegrad, Standardisierung, Herstellerabhängigkeit, Open-Source-Anteil oder regulatorische Eignung.
+
+---
+
+## Souveränitäts-Score (Konzept)
+
+Der Souveränitäts-Score macht Unterschiede zwischen Regierungs-Stacks vergleichbar. Eine mögliche Bewertungslogik kombiniert:
+
+- **Offenheit:** Einsatz offener Standards und Schnittstellen
+- **Unabhängigkeit:** Vendor-Lock-in-Risiko und Exit-Fähigkeit
+- **Betriebsfähigkeit:** Eigenbetrieb, Portabilität, Krisenfestigkeit
+- **Nachvollziehbarkeit:** Dokumentation, Auditierbarkeit, Governance
+- **Barrierefreiheit & Inklusion:** Zugänglichkeit als Qualitäts- und Teilhabekriterium
+
+Die Gewichtung kann je nach Land, Behörde oder Programmziel konfiguriert werden.
+
+---
+
+## Synergie-Analyse
+
+Die Anwendung kann Synergien auf mehreren Ebenen sichtbar machen:
+
+- **Gemeinsame Komponenten** zwischen Regierungs-Stacks
+- **Standardisierungsgrad** über Länder- oder Behörden-Grenzen hinweg
+- **Konsolidierungs-Potenziale** für Beschaffung, Betrieb und Wartung
+- **Wiederverwendbare Referenzmuster** für neue digitale Vorhaben
+
+So entsteht eine belastbare Grundlage für Kooperationen, Nachnutzung und strategische Investitionsentscheidungen.
+
+---
+
+## Accessibility by Design
+
+Das Projekt ist barrierefrei konzipiert, damit die Plattform selbst den Anspruch digitaler Teilhabe erfüllt:
+
+- Barrierefreie UI-Komponenten via [KoliBri](https://public-ui.github.io/)
+- Automatisierte Accessibility-Tests mit [axe-core](https://github.com/dequelabs/axe-core)
+- Statische Prüfungen mit `eslint-plugin-jsx-a11y`
 
 ---
 
@@ -33,7 +76,7 @@ Die Anwendung ist **barrierefrei** entwickelt:
 | Sprache      | TypeScript                                          |
 | Build-Tool   | [Vite](https://vite.dev/)                           |
 | Styling      | [UnoCSS](https://unocss.dev/), SCSS                 |
-| Komponenten  | [KoliBri](https://public-ui.github.io/) (KERN V2)   |
+| Komponenten  | [KoliBri](https://public-ui.github.io/)             |
 | Formulare    | React Hook Form + Zod                               |
 | PWA          | vite-plugin-pwa, Workbox                            |
 | Mobile       | [Capacitor](https://capacitorjs.com/) (Android/iOS) |
@@ -42,176 +85,61 @@ Die Anwendung ist **barrierefrei** entwickelt:
 
 ---
 
-## Deployment
-
-Die Anwendung wird automatisch auf **GitHub Pages** deployed.
-
-| Ereignis        | Deployment                                                             |
-| --------------- | ---------------------------------------------------------------------- |
-| Push auf `main` | Produktion: `https://deleonio.github.io/accessible-d-stack-landscape/` |
-| Pull Request    | PR-Preview: `.../pr-preview/pr-{nr}/`                                  |
-| PR geschlossen  | Preview wird automatisch bereinigt                                     |
-
-Der Deployment-Workflow befindet sich in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
-
-### Troubleshooting: PR-Preview zeigt nur Main
-
-Wenn `.../pr-preview/pr-{nr}/` statt des PR-Standes immer wie Main aussieht, liegt es häufig an den **GitHub Pages Settings**:
-
-1. Repository Settings → **Pages**
-2. **Build and deployment** muss auf **Deploy from a branch** stehen
-3. Branch: **`gh-pages`**, Folder: **`/ (root)`**
-
-Wenn stattdessen z. B. `main`/`docs` oder `GitHub Actions` als Quelle aktiv ist, werden die von `pr-preview-action` geschriebenen Dateien unter `gh-pages/pr-preview/...` nicht ausgeliefert.
-
----
-
 ## Lokale Entwicklung
 
 ### Voraussetzungen
 
 - [Node.js](https://nodejs.org/) 22+
-- [pnpm](https://pnpm.io/) (empfohlen)
+- [pnpm](https://pnpm.io/)
 
-### Installation
+### Setup
 
 ```bash
-pnpm install
+pnpm i
 ```
 
-### Entwicklungsserver starten
+### Entwicklungsserver
 
 ```bash
-pnpm start
+pnpm dev
 ```
 
-Die Anwendung läuft dann unter [http://localhost:5173](http://localhost:5173).
+Lokal unter: [http://localhost:5173](http://localhost:5173)
 
-### Konfigurierbare Asset-Basis-URL
-
-Logos in den Artikeldaten werden als relative Pfade (z. B. `/logos/...png`) gespeichert und zur Laufzeit über `VITE_ASSET_BASE_URL` aufgelöst.
-
-Beispiele:
-
-- **Nicht gesetzt** → Logos werden relativ zur aktuellen Domain geladen.
-- `VITE_ASSET_BASE_URL=https://example.com` → Logos werden von dieser Domain geladen.
-
-Für lokale Entwicklung kannst du eine `.env.local` anlegen:
+### Qualitätschecks
 
 ```bash
-VITE_ASSET_BASE_URL=https://example.com
-```
-
-### Produktions-Build
-
-```bash
+pnpm lint
+pnpm eslint
+pnpm stylelint
+pnpm format
 pnpm build
 ```
 
-Das Build-Ergebnis wird im Verzeichnis `dist/` abgelegt.
-
-### Build-Vorschau
-
-```bash
-pnpm preview
-```
-
----
-
-## Verfügbare Scripts
-
-| Script                   | Beschreibung                                                       |
-| ------------------------ | ------------------------------------------------------------------ |
-| `pnpm start`             | Entwicklungsserver starten                                         |
-| `pnpm build`             | Produktions-Build erstellen                                        |
-| `pnpm preview`           | Build-Vorschau starten                                             |
-| `pnpm lint`              | TypeScript-Typen prüfen                                            |
-| `pnpm eslint`            | ESLint-Analyse ausführen                                           |
-| `pnpm stylelint`         | CSS/SCSS-Linting ausführen                                         |
-| `pnpm format`            | Prettier-Formatierung prüfen                                       |
-| `pnpm generate:articles` | `src/data/articles.generated.ts` aus `data/items.csv` neu erzeugen |
-| `pnpm check-unused`      | Ungenutzte Abhängigkeiten prüfen (Knip)                            |
-| `pnpm check-updates`     | Verfügbare Paket-Updates anzeigen                                  |
-| `pnpm update`            | Alle Pakete aktualisieren                                          |
-| `pnpm test:e2e`          | E2E-Tests mit Playwright ausführen                                 |
-| `pnpm test:e2e:ui`       | E2E-Tests mit Playwright-UI ausführen                              |
-| `pnpm mobile:build`      | Build + Capacitor-Sync für Mobile                                  |
-
----
-
-## Tests
-
-### End-to-End-Tests
+### E2E-Tests
 
 ```bash
 pnpm test:e2e
 ```
-
-Tests befinden sich in `e2e/` und prüfen Header, Suchleiste, Kategorie-Grid und Footer.
-
-### Accessibility-Tests
-
-```bash
-pnpm test:e2e
-```
-
-Die Datei `e2e/axe.spec.ts` führt automatisierte WCAG-2.1-AA-Prüfungen mit axe-core aus.
-
----
-
-## CI/CD
-
-Drei GitHub Actions Workflows:
-
-### CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml))
-
-Läuft bei jedem Push und Pull Request:
-
-1. TypeScript-Typenprüfung
-2. ESLint
-3. stylelint
-4. Prettier (Formatierungsprüfung)
-5. Knip (ungenutzte Abhängigkeiten)
-6. Vite-Build
-7. Playwright E2E-Tests (inkl. Accessibility)
-
-### Deploy ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml))
-
-- Push auf `main` → Deployment auf GitHub Pages
-- Pull Requests → PR-Preview-Deployment
-- PR geschlossen → Preview-Bereinigung
-
-### CodeQL ([`.github/workflows/codeql.yml`](.github/workflows/codeql.yml))
-
-Statische Sicherheitsanalyse des Quellcodes.
 
 ---
 
 ## Projektstruktur
 
-```
+```text
 src/
-├── components/       # UI-Komponenten (Header, SearchBar, CategoryGrid, Footer, ArticleCard)
-├── data/             # Kategorien + exportierte Artikeldaten (articles.ts, articles.generated.ts)
-├── hooks/            # Custom Hooks (useFilters.ts)
-├── types/            # TypeScript-Typen
-├── App.tsx           # Haupt-Komponente
-└── preact.main.tsx   # Einstiegspunkt mit KoliBri-Setup
-scripts/
-└── generate_articles.py # Generator für src/data/articles.generated.ts aus data/items.csv
-data/
-├── items.csv         # Primäre Datenquelle für Artikelinhalte
-└── projects.csv      # Ergänzende Projektdaten (derzeit nicht im Frontend importiert)
-e2e/                  # Playwright E2E- und Accessibility-Tests
-.github/workflows/    # CI/CD-Konfiguration
+├── components/  # UI-Komponenten
+├── data/        # Katalog- und Vergleichsdaten
+├── hooks/       # Zustands- und Filterlogik
+├── types/       # Typdefinitionen
+├── utils/       # Auswertungs- und Hilfsfunktionen
+└── App.tsx      # Hauptanwendung
+scripts/         # Generatoren für Daten und Assets
+public/          # Statische Assets
 ```
 
 ---
 
-## Beitragen
+## Vision
 
-1. Fork erstellen
-2. Feature-Branch anlegen (`git checkout -b feature/mein-feature`)
-3. Änderungen committen
-4. Branch pushen
-5. Pull Request öffnen — PR-Previews werden automatisch erstellt
+GovStack Landscape soll sich zu einem offenen Werkzeugkasten für digitale Staatlichkeit entwickeln: vergleichbar, wiederverwendbar, zugänglich und souverän.
