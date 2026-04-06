@@ -1,4 +1,4 @@
-import { KolSingleSelect } from '@public-ui/preact';
+import { KolSelect } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
 
 const SUPPORTED_LANGUAGES = [
@@ -18,7 +18,7 @@ export function LanguageSwitcher() {
 
 	return (
 		<div className="language-switcher">
-			<KolSingleSelect
+			<KolSelect
 				_label={t('header.languageSwitcher.label')}
 				_hideLabel
 				_accessKey={t('header.languageSwitcher.accessKey')}

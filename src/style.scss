@@ -252,7 +252,7 @@ body {
 	.language-switcher {
 		min-width: 10rem;
 
-		kol-single-select {
+		kol-select {
 			background: transparent;
 			display: block;
 			min-width: 10rem;
@@ -345,7 +345,7 @@ body {
 		}
 	}
 
-	kol-single-select {
+	kol-select {
 		// Mobile: full width, no max-width constraint
 		width: 100%;
 
