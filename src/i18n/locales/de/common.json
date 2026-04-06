@@ -15,7 +15,9 @@
 		"subtitle": "Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung.",
 		"languageSwitcher": {
 			"ariaLabel": "Sprache wechseln",
-			"label": "Sprache"
+			"label": "Sprache",
+			"hint": "Anzeigesprache auswählen",
+			"accessKey": "l"
 		}
 	},
 	"footer": {

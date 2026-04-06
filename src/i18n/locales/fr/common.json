@@ -15,7 +15,9 @@
 		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique.",
 		"languageSwitcher": {
 			"ariaLabel": "Changer de langue",
-			"label": "Langue"
+			"label": "Langue",
+			"hint": "Sélectionner la langue d’affichage",
+			"accessKey": "l"
 		}
 	},
 	"footer": {

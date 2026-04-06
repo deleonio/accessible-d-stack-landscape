@@ -1,38 +1,38 @@
+import { KolSingleSelect } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
 
 const SUPPORTED_LANGUAGES = [
-	{ code: 'de', label: 'DE' },
-	{ code: 'en', label: 'EN' },
-	{ code: 'fr', label: 'FR' },
+	{ code: 'de', label: 'Deutsch' },
+	{ code: 'en', label: 'English' },
+	{ code: 'fr', label: 'Français' },
 ] as const;
 
 export function LanguageSwitcher() {
 	const { i18n, t } = useTranslation();
 
 	const activeLanguage = i18n.resolvedLanguage ?? i18n.language ?? '';
+	const languageOptions = SUPPORTED_LANGUAGES.map(({ code, label }) => ({
+		label,
+		value: code,
+	}));
 
 	return (
-		<div className="language-switcher" role="group" aria-label={t('header.languageSwitcher.ariaLabel')}>
-			<span className="language-switcher__label">{t('header.languageSwitcher.label')}</span>
-			<div className="language-switcher__buttons">
-				{SUPPORTED_LANGUAGES.map(({ code, label }) => {
-					const isActive = activeLanguage.startsWith(code);
-
-					return (
-						<button
-							type="button"
-							key={code}
-							onClick={() => {
-								void i18n.changeLanguage(code);
-							}}
-							className="language-switcher__button"
-							aria-pressed={isActive}
-						>
-							{label}
-						</button>
-					);
-				})}
-			</div>
+		<div className="language-switcher">
+			<KolSingleSelect
+				_label={t('header.languageSwitcher.label')}
+				_hideLabel
+				_accessKey={t('header.languageSwitcher.accessKey')}
+				_hint={t('header.languageSwitcher.hint')}
+				_options={languageOptions}
+				_value={activeLanguage}
+				_on={{
+					onChange: (_event: globalThis.Event, value: unknown) => {
+						if (typeof value === 'string') {
+							void i18n.changeLanguage(value);
+						}
+					},
+				}}
+			/>
 		</div>
 	);
 }
