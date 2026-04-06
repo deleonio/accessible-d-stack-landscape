@@ -24,7 +24,18 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			<KolCard _label={article.name} className="article-card">
 				<div className="card-content">
 					<div className="card-header">
-						{article.logo && <img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />}
+						{article.logo && (
+							<img
+								src={article.logo}
+								alt=""
+								role="presentation"
+								className="card-logo"
+								loading="lazy"
+								onError={(e) => {
+									e.currentTarget.src = 'assets/broken-logo.svg';
+								}}
+							/>
+						)}
 						<span
 							className="card-category-dot"
 							style={{ background: categoryColor }}
@@ -69,7 +80,18 @@ export function ArticleCard({ article }: ArticleCardProps) {
 					<KolCard _label={selectedArticle.name} className="drawer-card">
 						<div className="drawer-details">
 							<div className="drawer-headline">
-								{selectedArticle.logo && <img src={selectedArticle.logo} alt="" role="presentation" className="card-logo" loading="lazy" />}
+								{selectedArticle.logo && (
+									<img
+										src={selectedArticle.logo}
+										alt=""
+										role="presentation"
+										className="card-logo"
+										loading="lazy"
+										onError={(e) => {
+											e.currentTarget.src = 'assets/broken-logo.svg';
+										}}
+									/>
+								)}
 								<div>
 									<p className="drawer-category">{t('article.categoryLabel', { category: categoryName })}</p>
 									{selectedArticle.featured && <KolBadge _label={t('article.featured')} _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />}

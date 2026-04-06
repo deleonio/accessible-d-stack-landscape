@@ -6,9 +6,11 @@ import { fileURLToPath } from 'url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const INPUT_CSV = join(ROOT, 'data', 'items.csv');
+const LOGO_URLS_JSON = join(ROOT, 'src', 'data', 'logo-urls.json');
 const OUTPUT_TS = join(ROOT, 'src', 'data', 'articles.generated.ts');
 
 const CATEGORIES = new Set(['betrieb', 'infrastruktur', 'plattform', 'zugang']);
+const FALLBACK_LOGO = 'assets/broken-logo.svg';
 
 function parseCSV(csv) {
 	const [headerLine, ...dataLines] = csv.trim().split('\n');
@@ -45,31 +47,62 @@ function parseLine(line) {
 	return fields;
 }
 
-function toArticle(row, index) {
+function toArticle(row, index, logoUrls) {
 	const category = [...CATEGORIES].find((c) => (row.category || '').replace(/\s/g, '').toLowerCase().includes(c)) || 'plattform';
-	const logo = (row.logo || '').trim();
+	const csvLogo = (row.logo || '').trim();
+	const name = (row.name || '').trim();
 	const tags = (row.tag || '')
 		.split(',')
 		.map((t) => t.trim())
 		.filter(Boolean);
 
+	// 1. Use CSV logo if it's an external URL
+	let logo = '';
+	if (csvLogo && /^https?:\/\//.test(csvLogo)) {
+		logo = csvLogo;
+	} else if (csvLogo && !csvLogo.startsWith('http')) {
+		// 2. Use CSV logo if it's a local path
+		logo = '/' + csvLogo.replace(/^\/+/, '');
+	}
+
+	// 3. Try external logo URL from logo-urls.json
+	if (!logo && logoUrls[name]) {
+		const logoEntry = logoUrls[name];
+		if (logoEntry.verified && logoEntry.url) {
+			logo = logoEntry.url;
+		}
+	}
+
+	// 4. Fallback to broken-logo.svg if nothing found
+	if (!logo) {
+		logo = FALLBACK_LOGO;
+	}
+
 	return {
 		id: String(index + 1),
-		name: (row.name || '').trim(),
+		name,
 		category,
 		description: (row.description || '').trim(),
-		logo: !logo ? '' : /^https?:\/\//.test(logo) ? logo : '/' + logo.replace(/^\/+/, ''),
+		logo,
 		tags,
 		featured: false,
 	};
 }
 
-const articles = parseCSV(readFileSync(INPUT_CSV, 'utf-8')).map(toArticle);
+// Load logo-urls.json for fallback/override
+let logoUrls = {};
+try {
+	logoUrls = JSON.parse(readFileSync(LOGO_URLS_JSON, 'utf-8'));
+} catch {
+	console.warn('⚠️  Could not load logo-urls.json, will use CSV logos and fallback only');
+}
+
+const articles = parseCSV(readFileSync(INPUT_CSV, 'utf-8')).map((row, idx) => toArticle(row, idx, logoUrls));
 
 const articlesJson = articles.map((a) => `\t${JSON.stringify(a)},`).join('\n');
 
 const output = `// GENERATED FILE - DO NOT EDIT MANUALLY
-// Generated from: data/items.csv
+// Generated from: data/items.csv + src/data/logo-urls.json
 // Generated at: ${new Date().toISOString()}
 
 import { Article } from '../types';
@@ -93,4 +126,23 @@ export const ARTICLES: Article[] = RAW_ARTICLES.map((article) => ({
 `;
 
 writeFileSync(OUTPUT_TS, output, 'utf-8');
+
+// Count logo types
+const logoCounts = articles.reduce(
+	(acc, a) => {
+		if (a.logo === FALLBACK_LOGO) {
+			acc.fallback++;
+		} else if (/^https?:\/\//.test(a.logo)) {
+			acc.external++;
+		} else {
+			acc.local++;
+		}
+		return acc;
+	},
+	{ external: 0, local: 0, fallback: 0 },
+);
+
 console.log(`Generated src/data/articles.generated.ts (${articles.length} articles)`);
+console.log(`  📍 External URLs: ${logoCounts.external}`);
+console.log(`  📁 Local paths: ${logoCounts.local}`);
+console.log(`  ⚠️  Fallback logos: ${logoCounts.fallback}`);
