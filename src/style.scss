@@ -732,7 +732,7 @@ kol-card.article-card,
 	border-radius: var(--ds-radius-lg);
 	box-shadow: var(--ds-shadow-elevated);
 	max-width: calc(100vw - 2 * var(--ds-space-4));
-	animation: slideUp 0.3s ease;
+	animation: slide-up 0.3s ease;
 
 	@media (width < 600px) {
 		flex-direction: column;
@@ -754,7 +754,7 @@ kol-card.article-card,
 	}
 }
 
-@keyframes slideUp {
+@keyframes slide-up {
 	from {
 		opacity: 0;
 		transform: translateX(-50%) translateY(20px);
