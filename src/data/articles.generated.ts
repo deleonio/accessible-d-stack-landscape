@@ -1,6 +1,6 @@
 // GENERATED FILE - DO NOT EDIT MANUALLY
 // Generated from: data/items.csv
-// Generated at: 2026-04-06T05:01:33.437Z
+// Generated at: 2026-04-06T05:03:25.906Z
 
 import { Article } from '../types';
 

@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 const isPwaEnabled = process.env.VITE_ENABLE_PWA !== 'false';
 
 export default defineConfig({
-	base: process.env.VITE_BASE_URL ?? (process.env.GITHUB_ACTIONS ? '/accessible-d-stack-landscape/' : '/'),
+	base: './',
 	build: {
 		dynamicImportVarsOptions: {
 			exclude: [],
