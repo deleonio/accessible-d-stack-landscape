@@ -80,7 +80,6 @@ jobs:
 
           # Remove everything except PR backup
           rm -rf ./* ./.github ./.gitignore ./.nojekyll 2>/dev/null || true
-          rm -rf ./* ./.github ./.gitignore ./.nojekyll 2>/dev/null || true
 
           # Restore PR directories
           if [ -d ".pr-backup" ] && [ "$(ls -A .pr-backup)" ]; then
