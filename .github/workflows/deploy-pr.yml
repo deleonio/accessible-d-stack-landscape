@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   SLUG: pr-${{ github.event.pull_request.number }}

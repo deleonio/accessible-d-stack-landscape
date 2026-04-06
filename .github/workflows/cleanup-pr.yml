@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [closed]
 
+concurrency:
+  group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
