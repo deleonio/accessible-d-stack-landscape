@@ -13,7 +13,9 @@ export function ArticleCard({ article }: ArticleCardProps) {
 	const category = CATEGORIES.find((c) => c.id === selectedArticle.category);
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = category?.name ?? 'Allgemein';
-	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id).sort((a, b) => a.name.localeCompare(b.name, 'de'));
+	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id).sort((a, b) =>
+		a.name.localeCompare(b.name, 'de'),
+	);
 
 	return (
 		<div className="article-card-wrapper">
@@ -78,12 +80,11 @@ export function ArticleCard({ article }: ArticleCardProps) {
 									<ul className="drawer-related__list">
 										{relatedArticles.map((relatedArticle) => (
 											<li key={relatedArticle.id} className="drawer-related__item">
-												<button
-													className="drawer-related__link"
-													onClick={() => setSelectedArticle(relatedArticle)}
-												>
+												<button className="drawer-related__link" onClick={() => setSelectedArticle(relatedArticle)}>
 													<span className="drawer-related__link-text">{relatedArticle.name}</span>
-													<span className="drawer-related__link-icon" aria-hidden="true">›</span>
+													<span className="drawer-related__link-icon" aria-hidden="true">
+														›
+													</span>
 												</button>
 											</li>
 										))}
