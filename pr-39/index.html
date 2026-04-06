@@ -15,19 +15,62 @@
 		<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
 		<style>
 			/* ─── Splash / Intro Animation ──────────────────────────────────────── */
+
+			/* ── Design Tokens ── */
 			.splash {
+				/* Layout */
+				--splash-top: 33.33vh;
+				--splash-row-width: min(330px, 86vw);
+				--splash-gap: 6px;
+				--splash-seg-height: 18px;
+				--splash-seg-radius: 6px;
+
+				/* Timing – layer stagger & durations */
+				--splash-layer-1-delay: 0s;
+				--splash-layer-2-delay: 1.2s;
+				--splash-layer-3-delay: 2.4s;
+				--splash-layer-4-delay: 3.4s;
+				--splash-sovereign-delay: 4.8s;
+				--splash-seg-duration: 0.7s;
+				--splash-sov-duration: 1.5s;
+				--splash-label-duration: 1.4s;
+				--splash-title-delay: 6.5s;
+				--splash-exit-duration: 0.6s;
+
+				/* Colors – layer gradients */
+				--splash-color-infra: linear-gradient(135deg, #c5192d, #d4303f);
+				--splash-color-platform: linear-gradient(135deg, #1a56a0, #2068bf);
+				--splash-color-blocks: linear-gradient(135deg, #00883d, #00a34a);
+				--splash-color-apps: linear-gradient(135deg, #f39c12, #f5b041);
+				--splash-color-sovereign: linear-gradient(135deg, #f5f5f5, #ffffff);
+				--splash-color-skeleton: linear-gradient(135deg, #f5f5f5, #ffffff);
+
+				/* Colors – labels */
+				--splash-label-infra: #f4a0a8;
+				--splash-label-platform: #8bb8e8;
+				--splash-label-blocks: #7fd4a0;
+				--splash-label-apps: #fad78c;
+				--splash-label-sovereign: #ffffff;
+
+				/* Background */
+				--splash-bg: linear-gradient(170deg, #002d62 0%, #003d82 40%, #004a9e 100%);
+
+				/* Skeleton */
+				--splash-skeleton-opacity: 0.2;
+
+				/* Derived */
 				position: fixed;
 				inset: 0;
 				z-index: 9999;
 				display: flex;
 				align-items: flex-start;
 				justify-content: center;
-				padding-top: 33.33vh;
-				background: linear-gradient(170deg, #002d62 0%, #003d82 40%, #004a9e 100%);
+				padding-top: var(--splash-top);
+				background: var(--splash-bg);
 				overflow: hidden;
 				transition:
-					opacity 0.6s ease,
-					transform 0.6s ease;
+					opacity var(--splash-exit-duration) ease,
+					transform var(--splash-exit-duration) ease;
 			}
 			.splash--exiting {
 				opacity: 0;
@@ -41,7 +84,7 @@
 				gap: 1.8rem;
 			}
 
-			/* ── Fixed label display (same spot, one at a time) ── */
+			/* ── Labels ── */
 			.splash__labels {
 				position: relative;
 				display: flex;
@@ -58,104 +101,100 @@
 				letter-spacing: 0.12em;
 				text-transform: uppercase;
 				opacity: 0;
-				animation: splashLabelPulse 1.4s ease forwards;
+				animation: splashLabelPulse var(--splash-label-duration) ease forwards;
 			}
 			.splash__fixed-label--1 {
-				animation-delay: 0s;
-				color: #f4a0a8;
+				animation-delay: var(--splash-layer-1-delay);
+				color: var(--splash-label-infra);
 			}
 			.splash__fixed-label--2 {
-				animation-delay: 1.2s;
-				color: #8bb8e8;
+				animation-delay: var(--splash-layer-2-delay);
+				color: var(--splash-label-platform);
 			}
 			.splash__fixed-label--3 {
-				animation-delay: 2.4s;
-				color: #7fd4a0;
+				animation-delay: var(--splash-layer-3-delay);
+				color: var(--splash-label-blocks);
 			}
 			.splash__fixed-label--4 {
-				animation-delay: 3.4s;
-				color: #fad78c;
+				animation-delay: var(--splash-layer-4-delay);
+				color: var(--splash-label-apps);
 			}
 			.splash__fixed-label--5 {
-				animation-delay: 4.8s;
-				color: #ffffff;
+				animation-delay: var(--splash-sovereign-delay);
+				color: var(--splash-label-sovereign);
 			}
 
-			/* ── Pyramid layers with segments ── */
+			/* ── Pyramid ── */
 			.splash__pyramid {
-				--splash-layer-gap: 6px;
-				--splash-row-target-1: min(330px, 86vw);
-				--splash-row-target-2: min(330px, 86vw);
-				--splash-row-target-3: min(330px, 86vw);
-				--splash-row-target-4: min(330px, 86vw);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: var(--splash-layer-gap);
+				gap: var(--splash-gap);
 			}
 			.splash__layer {
 				display: flex;
 				justify-content: center;
-				gap: var(--splash-layer-gap);
+				gap: var(--splash-gap);
 				position: relative;
 			}
+
+			/* ── Skeleton (ghost preview) ── */
 			.splash__skeleton {
 				position: absolute;
 				display: flex;
 				justify-content: center;
-				gap: var(--splash-layer-gap);
+				gap: var(--splash-gap);
 				top: 0;
 				left: 50%;
 				transform: translateX(-50%);
 				z-index: 0;
 			}
-			.splash__sovereign-segments .splash__seg {
-				position: relative;
-				z-index: 1;
-			}
 			.splash__skeleton .splash__seg {
-				opacity: 0.2;
+				opacity: var(--splash-skeleton-opacity);
 				animation: none !important;
-				background: linear-gradient(135deg, #f5f5f5, #ffffff);
 				transform: none !important;
+				background: var(--splash-color-skeleton);
 			}
+
+			/* ── Segments (shared) ── */
 			.splash__seg {
-				height: 18px;
-				border-radius: 6px;
+				height: var(--splash-seg-height);
+				border-radius: var(--splash-seg-radius);
 				opacity: 0;
 				transform: translateY(50px) scale(0.6);
-				animation: splashSegRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+				animation: splashSegRise var(--splash-seg-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards;
 				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 			}
 
 			/* Layer 1 – Infrastructure: 3 segments */
 			.splash__layer--1 .splash__seg {
-				width: calc((var(--splash-row-target-1) - (3 - 1) * var(--splash-layer-gap)) / 3);
-				background: linear-gradient(135deg, #c5192d, #d4303f);
-				animation-delay: 0s;
+				width: calc((var(--splash-row-width) - 2 * var(--splash-gap)) / 3);
+				background: var(--splash-color-infra);
+				animation-delay: var(--splash-layer-1-delay);
 			}
 
 			/* Layer 2 – Platform: 5 segments */
 			.splash__layer--2 .splash__seg {
-				width: calc((var(--splash-row-target-2) - (5 - 1) * var(--splash-layer-gap)) / 5);
-				background: linear-gradient(135deg, #1a56a0, #2068bf);
-				animation-delay: 1.2s;
+				width: calc((var(--splash-row-width) - 4 * var(--splash-gap)) / 5);
+				background: var(--splash-color-platform);
+				animation-delay: var(--splash-layer-2-delay);
 			}
 
 			/* Layer 3 – Building Blocks: 7 segments */
 			.splash__layer--3 .splash__seg {
-				width: calc((var(--splash-row-target-3) - (7 - 1) * var(--splash-layer-gap)) / 7);
-				background: linear-gradient(135deg, #00883d, #00a34a);
-				animation-delay: 2.4s;
+				width: calc((var(--splash-row-width) - 6 * var(--splash-gap)) / 7);
+				background: var(--splash-color-blocks);
+				animation-delay: var(--splash-layer-3-delay);
 			}
 
 			/* Layer 4 – Applications: 9 segments */
 			.splash__layer--4 .splash__seg {
-				width: calc((var(--splash-row-target-4) - (9 - 1) * var(--splash-layer-gap)) / 9);
-				background: linear-gradient(135deg, #f39c12, #f5b041);
-				animation-delay: 3.4s;
+				width: calc((var(--splash-row-width) - 8 * var(--splash-gap)) / 9);
+				background: var(--splash-color-apps);
+				animation-delay: var(--splash-layer-4-delay);
 			}
 
+			/* ── Keyframes ── */
 			@keyframes splashSegRise {
 				0% {
 					opacity: 0;
@@ -168,16 +207,6 @@
 				100% {
 					opacity: 1;
 					transform: translateY(0) scale(1);
-				}
-			}
-			@keyframes splashLabelFade {
-				from {
-					opacity: 0;
-					transform: translateY(6px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
 				}
 			}
 			@keyframes splashLabelPulse {
@@ -198,7 +227,6 @@
 					transform: translateY(-4px);
 				}
 			}
-
 			@keyframes splashSovDrop {
 				0% {
 					opacity: 0;
@@ -213,6 +241,16 @@
 					transform: translateY(0);
 				}
 			}
+			@keyframes splashLabelFade {
+				from {
+					opacity: 0;
+					transform: translateY(6px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
 
 			/* ── Sovereign Standard ── */
 			.splash__sovereign {
@@ -222,29 +260,28 @@
 			.splash__sovereign-segments {
 				display: flex;
 				justify-content: center;
-				gap: var(--splash-layer-gap);
+				gap: var(--splash-gap);
 				position: relative;
 			}
-			.splash__sovereign .splash__skeleton .splash__seg {
-				width: calc((min(330px, 86vw) - (2 - 1) * var(--splash-layer-gap)) / 2);
-				opacity: 0.2;
-				animation: none !important;
-				transform: none !important;
-				background: linear-gradient(135deg, #f5f5f5, #ffffff);
+			.splash__sovereign-segments .splash__seg {
+				position: relative;
+				z-index: 1;
 			}
 			.splash__sovereign .splash__seg {
-				height: 18px;
-				width: calc((min(330px, 86vw) - (2 - 1) * var(--splash-layer-gap)) / 2);
-				border-radius: 6px;
-				opacity: 0;
-				transform: translateY(-24px) scale(0.9);
-				animation: splashSovDrop 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-				background: linear-gradient(135deg, #f5f5f5, #ffffff);
-				animation-delay: 4.8s;
+				width: calc((var(--splash-row-width) - var(--splash-gap)) / 2);
+				background: var(--splash-color-sovereign);
+				animation: splashSovDrop var(--splash-sov-duration) cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+				animation-delay: var(--splash-sovereign-delay);
 				display: flex;
 				align-items: center;
 				justify-content: center;
+			}
+			.splash__sovereign .splash__skeleton .splash__seg {
+				width: calc((var(--splash-row-width) - var(--splash-gap)) / 2);
+				opacity: var(--splash-skeleton-opacity);
+				animation: none !important;
+				transform: none !important;
+				background: var(--splash-color-skeleton);
 			}
 			.splash__seg-label {
 				font-family: 'Fira Sans', system-ui, sans-serif;
@@ -256,6 +293,7 @@
 				white-space: nowrap;
 				user-select: none;
 			}
+
 			/* ── App title ── */
 			.splash__title {
 				display: flex;
@@ -265,7 +303,7 @@
 				opacity: 0;
 				transform: translateY(12px);
 				animation: splashLabelFade 0.8s ease forwards;
-				animation-delay: 8s;
+				animation-delay: var(--splash-title-delay);
 			}
 			.splash__label {
 				font-family: 'Fira Sans', system-ui, sans-serif;
@@ -315,8 +353,8 @@
 				border: 0;
 			}
 		</style>
-		<script type="module" crossorigin src="./assets/index-CkoEaWwn.js"></script>
-		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-S7PHHa2Z.js">
+		<script type="module" crossorigin src="./assets/index-BOf-AgLx.js"></script>
+		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-DFjB4Sw8.js">
 		<link rel="modulepreload" crossorigin href="./assets/component-names-Dy77vq43-y0h3WhLS.js">
 		<link rel="modulepreload" crossorigin href="./assets/i18n-B2d_exHc-B0S3j5ey.js">
 		<link rel="stylesheet" crossorigin href="./assets/index-DImq3I1W.css">
