@@ -2,56 +2,23 @@ name: Deploy PR-Preview to GitHub Pages
 
 on:
   pull_request:
-    branches-ignore: [main, gh-pages]
+    types: [opened, synchronize, reopened]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  pull-requests: write
 
 concurrency:
   group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  cancel-in-progress: false
+
+env:
+  SLUG: pr-${{ github.event.pull_request.number }}
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    outputs:
-      deploy: ${{ steps.check.outputs.deploy }}
-      slug: ${{ steps.check.outputs.slug }}
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Check for .stand file
-        id: check
-        run: |
-          if [ ! -f .stand ]; then
-            echo "No .stand file found — skipping deployment."
-            echo "deploy=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          SLUG="$(cat .stand | tr -d '[:space:]')"
-
-          if [ -z "$SLUG" ]; then
-            echo ".stand file is empty — skipping deployment."
-            echo "deploy=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          # Slug darf nur alphanumerische Zeichen und Bindestriche enthalten
-          if ! echo "$SLUG" | grep -qE '^[a-z0-9][a-z0-9-]*[a-z0-9]$'; then
-            echo "Invalid slug '${SLUG}' in .stand — only lowercase letters, digits and hyphens allowed."
-            exit 1
-          fi
-
-          echo "Deploying as stand: ${SLUG}"
-          echo "deploy=true" >> "$GITHUB_OUTPUT"
-          echo "slug=${SLUG}" >> "$GITHUB_OUTPUT"
-
   build:
-    needs: check
-    if: needs.check.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -71,32 +38,33 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          VITE_BASE_URL: /accessible-d-stack-landscape/${{ needs.check.outputs.slug }}/
+          VITE_BASE_URL: /accessible-d-stack-landscape/${{ env.SLUG }}/
           VITE_COMMIT_SHA: ${{ github.sha }}
-          VITE_ENABLE_PWA: 'true'
+          VITE_ENABLE_PWA: 'false'
 
       - uses: actions/upload-artifact@v7
         with:
-          name: dist-${{ needs.check.outputs.slug }}
+          name: dist-${{ env.SLUG }}
           path: dist/
 
   deploy:
-    needs: [check, build]
-    if: needs.check.outputs.deploy == 'true'
+    needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
+
       - uses: actions/download-artifact@v8
         with:
-          name: dist-${{ needs.check.outputs.slug }}
+          name: dist-${{ env.SLUG }}
           path: dist/
 
-      - name: Publish Ständer to gh-pages subfolder
+      - name: Publish Preview to gh-pages subfolder
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
-          SLUG: ${{ needs.check.outputs.slug }}
+          SLUG: ${{ env.SLUG }}
         run: |
-          set -euo pipefailfals
+          set -euo pipefail
           REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
 
           if git ls-remote --exit-code --heads "${REMOTE_URL}" gh-pages >/dev/null 2>&1; then
@@ -132,3 +100,9 @@ jobs:
           else
             echo "No changes to deploy."
           fi
+
+      - name: Post Preview Comment
+        uses: ./.github/actions/post-preview-comment
+        with:
+          slug: ${{ env.SLUG }}
+          repository-owner: ${{ github.repository_owner }}
