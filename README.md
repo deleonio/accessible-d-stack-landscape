@@ -1,4 +1,4 @@
-# GovStack Landscape
+# Stack Atlas
 
 Interaktive Vergleichsplattform für staatliche Tech-Stacks. Die Anwendung hilft dabei, digitale Architekturen verschiedener Regierungen transparent zu vergleichen, Synergien zu erkennen und technologische Souveränität nachvollziehbar zu bewerten.
 
@@ -142,4 +142,4 @@ public/          # Statische Assets
 
 ## Vision
 
-GovStack Landscape soll sich zu einem offenen Werkzeugkasten für digitale Staatlichkeit entwickeln: vergleichbar, wiederverwendbar, zugänglich und souverän.
+Stack Atlas soll sich zu einem offenen Werkzeugkasten für digitale Staatlichkeit entwickeln: vergleichbar, wiederverwendbar, zugänglich und souverän.
