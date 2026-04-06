@@ -10,7 +10,7 @@ const LOGO_URLS_JSON = join(ROOT, 'src', 'data', 'logo-urls.json');
 const OUTPUT_TS = join(ROOT, 'src', 'data', 'articles.generated.ts');
 
 const CATEGORIES = new Set(['betrieb', 'infrastruktur', 'plattform', 'zugang']);
-const FALLBACK_LOGO = '/assets/broken-logo.svg';
+const FALLBACK_LOGO = 'assets/broken-logo.svg';
 
 function parseCSV(csv) {
 	const [headerLine, ...dataLines] = csv.trim().split('\n');

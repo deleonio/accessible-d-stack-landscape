@@ -32,7 +32,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 								className="card-logo"
 								loading="lazy"
 								onError={(e) => {
-									e.currentTarget.src = '/assets/broken-logo.svg';
+									e.currentTarget.src = 'assets/broken-logo.svg';
 								}}
 							/>
 						)}
@@ -88,7 +88,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 										className="card-logo"
 										loading="lazy"
 										onError={(e) => {
-											e.currentTarget.src = '/assets/broken-logo.svg';
+											e.currentTarget.src = 'assets/broken-logo.svg';
 										}}
 									/>
 								)}
