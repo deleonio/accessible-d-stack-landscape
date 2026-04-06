@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   SLUG: pr-${{ github.event.pull_request.number }}
@@ -79,23 +79,16 @@ jobs:
 
           cd gh-pages
 
-          # Unterordner des Ständers ersetzen
+          # Unterordner des PRs ersetzen
           rm -rf "${SLUG}"
           cp -a ../dist/. "${SLUG}/"
-
-          # Slug im .stands Manifest registrieren
-          touch .stands
-          if ! grep -qx "${SLUG}" .stands; then
-            echo "${SLUG}" >> .stands
-            sort -o .stands .stands
-          fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
-            git commit -m "Deploy Ständer '${SLUG}' (${GITHUB_SHA})"
+            git commit -m "Deploy PR preview '${SLUG}' (${GITHUB_SHA})"
             git push origin gh-pages
           else
             echo "No changes to deploy."

@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [closed]
 
+concurrency:
+  group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -11,7 +15,7 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: Cleanup PR preview from gh-pages
+      - name: Remove PR preview from gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
@@ -22,7 +26,7 @@ jobs:
           SLUG="pr-${PR_NUMBER}"
 
           if ! git ls-remote --exit-code --heads "${REMOTE_URL}" gh-pages >/dev/null 2>&1; then
-            echo "gh-pages branch does not exist, nothing to clean up."
+            echo "Nothing to clean up - gh-pages branch does not exist"
             exit 0
           fi
 
@@ -30,17 +34,11 @@ jobs:
           cd gh-pages
 
           if [ ! -d "${SLUG}" ]; then
-            echo "Preview directory '${SLUG}' not found, nothing to clean up."
+            echo "Nothing to clean up - preview directory not found"
             exit 0
           fi
 
-          echo "Removing preview directory: ${SLUG}"
           rm -rf "${SLUG}"
-
-          # Update .stands manifest
-          if [ -f .stands ]; then
-            grep -v "^${SLUG}$" .stands > .stands.tmp && mv .stands.tmp .stands || true
-          fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -49,7 +47,4 @@ jobs:
             git add -A
             git commit -m "cleanup: remove PR preview '${SLUG}' (PR #${PR_NUMBER} closed)"
             git push origin gh-pages
-            echo "Preview cleanup complete."
-          else
-            echo "No changes to commit."
           fi

@@ -6,11 +6,12 @@ import { VitePWA } from 'vite-plugin-pwa';
 const isPwaEnabled = process.env.VITE_ENABLE_PWA !== 'false';
 
 export default defineConfig({
-	base: process.env.VITE_BASE_URL ?? (process.env.GITHUB_ACTIONS ? '/accessible-d-stack-landscape/' : '/'),
+	base: './',
 	build: {
 		dynamicImportVarsOptions: {
 			exclude: [],
 		},
+		emptyOutDir: true,
 	},
 	plugins: [
 		preact(),
@@ -20,8 +21,8 @@ export default defineConfig({
 				registerType: 'autoUpdate',
 				includeAssets: ['favicon.ico', 'icons/*.png', 'assets/**/*'],
 				manifest: {
-					name: 'D-Stack Landscape',
-					short_name: 'D-Stack',
+					name: 'Landscape',
+					short_name: 'Landscape',
 					description: 'Interaktive Technologie-Landkarte für modernes digitales Ökosystem',
 					theme_color: '#004B76',
 					background_color: '#ffffff',

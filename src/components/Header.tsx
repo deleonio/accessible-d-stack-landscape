@@ -22,7 +22,7 @@ export function Header() {
 
 				<div className="header__brand-bar">
 					<a href={brandUrl} className="brand-logo" rel="noopener noreferrer">
-						<span>D-Stack Landscape</span>
+						<span>Landscape</span>
 						<span className="brand-logo__badge">MVP</span>
 					</a>
 					<nav className="header__nav" aria-label="Hauptnavigation">
