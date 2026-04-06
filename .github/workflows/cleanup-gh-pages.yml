@@ -26,7 +26,8 @@ jobs:
           cd gh-pages
 
           # Alles außer .git löschen
-          find . -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          shopt -s dotglob
+          rm -rf -- !(\.git)
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
