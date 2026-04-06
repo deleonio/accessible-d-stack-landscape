@@ -77,7 +77,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 							{relatedArticles.length > 0 && (
 								<div className="drawer-related">
 									<p className="drawer-related__title">Verwandte Einträge aus dieser Kategorie</p>
-									<ul className="drawer-related__list">
+									<ul className="drawer-related__list" role="list">
 										{relatedArticles.map((relatedArticle) => (
 											<li key={relatedArticle.id} className="drawer-related__item">
 												<button className="drawer-related__link" onClick={() => setSelectedArticle(relatedArticle)}>

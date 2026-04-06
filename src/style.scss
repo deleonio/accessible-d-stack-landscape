@@ -547,7 +547,10 @@ kol-card.article-card,
 		font-size: var(--ds-text-sm);
 		font-family: var(--ds-font-body);
 		cursor: pointer;
-		transition: all 0.18s ease;
+		transition:
+			background 0.18s ease,
+			border-color 0.18s ease,
+			color 0.18s ease;
 		text-align: left;
 
 		&:hover,
