@@ -1,4 +1,4 @@
-name: Cleanup All PR Previews
+name: Cleanup Github Pages
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Deploy Hauptstand (main)
+name: Deploy main-Branch to GitHub Pages
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: gh-pages-deploy
-  cancel-in-progress: false
+  group: gh-pages-main-deploy
+  cancel-in-progress: true
 
 jobs:
   validate-pages-config:
@@ -45,17 +45,17 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
-          cache: pnpm
+          node-version: 25
+          cache: true
 
       - run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build
         env:
+          VITE_BASE_URL: '/accessible-d-stack-landscape/'
           VITE_COMMIT_SHA: ${{ github.sha }}
           VITE_ENABLE_PWA: 'true'
-          VITE_BASE_URL: '/accessible-d-stack-landscape/'
 
       - uses: actions/upload-artifact@v7
         with:

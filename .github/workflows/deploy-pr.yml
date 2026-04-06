@@ -1,13 +1,12 @@
-name: Deploy Ständer
+name: Deploy PR-Preview to GitHub Pages
 
 on:
-  push:
+  pull_request:
     branches-ignore: [main, gh-pages]
-  workflow_dispatch:
 
 concurrency:
-  group: gh-pages-deploy
-  cancel-in-progress: false
+  group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   check:
@@ -79,21 +78,21 @@ jobs:
 
       - uses: pnpm/action-setup@v5
         with:
-          version: latest
+          version: 10
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
-          cache: pnpm
+          node-version: 25
+          cache: true
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm i
 
       - name: Build
         run: pnpm build
         env:
+          VITE_BASE_URL: /accessible-d-stack-landscape/${{ needs.check.outputs.slug }}/
           VITE_COMMIT_SHA: ${{ github.sha }}
           VITE_ENABLE_PWA: 'true'
-          VITE_BASE_URL: /accessible-d-stack-landscape/${{ needs.check.outputs.slug }}/
 
       - uses: actions/upload-artifact@v7
         with:
