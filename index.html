@@ -82,39 +82,33 @@
 				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 			}
 
-			/* Layer 1 – Infrastruktur: 8 segments, small gap */
-			.splash__layer--1 { gap: 5px; }
+			/* Layer 1 – Infrastruktur: 8 segments, widest gaps */
+			.splash__layer--1 { gap: 8px; }
 			.splash__layer--1 .splash__seg {
 				width: min(42px, 9.5vw);
 				background: linear-gradient(135deg, #c5192d, #d4303f);
 			}
 
-			/* Layer 2 – Plattform: 6 segments, slight overlap */
-			.splash__layer--2 { gap: 0px; }
+			/* Layer 2 – Plattform: 6 segments, medium gaps */
+			.splash__layer--2 { gap: 6px; }
 			.splash__layer--2 .splash__seg {
 				width: min(46px, 10vw);
-				margin-left: -4px;
 				background: linear-gradient(135deg, #1a56a0, #2068bf);
 			}
-			.splash__layer--2 .splash__seg:first-child { margin-left: 0; }
 
-			/* Layer 3 – Betrieb: 4 segments, more overlap */
-			.splash__layer--3 { gap: 0px; }
+			/* Layer 3 – Betrieb: 4 segments, small gaps */
+			.splash__layer--3 { gap: 4px; }
 			.splash__layer--3 .splash__seg {
 				width: min(50px, 11vw);
-				margin-left: -10px;
 				background: linear-gradient(135deg, #00883d, #00a34a);
 			}
-			.splash__layer--3 .splash__seg:first-child { margin-left: 0; }
 
-			/* Layer 4 – Zugang: 3 segments, heavy overlap */
-			.splash__layer--4 { gap: 0px; }
+			/* Layer 4 – Zugang: 3 segments, tight gaps */
+			.splash__layer--4 { gap: 3px; }
 			.splash__layer--4 .splash__seg {
 				width: min(48px, 10.5vw);
-				margin-left: -16px;
 				background: linear-gradient(135deg, #f39c12, #f5b041);
 			}
-			.splash__layer--4 .splash__seg:first-child { margin-left: 0; }
 
 			/* Staggered segment delays per layer */
 			/* Layer 1 – starts at 0s, segments stagger 0.07s */
