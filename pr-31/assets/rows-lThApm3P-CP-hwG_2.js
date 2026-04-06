@@ -1,0 +1,1 @@
+import{ct as e}from"./index-G8af0_gG-Bpzp9C48.js";var t=(t,n)=>{e(t,`_rows`,n,{min:1})};export{t};
