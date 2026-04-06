@@ -1,0 +1,1 @@
+import{ut as e}from"./index-G8af0_gG-Cs8-E9yo.js";var t=[`horizontal`,`vertical`],n=(n,r,i=`horizontal`)=>{e(n,`_orientation`,e=>typeof e==`string`&&t.includes(e),new Set([`KoliBriOrientation {${t.join(`, `)}`]),r,{defaultValue:i})};export{n as t};
