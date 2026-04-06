@@ -83,13 +83,6 @@ jobs:
           rm -rf "${SLUG}"
           cp -a ../dist/. "${SLUG}/"
 
-          # Slug im .stands Manifest registrieren
-          touch .stands
-          if ! grep -qx "${SLUG}" .stands; then
-            echo "${SLUG}" >> .stands
-            sort -o .stands .stands
-          fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
