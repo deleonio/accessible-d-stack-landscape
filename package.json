@@ -15,7 +15,7 @@
 		"postinstall:generate": "pnpm run prebuild",
 		"postinstall:components": "cpy \"node_modules/@public-ui/components/assets/**/*\" public/assets --dot",
 		"postinstall:theme-default": "cpy \"node_modules/@public-ui/theme-default/assets/**/*\" public/assets --dot",
-		"prebuild": "node scripts/generate-articles.mjs",
+		"prebuild": "node scripts/generate-articles.mjs && node scripts/generate-icons.mjs",
 		"preview": "vite preview",
 		"start": "pnpm run dev",
 		"test:e2e": "playwright test",
