@@ -1,4 +1,5 @@
-import { KolButton } from '@public-ui/preact';
+import { KolButton, KolPagination } from '@public-ui/preact';
+import { useState } from 'preact/hooks';
 import { Article, Category, FilterState } from '../types';
 import { ArticleCard } from './ArticleCard';
 
@@ -10,8 +11,21 @@ interface CategoryGridProps {
 	totalCount: number;
 }
 
+const ITEMS_PER_PAGE = 12;
+
 export function CategoryGrid({ categories, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
+	const [currentPage, setCurrentPage] = useState(1);
 	const activeCount = articles.length;
+	const totalPages = Math.ceil(activeCount / ITEMS_PER_PAGE);
+	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+	const endIdx = startIdx + ITEMS_PER_PAGE;
+	const paginatedArticles = articles.slice(startIdx, endIdx);
+
+	// Reset to page 1 when filters change
+	const handleFilterChange = (newFilters: FilterState) => {
+		onFilterChange(newFilters);
+		setCurrentPage(1);
+	};
 
 	return (
 		<main id="main-content" className="category-container">
@@ -22,7 +36,7 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 					_label="Alle"
 					_variant={filters.selectedCategory === null ? 'primary' : 'secondary'}
 					_on={{
-						onClick: () => onFilterChange({ ...filters, selectedCategory: null }),
+						onClick: () => handleFilterChange({ ...filters, selectedCategory: null }),
 					}}
 				/>
 
@@ -33,7 +47,7 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 						_variant={filters.selectedCategory === cat.id ? 'primary' : 'secondary'}
 						_on={{
 							onClick: () =>
-								onFilterChange({
+								handleFilterChange({
 									...filters,
 									selectedCategory: filters.selectedCategory === cat.id ? null : cat.id,
 								}),
@@ -41,7 +55,6 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 					/>
 				))}
 			</div>
-
 			<p className="results-info" aria-live="polite" aria-atomic="true">
 				{filters.searchQuery || filters.selectedCategory ? (
 					<>
@@ -72,11 +85,22 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 					</div>
 				</div>
 			) : (
-				<div className="articles-grid">
-					{articles.map((article) => (
-						<ArticleCard key={article.id} article={article} />
-					))}
-				</div>
+				<>
+					<div className="articles-grid">
+						{paginatedArticles.map((article) => (
+							<ArticleCard key={article.id} article={article} />
+						))}
+					</div>
+					{totalPages > 1 && (
+						<KolPagination
+							_currentPage={currentPage}
+							_totalPages={totalPages}
+							_on={{
+								onChange: (nextPage: number) => setCurrentPage(nextPage),
+							}}
+						/>
+					)}
+				</>
 			)}
 		</main>
 	);

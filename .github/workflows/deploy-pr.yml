@@ -38,7 +38,6 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          VITE_BASE_URL: /accessible-d-stack-landscape/${{ env.SLUG }}/
           VITE_COMMIT_SHA: ${{ github.sha }}
           VITE_ENABLE_PWA: 'false'
 
