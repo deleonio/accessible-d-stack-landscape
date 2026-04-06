@@ -3,25 +3,26 @@ import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { ARTICLES, CATEGORIES } from '../data/articles';
 import { Article } from '../types';
+import { getLocalizedText } from '../utils';
 
 interface ArticleCardProps {
 	article: Article;
 }
 
 export function ArticleCard({ article }: ArticleCardProps) {
-	const { t } = useTranslation();
+	const { i18n, t } = useTranslation();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [selectedArticle, setSelectedArticle] = useState(article);
 	const category = CATEGORIES.find((c) => c.id === selectedArticle.category);
 	const categoryColor = category?.color ?? '#003d82';
-	const categoryName = category?.name ?? 'Allgemein';
+	const categoryName = getLocalizedText(category?.name ?? { de: 'Allgemein', en: 'General', fr: 'Général' }, i18n.language);
 	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id).sort((a, b) =>
-		a.name.localeCompare(b.name, 'de'),
+		getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language),
 	);
 
 	return (
 		<div className="article-card-wrapper">
-			<KolCard _label={article.name} className="article-card">
+			<KolCard _label={getLocalizedText(article.name, i18n.language)} className="article-card">
 				<div className="card-content">
 					<div className="card-header">
 						{article.logo && (
@@ -43,7 +44,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 							aria-label={t('article.categoryAria', { category: categoryName })}
 						/>
 					</div>
-					<p className="card-description">{article.description}</p>
+					<p className="card-description">{getLocalizedText(article.description, i18n.language)}</p>
 					<div className="card-tags">
 						{article.tags.slice(0, 4).map((tag) => (
 							<KolBadge key={tag} _label={tag} _color="#e8eaed" className="tag-badge" />
@@ -68,7 +69,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			)}
 
 			<KolDrawer
-				_label={t('article.detailsFor', { name: selectedArticle.name })}
+				_label={t('article.detailsFor', { name: getLocalizedText(selectedArticle.name, i18n.language) })}
 				_align="right"
 				_hasCloser
 				_open={isDrawerOpen}
@@ -77,7 +78,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 				}}
 			>
 				<div className="drawer-content">
-					<KolCard _label={selectedArticle.name} className="drawer-card">
+					<KolCard _label={getLocalizedText(selectedArticle.name, i18n.language)} className="drawer-card">
 						<div className="drawer-details">
 							<div className="drawer-headline">
 								{selectedArticle.logo && (
@@ -97,7 +98,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 									{selectedArticle.featured && <KolBadge _label={t('article.featured')} _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />}
 								</div>
 							</div>
-							<p className="drawer-description">{selectedArticle.description}</p>
+							<p className="drawer-description">{getLocalizedText(selectedArticle.description, i18n.language)}</p>
 							<div className="drawer-tags">
 								{selectedArticle.tags.map((tag) => (
 									<KolBadge key={`${selectedArticle.id}-${tag}`} _label={tag} _color="#e8eaed" className="tag-badge" />
@@ -110,7 +111,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 										{relatedArticles.map((relatedArticle) => (
 											<li key={relatedArticle.id} className="drawer-related__item">
 												<button className="drawer-related__link" onClick={() => setSelectedArticle(relatedArticle)}>
-													<span className="drawer-related__link-text">{relatedArticle.name}</span>
+													<span className="drawer-related__link-text">{getLocalizedText(relatedArticle.name, i18n.language)}</span>
 													<span className="drawer-related__link-icon" aria-hidden="true">
 														›
 													</span>

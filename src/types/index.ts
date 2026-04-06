@@ -1,8 +1,18 @@
+export type LanguageCode = 'de' | 'en' | 'fr';
+
+export type LocalizedText = {
+	de: string;
+	en: string;
+	fr: string;
+};
+
+export type LocalizableText = string | LocalizedText;
+
 export type Article = {
 	id: string;
-	name: string;
+	name: LocalizableText;
 	category: string;
-	description: string;
+	description: LocalizableText;
 	logo?: string;
 	tags: string[];
 	featured: boolean;
@@ -10,7 +20,7 @@ export type Article = {
 
 export type Category = {
 	id: string;
-	name: string;
+	name: LocalizableText;
 	color: string;
 };
 
