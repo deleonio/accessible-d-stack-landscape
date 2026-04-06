@@ -94,6 +94,9 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 					</div>
 					{activeCount > ITEMS_PER_PAGE && (
 						<KolPagination
+							style={{
+								background: 'transparent',
+							}}
 							_page={currentPage}
 							_max={activeCount}
 							_pageSize={ITEMS_PER_PAGE}

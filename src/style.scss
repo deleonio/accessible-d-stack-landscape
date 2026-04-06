@@ -408,10 +408,12 @@ body {
 	// Mobile first: single column
 	grid-template-columns: 1fr;
 	gap: var(--ds-space-3);
+	margin-bottom: var(--ds-space-8);
 
 	@media (width >= 480px) {
 		grid-template-columns: repeat(2, 1fr);
 		gap: var(--ds-space-4);
+		margin-bottom: var(--ds-space-10);
 	}
 
 	@media (width >= 768px) {
