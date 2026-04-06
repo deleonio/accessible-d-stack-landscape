@@ -35,87 +35,71 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: 2rem;
+				gap: 1.8rem;
 			}
 
-			/* ── Pyramid stack ── */
+			/* ── Fixed label display ── */
+			.splash__labels {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 0.25rem;
+				min-height: 5.5rem;
+			}
+			.splash__fixed-label {
+				font-family: 'Fira Sans', system-ui, sans-serif;
+				font-size: clamp(0.72rem, 2vw, 0.88rem);
+				font-weight: 600;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				opacity: 0;
+				transform: translateY(6px);
+				animation: splashLabelFade 0.6s ease forwards;
+			}
+			.splash__fixed-label--1 { animation-delay: 1.2s; color: #f4a0a8; }
+			.splash__fixed-label--2 { animation-delay: 3.0s; color: #8bb8e8; }
+			.splash__fixed-label--3 { animation-delay: 4.8s; color: #7fd4a0; }
+			.splash__fixed-label--4 { animation-delay: 6.2s; color: #fad78c; }
+
+			/* ── Pyramid bars ── */
 			.splash__pyramid {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: 0;
-			}
-			/* Each row: label above + colored bar */
-			.splash__row {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-			.splash__row-label {
-				font-family: 'Fira Sans', system-ui, sans-serif;
-				font-size: clamp(0.65rem, 1.8vw, 0.8rem);
-				font-weight: 600;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-				color: rgba(255, 255, 255, 0);
-				margin-bottom: 4px;
-				animation: splashLabelFade 0.5s ease forwards;
+				gap: 6px;
 			}
 			.splash__bar {
 				border-radius: 6px;
 				opacity: 0;
 				transform: translateY(50px) scaleX(0.7);
-				animation: splashBarRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+				animation: splashBarRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 				box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+				height: 18px;
 			}
 
-			/* Pyramid: bottom = widest, top = narrowest */
 			/* Layer 1 – Infrastruktur (base, widest) */
-			.splash__row--1 .splash__bar {
+			.splash__bar--1 {
 				width: min(380px, 82vw);
-				height: 18px;
 				background: linear-gradient(90deg, #c5192d, #d4303f);
 				animation-delay: 0s;
 			}
-			.splash__row--1 .splash__row-label {
-				animation-delay: 0.5s;
-				color: #f4a0a8;
-			}
-
 			/* Layer 2 – Plattform */
-			.splash__row--2 .splash__bar {
+			.splash__bar--2 {
 				width: min(300px, 65vw);
-				height: 18px;
 				background: linear-gradient(90deg, #1a56a0, #2068bf);
-				animation-delay: 0.6s;
-			}
-			.splash__row--2 .splash__row-label {
-				animation-delay: 1.1s;
-				color: #8bb8e8;
-			}
-
-			/* Layer 3 – Betrieb */
-			.splash__row--3 .splash__bar {
-				width: min(220px, 48vw);
-				height: 18px;
-				background: linear-gradient(90deg, #00883d, #00a34a);
-				animation-delay: 1.2s;
-			}
-			.splash__row--3 .splash__row-label {
-				animation-delay: 1.7s;
-				color: #7fd4a0;
-			}
-
-			/* Layer 4 – Zugang (top, narrowest) */
-			.splash__row--4 .splash__bar {
-				width: min(140px, 32vw);
-				height: 18px;
-				background: linear-gradient(90deg, #f39c12, #f5b041);
 				animation-delay: 1.8s;
 			}
-			.splash__row--4 .splash__row-label {
-				animation-delay: 2.3s;
-				color: #fad78c;
+			/* Layer 3 – Betrieb */
+			.splash__bar--3 {
+				width: min(220px, 48vw);
+				background: linear-gradient(90deg, #00883d, #00a34a);
+				animation-delay: 3.6s;
+			}
+			/* Layer 4 – Zugang (top, narrowest) */
+			.splash__bar--4 {
+				width: min(140px, 32vw);
+				background: linear-gradient(90deg, #f39c12, #f5b041);
+				animation-delay: 5.2s;
 			}
 
 			@keyframes splashBarRise {
@@ -147,10 +131,9 @@
 			.splash__sovereign {
 				opacity: 0;
 				transform: translateY(8px);
-				animation: splashLabelFade 0.7s ease forwards;
-				animation-delay: 2.8s;
+				animation: splashLabelFade 0.8s ease forwards;
+				animation-delay: 7.0s;
 				text-align: center;
-				margin-bottom: 1.2rem;
 			}
 			.splash__sovereign-text {
 				font-family: 'Fira Sans', system-ui, sans-serif;
@@ -172,8 +155,8 @@
 				gap: 0.3rem;
 				opacity: 0;
 				transform: translateY(12px);
-				animation: splashLabelFade 0.7s ease forwards;
-				animation-delay: 3.3s;
+				animation: splashLabelFade 0.8s ease forwards;
+				animation-delay: 8.0s;
 			}
 			.splash__label {
 				font-family: 'Fira Sans', system-ui, sans-serif;
@@ -194,14 +177,14 @@
 			/* ── Accessibility: reduced motion ── */
 			@media (prefers-reduced-motion: reduce) {
 				.splash__bar,
-				.splash__row-label,
+				.splash__fixed-label,
 				.splash__sovereign,
 				.splash__title {
 					animation: none;
 					opacity: 1;
 					transform: none;
 				}
-				.splash__row-label {
+				.splash__fixed-label {
 					color: rgba(255, 255, 255, 0.7);
 				}
 				.splash {
@@ -222,8 +205,8 @@
 				border: 0;
 			}
 		</style>
-		<script type="module" crossorigin src="./assets/index-CaPYkvE_.js"></script>
-		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-IwOeqeEj.js">
+		<script type="module" crossorigin src="./assets/index-QaQsca5F.js"></script>
+		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-D2MUUBCA.js">
 		<link rel="modulepreload" crossorigin href="./assets/component-names-Dy77vq43-y0h3WhLS.js">
 		<link rel="modulepreload" crossorigin href="./assets/i18n-B2d_exHc-B0S3j5ey.js">
 		<link rel="stylesheet" crossorigin href="./assets/index-BMxuPKvQ.css">
@@ -231,29 +214,26 @@
 	<body>
 		<div id="splash" class="splash" role="status" aria-label="Anwendung wird geladen">
 			<div class="splash__content">
+				<!-- Fixed label area: labels fade in here and stay -->
+				<div class="splash__labels" aria-hidden="true">
+					<span class="splash__fixed-label splash__fixed-label--1">Infrastruktur</span>
+					<span class="splash__fixed-label splash__fixed-label--2">Plattform</span>
+					<span class="splash__fixed-label splash__fixed-label--3">Betrieb</span>
+					<span class="splash__fixed-label splash__fixed-label--4">Zugang</span>
+				</div>
+
 				<div class="splash__pyramid" aria-hidden="true">
 					<!-- Sovereign Standard – crown above pyramid -->
 					<div class="splash__sovereign">
 						<span class="splash__sovereign-text">Sovereign Standard</span>
 					</div>
-					<!-- Top → Bottom: narrowest to widest (visual order) -->
-					<div class="splash__row splash__row--4">
-						<span class="splash__row-label">Zugang</span>
-						<div class="splash__bar"></div>
-					</div>
-					<div class="splash__row splash__row--3">
-						<span class="splash__row-label">Betrieb</span>
-						<div class="splash__bar"></div>
-					</div>
-					<div class="splash__row splash__row--2">
-						<span class="splash__row-label">Plattform</span>
-						<div class="splash__bar"></div>
-					</div>
-					<div class="splash__row splash__row--1">
-						<span class="splash__row-label">Infrastruktur</span>
-						<div class="splash__bar"></div>
-					</div>
+					<!-- Top → Bottom: narrowest to widest (pyramid) -->
+					<div class="splash__bar splash__bar--4"></div>
+					<div class="splash__bar splash__bar--3"></div>
+					<div class="splash__bar splash__bar--2"></div>
+					<div class="splash__bar splash__bar--1"></div>
 				</div>
+
 				<div class="splash__title" aria-hidden="true">
 					<span class="splash__label">Public Digital Infrastructure</span>
 					<span class="splash__heading">StackAtlas</span>
