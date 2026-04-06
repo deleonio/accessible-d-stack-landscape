@@ -2,7 +2,9 @@
 
 ## Overview
 
-StackAtlas uses a unified visual design system built on three core layers that represent the digital sovereignty landscape. These layers are consistently applied across the favicon, splash animation, and UI components.
+StackAtlas uses a unified visual design system built on three core layers that represent the digital sovereignty landscape.
+
+**Important:** The brand identity uses a **simplified 3-layer pyramid** (Building Blocks, Applications, Sovereign), which is consistent across the favicon and brand guidelines. However, the **splash animation currently implements a 5-layer model** (Infrastructure, Platform, Building Blocks, Applications, Sovereign) to represent the extended digital landscape. Future iterations may align both to the simpler 3-layer model for consistency.
 
 ## The Three-Layer Pyramid
 
@@ -70,36 +72,52 @@ The splash animation appears on app load and builds the three-layer pyramid in s
 
 ### Timeline
 
+The splash animation currently implements a **5-layer sequence** (note: this differs from the simplified 3-layer favicon branding and represents an extended digital landscape model):
+
 ```
-Layer 3 (Building Blocks) [Green – 7 segments]:     0.0s start
-Label "Building Blocks" fades in:                    0.0s–1.4s
+Layer 1 (Infrastructure) [Red – 3 segments]:         0.0s start
+Label "Infrastructure" fades in:                     0.0s–1.4s
            ↓
-Layer 4 (Applications) [Orange – 9 segments]:       1.2s start
-Label "Applications" fades in:                       1.2s–2.6s
+Layer 2 (Platform) [Blue – 5 segments]:              1.2s start
+Label "Platform" fades in:                           1.2s–2.6s
            ↓
-Sovereign [White – 2 segments]:                     2.4s start
-Label "Sovereign Standards" fades in:              2.4s–3.8s
+Layer 3 (Building Blocks) [Green – 7 segments]:      2.4s start
+Label "Building Blocks" fades in:                    2.4s–3.8s
            ↓
-Title "StackAtlas" appears & animation exits:      3.8s start
+Layer 4 (Applications) [Orange – 9 segments]:        3.4s start
+Label "Applications" fades in:                       3.4s–4.8s
+           ↓
+Sovereign Standards [White – 2 segments]:            4.8s start
+Label "Sovereign Standards" fades in:                4.8s–6.2s
+           ↓
+Title "StackAtlas" appears & animation exits:       6.5s start
 ```
+
+**Note:** Future branding simplification may align the splash animation with the 3-layer pyramid model used in the favicon. Currently, the splash represents a more detailed digital landscape breakdown.
 
 ### CSS Custom Properties
 
-Located in `.splash` root styles in `index.html`:
+Located in `.splash` class root styles in `index.html` `<style>` tag:
 
 ```css
 /* Timing – layer stagger & durations */
---splash-layer-3-delay: 0s; /* Building Blocks */
---splash-layer-4-delay: 1.2s; /* Applications */
---splash-sovereign-delay: 2.4s; /* Sovereign */
+--splash-layer-1-delay: 0s; /* Infrastructure */
+--splash-layer-2-delay: 1.2s; /* Platform */
+--splash-layer-3-delay: 2.4s; /* Building Blocks */
+--splash-layer-4-delay: 3.4s; /* Applications */
+--splash-sovereign-delay: 4.8s; /* Sovereign Standards */
 --splash-seg-duration: 0.7s; /* Individual segment rise time */
---splash-title-delay: 3.8s; /* Final title & exit */
---splash-exit-duration: 0.6s; /* Fade out on app loaded */
+--splash-sov-duration: 1.5s; /* Sovereign segment drop time */
+--splash-label-duration: 1.4s; /* Label fade in/out duration */
+--splash-title-delay: 6.5s; /* Final title appearance */
+--splash-exit-duration: 0.6s; /* Fade out when app loads */
 
-/* Colors */
---splash-color-blocks: linear-gradient(135deg, #00883d, #00a34a);
---splash-color-apps: linear-gradient(135deg, #f39c12, #f5b041);
---splash-color-sovereign: linear-gradient(135deg, #f5f5f5, #ffffff);
+/* Colors – layer gradients */
+--splash-color-infra: linear-gradient(135deg, #c5192d, #d4303f); /* Infrastructure (Red) */
+--splash-color-platform: linear-gradient(135deg, #1a56a0, #2068bf); /* Platform (Blue) */
+--splash-color-blocks: linear-gradient(135deg, #00883d, #00a34a); /* Building Blocks (Green) */
+--splash-color-apps: linear-gradient(135deg, #f39c12, #f5b041); /* Applications (Orange) */
+--splash-color-sovereign: linear-gradient(135deg, #f5f5f5, #ffffff); /* Sovereign Standards (White) */
 ```
 
 ### Customization
@@ -114,21 +132,24 @@ To adjust:
 
 ### In `index.html`
 
-1. **Favicon link** (line ~13):
+1. **Favicon link** (in `<head>`):
 
    ```html
    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
    ```
 
-2. **Splash styles** (lines ~20–260):
-   - `.splash` class with design token definitions
+2. **Splash styles** (in embedded `<style>` tag):
+   - `.splash` CSS class with design token definitions (`--splash-color-*`, `--splash-layer-*-delay` variables)
    - Keyframe animations: `splashSegRise`, `splashLabelPulse`, `splashSovDrop`, `splashLabelFade`
-   - Layer-specific styling: `.splash__layer--3`, `.splash__layer--4`
+   - 5 layer-specific selector blocks: `.splash__layer--1` through `.splash__layer--4` plus `.splash__sovereign`
+   - Each layer defines segment counts and animation delays
 
-3. **Splash HTML** (lines ~360–410):
-   - `.splash__pyramid`: Container for 3-layer pyramid
-   - `.splash__labels`: Label display area for layer names
-   - `.splash__sovereign`: Special Sovereign Standard segment renderer
+3. **Splash HTML** (in body):
+   - `.splash__pyramid`: Container for all animation layers
+   - `.splash__labels`: Area where layer labels fade in/out sequentially
+   - `.splash__fixed-label`: Individual label elements (5 total: Infrastructure, Platform, Building Blocks, Applications, Sovereign Standards)
+   - `.splash__layer--N`: Containers for segment rows (Layers 1–4)
+   - `.splash__sovereign`: Special container for Sovereign Standards segments with custom animation
 
 ### In `public/favicon.svg`
 
@@ -148,11 +169,11 @@ To adjust:
 
 ### Don'ts ❌
 
-- Don't use only Infrastructure (red) or Platform (blue) layers
-- Don't invert the layer order (Sovereign must be on top)
-- Don't use flag-like horizontal arrangements
-- Don't remove the background blue
-- Don't apply drop shadows or 3D effects (keep flat design)
+- **Branding simplification goal:** The favicon uses a 3-layer model (Building Blocks, Applications, Sovereign), while the splash animation currently uses 5 layers (Infrastructure, Platform, Building Blocks, Applications, Sovereign). When simplifying, avoid removing the core digital sovereignty narrative.
+- Don't invert the layer order (Sovereign must remain at the top/end)
+- Don't use flag-like horizontal arrangements (vertical/stacked pyramid is distinctive)
+- Don't remove the background blue gradient (`--splash-bg`)
+- Don't apply drop shadows or 3D effects beyond the existing `box-shadow` (keep flat design aesthetic)
 
 ## Related Files
 
