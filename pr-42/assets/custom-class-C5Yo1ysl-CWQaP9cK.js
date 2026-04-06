@@ -1,0 +1,1 @@
+import{lt as e}from"./index-G8af0_gG-C4GtGH1Z.js";var t=(t,n)=>{e(t,`_customClass`,n,{defaultValue:``})};export{t};
