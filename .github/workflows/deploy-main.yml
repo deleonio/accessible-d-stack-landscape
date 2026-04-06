@@ -75,6 +75,7 @@ jobs:
           # Alles löschen und mit neuem dist/ ersetzen
           rm -rf ./* ./.github ./.gitignore ./.nojekyll
           cp -a ../dist/. ./
+          touch .nojekyll
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

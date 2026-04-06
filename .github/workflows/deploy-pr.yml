@@ -81,6 +81,7 @@ jobs:
           # Unterordner des PRs ersetzen
           rm -rf "${SLUG}"
           cp -a ../dist/. "${SLUG}/"
+          touch .nojekyll
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
