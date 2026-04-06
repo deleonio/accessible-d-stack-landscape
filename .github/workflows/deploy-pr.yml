@@ -3,6 +3,7 @@ name: Deploy PR-Preview to GitHub Pages
 on:
   pull_request:
     branches-ignore: [main, gh-pages]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: read
@@ -74,7 +75,7 @@ jobs:
         env:
           VITE_BASE_URL: /accessible-d-stack-landscape/${{ needs.check.outputs.slug }}/
           VITE_COMMIT_SHA: ${{ github.sha }}
-          VITE_ENABLE_PWA: 'true'
+          VITE_ENABLE_PWA: 'false'
 
       - uses: actions/upload-artifact@v7
         with:
@@ -97,7 +98,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           SLUG: ${{ needs.check.outputs.slug }}
         run: |
-          set -euo pipefailfals
+          set -euo pipefail
           REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
 
           if git ls-remote --exit-code --heads "${REMOTE_URL}" gh-pages >/dev/null 2>&1; then
