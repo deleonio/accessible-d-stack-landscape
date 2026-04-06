@@ -22,7 +22,7 @@
 				display: flex;
 				align-items: flex-start;
 				justify-content: center;
-				padding-top: 38vh;
+				padding-top: 33.33vh;
 				background: linear-gradient(170deg, #002d62 0%, #003d82 40%, #004a9e 100%);
 				overflow: hidden;
 				transition:
@@ -97,6 +97,27 @@
 				display: flex;
 				justify-content: center;
 				gap: var(--splash-layer-gap);
+				position: relative;
+			}
+			.splash__skeleton {
+				position: absolute;
+				display: flex;
+				justify-content: center;
+				gap: var(--splash-layer-gap);
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 0;
+			}
+			.splash__sovereign-segments .splash__seg {
+				position: relative;
+				z-index: 1;
+			}
+			.splash__skeleton .splash__seg {
+				opacity: 0.2;
+				animation: none !important;
+				background: linear-gradient(135deg, #f5f5f5, #ffffff);
+				transform: none !important;
 			}
 			.splash__seg {
 				height: 18px;
@@ -202,6 +223,14 @@
 				display: flex;
 				justify-content: center;
 				gap: var(--splash-layer-gap);
+				position: relative;
+			}
+			.splash__sovereign .splash__skeleton .splash__seg {
+				width: calc((min(330px, 86vw) - (2 - 1) * var(--splash-layer-gap)) / 2);
+				opacity: 0.2;
+				animation: none !important;
+				transform: none !important;
+				background: linear-gradient(135deg, #f5f5f5, #ffffff);
 			}
 			.splash__sovereign .splash__seg {
 				height: 18px;
@@ -286,8 +315,8 @@
 				border: 0;
 			}
 		</style>
-		<script type="module" crossorigin src="./assets/index-q4e0Of0r.js"></script>
-		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-B5JwD9t_.js">
+		<script type="module" crossorigin src="./assets/index-CkoEaWwn.js"></script>
+		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-S7PHHa2Z.js">
 		<link rel="modulepreload" crossorigin href="./assets/component-names-Dy77vq43-y0h3WhLS.js">
 		<link rel="modulepreload" crossorigin href="./assets/i18n-B2d_exHc-B0S3j5ey.js">
 		<link rel="stylesheet" crossorigin href="./assets/index-DImq3I1W.css">
@@ -308,6 +337,10 @@
 					<!-- Sovereign Standard – crown with 2 segments -->
 					<div class="splash__sovereign">
 						<div class="splash__sovereign-segments">
+							<div class="splash__skeleton">
+								<div class="splash__seg"></div>
+								<div class="splash__seg"></div>
+							</div>
 							<div class="splash__seg"></div>
 							<div class="splash__seg"></div>
 						</div>
@@ -315,6 +348,17 @@
 					<!-- Top → Bottom: narrowest to widest (pyramid) -->
 					<!-- Layer 4 – Applications: 9 segments -->
 					<div class="splash__layer splash__layer--4">
+						<div class="splash__skeleton">
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+						</div>
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
@@ -327,6 +371,15 @@
 					</div>
 					<!-- Layer 3 – Building Blocks: 7 segments -->
 					<div class="splash__layer splash__layer--3">
+						<div class="splash__skeleton">
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+						</div>
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
@@ -337,6 +390,13 @@
 					</div>
 					<!-- Layer 2 – Platform: 5 segments -->
 					<div class="splash__layer splash__layer--2">
+						<div class="splash__skeleton">
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+						</div>
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
@@ -345,6 +405,11 @@
 					</div>
 					<!-- Layer 1 – Infrastructure: 3 segments -->
 					<div class="splash__layer splash__layer--1">
+						<div class="splash__skeleton">
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+							<div class="splash__seg"></div>
+						</div>
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
