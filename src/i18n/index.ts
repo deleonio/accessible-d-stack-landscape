@@ -28,9 +28,15 @@ void i18next
 		},
 	})
 	.then(() => {
-		document.documentElement.lang = i18next.resolvedLanguage ?? i18next.language;
+		const lng = i18next.resolvedLanguage ?? i18next.language;
+
+		if (lng) {
+			document.documentElement.lang = lng;
+		}
 	});
 
 i18next.on('languageChanged', (lng: string) => {
-	document.documentElement.lang = lng;
+	if (lng) {
+		document.documentElement.lang = lng;
+	}
 });

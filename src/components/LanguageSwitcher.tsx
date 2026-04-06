@@ -9,7 +9,7 @@ const SUPPORTED_LANGUAGES = [
 export function LanguageSwitcher() {
 	const { i18n, t } = useTranslation();
 
-	const activeLanguage = i18n.resolvedLanguage ?? i18n.language;
+	const activeLanguage = i18n.resolvedLanguage ?? i18n.language ?? '';
 
 	return (
 		<div className="language-switcher" role="group" aria-label={t('header.languageSwitcher.ariaLabel')}>
