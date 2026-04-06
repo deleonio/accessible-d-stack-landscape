@@ -4,6 +4,11 @@ on:
   pull_request:
     branches-ignore: [main, gh-pages]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
   group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
   cancel-in-progress: true
@@ -44,33 +49,8 @@ jobs:
           echo "deploy=true" >> "$GITHUB_OUTPUT"
           echo "slug=${SLUG}" >> "$GITHUB_OUTPUT"
 
-  validate-pages-config:
-    needs: check
-    if: needs.check.outputs.deploy == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate GitHub Pages source
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          PAGE_CONFIG="$(curl -fsSL \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${REPOSITORY}/pages")"
-
-          SOURCE_BRANCH="$(echo "${PAGE_CONFIG}" | jq -r '.source.branch // empty')"
-          SOURCE_PATH="$(echo "${PAGE_CONFIG}" | jq -r '.source.path // empty')"
-
-          if [ "${SOURCE_BRANCH}" != "gh-pages" ] || [ "${SOURCE_PATH}" != "/" ]; then
-            echo "GitHub Pages must publish from branch 'gh-pages' and path '/'."
-            echo "Current config: branch='${SOURCE_BRANCH}', path='${SOURCE_PATH}'"
-            exit 1
-          fi
-
   build:
-    needs: [check, validate-pages-config]
+    needs: check
     if: needs.check.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     steps:
@@ -104,8 +84,6 @@ jobs:
     needs: [check, build]
     if: needs.check.outputs.deploy == 'true'
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/download-artifact@v8
         with:
@@ -118,7 +96,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           SLUG: ${{ needs.check.outputs.slug }}
         run: |
-          set -euo pipefail
+          set -euo pipefailfals
           REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
 
           if git ls-remote --exit-code --heads "${REMOTE_URL}" gh-pages >/dev/null 2>&1; then

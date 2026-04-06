@@ -44,7 +44,7 @@ jobs:
         env:
           VITE_BASE_URL: /accessible-d-stack-landscape/
           VITE_COMMIT_SHA: ${{ github.sha }}
-          VITE_ENABLE_PWA: 'true'
+          VITE_ENABLE_PWA: 'false'
 
       # E2E tests temporarily disabled
       # - name: Get installed Playwright version

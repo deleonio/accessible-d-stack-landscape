@@ -37,7 +37,7 @@ jobs:
         env:
           VITE_BASE_URL: '/accessible-d-stack-landscape/'
           VITE_COMMIT_SHA: ${{ github.sha }}
-          VITE_ENABLE_PWA: 'true'
+          VITE_ENABLE_PWA: 'false'
 
       - uses: actions/upload-pages-artifact@v3
         with:
