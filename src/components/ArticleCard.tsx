@@ -24,7 +24,18 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			<KolCard _label={article.name} className="article-card">
 				<div className="card-content">
 					<div className="card-header">
-						{article.logo && <img src={article.logo} alt="" role="presentation" className="card-logo" loading="lazy" />}
+						{article.logo && (
+							<img
+								src={article.logo}
+								alt=""
+								role="presentation"
+								className="card-logo"
+								loading="lazy"
+								onError={(e) => {
+									e.currentTarget.src = '/assets/broken-logo.svg';
+								}}
+							/>
+						)}
 						<span
 							className="card-category-dot"
 							style={{ background: categoryColor }}
