@@ -9,9 +9,9 @@ import './i18n';
 
 /**
  * Splash minimum display time (ms).
- * Derived from CSS timing: sovereign-delay (4.8s) + sov-duration (1.5s) + 3s hold + 0.7s title fade = ~10s + 1s buffer.
+ * Derived from CSS timing: layer-3 (0s) + layer-4 (1.2s) + sovereign (2.4s) + sov-duration (1.5s) + 1s hold + title fade.
  */
-const SPLASH_MIN_MS = 11000;
+const SPLASH_MIN_MS = 6000;
 const splashStart = performance.now();
 
 function dismissSplash(): void {

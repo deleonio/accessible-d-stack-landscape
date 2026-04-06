@@ -66,5 +66,10 @@
 		"detailsFor": "Details for {{name}}",
 		"categoryLabel": "Category: {{category}}",
 		"relatedTitle": "Related entries from this category"
+	},
+	"pwa": {
+		"updateAvailable": "A new version of StackAtlas is available.",
+		"update": "Update now",
+		"dismiss": "Later"
 	}
 }
