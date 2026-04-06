@@ -1,9 +1,11 @@
 import { register } from '@public-ui/components';
 import { defineCustomElements } from '@public-ui/components/loader';
+import { DEFAULT } from '@public-ui/theme-default';
 import { KERN_V2 } from '@public-ui/theme-kern';
 
 import { render } from 'preact';
 import App from './App';
+import './i18n';
 
 /**
  * Splash minimum display time (ms).
@@ -26,7 +28,10 @@ function dismissSplash(): void {
 	setTimeout(cleanup, 600);
 }
 
-Promise.all([register(KERN_V2, defineCustomElements, { translation: { name: 'de' } }), new Promise<void>((resolve) => setTimeout(resolve, SPLASH_MIN_MS))])
+Promise.all([
+	register([KERN_V2, DEFAULT], defineCustomElements, { translation: { name: 'de' } }),
+	new Promise<void>((resolve) => setTimeout(resolve, SPLASH_MIN_MS)),
+])
 	.then(() => {
 		const htmlElement: HTMLElement | null = document.querySelector<HTMLDivElement>('div#app');
 		if (htmlElement instanceof HTMLElement) {

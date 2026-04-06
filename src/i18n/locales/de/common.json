@@ -1,0 +1,64 @@
+{
+	"header": {
+		"skipToContent": "Direkt zum Inhalt springen",
+		"instanceInfoAria": "Instanz-Informationen",
+		"officialProjectSetup": "Offizielles Projekt-Setup",
+		"mvpLayoutAligned": "Ausgerichtet an den Doku-Vorgaben (MVP Layout)",
+		"commit": "Commit",
+		"mainNavigationAria": "Hauptnavigation",
+		"nav": {
+			"home": "Home",
+			"categories": "Kategorien",
+			"docs": "Docs"
+		},
+		"eyebrow": "Public Digital Infrastructure",
+		"subtitle": "Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung."
+	},
+	"footer": {
+		"subtitle": "Barrierefreie Technologie-Landkarte für öffentliche Plattformen",
+		"navigationAria": "Footer-Navigation",
+		"links": {
+			"github": "GitHub",
+			"documentation": "Dokumentation",
+			"contact": "Kontakt",
+			"community": "Community"
+		},
+		"license": "Lizenz: EUPL-1.2",
+		"builtWith": "Built with",
+		"and": "and",
+		"buildCommitAria": "Build Commit {{commit}}",
+		"buildCommitLabel": "Build-Commit:"
+	},
+	"search": {
+		"regionAria": "Suche und Filter",
+		"inputLabel": "Suche",
+		"placeholder": "Technologie oder Stichwort suchen …",
+		"categoryLabel": "Kategorie",
+		"allCategories": "Alle Kategorien"
+	},
+	"category": {
+		"toolbarAria": "Kategorien filtern",
+		"label": "Kategorie:",
+		"all": "Alle",
+		"results": {
+			"filteredPrefix": "von",
+			"entries": "Einträgen",
+			"inCategory": "in {{category}}",
+			"forQuery": "für „{{query}}“",
+			"totalTechnologiesAndStandards": "Technologien & Standards"
+		},
+		"paginationLabel": "Navigiere durch die Artikel"
+	},
+	"results": {
+		"noneFound": "Keine Einträge gefunden",
+		"adjustFilters": "Bitte passen Sie Ihre Suche oder den Kategoriefilter an."
+	},
+	"article": {
+		"categoryAria": "Kategorie: {{category}}",
+		"openDetails": "Details öffnen",
+		"featured": "Empfohlen",
+		"detailsFor": "Details zu {{name}}",
+		"categoryLabel": "Kategorie: {{category}}",
+		"relatedTitle": "Verwandte Einträge aus dieser Kategorie"
+	}
+}

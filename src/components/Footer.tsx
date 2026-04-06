@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 export function Footer() {
+	const { t } = useTranslation();
 	const year = new Date().getFullYear();
 	const commitSha = import.meta.env.VITE_COMMIT_SHA;
 	const commitDisplay = commitSha ? commitSha.slice(0, 7) : 'lokal';
@@ -8,18 +11,18 @@ export function Footer() {
 			<div className="footer__inner footer__inner--top">
 				<div className="footer__brand">
 					<p className="footer-title">StackAtlas</p>
-					<p className="footer-sub">Barrierefreie Technologie-Landkarte für öffentliche Plattformen</p>
+					<p className="footer-sub">{t('footer.subtitle')}</p>
 				</div>
-				<nav className="footer__links" aria-label="Footer-Navigation">
+				<nav className="footer__links" aria-label={t('footer.navigationAria')}>
 					<a href="https://github.com/deleonio/accessible-d-stack-landscape" rel="noopener noreferrer">
-						GitHub
+						{t('footer.links.github')}
 					</a>
 					<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
-						Dokumentation
+						{t('footer.links.documentation')}
 					</a>
-					<a href="mailto:opensource@example.org">Kontakt</a>
+					<a href="mailto:opensource@example.org">{t('footer.links.contact')}</a>
 					<a href="https://github.com/deleonio/accessible-d-stack-landscape/discussions" rel="noopener noreferrer">
-						Community
+						{t('footer.links.community')}
 					</a>
 				</nav>
 			</div>
@@ -30,13 +33,13 @@ export function Footer() {
 					<a href="https://www.public-ui.de/" rel="noopener noreferrer">
 						KoliBri
 					</a>
-					, and{' '}
+					, {t('footer.and')}{' '}
 					<a href="https://www.kern-ux.com/" rel="noopener noreferrer">
 						KERN-UX
 					</a>
 				</p>
-				<p className="footer__meta" aria-label={`Build Commit ${commitDisplay}`}>
-					Build-Commit: <code>{commitDisplay}</code>
+				<p className="footer__meta" aria-label={t('footer.buildCommitAria', { commit: commitDisplay })}>
+					{t('footer.buildCommitLabel')} <code>{commitDisplay}</code>
 				</p>
 			</div>
 		</footer>
