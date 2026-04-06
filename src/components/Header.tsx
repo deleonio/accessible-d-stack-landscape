@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Header() {
 	const { t } = useTranslation();
@@ -38,6 +39,7 @@ export function Header() {
 							{t('header.nav.docs')}
 						</a>
 					</nav>
+					<LanguageSwitcher />
 				</div>
 
 				<div className="header__content">

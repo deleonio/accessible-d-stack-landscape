@@ -12,7 +12,13 @@
 			"docs": "Docs"
 		},
 		"eyebrow": "Public Digital Infrastructure",
-		"subtitle": "Interactive overview of technologies, standards and components for digital public administration."
+		"subtitle": "Interactive overview of technologies, standards and components for digital public administration.",
+		"languageSwitcher": {
+			"ariaLabel": "Switch language",
+			"label": "Language",
+			"hint": "Select display language",
+			"accessKey": "l"
+		}
 	},
 	"footer": {
 		"subtitle": "Accessible technology map for public platforms",

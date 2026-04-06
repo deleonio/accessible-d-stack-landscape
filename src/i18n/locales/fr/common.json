@@ -12,7 +12,13 @@
 			"docs": "Docs"
 		},
 		"eyebrow": "Public Digital Infrastructure",
-		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique."
+		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique.",
+		"languageSwitcher": {
+			"ariaLabel": "Changer de langue",
+			"label": "Langue",
+			"hint": "Sélectionner la langue d’affichage",
+			"accessKey": "l"
+		}
 	},
 	"footer": {
 		"subtitle": "Cartographie technologique accessible pour les plateformes publiques",

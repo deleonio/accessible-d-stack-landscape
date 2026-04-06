@@ -1,0 +1,37 @@
+import { KolSelect } from '@public-ui/preact';
+import { useTranslation } from 'react-i18next';
+
+const SUPPORTED_LANGUAGES = [
+	{ code: 'de', label: 'Deutsch' },
+	{ code: 'en', label: 'English' },
+	{ code: 'fr', label: 'Français' },
+] as const;
+
+export function LanguageSwitcher() {
+	const { i18n, t } = useTranslation();
+
+	const activeLanguage = i18n.resolvedLanguage ?? i18n.language ?? '';
+	const languageOptions = SUPPORTED_LANGUAGES.map(({ code, label }) => ({
+		label,
+		value: code,
+	}));
+
+	return (
+		<div className="language-switcher">
+			<KolSelect
+				_label={t('header.languageSwitcher.label')}
+				_hideLabel
+				_accessKey={t('header.languageSwitcher.accessKey')}
+				_options={languageOptions}
+				_value={activeLanguage}
+				_on={{
+					onChange: (_event: globalThis.Event, value: unknown) => {
+						if (typeof value === 'string') {
+							void i18n.changeLanguage(value);
+						}
+					},
+				}}
+			/>
+		</div>
+	);
+}

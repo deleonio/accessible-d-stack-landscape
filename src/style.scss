@@ -249,6 +249,16 @@ body {
 		}
 	}
 
+	.language-switcher {
+		min-width: 10rem;
+
+		kol-select {
+			background: transparent;
+			display: block;
+			min-width: 10rem;
+		}
+	}
+
 	&__content {
 		max-width: 1400px;
 		margin: 0 auto;
@@ -335,7 +345,7 @@ body {
 		}
 	}
 
-	kol-single-select {
+	kol-select {
 		// Mobile: full width, no max-width constraint
 		width: 100%;
 

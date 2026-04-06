@@ -19,9 +19,24 @@ void i18next
 		supportedLngs: ['de', 'en', 'fr'],
 		fallbackLng: 'de',
 		detection: {
+			caches: ['localStorage'],
+			lookupQuerystring: 'lng',
 			order: ['querystring', 'localStorage', 'navigator', 'htmlTag'],
 		},
 		interpolation: {
 			escapeValue: false,
 		},
+	})
+	.then(() => {
+		const lng = i18next.resolvedLanguage ?? i18next.language;
+
+		if (lng) {
+			document.documentElement.lang = lng;
+		}
 	});
+
+i18next.on('languageChanged', (lng: string) => {
+	if (lng) {
+		document.documentElement.lang = lng;
+	}
+});

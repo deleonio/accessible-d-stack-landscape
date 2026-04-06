@@ -12,7 +12,13 @@
 			"docs": "Docs"
 		},
 		"eyebrow": "Public Digital Infrastructure",
-		"subtitle": "Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung."
+		"subtitle": "Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung.",
+		"languageSwitcher": {
+			"ariaLabel": "Sprache wechseln",
+			"label": "Sprache",
+			"hint": "Anzeigesprache auswählen",
+			"accessKey": "l"
+		}
 	},
 	"footer": {
 		"subtitle": "Barrierefreie Technologie-Landkarte für öffentliche Plattformen",
