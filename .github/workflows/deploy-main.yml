@@ -74,7 +74,9 @@ jobs:
 
           # Backup PR directories
           mkdir -p .pr-backup
-          find . -maxdepth 1 -type d -name "pr-*" -exec mv {} .pr-backup/ \; 2>/dev/null || true
+          if [ -d "pr-"* ]; then
+            find . -maxdepth 1 -type d -name "pr-*" -exec mv {} .pr-backup/ \;
+          fi
 
           # Remove everything except PR backup
           rm -rf ./* ./.github ./.gitignore ./.nojekyll 2>/dev/null || true

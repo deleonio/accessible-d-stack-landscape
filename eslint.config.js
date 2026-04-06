@@ -20,6 +20,8 @@ export default [
 				HTMLElement: 'readonly',
 				HTMLDivElement: 'readonly',
 				CustomEvent: 'readonly',
+				performance: 'readonly',
+				setTimeout: 'readonly',
 			},
 		},
 		plugins: {
