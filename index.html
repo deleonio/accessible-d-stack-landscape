@@ -102,28 +102,28 @@
 				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 			}
 
-			/* Layer 1 – Infrastruktur: 3 segments */
+			/* Layer 1 – Infrastructure: 3 segments */
 			.splash__layer--1 .splash__seg {
 				width: calc((var(--splash-row-target-1) - (3 - 1) * var(--splash-layer-gap)) / 3);
 				background: linear-gradient(135deg, #c5192d, #d4303f);
 				animation-delay: 0s;
 			}
 
-			/* Layer 2 – Systemplattform: 5 segments */
+			/* Layer 2 – Platform: 5 segments */
 			.splash__layer--2 .splash__seg {
 				width: calc((var(--splash-row-target-2) - (5 - 1) * var(--splash-layer-gap)) / 5);
 				background: linear-gradient(135deg, #1a56a0, #2068bf);
 				animation-delay: 1.8s;
 			}
 
-			/* Layer 3 – Anwendungs- & Datenebene: 7 segments */
+			/* Layer 3 – Building Blocks: 7 segments */
 			.splash__layer--3 .splash__seg {
 				width: calc((var(--splash-row-target-3) - (7 - 1) * var(--splash-layer-gap)) / 7);
 				background: linear-gradient(135deg, #00883d, #00a34a);
 				animation-delay: 3.6s;
 			}
 
-			/* Layer 4 – Vernetzung & Sicherheit: 9 segments */
+			/* Layer 4 – Applications: 9 segments */
 			.splash__layer--4 .splash__seg {
 				width: calc((var(--splash-row-target-4) - (9 - 1) * var(--splash-layer-gap)) / 9);
 				background: linear-gradient(135deg, #f39c12, #f5b041);
@@ -271,14 +271,14 @@
 		</style>
 	</head>
 	<body>
-		<div id="splash" class="splash" role="status" aria-label="Anwendung wird geladen">
+		<div id="splash" class="splash" role="status" aria-label="Application loading">
 			<div class="splash__content">
 				<!-- Fixed label area: labels fade in here and stay -->
 				<div class="splash__labels" aria-hidden="true">
-					<span class="splash__fixed-label splash__fixed-label--1">Physische Infrastruktur</span>
-					<span class="splash__fixed-label splash__fixed-label--2">Systemplattform</span>
-					<span class="splash__fixed-label splash__fixed-label--3">Anwendungs- & Datenebene</span>
-					<span class="splash__fixed-label splash__fixed-label--4">Vernetzung & Sicherheit</span>
+					<span class="splash__fixed-label splash__fixed-label--1">Infrastructure</span>
+					<span class="splash__fixed-label splash__fixed-label--2">Platform</span>
+					<span class="splash__fixed-label splash__fixed-label--3">Building Blocks</span>
+					<span class="splash__fixed-label splash__fixed-label--4">Applications</span>
 				</div>
 
 				<div class="splash__pyramid" aria-hidden="true">
@@ -288,10 +288,10 @@
 							<div class="splash__seg"></div>
 							<div class="splash__seg"></div>
 						</div>
-						<span class="splash__sovereign-text">Souveräne Standards</span>
+						<span class="splash__sovereign-text">Sovereign Standards</span>
 					</div>
 					<!-- Top → Bottom: narrowest to widest (pyramid) -->
-					<!-- Layer 4 – Vernetzung & Sicherheit: 9 segments -->
+					<!-- Layer 4 – Applications: 9 segments -->
 					<div class="splash__layer splash__layer--4">
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
@@ -303,7 +303,7 @@
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
 					</div>
-					<!-- Layer 3 – Anwendungs- & Datenebene: 7 segments -->
+					<!-- Layer 3 – Building Blocks: 7 segments -->
 					<div class="splash__layer splash__layer--3">
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
@@ -313,7 +313,7 @@
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
 					</div>
-					<!-- Layer 2 – Systemplattform: 5 segments -->
+					<!-- Layer 2 – Platform: 5 segments -->
 					<div class="splash__layer splash__layer--2">
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
@@ -321,7 +321,7 @@
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
 					</div>
-					<!-- Layer 1 – Physische Infrastruktur: 3 segments -->
+					<!-- Layer 1 – Infrastructure: 3 segments -->
 					<div class="splash__layer splash__layer--1">
 						<div class="splash__seg"></div>
 						<div class="splash__seg"></div>
@@ -334,7 +334,7 @@
 					<span class="splash__heading">StackAtlas</span>
 				</div>
 			</div>
-			<span class="splash-sr-only" aria-live="polite" id="splash-status">Anwendung wird geladen</span>
+			<span class="splash-sr-only" aria-live="polite" id="splash-status">Application loading</span>
 		</div>
 		<div id="app"></div>
 		<script type="module" src="/src/main.ts"></script>
