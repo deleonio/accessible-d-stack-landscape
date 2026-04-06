@@ -7,7 +7,7 @@ export function Footer() {
 		<footer className="footer">
 			<div className="footer__inner footer__inner--top">
 				<div className="footer__brand">
-					<p className="footer-title">D-Stack Landscape</p>
+					<p className="footer-title">Landscape</p>
 					<p className="footer-sub">Barrierefreie Technologie-Landkarte für öffentliche Plattformen</p>
 				</div>
 				<nav className="footer__links" aria-label="Footer-Navigation">
@@ -26,7 +26,7 @@ export function Footer() {
 
 			<div className="footer__inner footer__inner--bottom">
 				<p className="footer__copy">
-					© {year} D-Stack Landscape · Lizenz: EUPL-1.2 · Built with{' '}
+					© {year} Landscape · Lizenz: EUPL-1.2 · Built with{' '}
 					<a href="https://preactjs.com/" rel="noopener noreferrer">
 						Preact
 					</a>{' '}

@@ -1,4 +1,4 @@
-# D-Stack Landscape
+# Landscape
 
 Interaktive Technologie-Übersicht für ein modernes, barrierefreies Digital-Ökosystem.
 
@@ -8,16 +8,17 @@ Interaktive Technologie-Übersicht für ein modernes, barrierefreies Digital-Ök
 
 ## Über das Projekt
 
-Die D-Stack Landscape visualisiert Technologien, Komponenten und Protokolle, die in einer modularen Plattformarchitektur eingesetzt oder evaluiert werden. Technologien sind in vier Kategorien unterteilt:
+Die Landscape visualisiert Technologien, Komponenten und Protokolle, die in einer modularen Plattformarchitektur eingesetzt oder evaluiert werden. Technologien sind in vier Kategorien unterteilt:
 
-| Kategorie | Farbe | Beschreibung |
-|---|---|---|
-| **Betrieb** | Grün | Operativer Betrieb und Sicherheit |
-| **Infrastruktur** | Rot | Technische Infrastruktur |
-| **Plattform** | Blau | Plattformen und Protokolle |
-| **Zugang** | Orange | Nutzer-Zugang und Endgeräte |
+| Kategorie         | Farbe  | Beschreibung                      |
+| ----------------- | ------ | --------------------------------- |
+| **Betrieb**       | Grün   | Operativer Betrieb und Sicherheit |
+| **Infrastruktur** | Rot    | Technische Infrastruktur          |
+| **Plattform**     | Blau   | Plattformen und Protokolle        |
+| **Zugang**        | Orange | Nutzer-Zugang und Endgeräte       |
 
 Die Anwendung ist **barrierefrei** entwickelt:
+
 - Barrierefreie UI-Komponenten via [KoliBri](https://public-ui.github.io/) (accessible component system)
 - Automatisierte Accessibility-Tests mit [axe-core](https://github.com/dequelabs/axe-core) (WCAG 2.1 AA)
 - ESLint-Plugin `jsx-a11y` für statische Barrierefreiheitsprüfung
@@ -26,18 +27,18 @@ Die Anwendung ist **barrierefrei** entwickelt:
 
 ## Tech Stack
 
-| Bereich | Technologie |
-|---|---|
-| UI-Framework | [Preact](https://preactjs.com/) 10 |
-| Sprache | TypeScript |
-| Build-Tool | [Vite](https://vite.dev/) |
-| Styling | [UnoCSS](https://unocss.dev/), SCSS |
-| Komponenten | [KoliBri](https://public-ui.github.io/) (KERN V2) |
-| Formulare | React Hook Form + Zod |
-| PWA | vite-plugin-pwa, Workbox |
-| Mobile | [Capacitor](https://capacitorjs.com/) (Android/iOS) |
-| Tests | [Playwright](https://playwright.dev/), axe-core |
-| Linting | ESLint, stylelint, Prettier, Knip |
+| Bereich      | Technologie                                         |
+| ------------ | --------------------------------------------------- |
+| UI-Framework | [Preact](https://preactjs.com/) 10                  |
+| Sprache      | TypeScript                                          |
+| Build-Tool   | [Vite](https://vite.dev/)                           |
+| Styling      | [UnoCSS](https://unocss.dev/), SCSS                 |
+| Komponenten  | [KoliBri](https://public-ui.github.io/) (KERN V2)   |
+| Formulare    | React Hook Form + Zod                               |
+| PWA          | vite-plugin-pwa, Workbox                            |
+| Mobile       | [Capacitor](https://capacitorjs.com/) (Android/iOS) |
+| Tests        | [Playwright](https://playwright.dev/), axe-core     |
+| Linting      | ESLint, stylelint, Prettier, Knip                   |
 
 ---
 
@@ -45,11 +46,11 @@ Die Anwendung ist **barrierefrei** entwickelt:
 
 Die Anwendung wird automatisch auf **GitHub Pages** deployed.
 
-| Ereignis | Deployment |
-|---|---|
+| Ereignis        | Deployment                                                             |
+| --------------- | ---------------------------------------------------------------------- |
 | Push auf `main` | Produktion: `https://deleonio.github.io/accessible-d-stack-landscape/` |
-| Pull Request | PR-Preview: `.../pr-preview/pr-{nr}/` |
-| PR geschlossen | Preview wird automatisch bereinigt |
+| Pull Request    | PR-Preview: `.../pr-preview/pr-{nr}/`                                  |
+| PR geschlossen  | Preview wird automatisch bereinigt                                     |
 
 Der Deployment-Workflow befindet sich in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
@@ -119,22 +120,22 @@ pnpm preview
 
 ## Verfügbare Scripts
 
-| Script | Beschreibung |
-|---|---|
-| `pnpm start` | Entwicklungsserver starten |
-| `pnpm build` | Produktions-Build erstellen |
-| `pnpm preview` | Build-Vorschau starten |
-| `pnpm lint` | TypeScript-Typen prüfen |
-| `pnpm eslint` | ESLint-Analyse ausführen |
-| `pnpm stylelint` | CSS/SCSS-Linting ausführen |
-| `pnpm format` | Prettier-Formatierung prüfen |
+| Script                   | Beschreibung                                                       |
+| ------------------------ | ------------------------------------------------------------------ |
+| `pnpm start`             | Entwicklungsserver starten                                         |
+| `pnpm build`             | Produktions-Build erstellen                                        |
+| `pnpm preview`           | Build-Vorschau starten                                             |
+| `pnpm lint`              | TypeScript-Typen prüfen                                            |
+| `pnpm eslint`            | ESLint-Analyse ausführen                                           |
+| `pnpm stylelint`         | CSS/SCSS-Linting ausführen                                         |
+| `pnpm format`            | Prettier-Formatierung prüfen                                       |
 | `pnpm generate:articles` | `src/data/articles.generated.ts` aus `data/items.csv` neu erzeugen |
-| `pnpm check-unused` | Ungenutzte Abhängigkeiten prüfen (Knip) |
-| `pnpm check-updates` | Verfügbare Paket-Updates anzeigen |
-| `pnpm update` | Alle Pakete aktualisieren |
-| `pnpm test:e2e` | E2E-Tests mit Playwright ausführen |
-| `pnpm test:e2e:ui` | E2E-Tests mit Playwright-UI ausführen |
-| `pnpm mobile:build` | Build + Capacitor-Sync für Mobile |
+| `pnpm check-unused`      | Ungenutzte Abhängigkeiten prüfen (Knip)                            |
+| `pnpm check-updates`     | Verfügbare Paket-Updates anzeigen                                  |
+| `pnpm update`            | Alle Pakete aktualisieren                                          |
+| `pnpm test:e2e`          | E2E-Tests mit Playwright ausführen                                 |
+| `pnpm test:e2e:ui`       | E2E-Tests mit Playwright-UI ausführen                              |
+| `pnpm mobile:build`      | Build + Capacitor-Sync für Mobile                                  |
 
 ---
 

@@ -20,8 +20,8 @@ export default defineConfig({
 				registerType: 'autoUpdate',
 				includeAssets: ['favicon.ico', 'icons/*.png', 'assets/**/*'],
 				manifest: {
-					name: 'D-Stack Landscape',
-					short_name: 'D-Stack',
+					name: 'Landscape',
+					short_name: 'Landscape',
 					description: 'Interaktive Technologie-Landkarte für modernes digitales Ökosystem',
 					theme_color: '#004B76',
 					background_color: '#ffffff',
