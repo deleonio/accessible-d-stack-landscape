@@ -404,16 +404,18 @@ body {
 // ─── Articles grid ────────────────────────────────────────────────────────────
 .articles-grid {
 	display: grid;
+	list-style: none;
+	margin: 0 0 var(--ds-space-12) 0;
+	padding: 0;
 
 	// Mobile first: single column
 	grid-template-columns: 1fr;
 	gap: var(--ds-space-3);
-	margin-bottom: var(--ds-space-8);
 
 	@media (width >= 480px) {
 		grid-template-columns: repeat(2, 1fr);
 		gap: var(--ds-space-4);
-		margin-bottom: var(--ds-space-10);
+		margin-bottom: var(--ds-space-14);
 	}
 
 	@media (width >= 768px) {
@@ -427,6 +429,12 @@ body {
 	@media (width >= 1440px) {
 		grid-template-columns: repeat(5, 1fr);
 	}
+}
+
+// ─── Pagination ────────────────────────────────────────────────────────────────
+kol-pagination {
+	display: block;
+	margin-top: var(--ds-space-8);
 }
 
 // ─── Article card ─────────────────────────────────────────────────────────────
