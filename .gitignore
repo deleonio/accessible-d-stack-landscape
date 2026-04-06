@@ -1,9 +1,3 @@
-# Next
-.next
-
-# GraphQL
-src/__generated__
-
 # IDE's
 .idea
 .project
@@ -17,9 +11,8 @@ npm-debug.log
 
 
 # Build and test tools
-*.zip
-assets/*
-dist/*
+assets/
+dist/
 
 # Playwright
 playwright-report/
@@ -43,14 +36,3 @@ Thumbs.db
 *~
 *.log
 *.tgz
-
-assets/codicons/
-assets/fontawesome-free/
-assets/icofont/
-assets/kreon/
-assets/material-icons/
-assets/material-symbols/
-assets/noto-sans/
-assets/roboto/
-assets/tabler-icons/
-assets/kolibri.ico

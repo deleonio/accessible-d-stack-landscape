@@ -1,37 +1,30 @@
 name: CI
 
 on:
-  push:
-    branches: ['**']
   pull_request:
-    branches: ['**']
+  push:
 
 jobs:
-  build-and-test:
-    name: Build & Playwright Tests
-    if: github.event_name != 'push' || github.ref == 'refs/heads/main'
+  ci:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v5
+      - uses: pnpm/action-setup@v5
         with:
-          version: latest
+          version: 10
+          cache: true
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 25
           cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - run: pnpm i
 
-      - name: Type check (tsc)
+      - name: Type check
         run: pnpm lint
 
       - name: ESLint
@@ -43,16 +36,11 @@ jobs:
       - name: Prettier
         run: pnpm format
 
-      - name: Knip (unused exports/deps)
+      - name: Knip
         run: pnpm check-unused
 
       - name: Build
         run: pnpm build
-        env:
-          VITE_COMMIT_SHA: >-
-            ${{ github.event_name == 'pull_request'
-              && github.event.pull_request.head.sha
-              || github.sha }}
 
       # E2E tests temporarily disabled
       # - name: Get installed Playwright version
