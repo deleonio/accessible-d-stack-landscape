@@ -16,7 +16,6 @@ const ITEMS_PER_PAGE = 12;
 export function CategoryGrid({ categories, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
 	const [currentPage, setCurrentPage] = useState(1);
 	const activeCount = articles.length;
-	const totalPages = Math.ceil(activeCount / ITEMS_PER_PAGE);
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
 	const endIdx = startIdx + ITEMS_PER_PAGE;
 	const paginatedArticles = articles.slice(startIdx, endIdx);
@@ -91,12 +90,14 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 							<ArticleCard key={article.id} article={article} />
 						))}
 					</div>
-					{totalPages > 1 && (
+					{activeCount > ITEMS_PER_PAGE && (
 						<KolPagination
-							_currentPage={currentPage}
-							_totalPages={totalPages}
+							_page={currentPage}
+							_max={activeCount}
+							_pageSize={ITEMS_PER_PAGE}
+							_label="Navigiere durch die Artikel"
 							_on={{
-								onChange: (nextPage: number) => setCurrentPage(nextPage),
+								onChangePage: (_event: Event, page: number) => setCurrentPage(page),
 							}}
 						/>
 					)}
