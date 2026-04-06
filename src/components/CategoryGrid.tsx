@@ -97,7 +97,7 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 							_pageSize={ITEMS_PER_PAGE}
 							_label="Navigiere durch die Artikel"
 							_on={{
-								onChangePage: (_event: Event, page: number) => setCurrentPage(page),
+								onChangePage: (_event, page: number) => setCurrentPage(page),
 							}}
 						/>
 					)}
