@@ -24,7 +24,9 @@
 				justify-content: center;
 				background: linear-gradient(170deg, #002d62 0%, #003d82 40%, #004a9e 100%);
 				overflow: hidden;
-				transition: opacity 0.6s ease, transform 0.6s ease;
+				transition:
+					opacity 0.6s ease,
+					transform 0.6s ease;
 			}
 			.splash--exiting {
 				opacity: 0;
@@ -57,10 +59,22 @@
 				opacity: 0;
 				animation: splashLabelPulse 1.4s ease forwards;
 			}
-			.splash__fixed-label--1 { animation-delay: 0.6s;  color: #f4a0a8; }
-			.splash__fixed-label--2 { animation-delay: 2.4s; color: #8bb8e8; }
-			.splash__fixed-label--3 { animation-delay: 4.2s; color: #7fd4a0; }
-			.splash__fixed-label--4 { animation-delay: 5.8s; color: #fad78c; }
+			.splash__fixed-label--1 {
+				animation-delay: 0.6s;
+				color: #f4a0a8;
+			}
+			.splash__fixed-label--2 {
+				animation-delay: 2.4s;
+				color: #8bb8e8;
+			}
+			.splash__fixed-label--3 {
+				animation-delay: 4.2s;
+				color: #7fd4a0;
+			}
+			.splash__fixed-label--4 {
+				animation-delay: 5.8s;
+				color: #fad78c;
+			}
 
 			/* ── Pyramid layers with segments ── */
 			.splash__pyramid {
@@ -88,23 +102,23 @@
 				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 			}
 
-			/* Layer 1 – Infrastruktur: 8 segments (widest) */
+			/* Layer 1 – Infrastruktur: 9 segments (widest) */
 			.splash__layer--1 .splash__seg {
-				width: calc((var(--splash-row-target-1) - (8 - 1) * var(--splash-layer-gap)) / 8);
+				width: calc((var(--splash-row-target-1) - (9 - 1) * var(--splash-layer-gap)) / 9);
 				background: linear-gradient(135deg, #c5192d, #d4303f);
 				animation-delay: 0s;
 			}
 
-			/* Layer 2 – Plattform: 6 segments */
+			/* Layer 2 – Plattform: 7 segments */
 			.splash__layer--2 .splash__seg {
-				width: calc((var(--splash-row-target-2) - (6 - 1) * var(--splash-layer-gap)) / 6);
+				width: calc((var(--splash-row-target-2) - (7 - 1) * var(--splash-layer-gap)) / 7);
 				background: linear-gradient(135deg, #1a56a0, #2068bf);
 				animation-delay: 1.8s;
 			}
 
-			/* Layer 3 – Betrieb: 4 segments */
+			/* Layer 3 – Betrieb: 5 segments */
 			.splash__layer--3 .splash__seg {
-				width: calc((var(--splash-row-target-3) - (4 - 1) * var(--splash-layer-gap)) / 4);
+				width: calc((var(--splash-row-target-3) - (5 - 1) * var(--splash-layer-gap)) / 5);
 				background: linear-gradient(135deg, #00883d, #00a34a);
 				animation-delay: 3.6s;
 			}
@@ -161,11 +175,10 @@
 
 			/* ── Sovereign Standard crown ── */
 			.splash__sovereign {
-				width: var(--splash-row-target-4);
 				opacity: 0;
 				transform: translateY(8px);
 				animation: splashLabelFade 0.8s ease forwards;
-				animation-delay: 7.0s;
+				animation-delay: 7s;
 				text-align: center;
 			}
 			.splash__sovereign-text {
@@ -178,6 +191,7 @@
 				border: 1px solid rgba(255, 255, 255, 0.25);
 				padding: 0.3em 1em;
 				border-radius: 4px;
+				white-space: nowrap;
 			}
 
 			/* ── App title ── */
@@ -189,7 +203,7 @@
 				opacity: 0;
 				transform: translateY(12px);
 				animation: splashLabelFade 0.8s ease forwards;
-				animation-delay: 8.0s;
+				animation-delay: 8s;
 			}
 			.splash__label {
 				font-family: 'Fira Sans', system-ui, sans-serif;
@@ -258,19 +272,39 @@
 					<!-- Top → Bottom: narrowest to widest (pyramid) -->
 					<!-- Layer 4 – Zugang: 3 segments, heavy overlap -->
 					<div class="splash__layer splash__layer--4">
-						<div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
 					</div>
-					<!-- Layer 3 – Betrieb: 4 segments, more overlap -->
-					<div class="splash__layer splash__layer--3">
-						<div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div>
+				<!-- Layer 3 – Betrieb: 5 segments, more overlap -->
+				<div class="splash__layer splash__layer--3">
+					<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
 					</div>
-					<!-- Layer 2 – Plattform: 6 segments, slight overlap -->
-					<div class="splash__layer splash__layer--2">
-						<div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div>
+				<!-- Layer 2 – Plattform: 7 segments, slight overlap -->
+				<div class="splash__layer splash__layer--2">
+					<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
 					</div>
-					<!-- Layer 1 – Infrastruktur: 8 segments, small gap -->
-					<div class="splash__layer splash__layer--1">
-						<div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div><div class="splash__seg"></div>
+				<!-- Layer 1 – Infrastruktur: 9 segments, small gap -->
+				<div class="splash__layer splash__layer--1">
+					<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
+						<div class="splash__seg"></div>
 					</div>
 				</div>
 
