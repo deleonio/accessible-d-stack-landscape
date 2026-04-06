@@ -87,13 +87,11 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 				</div>
 			) : (
 				<>
-					<ul className="articles-grid">
+					<div className="articles-grid">
 						{paginatedArticles.map((article) => (
-							<li key={article.id} className="articles-grid__item">
-								<ArticleCard article={article} />
-							</li>
+							<ArticleCard key={article.id} article={article} />
 						))}
-					</ul>
+					</div>
 					{activeCount > ITEMS_PER_PAGE && (
 						<KolPagination
 							_page={currentPage}

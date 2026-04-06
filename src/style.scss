@@ -434,14 +434,6 @@ body {
 	@media (width >= 1440px) {
 		grid-template-columns: repeat(5, 1fr);
 	}
-
-	list-style: none;
-	padding: 0;
-	margin: 0;
-
-	&__item {
-		min-width: 0;
-	}
 }
 
 .articles-grid + kol-pagination {
