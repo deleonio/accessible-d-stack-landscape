@@ -12,6 +12,7 @@
 		"lint": "tsc --noemit",
 		"stylelint": "stylelint \"src/**/*.scss\"",
 		"postinstall": "npm-run-all2 postinstall:*",
+		"postinstall:generate": "pnpm run prebuild",
 		"postinstall:components": "cpy \"node_modules/@public-ui/components/assets/**/*\" public/assets --dot",
 		"postinstall:theme-default": "cpy \"node_modules/@public-ui/theme-default/assets/**/*\" public/assets --dot",
 		"prebuild": "node scripts/generate-articles.mjs",
