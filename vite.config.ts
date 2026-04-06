@@ -11,6 +11,7 @@ export default defineConfig({
 		dynamicImportVarsOptions: {
 			exclude: [],
 		},
+		emptyOutDir: true,
 	},
 	plugins: [
 		preact(),

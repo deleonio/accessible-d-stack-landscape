@@ -11,8 +11,8 @@ npm-debug.log
 
 
 # Build and test tools
-assets/
 dist/
+public/assets/
 
 # Playwright
 playwright-report/
