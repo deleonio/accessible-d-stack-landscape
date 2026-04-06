@@ -436,9 +436,10 @@ body {
 	}
 }
 
-.articles-grid + kol-pagination {
+// ─── Pagination ────────────────────────────────────────────────────────────────
+kol-pagination {
 	display: block;
-	margin-top: var(--ds-space-6);
+	margin-top: var(--ds-space-8);
 }
 
 // ─── Article card ─────────────────────────────────────────────────────────────
