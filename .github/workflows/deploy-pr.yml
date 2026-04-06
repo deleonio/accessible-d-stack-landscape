@@ -2,7 +2,6 @@ name: Deploy PR-Preview to GitHub Pages
 
 on:
   pull_request:
-    branches-ignore: [main, gh-pages]
     types: [opened, synchronize, reopened]
 
 permissions:
@@ -13,7 +12,7 @@ permissions:
 
 concurrency:
   group: gh-pages-pr-deploy-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   check:
