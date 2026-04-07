@@ -9,7 +9,9 @@
 		"nav": {
 			"home": "Accueil",
 			"categories": "Catégories",
-			"docs": "Docs"
+			"docs": "Docs",
+			"imprint": "Mentions légales",
+			"settings": "Paramètres"
 		},
 		"eyebrow": "Public Digital Infrastructure",
 		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique.",
@@ -27,7 +29,9 @@
 			"github": "GitHub",
 			"documentation": "Documentation",
 			"contact": "Contact",
-			"community": "Communauté"
+			"community": "Communauté",
+			"imprint": "Mentions légales",
+			"settings": "Paramètres"
 		},
 		"license": "Licence : EUPL-1.2",
 		"builtWith": "Built with",
@@ -115,6 +119,16 @@
 			"contributor": "Contributeur",
 			"funder": "Financeur",
 			"consumer": "Utilisateur"
+		}
+	},
+	"pages": {
+		"imprint": {
+			"description": "Cette page contient les informations légales et l’éditeur de StackAtlas.",
+			"title": "Mentions légales"
+		},
+		"settings": {
+			"description": "Gérez ici les paramètres et préférences de l’application StackAtlas.",
+			"title": "Paramètres"
 		}
 	}
 }

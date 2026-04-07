@@ -30,14 +30,17 @@ jobs:
 
       - run: pnpm i
 
-      - name: Type check
-        run: pnpm lint
+      - name: TypeScript
+        run: pnpm lint:ts
 
       - name: ESLint
-        run: pnpm eslint
+        run: pnpm lint:eslint
 
       - name: Stylelint
-        run: pnpm stylelint
+        run: pnpm lint:stylelint
+
+      - name: Knip
+        run: pnpm lint:knip
 
       - name: Prettier
         run: pnpm format

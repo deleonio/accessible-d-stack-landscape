@@ -9,7 +9,9 @@
 		"nav": {
 			"home": "Home",
 			"categories": "Kategorien",
-			"docs": "Docs"
+			"docs": "Docs",
+			"imprint": "Impressum",
+			"settings": "Einstellungen"
 		},
 		"eyebrow": "Public Digital Infrastructure",
 		"subtitle": "Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung.",
@@ -27,7 +29,9 @@
 			"github": "GitHub",
 			"documentation": "Dokumentation",
 			"contact": "Kontakt",
-			"community": "Community"
+			"community": "Community",
+			"imprint": "Impressum",
+			"settings": "Einstellungen"
 		},
 		"license": "Lizenz: EUPL-1.2",
 		"builtWith": "Built with",
@@ -115,6 +119,16 @@
 			"contributor": "Contributor",
 			"funder": "Förderer",
 			"consumer": "Nutzer"
+		}
+	},
+	"pages": {
+		"imprint": {
+			"description": "Diese Seite enthält rechtliche Hinweise und Anbieterinformationen für StackAtlas.",
+			"title": "Impressum"
+		},
+		"settings": {
+			"description": "Verwalte hier anwendungsbezogene Einstellungen und Präferenzen für StackAtlas.",
+			"title": "Einstellungen"
 		}
 	}
 }

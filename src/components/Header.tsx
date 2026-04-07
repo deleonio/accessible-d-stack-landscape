@@ -37,8 +37,9 @@ export function Header() {
 					</a>
 					<div className="header__controls">
 						<nav className="header__nav" aria-label={t('header.mainNavigationAria')}>
-							<a href={baseUrl}>{t('header.nav.home')}</a>
-							<a href="#main-content">{t('header.nav.categories')}</a>
+							<a href="/">{t('header.nav.home')}</a>
+							<a href="/settings">{t('header.nav.settings')}</a>
+							<a href="/imprint">{t('header.nav.imprint')}</a>
 							<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
 								{t('header.nav.docs')}
 							</a>

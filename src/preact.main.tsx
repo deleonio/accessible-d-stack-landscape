@@ -34,6 +34,15 @@ function dismissSplash(): void {
 }
 
 let renderApp: (() => void) | null = null;
+const splash = document.getElementById('splash');
+
+if (splash instanceof HTMLElement) {
+	splash.style.cursor = 'pointer';
+	splash.addEventListener('click', () => {
+		dismissSplash();
+		renderApp?.();
+	});
+}
 
 document.addEventListener('keydown', (e: globalThis.KeyboardEvent) => {
 	if (e.key === 'Escape') {

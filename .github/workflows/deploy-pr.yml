@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - uses: pnpm/action-setup@v5
         with:
@@ -36,7 +38,7 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          VITE_COMMIT_SHA: ${{ github.sha }}
+          VITE_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           VITE_ENABLE_PWA: 'false'
 
       - uses: actions/upload-artifact@v7
@@ -60,6 +62,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
           SLUG: ${{ env.SLUG }}
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           set -euo pipefail
           REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
@@ -86,7 +89,7 @@ jobs:
 
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
-            git commit -m "Deploy PR preview '${SLUG}' (${GITHUB_SHA})"
+            git commit -m "Deploy PR preview '${SLUG}' (${SOURCE_SHA})"
             git push origin gh-pages
           else
             echo "No changes to deploy."

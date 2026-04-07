@@ -9,7 +9,9 @@
 		"nav": {
 			"home": "Home",
 			"categories": "Categories",
-			"docs": "Docs"
+			"docs": "Docs",
+			"imprint": "Imprint",
+			"settings": "Settings"
 		},
 		"eyebrow": "Public Digital Infrastructure",
 		"subtitle": "Interactive overview of technologies, standards and components for digital public administration.",
@@ -27,7 +29,9 @@
 			"github": "GitHub",
 			"documentation": "Documentation",
 			"contact": "Contact",
-			"community": "Community"
+			"community": "Community",
+			"imprint": "Imprint",
+			"settings": "Settings"
 		},
 		"license": "License: EUPL-1.2",
 		"builtWith": "Built with",
@@ -115,6 +119,16 @@
 			"contributor": "Contributor",
 			"funder": "Funder",
 			"consumer": "Consumer"
+		}
+	},
+	"pages": {
+		"imprint": {
+			"description": "This page provides legal notices and provider information for StackAtlas.",
+			"title": "Imprint"
+		},
+		"settings": {
+			"description": "Manage application settings and preferences for StackAtlas here.",
+			"title": "Settings"
 		}
 	}
 }
