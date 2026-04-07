@@ -1,4 +1,4 @@
-import { KolButton } from '@public-ui/preact';
+import { KolSingleSelect } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
 import { Stack } from '../types';
 import { getLocalizedText } from '../utils';
@@ -15,17 +15,22 @@ export function StackSelector({ stacks, activeStackId, onStackChange }: StackSel
 	if (stacks.length === 0) return null;
 
 	return (
-		<div className="stack-selector" role="group" aria-label={t('stack.selectorAria')}>
-			<span className="stack-selector__label">{t('stack.label')}</span>
-			<KolButton _label={t('stack.all')} _variant={activeStackId === null ? 'primary' : 'secondary'} _on={{ onClick: () => onStackChange(null) }} />
-			{stacks.map((stack) => (
-				<KolButton
-					key={stack.id}
-					_label={`${getLocalizedText(stack.name, i18n.language)} (${stack.items.length})`}
-					_variant={activeStackId === stack.id ? 'primary' : 'secondary'}
-					_on={{ onClick: () => onStackChange(stack.id) }}
-				/>
-			))}
+		<div className="stack-selector">
+			<KolSingleSelect
+				_label={t('stack.label')}
+				className="sort-select"
+				_options={[
+					{ label: t('stack.all'), value: '' },
+					...stacks.map((stack) => ({
+						label: `${getLocalizedText(stack.name, i18n.language)} (${stack.items.length})`,
+						value: stack.id,
+					})),
+				]}
+				_value={activeStackId ?? ''}
+				_on={{
+					onChange: (_e: globalThis.Event, value: unknown) => onStackChange(value ? (value as string) : null),
+				}}
+			/>
 		</div>
 	);
 }

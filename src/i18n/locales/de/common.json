@@ -65,6 +65,7 @@
 	},
 	"view": {
 		"toolbarAria": "Ansicht und Sortierung",
+		"viewToggle": "Kachel / Liste",
 		"tile": "Kacheln",
 		"list": "Liste",
 		"sort": {

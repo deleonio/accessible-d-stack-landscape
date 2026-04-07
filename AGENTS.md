@@ -73,6 +73,51 @@ pnpm test:e2e:update-snapshots
 - **E2E Tests:** Playwright + axe-core
 - **Linting:** ESLint (with `jsx-a11y`, `react-hooks`), Stylelint, Prettier, Knip
 
+## 🚨 KoliBri First – Non-Negotiable Rule
+
+**ALWAYS use KoliBri components (`@public-ui/preact`) for EVERYTHING that KoliBri provides.**
+Using native HTML elements or custom implementations when a KoliBri equivalent exists is FORBIDDEN.
+
+### Which components are available?
+
+**Use the MCP tool `mcp_kolibri-mcp_search` or `mcp_kolibri-mcp_fetch` BEFORE implementing any UI element** to check if KoliBri has a component for it. Do NOT guess from memory.
+
+Examples of what KoliBri covers (non-exhaustive):
+
+- Buttons → `KolButton`
+- Checkboxes / Switches → `KolInputCheckbox _variant="switch"`
+- Select dropdowns → `KolSingleSelect`
+- Text inputs → `KolInputText`
+- Pagination → `KolPagination`
+- Cards → `KolCard`
+- Drawers / Side panels → `KolDrawer`
+- Images → `KolImage`
+- Badges / Tags → use KoliBri where possible
+- Links → `KolLink`
+- Tabs → `KolTabs`
+- Accordion → `KolAccordion`
+- Alerts / Notifications → `KolAlert`
+- Modals → `KolModal`
+- Progress → `KolProgress`
+- Tooltips → `KolTooltip`
+- Spinners → `KolSpin`
+
+### MCP usage is MANDATORY
+
+Before building any UI component or pattern, run:
+
+```
+mcp_kolibri-mcp_search(query: "<component name or use case>")
+```
+
+If a KoliBri component exists → use it. If uncertain → fetch the docs:
+
+```
+mcp_kolibri-mcp_fetch(url: "https://kolibri.digital/<component>")
+```
+
+Only fall back to custom HTML/CSS if KoliBri provably has no solution.
+
 ## Coding Conventions
 
 - Use ESM imports exclusively (`"type": "module"`).

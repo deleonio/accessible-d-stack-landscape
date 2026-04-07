@@ -1,4 +1,4 @@
-import { KolButton, KolPagination, KolSingleSelect } from '@public-ui/preact';
+import { KolButton, KolInputCheckbox, KolPagination, KolSingleSelect } from '@public-ui/preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { FilterState, Item, Layer, Stack, StackItem } from '../types';
@@ -56,31 +56,16 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 	return (
 		<main id="main-content" className="category-container">
 			{activeStack && stackItemMap && <StackStats stack={activeStack} items={articles} stackItemMap={stackItemMap} />}
-			<div className="category-filters" role="toolbar" aria-label={t('category.toolbarAria')}>
-				<span className="category-filters__label">{t('category.label')}</span>
-
-				<KolButton
-					_label={t('category.all')}
-					_variant={filters.selectedLayer === null ? 'primary' : 'secondary'}
+			<div className="category-filters">
+				<KolSingleSelect
+					_label={t('category.label')}
+					className="sort-select"
+					_options={[{ label: t('category.all'), value: '' }, ...layers.map((cat) => ({ label: getLocalizedText(cat.name, i18n.language), value: cat.id }))]}
+					_value={filters.selectedLayer ?? ''}
 					_on={{
-						onClick: () => handleFilterChange({ ...filters, selectedLayer: null }),
+						onChange: (_e: globalThis.Event, value: unknown) => handleFilterChange({ ...filters, selectedLayer: value ? (value as string) : null }),
 					}}
 				/>
-
-				{layers.map((cat) => (
-					<KolButton
-						key={cat.id}
-						_label={getLocalizedText(cat.name, i18n.language)}
-						_variant={filters.selectedLayer === cat.id ? 'primary' : 'secondary'}
-						_on={{
-							onClick: () =>
-								handleFilterChange({
-									...filters,
-									selectedLayer: filters.selectedLayer === cat.id ? null : cat.id,
-								}),
-						}}
-					/>
-				))}
 			</div>
 			<p className="results-info" aria-live="polite" aria-atomic="true">
 				{filters.searchQuery || filters.selectedLayer ? (
@@ -109,6 +94,8 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 				<div className="view-controls__sort">
 					<KolSingleSelect
 						_label={t('view.sort.label')}
+						_hideLabel
+						className="sort-select"
 						_options={[
 							{ label: t('view.sort.name'), value: 'name' },
 							{ label: t('view.sort.score'), value: 'score' },
@@ -132,10 +119,14 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 						}}
 					/>
 				</div>
-				<div className="view-controls__view">
-					<KolButton _label={t('view.tile')} _variant={viewMode === 'tile' ? 'primary' : 'secondary'} _on={{ onClick: () => setViewMode('tile') }} />
-					<KolButton _label={t('view.list')} _variant={viewMode === 'list' ? 'primary' : 'secondary'} _on={{ onClick: () => setViewMode('list') }} />
-				</div>
+				<KolInputCheckbox
+					_label={t('view.viewToggle')}
+					_variant="switch"
+					_checked={viewMode === 'list'}
+					_on={{
+						onChange: (_e: globalThis.Event, value: unknown) => setViewMode(value ? 'list' : 'tile'),
+					}}
+				/>
 			</div>
 
 			{articles.length === 0 ? (

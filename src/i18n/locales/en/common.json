@@ -65,6 +65,7 @@
 	},
 	"view": {
 		"toolbarAria": "View and sorting",
+		"viewToggle": "Tile / List",
 		"tile": "Tiles",
 		"list": "List",
 		"sort": {

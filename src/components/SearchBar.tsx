@@ -40,7 +40,9 @@ export function SearchBar({ filters, onFilterChange, layers, stacks, activeStack
 					}}
 				/>
 			</div>
-			<StackSelector stacks={stacks} activeStackId={activeStackId} onStackChange={onStackChange} />
+			<div className="search-bar__stack">
+				<StackSelector stacks={stacks} activeStackId={activeStackId} onStackChange={onStackChange} />
+			</div>
 		</section>
 	);
 }
