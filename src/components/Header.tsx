@@ -39,14 +39,6 @@ export function Header() {
 						<span className="brand-logo__badge">MVP</span>
 					</a>
 					<div className="header__controls">
-						<nav className="header__nav" aria-label={t('header.mainNavigationAria')}>
-							<a href="/">{t('header.nav.home')}</a>
-							<a href="/settings">{t('header.nav.settings')}</a>
-							<a href="/imprint">{t('header.nav.imprint')}</a>
-							<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
-								{t('header.nav.docs')}
-							</a>
-						</nav>
 						<KolButton
 							className="lang-drawer-trigger"
 							_label={t('header.languageSwitcher.label')}
