@@ -1,3 +1,4 @@
+import { Link } from 'preact-router/match';
 import { useTranslation } from 'react-i18next';
 
 export function Footer() {
@@ -14,6 +15,8 @@ export function Footer() {
 					<p className="footer-sub">{t('footer.subtitle')}</p>
 				</div>
 				<nav className="footer__links" aria-label={t('footer.navigationAria')}>
+					<Link href="/einstellungen">{t('footer.links.settings')}</Link>
+					<Link href="/impressum">{t('footer.links.imprint')}</Link>
 					<a href="https://github.com/deleonio/accessible-d-stack-landscape" rel="noopener noreferrer">
 						{t('footer.links.github')}
 					</a>

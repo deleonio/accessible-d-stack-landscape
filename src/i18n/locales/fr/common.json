@@ -1,75 +1,88 @@
 {
-	"header": {
-		"skipToContent": "Aller au contenu principal",
-		"instanceInfoAria": "Informations d’instance",
-		"officialProjectSetup": "Configuration officielle du projet",
-		"mvpLayoutAligned": "Aligné sur les exigences de documentation (mise en page MVP)",
-		"commit": "Commit",
-		"mainNavigationAria": "Navigation principale",
-		"nav": {
-			"home": "Accueil",
-			"categories": "Catégories",
-			"docs": "Docs"
-		},
-		"eyebrow": "Public Digital Infrastructure",
-		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique.",
-		"languageSwitcher": {
-			"ariaLabel": "Changer de langue",
-			"label": "Langue",
-			"hint": "Sélectionner la langue d’affichage",
-			"accessKey": "l"
-		}
-	},
-	"footer": {
-		"subtitle": "Cartographie technologique accessible pour les plateformes publiques",
-		"navigationAria": "Navigation du pied de page",
-		"links": {
-			"github": "GitHub",
-			"documentation": "Documentation",
-			"contact": "Contact",
-			"community": "Communauté"
-		},
-		"license": "Licence : EUPL-1.2",
-		"builtWith": "Built with",
-		"and": "and",
-		"buildCommitAria": "Commit de build {{commit}}",
-		"buildCommitLabel": "Commit de build :"
-	},
-	"search": {
-		"regionAria": "Recherche et filtres",
-		"inputLabel": "Recherche",
-		"placeholder": "Rechercher une technologie ou un mot-clé …",
-		"categoryLabel": "Catégorie",
-		"allCategories": "Toutes les catégories"
-	},
-	"category": {
-		"toolbarAria": "Filtrer les catégories",
-		"label": "Catégorie :",
-		"all": "Toutes",
-		"results": {
-			"filteredPrefix": "sur",
-			"entries": "entrées",
-			"inCategory": "dans {{category}}",
-			"forQuery": "pour « {{query}} »",
-			"totalTechnologiesAndStandards": "technologies et standards"
-		},
-		"paginationLabel": "Parcourir les articles"
-	},
-	"results": {
-		"noneFound": "Aucune entrée trouvée",
-		"adjustFilters": "Veuillez ajuster votre recherche ou le filtre de catégorie."
-	},
 	"article": {
 		"categoryAria": "Catégorie : {{category}}",
-		"openDetails": "Ouvrir les détails",
-		"featured": "Recommandé",
-		"detailsFor": "Détails pour {{name}}",
 		"categoryLabel": "Catégorie : {{category}}",
+		"detailsFor": "Détails pour {{name}}",
+		"featured": "Recommandé",
+		"openDetails": "Ouvrir les détails",
 		"relatedTitle": "Entrées liées dans cette catégorie"
 	},
+	"category": {
+		"all": "Toutes",
+		"label": "Catégorie :",
+		"paginationLabel": "Parcourir les articles",
+		"results": {
+			"entries": "entrées",
+			"filteredPrefix": "sur",
+			"forQuery": "pour « {{query}} »",
+			"inCategory": "dans {{category}}",
+			"totalTechnologiesAndStandards": "technologies et standards"
+		},
+		"toolbarAria": "Filtrer les catégories"
+	},
+	"footer": {
+		"and": "and",
+		"buildCommitAria": "Commit de build {{commit}}",
+		"buildCommitLabel": "Commit de build :",
+		"builtWith": "Built with",
+		"license": "Licence : EUPL-1.2",
+		"links": {
+			"community": "Communauté",
+			"contact": "Contact",
+			"documentation": "Documentation",
+			"github": "GitHub",
+			"imprint": "Mentions légales",
+			"settings": "Paramètres"
+		},
+		"navigationAria": "Navigation du pied de page",
+		"subtitle": "Cartographie technologique accessible pour les plateformes publiques"
+	},
+	"header": {
+		"commit": "Commit",
+		"eyebrow": "Public Digital Infrastructure",
+		"instanceInfoAria": "Informations d’instance",
+		"languageSwitcher": {
+			"accessKey": "l",
+			"ariaLabel": "Changer de langue",
+			"hint": "Sélectionner la langue d’affichage",
+			"label": "Langue"
+		},
+		"mainNavigationAria": "Navigation principale",
+		"mvpLayoutAligned": "Aligné sur les exigences de documentation (mise en page MVP)",
+		"nav": {
+			"docs": "Docs",
+			"home": "Accueil",
+			"imprint": "Mentions légales",
+			"settings": "Paramètres"
+		},
+		"officialProjectSetup": "Configuration officielle du projet",
+		"skipToContent": "Aller au contenu principal",
+		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique."
+	},
+	"pages": {
+		"imprint": {
+			"description": "Cette page contient les informations légales et l’éditeur de StackAtlas.",
+			"title": "Mentions légales"
+		},
+		"settings": {
+			"description": "Gérez ici les paramètres et préférences de l’application StackAtlas.",
+			"title": "Paramètres"
+		}
+	},
 	"pwa": {
-		"updateAvailable": "Une nouvelle version de StackAtlas est disponible.",
+		"dismiss": "Plus tard",
 		"update": "Mettre à jour",
-		"dismiss": "Plus tard"
+		"updateAvailable": "Une nouvelle version de StackAtlas est disponible."
+	},
+	"results": {
+		"adjustFilters": "Veuillez ajuster votre recherche ou le filtre de catégorie.",
+		"noneFound": "Aucune entrée trouvée"
+	},
+	"search": {
+		"allCategories": "Toutes les catégories",
+		"categoryLabel": "Catégorie",
+		"inputLabel": "Recherche",
+		"placeholder": "Rechercher une technologie ou un mot-clé …",
+		"regionAria": "Recherche et filtres"
 	}
 }
