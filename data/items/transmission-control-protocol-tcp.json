@@ -1,0 +1,27 @@
+{
+	"id": "transmission-control-protocol-tcp",
+	"name": "Transmission Control Protocol (TCP)",
+	"layer": "infrastructure",
+	"sublayer": "transport",
+	"description": {
+		"de": "TCP ist in Verbindung mit IP Kern für die Funktionsfähigkeit des Internet. Die Datenübertragung erfolgt durch Zerlegung in einzelne Pakete inklusive der Sicherstellung der Übermittlung.",
+		"en": ""
+	},
+	"homepage": "https://datatracker.ietf.org/doc/html/rfc9293",
+	"tags": [
+		"paket",
+		"datenuebertragung",
+		"zustellung",
+		"datenintegritaet"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": false,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	}
+}

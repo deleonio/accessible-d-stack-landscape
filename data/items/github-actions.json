@@ -1,0 +1,32 @@
+{
+	"id": "github-actions",
+	"name": "GitHub Actions",
+	"layer": "building-blocks",
+	"sublayer": "inbetriebnahme",
+	"description": {
+		"de": "GitHub Actions können Entwicklungsprozesse automatisieren und anpassen (CI/CD).",
+		"en": ""
+	},
+	"homepage": "https://github.com/actions",
+	"logo": "https://commons.wikimedia.org/wiki/Special:FilePath/GitHub_Actions_Logo.svg",
+	"tags": [
+		"pipeline",
+		"cd",
+		"bereitstellung",
+		"ci"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": true,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	},
+	"audit": {
+		"lastDate": "2025-11-11",
+		"url": "https://docs.github.com/en/actions"
+	}
+}

@@ -1,0 +1,135 @@
+{
+	"header": {
+		"skipToContent": "Direkt zum Inhalt springen",
+		"instanceInfoAria": "Instanz-Informationen",
+		"officialProjectSetup": "Offizielles Projekt-Setup",
+		"mvpLayoutAligned": "Ausgerichtet an den Doku-Vorgaben (MVP Layout)",
+		"commit": "Commit",
+		"mainNavigationAria": "Hauptnavigation",
+		"nav": {
+			"home": "Home",
+			"categories": "Kategorien",
+			"docs": "Docs",
+			"imprint": "Impressum",
+			"settings": "Einstellungen"
+		},
+		"eyebrow": "Digitale Souveränität messen & vergleichen",
+		"subtitle": "Wie souverän ist dein Tech-Stack? StackAtlas bewertet Technologien und Standards weltweit mit einem transparenten Souveränitäts-Score von 0–100 – und zeigt, welche Abhängigkeiten deine digitale Unabhängigkeit gefährden.",
+		"languageSwitcher": {
+			"ariaLabel": "Sprache wechseln",
+			"label": "Sprache",
+			"hint": "Anzeigesprache auswählen",
+			"accessKey": "l"
+		}
+	},
+	"footer": {
+		"subtitle": "Tech-Stacks weltweit nach digitaler Souveränität bewerten und vergleichen",
+		"navigationAria": "Footer-Navigation",
+		"links": {
+			"github": "GitHub",
+			"documentation": "Dokumentation",
+			"contact": "Kontakt",
+			"community": "Community",
+			"imprint": "Impressum",
+			"settings": "Einstellungen"
+		},
+		"license": "Lizenz: EUPL-1.2",
+		"builtWith": "Built with",
+		"and": "and",
+		"buildCommitAria": "Build Commit {{commit}}",
+		"buildCommitLabel": "Build-Commit:"
+	},
+	"search": {
+		"regionAria": "Suche und Filter",
+		"inputLabel": "Suche",
+		"placeholder": "Technologie, Standard oder Framework suchen …",
+		"categoryLabel": "Schicht",
+		"allCategories": "Alle Schichten"
+	},
+	"category": {
+		"toolbarAria": "Schichten filtern",
+		"label": "Schicht",
+		"all": "Alle",
+		"results": {
+			"filteredPrefix": "von",
+			"entries": "Einträgen",
+			"inCategory": "in {{category}}",
+			"forQuery": "für „{{query}}“",
+			"totalTechnologiesAndStandards": "bewertete Technologien & Standards"
+		},
+		"paginationLabel": "Navigiere durch die Artikel"
+	},
+	"results": {
+		"noneFound": "Keine Einträge gefunden",
+		"adjustFilters": "Bitte passen Sie Ihre Suche oder den Kategoriefilter an."
+	},
+	"view": {
+		"toolbarAria": "Ansicht und Sortierung",
+		"viewToggle": "Kachel / Liste",
+		"tile": "Kacheln",
+		"list": "Liste",
+		"sort": {
+			"label": "Sortieren nach",
+			"name": "Name",
+			"score": "Score",
+			"asc": "↑ Aufsteigend",
+			"desc": "↓ Absteigend"
+		}
+	},
+	"article": {
+		"categoryAria": "Kategorie: {{category}}",
+		"openDetails": "Score & Details →",
+		"featured": "Empfohlen",
+		"detailsFor": "Details zu {{name}}",
+		"categoryLabel": "Kategorie: {{category}}",
+		"relatedTitle": "Weitere Einträge im gleichen Layer & Stack",
+		"relatedTitleLayer": "Alle Einträge im gleichen Layer",
+		"relatedSubtitleLayer": "Kein Stack aktiv – alle {{count}} Einträge im Layer werden angezeigt.",
+		"relatedSubtitleStack": "Gefiltert auf Stack – {{count}} Einträge im gleichen Layer.",
+		"website": "Produktseite ↗",
+		"repository": "Repository ↗",
+		"scoreTitle": "Souveränitäts-Score",
+		"scoreAria": "Souveränitäts-Score: {{score}} von 100",
+		"sovereigntyScore": "Souveränitäts-Score (0–100)",
+		"criteria": {
+			"openSource": "Open Source (öffentlicher Quellcode)",
+			"euHeadquartered": "EU-Hauptsitz oder Registrierung",
+			"hasAudit": "Sicherheitsaudit vorhanden",
+			"permissiveLicense": "Permissive oder Copyleft-Lizenz",
+			"matureProject": "Reifes Projekt (graduiert/stabil)",
+			"largeEcosystem": "Großes Community-Ökosystem"
+		}
+	},
+	"pwa": {
+		"updateAvailable": "Eine neue Version von StackAtlas ist verfügbar.",
+		"update": "Jetzt aktualisieren",
+		"dismiss": "Später"
+	},
+	"stack": {
+		"label": "Stack",
+		"all": "Ohne",
+		"selectorAria": "Stack auswählen",
+		"rationale": "Begründung",
+		"stats": {
+			"version": "v{{version}}",
+			"items": "{{count}} Einträge",
+			"avgScore": "Ø Souveränitätswert"
+		},
+		"roles": {
+			"maintainer": "Maintainer",
+			"contributor": "Contributor",
+			"funder": "Förderer",
+			"consumer": "Nutzer"
+		}
+	},
+	"pages": {
+		"imprint": {
+			"description": "Diese Seite enthält rechtliche Hinweise und Anbieterinformationen für StackAtlas.",
+			"title": "Impressum"
+		},
+		"settings": {
+			"description": "Verwalte hier anwendungsbezogene Einstellungen und Präferenzen für StackAtlas.",
+			"title": "Einstellungen"
+		}
+	}
+}

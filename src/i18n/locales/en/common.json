@@ -1,0 +1,135 @@
+{
+	"header": {
+		"skipToContent": "Skip to main content",
+		"instanceInfoAria": "Instance information",
+		"officialProjectSetup": "Official project setup",
+		"mvpLayoutAligned": "Aligned with documentation requirements (MVP layout)",
+		"commit": "Commit",
+		"mainNavigationAria": "Main navigation",
+		"nav": {
+			"home": "Home",
+			"categories": "Categories",
+			"docs": "Docs",
+			"imprint": "Imprint",
+			"settings": "Settings"
+		},
+		"eyebrow": "Measure & Compare Digital Sovereignty",
+		"subtitle": "How sovereign is your tech stack? StackAtlas scores technologies and standards worldwide with a transparent sovereignty score from 0–100 – and reveals which dependencies threaten your digital independence.",
+		"languageSwitcher": {
+			"ariaLabel": "Switch language",
+			"label": "Language",
+			"hint": "Select display language",
+			"accessKey": "l"
+		}
+	},
+	"footer": {
+		"subtitle": "Rate and compare tech stacks worldwide by digital sovereignty",
+		"navigationAria": "Footer navigation",
+		"links": {
+			"github": "GitHub",
+			"documentation": "Documentation",
+			"contact": "Contact",
+			"community": "Community",
+			"imprint": "Imprint",
+			"settings": "Settings"
+		},
+		"license": "License: EUPL-1.2",
+		"builtWith": "Built with",
+		"and": "and",
+		"buildCommitAria": "Build commit {{commit}}",
+		"buildCommitLabel": "Build commit:"
+	},
+	"search": {
+		"regionAria": "Search and filter",
+		"inputLabel": "Search",
+		"placeholder": "Search technology, standard or framework …",
+		"categoryLabel": "Layer",
+		"allCategories": "All layers"
+	},
+	"category": {
+		"toolbarAria": "Filter layers",
+		"label": "Layer",
+		"all": "All",
+		"results": {
+			"filteredPrefix": "of",
+			"entries": "entries",
+			"inCategory": "in {{category}}",
+			"forQuery": "for “{{query}}”",
+			"totalTechnologiesAndStandards": "rated technologies & standards"
+		},
+		"paginationLabel": "Navigate through the articles"
+	},
+	"results": {
+		"noneFound": "No entries found",
+		"adjustFilters": "Please adjust your search or category filter."
+	},
+	"view": {
+		"toolbarAria": "View and sorting",
+		"viewToggle": "Tile / List",
+		"tile": "Tiles",
+		"list": "List",
+		"sort": {
+			"label": "Sort by",
+			"name": "Name",
+			"score": "Score",
+			"asc": "↑ Ascending",
+			"desc": "↓ Descending"
+		}
+	},
+	"article": {
+		"categoryAria": "Category: {{category}}",
+		"openDetails": "Score & Details →",
+		"featured": "Featured",
+		"detailsFor": "Details for {{name}}",
+		"categoryLabel": "Category: {{category}}",
+		"relatedTitle": "More entries in the same layer & stack",
+		"relatedTitleLayer": "All entries in the same layer",
+		"relatedSubtitleLayer": "No stack active – showing all {{count}} entries in this layer.",
+		"relatedSubtitleStack": "Filtered by stack – {{count}} entries in the same layer.",
+		"website": "Website ↗",
+		"repository": "Repository ↗",
+		"scoreTitle": "Sovereignty Score",
+		"scoreAria": "Sovereignty score: {{score}} of 100",
+		"sovereigntyScore": "Sovereignty Score (0–100)",
+		"criteria": {
+			"openSource": "Open Source (public source code)",
+			"euHeadquartered": "EU headquarters or registration",
+			"hasAudit": "Security audit available",
+			"permissiveLicense": "Permissive or copyleft license",
+			"matureProject": "Mature project (graduated/stable)",
+			"largeEcosystem": "Large community ecosystem"
+		}
+	},
+	"pwa": {
+		"updateAvailable": "A new version of StackAtlas is available.",
+		"update": "Update now",
+		"dismiss": "Later"
+	},
+	"stack": {
+		"label": "Stack",
+		"all": "Without",
+		"selectorAria": "Select stack",
+		"rationale": "Rationale",
+		"stats": {
+			"version": "v{{version}}",
+			"items": "{{count}} items",
+			"avgScore": "Avg. sovereignty score"
+		},
+		"roles": {
+			"maintainer": "Maintainer",
+			"contributor": "Contributor",
+			"funder": "Funder",
+			"consumer": "Consumer"
+		}
+	},
+	"pages": {
+		"imprint": {
+			"description": "This page provides legal notices and provider information for StackAtlas.",
+			"title": "Imprint"
+		},
+		"settings": {
+			"description": "Manage application settings and preferences for StackAtlas here.",
+			"title": "Settings"
+		}
+	}
+}

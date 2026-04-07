@@ -1,0 +1,30 @@
+{
+	"id": "rancher",
+	"name": "Rancher",
+	"layer": "platform",
+	"sublayer": "integration",
+	"description": {
+		"de": "Rancher ist eine Open-Source-Plattform zur Verwaltung und Bereitstellung mehrerer Kubernetes-Cluster und Container-Anwendungen. Es bietet eine einfache Benutzeroberfläche.",
+		"en": ""
+	},
+	"homepage": "https://www.rancher.com/",
+	"logo": "https://www.rancher.com/assets/img/brand-guidelines/assets/logos/png/color/rancher-logo-horiz-color.png",
+	"tags": [
+		"orchestrierung",
+		"container"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": true,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	},
+	"audit": {
+		"lastDate": "2025-11-11",
+		"url": "https://github.com/rancher/rancher"
+	}
+}

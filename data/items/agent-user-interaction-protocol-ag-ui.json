@@ -1,0 +1,30 @@
+{
+	"id": "agent-user-interaction-protocol-ag-ui",
+	"name": "Agent-User Interaction Protocol (AG-UI)",
+	"layer": "platform",
+	"sublayer": "ki",
+	"description": {
+		"de": "AG-UI standardisiert Status, Ziel und Interaktion von KI-Agenten und deren Laufzeit gegenüber den Nutzenden.",
+		"en": ""
+	},
+	"homepage": "https://ag-ui.com",
+	"tags": [
+		"agent",
+		"agentische-ki",
+		"user-interface"
+	],
+	"oss": true,
+	"maturity": "sandbox",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": true,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	},
+	"audit": {
+		"lastDate": "2025-11-11",
+		"url": "https://github.com/ag-ui-protocol/ag-ui"
+	}
+}

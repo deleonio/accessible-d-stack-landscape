@@ -1,0 +1,130 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Item Definition",
+	"description": "Defines a technology, standard, or tool in the digital stack landscape",
+	"type": "object",
+	"required": ["id", "name", "layer", "description", "oss", "sovereigntyCriteria"],
+	"additionalProperties": false,
+	"properties": {
+		"id": {
+			"type": "string",
+			"description": "Unique item identifier (slug format: lowercase with hyphens)",
+			"pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
+		},
+		"name": {
+			"type": "string",
+			"description": "Display name (English, original name of the technology)"
+		},
+		"layer": {
+			"type": "string",
+			"description": "One of the 5 Splash layers",
+			"enum": ["infrastructure", "platform", "building-blocks", "applications", "sovereign-standards"]
+		},
+		"sublayer": {
+			"type": "string",
+			"description": "Optional sub-category within the layer (e.g., 'security', 'database')"
+		},
+		"description": {
+			"type": "object",
+			"description": "Localized description of the item",
+			"required": ["de"],
+			"additionalProperties": false,
+			"properties": {
+				"de": { "type": "string", "minLength": 1 },
+				"en": { "type": "string" },
+				"fr": { "type": "string" }
+			}
+		},
+		"homepage": {
+			"type": "string",
+			"description": "Official homepage or project URL",
+			"format": "uri"
+		},
+		"logo": {
+			"type": "string",
+			"description": "Logo URL (HTTP/HTTPS) or path to local asset"
+		},
+		"tags": {
+			"type": "array",
+			"description": "List of tags for categorization and search",
+			"items": { "type": "string" }
+		},
+		"license": {
+			"type": "string",
+			"description": "License identifier (e.g., 'MIT', 'Apache-2.0', 'GPL-3.0-or-later')"
+		},
+		"oss": {
+			"type": "boolean",
+			"description": "Whether the item is open-source"
+		},
+		"maturity": {
+			"type": "string",
+			"description": "Project maturity status",
+			"enum": ["sandbox", "incubation", "graduated"]
+		},
+		"sovereigntyCriteria": {
+			"type": "object",
+			"description": "Criteria used to calculate the sovereignty score (0–100)",
+			"required": ["openSource", "euHeadquartered", "hasAudit", "permissiveLicense", "matureProject", "largeEcosystem"],
+			"additionalProperties": false,
+			"properties": {
+				"openSource": {
+					"type": "boolean",
+					"description": "Open-source with publicly accessible source code (+30 points)"
+				},
+				"euHeadquartered": {
+					"type": "boolean",
+					"description": "Headquartered or legally registered in the EU (+25 points)"
+				},
+				"hasAudit": {
+					"type": "boolean",
+					"description": "Has documented and publicly available security/compliance audit (+20 points)"
+				},
+				"permissiveLicense": {
+					"type": "boolean",
+					"description": "Uses permissive or copyleft open-source license (+10 points)"
+				},
+				"matureProject": {
+					"type": "boolean",
+					"description": "Project is mature — graduated/stable lifecycle status (+10 points)"
+				},
+				"largeEcosystem": {
+					"type": "boolean",
+					"description": "Large community ecosystem — e.g., GitHub stars > 1000 (+5 points)"
+				}
+			}
+		},
+		"github": {
+			"type": "object",
+			"description": "GitHub repository metadata",
+			"additionalProperties": false,
+			"properties": {
+				"repo": {
+					"type": "string",
+					"description": "GitHub repository URL"
+				},
+				"stars": {
+					"type": "integer",
+					"description": "Number of GitHub stars",
+					"minimum": 0
+				}
+			}
+		},
+		"audit": {
+			"type": "object",
+			"description": "Audit/compliance information",
+			"additionalProperties": false,
+			"properties": {
+				"lastDate": {
+					"type": "string",
+					"description": "ISO 8601 date of last audit (YYYY-MM-DD)"
+				},
+				"url": {
+					"type": "string",
+					"description": "URL to audit report or compliance documentation",
+					"format": "uri"
+				}
+			}
+		}
+	}
+}
