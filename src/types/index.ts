@@ -113,8 +113,5 @@ export type FilterState = {
 // ---------------------------------------------------------------------------
 // Legacy aliases — kept for gradual migration
 // ---------------------------------------------------------------------------
-
-/** @deprecated Use Item instead */
-export type Article = Item;
-/** @deprecated Use Layer instead */
-export type Category = Layer;
+// Stack (Gov-Stack mapping)
+// ---------------------------------------------------------------------------

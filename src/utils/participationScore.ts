@@ -12,7 +12,7 @@ export type ParticipationResult = {
 	hasForeignFunder: boolean;
 };
 
-export function computeParticipationScore(participants: Participant[]): ParticipationResult {
+function computeParticipationScore(participants: Participant[]): ParticipationResult {
 	const score = Math.min(
 		100,
 		participants.reduce((sum, p) => sum + (ROLE_WEIGHTS[p.role] ?? 0), 0),
