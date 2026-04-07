@@ -37,7 +37,7 @@ function App() {
 		<div className="app">
 			<Header />
 			<Router>
-				<HomeRoute path="/" />
+				<HomeRoute path="/" default />
 				<SettingsRoute path="/settings" />
 				<ImprintRoute path="/imprint" />
 				<SettingsRoute path="/einstellungen" />
