@@ -47,7 +47,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const selectedScore = computeSovereigntyScore(selectedArticle.sovereigntyCriteria);
 	const criteriaKeys = Object.keys(article.sovereigntyCriteria) as Array<keyof typeof article.sovereigntyCriteria>;
 
-	const renderArticleLogo = (logo: string | undefined, localizedName: string) => {
+	const renderArticleLogo = (logo: string | undefined, localizedName: string, large = false) => {
 		if (!logo) {
 			return null;
 		}
@@ -56,6 +56,10 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 		const handleImageError = () => {
 			setFailedLogos((prev) => new Set([...prev, logo]));
 		};
+
+		if (large) {
+			return <img src={src} alt={localizedName} loading="lazy" className="article-logo--drawer" onError={() => handleImageError()} />;
+		}
 
 		return (
 			<KolImage
@@ -155,11 +159,23 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 					<KolCard _label={localizedSelectedArticleName} className="drawer-card">
 						<div className="drawer-details">
 							<div className="drawer-headline">
-								{renderArticleLogo(selectedArticle.logo, localizedSelectedArticleName)}
+								{renderArticleLogo(selectedArticle.logo, localizedSelectedArticleName, true)}
 								<div>
 									<p className="drawer-category">{t('article.categoryLabel', { category: categoryName })}</p>
+									<div className="drawer-links">
+										{selectedArticle.homepage && (
+											<a href={selectedArticle.homepage} target="_blank" rel="noopener noreferrer" className="drawer-link">
+												{t('article.website')}
+											</a>
+										)}
+										{selectedArticle.github?.repo && (
+											<a href={selectedArticle.github.repo} target="_blank" rel="noopener noreferrer" className="drawer-link drawer-link--github">
+												{t('article.repository')}
+											</a>
+										)}
+									</div>
 								</div>
-							</div>{' '}
+							</div>
 							<div className="drawer-score-section">
 								<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
 								<div className="drawer-score-total" style={{ color: scoreColor(selectedScore) }}>
@@ -185,7 +201,12 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 							<p className="drawer-description">{getLocalizedText(selectedArticle.description, i18n.language)}</p>
 							{relatedArticles.length > 0 && (
 								<div className="drawer-related">
-									<p className="drawer-related__title">{t('article.relatedTitle')}</p>
+									<p className="drawer-related__title">{stackItemMap !== undefined ? t('article.relatedTitle') : t('article.relatedTitleLayer')}</p>
+									<p className="drawer-related__subtitle">
+										{stackItemMap !== undefined
+											? t('article.relatedSubtitleStack', { count: relatedArticles.length })
+											: t('article.relatedSubtitleLayer', { count: relatedArticles.length })}
+									</p>
 									<ul className="drawer-related__list">
 										{relatedArticles.map((relatedArticle) => (
 											<li key={relatedArticle.id} className="drawer-related__item">

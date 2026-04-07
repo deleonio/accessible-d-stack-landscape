@@ -77,7 +77,12 @@
 		"featured": "Featured",
 		"detailsFor": "Details for {{name}}",
 		"categoryLabel": "Category: {{category}}",
-		"relatedTitle": "Related entries from this category",
+		"relatedTitle": "More entries in the same layer & stack",
+		"relatedTitleLayer": "All entries in the same layer",
+		"relatedSubtitleLayer": "No stack active – showing all {{count}} entries in this layer.",
+		"relatedSubtitleStack": "Filtered by stack – {{count}} entries in the same layer.",
+		"website": "Website ↗",
+		"repository": "Repository ↗",
 		"scoreTitle": "Sovereignty score",
 		"scoreAria": "Sovereignty score: {{score}} of 100",
 		"sovereigntyScore": "Sovereignty Score",
@@ -97,7 +102,7 @@
 	},
 	"stack": {
 		"label": "Stack:",
-		"all": "All stacks",
+		"all": "Without",
 		"selectorAria": "Select stack",
 		"rationale": "Rationale",
 		"stats": {

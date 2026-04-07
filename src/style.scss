@@ -595,6 +595,12 @@ kol-card.article-card,
 	&__title {
 		font-size: var(--ds-text-sm);
 		font-weight: 600;
+		margin-bottom: var(--ds-space-1);
+	}
+
+	&__subtitle {
+		font-size: var(--ds-text-xs);
+		color: var(--ds-color-text-muted);
 		margin-bottom: var(--ds-space-2);
 	}
 
@@ -1141,4 +1147,66 @@ kol-card.article-card,
 	align-items: center;
 	gap: var(--ds-space-2);
 	flex-shrink: 0;
+}
+
+// ─── Drawer logo (large) ──────────────────────────────────────────────────────
+
+.article-logo--drawer {
+	display: block;
+	max-height: 300px;
+	max-width: 100%;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	border-radius: var(--ds-radius-sm);
+	background: var(--ds-color-bg);
+	padding: var(--ds-space-2);
+	margin-bottom: var(--ds-space-3);
+}
+
+// ─── Drawer links (homepage / repo) ──────────────────────────────────────────
+
+.drawer-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--ds-space-2);
+	margin-top: var(--ds-space-2);
+}
+
+.drawer-link {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 12px;
+	border-radius: var(--ds-radius-sm);
+	font-size: var(--ds-text-sm);
+	font-weight: 600;
+	text-decoration: none;
+	border: 1px solid var(--ds-color-primary);
+	color: var(--ds-color-primary);
+	transition:
+		background 0.15s ease,
+		color 0.15s ease;
+
+	&:hover,
+	&:focus-visible {
+		background: var(--ds-color-primary);
+		color: #fff;
+		outline: none;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--ds-color-primary);
+		outline-offset: 2px;
+	}
+
+	&--github {
+		border-color: #24292f;
+		color: #24292f;
+
+		&:hover,
+		&:focus-visible {
+			background: #24292f;
+			color: #fff;
+		}
+	}
 }

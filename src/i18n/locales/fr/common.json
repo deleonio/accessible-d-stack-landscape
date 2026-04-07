@@ -77,7 +77,12 @@
 		"featured": "Recommandé",
 		"detailsFor": "Détails pour {{name}}",
 		"categoryLabel": "Catégorie : {{category}}",
-		"relatedTitle": "Entrées liées dans cette catégorie",
+		"relatedTitle": "Autres entrées dans la même couche & stack",
+		"relatedTitleLayer": "Toutes les entrées dans la même couche",
+		"relatedSubtitleLayer": "Aucun stack actif – affichage des {{count}} entrées de cette couche.",
+		"relatedSubtitleStack": "Filtré par stack – {{count}} entrées dans la même couche.",
+		"website": "Site web ↗",
+		"repository": "Dépôt ↗",
 		"scoreTitle": "Score de souveraineté",
 		"scoreAria": "Score de souveraineté : {{score}} sur 100",
 		"sovereigntyScore": "Score de souveraineté",
@@ -97,7 +102,7 @@
 	},
 	"stack": {
 		"label": "Stack :",
-		"all": "Tous les stacks",
+		"all": "Sans",
 		"selectorAria": "Sélectionner un stack",
 		"rationale": "Justification",
 		"stats": {

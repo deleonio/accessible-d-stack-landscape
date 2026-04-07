@@ -153,7 +153,12 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 					<ul className={viewMode === 'tile' ? 'articles-grid' : 'articles-list'}>
 						{paginatedArticles.map((article) => (
 							<li key={article.id}>
-								<ArticleCard article={article} stackItem={stackItemMap?.get(article.id)} stackItemMap={stackItemMap} viewMode={viewMode} />
+								<ArticleCard
+									article={article}
+									stackItem={stackItemMap?.get(article.id)}
+									stackItemMap={activeStack ? stackItemMap : undefined}
+									viewMode={viewMode}
+								/>
 							</li>
 						))}
 					</ul>
