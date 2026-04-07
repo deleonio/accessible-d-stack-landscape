@@ -1054,3 +1054,91 @@ kol-card.article-card,
 		font-weight: 600;
 	}
 }
+
+// ─── View Controls toolbar ────────────────────────────────────────────────────
+
+.view-controls {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: var(--ds-space-3);
+	padding: var(--ds-space-3) 0 var(--ds-space-4);
+
+	&__sort {
+		display: flex;
+		align-items: flex-end;
+		gap: var(--ds-space-2);
+		flex-wrap: wrap;
+	}
+
+	&__view {
+		display: flex;
+		gap: var(--ds-space-2);
+	}
+}
+
+// ─── Articles list view ───────────────────────────────────────────────────────
+
+.articles-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ds-space-2);
+	list-style: none;
+	margin: 0 0 var(--ds-space-12);
+	padding: 0;
+}
+
+.article-card--list {
+	display: flex;
+	align-items: center;
+	gap: var(--ds-space-3);
+	padding: var(--ds-space-3) var(--ds-space-4);
+	border: 1px solid var(--ds-color-border);
+	border-radius: var(--ds-radius-md);
+	background: var(--ds-color-bg);
+	transition:
+		border-color 0.18s ease,
+		box-shadow 0.18s ease;
+
+	&:hover {
+		border-color: var(--ds-color-primary);
+		box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+	}
+}
+
+.card-list-logo {
+	display: flex;
+	align-items: center;
+	gap: var(--ds-space-2);
+	flex-shrink: 0;
+}
+
+.card-list-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.card-list-name {
+	font-weight: 600;
+	font-size: var(--ds-text-sm);
+	margin: 0 0 var(--ds-space-1);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.card-description--truncate {
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	margin: 0;
+}
+
+.card-list-badges {
+	display: flex;
+	align-items: center;
+	gap: var(--ds-space-2);
+	flex-shrink: 0;
+}

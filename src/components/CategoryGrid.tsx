@@ -1,10 +1,15 @@
-import { KolButton, KolPagination } from '@public-ui/preact';
-import { useState } from 'preact/hooks';
+import { KolButton, KolPagination, KolSingleSelect } from '@public-ui/preact';
+import { useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { FilterState, Item, Layer, Stack, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
+import { computeSovereigntyScore } from '../utils/sovereigntyScore';
 import { ArticleCard } from './ArticleCard';
 import { StackStats } from './StackStats';
+
+type ViewMode = 'tile' | 'list';
+type SortField = 'name' | 'score';
+type SortDir = 'asc' | 'desc';
 
 interface CategoryGridProps {
 	layers: Layer[];
@@ -21,10 +26,26 @@ const ITEMS_PER_PAGE = 12;
 export function CategoryGrid({ layers, articles, filters, onFilterChange, totalCount, activeStack, stackItemMap }: CategoryGridProps) {
 	const { i18n, t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
+	const [viewMode, setViewMode] = useState<ViewMode>('tile');
+	const [sortField, setSortField] = useState<SortField>('name');
+	const [sortDir, setSortDir] = useState<SortDir>('asc');
+
+	const sortedArticles = useMemo(
+		() =>
+			[...articles].sort((a, b) => {
+				const cmp =
+					sortField === 'name'
+						? getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language)
+						: computeSovereigntyScore(a.sovereigntyCriteria) - computeSovereigntyScore(b.sovereigntyCriteria);
+				return sortDir === 'asc' ? cmp : -cmp;
+			}),
+		[articles, sortField, sortDir, i18n.language],
+	);
+
 	const activeCount = articles.length;
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
 	const endIdx = startIdx + ITEMS_PER_PAGE;
-	const paginatedArticles = articles.slice(startIdx, endIdx);
+	const paginatedArticles = sortedArticles.slice(startIdx, endIdx);
 
 	// Reset to page 1 when filters change
 	const handleFilterChange = (newFilters: FilterState) => {
@@ -84,6 +105,39 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 				)}
 			</p>
 
+			<div className="view-controls" role="toolbar" aria-label={t('view.toolbarAria')}>
+				<div className="view-controls__sort">
+					<KolSingleSelect
+						_label={t('view.sort.label')}
+						_options={[
+							{ label: t('view.sort.name'), value: 'name' },
+							{ label: t('view.sort.score'), value: 'score' },
+						]}
+						_value={sortField}
+						_on={{
+							onChange: (_e: globalThis.Event, value: unknown) => {
+								setSortField(value as SortField);
+								setCurrentPage(1);
+							},
+						}}
+					/>
+					<KolButton
+						_label={sortDir === 'asc' ? t('view.sort.asc') : t('view.sort.desc')}
+						_variant="secondary"
+						_on={{
+							onClick: () => {
+								setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+								setCurrentPage(1);
+							},
+						}}
+					/>
+				</div>
+				<div className="view-controls__view">
+					<KolButton _label={t('view.tile')} _variant={viewMode === 'tile' ? 'primary' : 'secondary'} _on={{ onClick: () => setViewMode('tile') }} />
+					<KolButton _label={t('view.list')} _variant={viewMode === 'list' ? 'primary' : 'secondary'} _on={{ onClick: () => setViewMode('list') }} />
+				</div>
+			</div>
+
 			{articles.length === 0 ? (
 				<div className="articles-grid">
 					<div className="empty-state">
@@ -96,10 +150,10 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 				</div>
 			) : (
 				<>
-					<ul className="articles-grid">
+					<ul className={viewMode === 'tile' ? 'articles-grid' : 'articles-list'}>
 						{paginatedArticles.map((article) => (
 							<li key={article.id}>
-								<ArticleCard article={article} stackItem={stackItemMap?.get(article.id)} stackItemMap={stackItemMap} />
+								<ArticleCard article={article} stackItem={stackItemMap?.get(article.id)} stackItemMap={stackItemMap} viewMode={viewMode} />
 							</li>
 						))}
 					</ul>

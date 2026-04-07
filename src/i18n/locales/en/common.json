@@ -59,6 +59,18 @@
 		"noneFound": "No entries found",
 		"adjustFilters": "Please adjust your search or category filter."
 	},
+	"view": {
+		"toolbarAria": "View and sorting",
+		"tile": "Tiles",
+		"list": "List",
+		"sort": {
+			"label": "Sort by",
+			"name": "Name",
+			"score": "Score",
+			"asc": "↑ Ascending",
+			"desc": "↓ Descending"
+		}
+	},
 	"article": {
 		"categoryAria": "Category: {{category}}",
 		"openDetails": "Open details",

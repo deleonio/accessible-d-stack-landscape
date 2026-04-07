@@ -59,6 +59,18 @@
 		"noneFound": "Aucune entrée trouvée",
 		"adjustFilters": "Veuillez ajuster votre recherche ou le filtre de catégorie."
 	},
+	"view": {
+		"toolbarAria": "Affichage et tri",
+		"tile": "Tuiles",
+		"list": "Liste",
+		"sort": {
+			"label": "Trier par",
+			"name": "Nom",
+			"score": "Score",
+			"asc": "↑ Croissant",
+			"desc": "↓ Décroissant"
+		}
+	},
 	"article": {
 		"categoryAria": "Catégorie : {{category}}",
 		"openDetails": "Ouvrir les détails",

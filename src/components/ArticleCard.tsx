@@ -6,10 +6,13 @@ import { Item, ParticipantRole, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
 import { computeSovereigntyScore } from '../utils/sovereigntyScore';
 
+type ViewMode = 'tile' | 'list';
+
 interface ArticleCardProps {
 	article: Item;
 	stackItem?: StackItem;
 	stackItemMap?: Map<string, StackItem>;
+	viewMode?: ViewMode;
 }
 
 const ROLE_COLORS: Record<ParticipantRole, string> = {
@@ -25,7 +28,7 @@ function scoreColor(score: number): string {
 	return '#c62828';
 }
 
-export function ArticleCard({ article, stackItem, stackItemMap }: ArticleCardProps) {
+export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile' }: ArticleCardProps) {
 	const { i18n, t } = useTranslation();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [selectedArticle, setSelectedArticle] = useState(article);
@@ -69,47 +72,75 @@ export function ArticleCard({ article, stackItem, stackItemMap }: ArticleCardPro
 		);
 	};
 
+	const openButton = (
+		<KolButton
+			_label={t('article.openDetails')}
+			_variant="secondary"
+			_on={{
+				onClick: () => {
+					setSelectedArticle(article);
+					setIsDrawerOpen(true);
+				},
+			}}
+		/>
+	);
+
+	const badges = (
+		<>
+			<span
+				className="card-score-badge"
+				style={{ background: scoreColor(score), color: '#fff' }}
+				title={t('article.scoreTitle')}
+				aria-label={t('article.scoreAria', { score })}
+			>
+				{score}
+			</span>
+			{stackItem && (
+				<span className="card-role-badge" style={{ background: ROLE_COLORS[stackItem.role], color: '#fff' }} title={t(`stack.roles.${stackItem.role}`)}>
+					{t(`stack.roles.${stackItem.role}`)}
+				</span>
+			)}
+		</>
+	);
+
 	return (
-		<div className="article-card-wrapper">
-			<KolCard _label={localizedArticleName} className="article-card">
-				<div className="card-content">
-					<div className="card-header">
+		<div className={`article-card-wrapper${viewMode === 'list' ? ' article-card-wrapper--list' : ''}`}>
+			{viewMode === 'tile' ? (
+				<KolCard _label={localizedArticleName} className="article-card">
+					<div className="card-content">
+						<div className="card-header">
+							{renderArticleLogo(article.logo, localizedArticleName)}
+							<span
+								className="card-category-dot"
+								style={{ background: categoryColor }}
+								title={categoryName}
+								aria-label={t('article.categoryAria', { category: categoryName })}
+							/>
+							{badges}
+						</div>
+						<p className="card-description">{getLocalizedText(article.description, i18n.language)}</p>
+						<div className="card-action">{openButton}</div>
+					</div>
+				</KolCard>
+			) : (
+				<div className="article-card article-card--list" role="article" aria-label={localizedArticleName}>
+					<div className="card-list-logo">
 						{renderArticleLogo(article.logo, localizedArticleName)}
 						<span
 							className="card-category-dot"
 							style={{ background: categoryColor }}
 							title={categoryName}
 							aria-label={t('article.categoryAria', { category: categoryName })}
-						/>{' '}
-						<span
-							className="card-score-badge"
-							style={{ background: scoreColor(score), color: '#fff' }}
-							title={t('article.scoreTitle')}
-							aria-label={t('article.scoreAria', { score })}
-						>
-							{score}
-						</span>
-						{stackItem && (
-							<span className="card-role-badge" style={{ background: ROLE_COLORS[stackItem.role], color: '#fff' }} title={t(`stack.roles.${stackItem.role}`)}>
-								{t(`stack.roles.${stackItem.role}`)}
-							</span>
-						)}{' '}
-					</div>
-					<p className="card-description">{getLocalizedText(article.description, i18n.language)}</p>
-					<div className="card-action">
-						<KolButton
-							_label={t('article.openDetails')}
-							_variant="secondary"
-							_on={{
-								onClick: () => {
-									setSelectedArticle(article);
-									setIsDrawerOpen(true);
-								},
-							}}
 						/>
 					</div>
+					<div className="card-list-body">
+						<p className="card-list-name">{localizedArticleName}</p>
+						<p className="card-description card-description--truncate">{getLocalizedText(article.description, i18n.language)}</p>
+					</div>
+					<div className="card-list-badges">{badges}</div>
+					<div className="card-action">{openButton}</div>
 				</div>
-			</KolCard>
+			)}
 
 			<KolDrawer
 				_label={t('article.detailsFor', { name: localizedSelectedArticleName })}
