@@ -35,7 +35,7 @@ function dismissSplash(): void {
 
 let renderApp: (() => void) | null = null;
 
-document.addEventListener('keydown', (e: KeyboardEvent) => {
+document.addEventListener('keydown', (e: globalThis.KeyboardEvent) => {
 	if (e.key === 'Escape') {
 		dismissSplash();
 		renderApp?.();

@@ -511,20 +511,7 @@ kol-pagination {
 
 kol-card.article-card,
 .article-card {
-	transition:
-		box-shadow 0.18s ease,
-		transform 0.18s ease,
-		border-color 0.18s ease;
-	cursor: pointer;
 	height: 100%;
-
-	@media (hover: hover) {
-		&:hover {
-			box-shadow: var(--ds-shadow-card-hover);
-			transform: translateY(-4px);
-			border-color: var(--ds-color-primary);
-		}
-	}
 }
 
 .card-content {
@@ -577,6 +564,18 @@ kol-card.article-card,
 
 		.tag-badge {
 			flex-shrink: 0;
+		}
+	}
+
+	.card-action {
+		kol-button {
+			display: block;
+		}
+
+		@media (hover: hover) {
+			&:hover kol-button {
+				filter: brightness(0.9);
+			}
 		}
 	}
 }
