@@ -15,8 +15,8 @@ export function Footer() {
 					<p className="footer-sub">{t('footer.subtitle')}</p>
 				</div>
 				<nav className="footer__links" aria-label={t('footer.navigationAria')}>
-					<Link href="/einstellungen">{t('footer.links.settings')}</Link>
-					<Link href="/impressum">{t('footer.links.imprint')}</Link>
+					<Link href="/settings">{t('footer.links.settings')}</Link>
+					<Link href="/imprint">{t('footer.links.imprint')}</Link>
 					<a href="https://github.com/deleonio/accessible-d-stack-landscape" rel="noopener noreferrer">
 						{t('footer.links.github')}
 					</a>

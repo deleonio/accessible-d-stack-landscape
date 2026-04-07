@@ -38,11 +38,11 @@ function App() {
 			<Header />
 			<Router>
 				<HomeRoute path="/" />
-				<SettingsRoute path="/einstellungen" />
-				<ImprintRoute path="/impressum" />
 				<SettingsRoute path="/settings" />
 				<ImprintRoute path="/imprint" />
-				<HomeRoute default />
+				<SettingsRoute path="/einstellungen" />
+				<ImprintRoute path="/impressum" />
+				<HomeRoute path="/" default />
 			</Router>
 			<Footer />
 			<PwaWrapper />
