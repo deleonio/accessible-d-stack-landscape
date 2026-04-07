@@ -376,6 +376,7 @@ body {
 		@media (width >= 600px) {
 			grid-template-columns: 1fr 1fr 2fr auto auto;
 			grid-template-areas: 'stack layer search sort toggle';
+			align-items: center;
 
 			&:not(:has(.filter-bar__select--stack)) {
 				grid-template-columns: 1fr 2fr auto auto;
@@ -408,7 +409,7 @@ body {
 	&__sort {
 		grid-area: sort;
 		display: flex;
-		align-items: flex-end;
+		align-items: center;
 		gap: var(--ds-space-2);
 		flex-shrink: 0;
 
@@ -420,7 +421,7 @@ body {
 
 	&__view-toggle {
 		grid-area: toggle;
-		place-self: end;
+		place-self: center end;
 
 		// Auf mobil (single column) linksbündig
 		@media (width < 480px) {
