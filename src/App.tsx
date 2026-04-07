@@ -1,19 +1,49 @@
-import { CategoryGrid } from './components/CategoryGrid';
+import { Router } from 'preact-router';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { PwaWrapper } from './components/PwaWrapper';
-import { SearchBar } from './components/SearchBar';
-import { ARTICLES, CATEGORIES } from './data/articles';
-import { useFilters } from './hooks/useFilters';
+import { HomePage } from './pages/HomePage';
+import { ImprintPage } from './pages/ImprintPage';
+import { SettingsPage } from './pages/SettingsPage';
+
+type RouteProps = {
+	default?: boolean;
+	path?: string;
+};
+
+function HomeRoute({ default: isDefault, path }: RouteProps) {
+	void isDefault;
+	void path;
+
+	return <HomePage />;
+}
+
+function SettingsRoute({ default: isDefault, path }: RouteProps) {
+	void isDefault;
+	void path;
+
+	return <SettingsPage />;
+}
+
+function ImprintRoute({ default: isDefault, path }: RouteProps) {
+	void isDefault;
+	void path;
+
+	return <ImprintPage />;
+}
 
 function App() {
-	const { filters, setFilters, filtered } = useFilters(ARTICLES);
-
 	return (
 		<div className="app">
 			<Header />
-			<SearchBar filters={filters} onFilterChange={setFilters} categories={CATEGORIES} />
-			<CategoryGrid categories={CATEGORIES} articles={filtered} filters={filters} onFilterChange={setFilters} totalCount={ARTICLES.length} />
+			<Router>
+				<HomeRoute path="/" default />
+				<SettingsRoute path="/settings" />
+				<ImprintRoute path="/imprint" />
+				<SettingsRoute path="/einstellungen" />
+				<ImprintRoute path="/impressum" />
+				<HomeRoute path="/" default />
+			</Router>
 			<Footer />
 			<PwaWrapper />
 		</div>

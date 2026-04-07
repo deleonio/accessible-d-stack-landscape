@@ -1,75 +1,88 @@
 {
-	"header": {
-		"skipToContent": "Skip to main content",
-		"instanceInfoAria": "Instance information",
-		"officialProjectSetup": "Official project setup",
-		"mvpLayoutAligned": "Aligned with documentation requirements (MVP layout)",
-		"commit": "Commit",
-		"mainNavigationAria": "Main navigation",
-		"nav": {
-			"home": "Home",
-			"categories": "Categories",
-			"docs": "Docs"
-		},
-		"eyebrow": "Public Digital Infrastructure",
-		"subtitle": "Interactive overview of technologies, standards and components for digital public administration.",
-		"languageSwitcher": {
-			"ariaLabel": "Switch language",
-			"label": "Language",
-			"hint": "Select display language",
-			"accessKey": "l"
-		}
-	},
-	"footer": {
-		"subtitle": "Accessible technology map for public platforms",
-		"navigationAria": "Footer navigation",
-		"links": {
-			"github": "GitHub",
-			"documentation": "Documentation",
-			"contact": "Contact",
-			"community": "Community"
-		},
-		"license": "License: EUPL-1.2",
-		"builtWith": "Built with",
-		"and": "and",
-		"buildCommitAria": "Build commit {{commit}}",
-		"buildCommitLabel": "Build commit:"
-	},
-	"search": {
-		"regionAria": "Search and filter",
-		"inputLabel": "Search",
-		"placeholder": "Search technology or keyword …",
-		"categoryLabel": "Category",
-		"allCategories": "All categories"
-	},
-	"category": {
-		"toolbarAria": "Filter categories",
-		"label": "Category:",
-		"all": "All",
-		"results": {
-			"filteredPrefix": "of",
-			"entries": "entries",
-			"inCategory": "in {{category}}",
-			"forQuery": "for “{{query}}”",
-			"totalTechnologiesAndStandards": "technologies & standards"
-		},
-		"paginationLabel": "Navigate through the articles"
-	},
-	"results": {
-		"noneFound": "No entries found",
-		"adjustFilters": "Please adjust your search or category filter."
-	},
 	"article": {
 		"categoryAria": "Category: {{category}}",
-		"openDetails": "Open details",
-		"featured": "Featured",
-		"detailsFor": "Details for {{name}}",
 		"categoryLabel": "Category: {{category}}",
+		"detailsFor": "Details for {{name}}",
+		"featured": "Featured",
+		"openDetails": "Open details",
 		"relatedTitle": "Related entries from this category"
 	},
+	"category": {
+		"all": "All",
+		"label": "Category:",
+		"paginationLabel": "Navigate through the articles",
+		"results": {
+			"entries": "entries",
+			"filteredPrefix": "of",
+			"forQuery": "for “{{query}}”",
+			"inCategory": "in {{category}}",
+			"totalTechnologiesAndStandards": "technologies & standards"
+		},
+		"toolbarAria": "Filter categories"
+	},
+	"footer": {
+		"and": "and",
+		"buildCommitAria": "Build commit {{commit}}",
+		"buildCommitLabel": "Build commit:",
+		"builtWith": "Built with",
+		"license": "License: EUPL-1.2",
+		"links": {
+			"community": "Community",
+			"contact": "Contact",
+			"documentation": "Documentation",
+			"github": "GitHub",
+			"imprint": "Imprint",
+			"settings": "Settings"
+		},
+		"navigationAria": "Footer navigation",
+		"subtitle": "Accessible technology map for public platforms"
+	},
+	"header": {
+		"commit": "Commit",
+		"eyebrow": "Public Digital Infrastructure",
+		"instanceInfoAria": "Instance information",
+		"languageSwitcher": {
+			"accessKey": "l",
+			"ariaLabel": "Switch language",
+			"hint": "Select display language",
+			"label": "Language"
+		},
+		"mainNavigationAria": "Main navigation",
+		"mvpLayoutAligned": "Aligned with documentation requirements (MVP layout)",
+		"nav": {
+			"docs": "Docs",
+			"home": "Home",
+			"imprint": "Imprint",
+			"settings": "Settings"
+		},
+		"officialProjectSetup": "Official project setup",
+		"skipToContent": "Skip to main content",
+		"subtitle": "Interactive overview of technologies, standards and components for digital public administration."
+	},
+	"pages": {
+		"imprint": {
+			"description": "This page provides legal notices and provider information for StackAtlas.",
+			"title": "Imprint"
+		},
+		"settings": {
+			"description": "Manage application settings and preferences for StackAtlas here.",
+			"title": "Settings"
+		}
+	},
 	"pwa": {
-		"updateAvailable": "A new version of StackAtlas is available.",
+		"dismiss": "Later",
 		"update": "Update now",
-		"dismiss": "Later"
+		"updateAvailable": "A new version of StackAtlas is available."
+	},
+	"results": {
+		"adjustFilters": "Please adjust your search or category filter.",
+		"noneFound": "No entries found"
+	},
+	"search": {
+		"allCategories": "All categories",
+		"categoryLabel": "Category",
+		"inputLabel": "Search",
+		"placeholder": "Search technology or keyword …",
+		"regionAria": "Search and filter"
 	}
 }

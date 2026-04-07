@@ -830,3 +830,23 @@ kol-card.article-card,
 		transform: translateX(-50%) translateY(0);
 	}
 }
+
+// ─── Static Content Pages ────────────────────────────────────────────────────
+.content-page {
+	width: min(1400px, calc(100% - 2 * var(--ds-space-6)));
+	margin: 0 auto;
+	padding: var(--ds-space-8) 0 var(--ds-space-12);
+
+	h2 {
+		margin: 0 0 var(--ds-space-4);
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+	}
+
+	p {
+		margin: 0;
+		max-width: 70ch;
+		font-size: var(--ds-text-md);
+		line-height: 1.65;
+		color: var(--ds-color-text-muted);
+	}
+}

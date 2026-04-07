@@ -1,75 +1,88 @@
 {
-	"header": {
-		"skipToContent": "Direkt zum Inhalt springen",
-		"instanceInfoAria": "Instanz-Informationen",
-		"officialProjectSetup": "Offizielles Projekt-Setup",
-		"mvpLayoutAligned": "Ausgerichtet an den Doku-Vorgaben (MVP Layout)",
-		"commit": "Commit",
-		"mainNavigationAria": "Hauptnavigation",
-		"nav": {
-			"home": "Home",
-			"categories": "Kategorien",
-			"docs": "Docs"
-		},
-		"eyebrow": "Public Digital Infrastructure",
-		"subtitle": "Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung.",
-		"languageSwitcher": {
-			"ariaLabel": "Sprache wechseln",
-			"label": "Sprache",
-			"hint": "Anzeigesprache auswählen",
-			"accessKey": "l"
-		}
-	},
-	"footer": {
-		"subtitle": "Barrierefreie Technologie-Landkarte für öffentliche Plattformen",
-		"navigationAria": "Footer-Navigation",
-		"links": {
-			"github": "GitHub",
-			"documentation": "Dokumentation",
-			"contact": "Kontakt",
-			"community": "Community"
-		},
-		"license": "Lizenz: EUPL-1.2",
-		"builtWith": "Built with",
-		"and": "and",
-		"buildCommitAria": "Build Commit {{commit}}",
-		"buildCommitLabel": "Build-Commit:"
-	},
-	"search": {
-		"regionAria": "Suche und Filter",
-		"inputLabel": "Suche",
-		"placeholder": "Technologie oder Stichwort suchen …",
-		"categoryLabel": "Kategorie",
-		"allCategories": "Alle Kategorien"
-	},
-	"category": {
-		"toolbarAria": "Kategorien filtern",
-		"label": "Kategorie:",
-		"all": "Alle",
-		"results": {
-			"filteredPrefix": "von",
-			"entries": "Einträgen",
-			"inCategory": "in {{category}}",
-			"forQuery": "für „{{query}}“",
-			"totalTechnologiesAndStandards": "Technologien & Standards"
-		},
-		"paginationLabel": "Navigiere durch die Artikel"
-	},
-	"results": {
-		"noneFound": "Keine Einträge gefunden",
-		"adjustFilters": "Bitte passen Sie Ihre Suche oder den Kategoriefilter an."
-	},
 	"article": {
 		"categoryAria": "Kategorie: {{category}}",
-		"openDetails": "Details öffnen",
-		"featured": "Empfohlen",
-		"detailsFor": "Details zu {{name}}",
 		"categoryLabel": "Kategorie: {{category}}",
+		"detailsFor": "Details zu {{name}}",
+		"featured": "Empfohlen",
+		"openDetails": "Details öffnen",
 		"relatedTitle": "Verwandte Einträge aus dieser Kategorie"
 	},
+	"category": {
+		"all": "Alle",
+		"label": "Kategorie:",
+		"paginationLabel": "Navigiere durch die Artikel",
+		"results": {
+			"entries": "Einträgen",
+			"filteredPrefix": "von",
+			"forQuery": "für „{{query}}“",
+			"inCategory": "in {{category}}",
+			"totalTechnologiesAndStandards": "Technologien & Standards"
+		},
+		"toolbarAria": "Kategorien filtern"
+	},
+	"footer": {
+		"and": "and",
+		"buildCommitAria": "Build Commit {{commit}}",
+		"buildCommitLabel": "Build-Commit:",
+		"builtWith": "Built with",
+		"license": "Lizenz: EUPL-1.2",
+		"links": {
+			"community": "Community",
+			"contact": "Kontakt",
+			"documentation": "Dokumentation",
+			"github": "GitHub",
+			"imprint": "Impressum",
+			"settings": "Einstellungen"
+		},
+		"navigationAria": "Footer-Navigation",
+		"subtitle": "Barrierefreie Technologie-Landkarte für öffentliche Plattformen"
+	},
+	"header": {
+		"commit": "Commit",
+		"eyebrow": "Public Digital Infrastructure",
+		"instanceInfoAria": "Instanz-Informationen",
+		"languageSwitcher": {
+			"accessKey": "l",
+			"ariaLabel": "Sprache wechseln",
+			"hint": "Anzeigesprache auswählen",
+			"label": "Sprache"
+		},
+		"mainNavigationAria": "Hauptnavigation",
+		"mvpLayoutAligned": "Ausgerichtet an den Doku-Vorgaben (MVP Layout)",
+		"nav": {
+			"docs": "Docs",
+			"home": "Home",
+			"imprint": "Impressum",
+			"settings": "Einstellungen"
+		},
+		"officialProjectSetup": "Offizielles Projekt-Setup",
+		"skipToContent": "Direkt zum Inhalt springen",
+		"subtitle": "Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung."
+	},
+	"pages": {
+		"imprint": {
+			"description": "Diese Seite enthält rechtliche Hinweise und Anbieterinformationen für StackAtlas.",
+			"title": "Impressum"
+		},
+		"settings": {
+			"description": "Verwalte hier anwendungsbezogene Einstellungen und Präferenzen für StackAtlas.",
+			"title": "Einstellungen"
+		}
+	},
 	"pwa": {
-		"updateAvailable": "Eine neue Version von StackAtlas ist verfügbar.",
+		"dismiss": "Später",
 		"update": "Jetzt aktualisieren",
-		"dismiss": "Später"
+		"updateAvailable": "Eine neue Version von StackAtlas ist verfügbar."
+	},
+	"results": {
+		"adjustFilters": "Bitte passen Sie Ihre Suche oder den Kategoriefilter an.",
+		"noneFound": "Keine Einträge gefunden"
+	},
+	"search": {
+		"allCategories": "Alle Kategorien",
+		"categoryLabel": "Kategorie",
+		"inputLabel": "Suche",
+		"placeholder": "Technologie oder Stichwort suchen …",
+		"regionAria": "Suche und Filter"
 	}
 }
