@@ -1,63 +1,125 @@
 {
-	"article": {
-		"categoryAria": "Catégorie : {{category}}",
-		"categoryLabel": "Catégorie : {{category}}",
-		"detailsFor": "Détails pour {{name}}",
-		"featured": "Recommandé",
-		"openDetails": "Ouvrir les détails",
-		"relatedTitle": "Entrées liées dans cette catégorie"
-	},
-	"category": {
-		"all": "Toutes",
-		"label": "Catégorie :",
-		"paginationLabel": "Parcourir les articles",
-		"results": {
-			"entries": "entrées",
-			"filteredPrefix": "sur",
-			"forQuery": "pour « {{query}} »",
-			"inCategory": "dans {{category}}",
-			"totalTechnologiesAndStandards": "technologies et standards"
+	"header": {
+		"skipToContent": "Aller au contenu principal",
+		"instanceInfoAria": "Informations d’instance",
+		"officialProjectSetup": "Configuration officielle du projet",
+		"mvpLayoutAligned": "Aligné sur les exigences de documentation (mise en page MVP)",
+		"commit": "Commit",
+		"mainNavigationAria": "Navigation principale",
+		"nav": {
+			"home": "Accueil",
+			"categories": "Catégories",
+			"docs": "Docs",
+			"imprint": "Mentions légales",
+			"settings": "Paramètres"
 		},
-		"toolbarAria": "Filtrer les catégories"
+		"eyebrow": "Public Digital Infrastructure",
+		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique.",
+		"languageSwitcher": {
+			"ariaLabel": "Changer de langue",
+			"label": "Langue",
+			"hint": "Sélectionner la langue d’affichage",
+			"accessKey": "l"
+		}
 	},
 	"footer": {
+		"subtitle": "Cartographie technologique accessible pour les plateformes publiques",
+		"navigationAria": "Navigation du pied de page",
+		"links": {
+			"github": "GitHub",
+			"documentation": "Documentation",
+			"contact": "Contact",
+			"community": "Communauté",
+			"imprint": "Mentions légales",
+			"settings": "Paramètres"
+		},
+		"license": "Licence : EUPL-1.2",
+		"builtWith": "Built with",
 		"and": "and",
 		"buildCommitAria": "Commit de build {{commit}}",
-		"buildCommitLabel": "Commit de build :",
-		"builtWith": "Built with",
-		"license": "Licence : EUPL-1.2",
-		"links": {
-			"community": "Communauté",
-			"contact": "Contact",
-			"documentation": "Documentation",
-			"github": "GitHub",
-			"imprint": "Mentions légales",
-			"settings": "Paramètres"
-		},
-		"navigationAria": "Navigation du pied de page",
-		"subtitle": "Cartographie technologique accessible pour les plateformes publiques"
+		"buildCommitLabel": "Commit de build :"
 	},
-	"header": {
-		"commit": "Commit",
-		"eyebrow": "Public Digital Infrastructure",
-		"instanceInfoAria": "Informations d’instance",
-		"languageSwitcher": {
-			"accessKey": "l",
-			"ariaLabel": "Changer de langue",
-			"hint": "Sélectionner la langue d’affichage",
-			"label": "Langue"
+	"search": {
+		"regionAria": "Recherche et filtres",
+		"inputLabel": "Recherche",
+		"placeholder": "Rechercher une technologie ou un mot-clé …",
+		"categoryLabel": "Catégorie",
+		"allCategories": "Toutes les catégories"
+	},
+	"category": {
+		"toolbarAria": "Filtrer les catégories",
+		"label": "Catégorie :",
+		"all": "Toutes",
+		"results": {
+			"filteredPrefix": "sur",
+			"entries": "entrées",
+			"inCategory": "dans {{category}}",
+			"forQuery": "pour « {{query}} »",
+			"totalTechnologiesAndStandards": "technologies et standards"
 		},
-		"mainNavigationAria": "Navigation principale",
-		"mvpLayoutAligned": "Aligné sur les exigences de documentation (mise en page MVP)",
-		"nav": {
-			"docs": "Docs",
-			"home": "Accueil",
-			"imprint": "Mentions légales",
-			"settings": "Paramètres"
+		"paginationLabel": "Parcourir les articles"
+	},
+	"results": {
+		"noneFound": "Aucune entrée trouvée",
+		"adjustFilters": "Veuillez ajuster votre recherche ou le filtre de catégorie."
+	},
+	"view": {
+		"toolbarAria": "Affichage et tri",
+		"tile": "Tuiles",
+		"list": "Liste",
+		"sort": {
+			"label": "Trier par",
+			"name": "Nom",
+			"score": "Score",
+			"asc": "↑ Croissant",
+			"desc": "↓ Décroissant"
+		}
+	},
+	"article": {
+		"categoryAria": "Catégorie : {{category}}",
+		"openDetails": "Ouvrir les détails",
+		"featured": "Recommandé",
+		"detailsFor": "Détails pour {{name}}",
+		"categoryLabel": "Catégorie : {{category}}",
+		"relatedTitle": "Autres entrées dans la même couche & stack",
+		"relatedTitleLayer": "Toutes les entrées dans la même couche",
+		"relatedSubtitleLayer": "Aucun stack actif – affichage des {{count}} entrées de cette couche.",
+		"relatedSubtitleStack": "Filtré par stack – {{count}} entrées dans la même couche.",
+		"website": "Site web ↗",
+		"repository": "Dépôt ↗",
+		"scoreTitle": "Score de souveraineté",
+		"scoreAria": "Score de souveraineté : {{score}} sur 100",
+		"sovereigntyScore": "Score de souveraineté",
+		"criteria": {
+			"openSource": "Open Source (code source public)",
+			"euHeadquartered": "Siège ou enregistrement dans l'UE",
+			"hasAudit": "Audit de sécurité disponible",
+			"permissiveLicense": "Licence permissive ou copyleft",
+			"matureProject": "Projet mature (diplômé/stable)",
+			"largeEcosystem": "Grand écosystème communautaire"
+		}
+	},
+	"pwa": {
+		"updateAvailable": "Une nouvelle version de StackAtlas est disponible.",
+		"update": "Mettre à jour",
+		"dismiss": "Plus tard"
+	},
+	"stack": {
+		"label": "Stack :",
+		"all": "Sans",
+		"selectorAria": "Sélectionner un stack",
+		"rationale": "Justification",
+		"stats": {
+			"version": "v{{version}}",
+			"items": "{{count}} entrées",
+			"avgScore": "Score de souveraineté moyen"
 		},
-		"officialProjectSetup": "Configuration officielle du projet",
-		"skipToContent": "Aller au contenu principal",
-		"subtitle": "Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique."
+		"roles": {
+			"maintainer": "Mainteneur",
+			"contributor": "Contributeur",
+			"funder": "Financeur",
+			"consumer": "Utilisateur"
+		}
 	},
 	"pages": {
 		"imprint": {
@@ -68,21 +130,5 @@
 			"description": "Gérez ici les paramètres et préférences de l’application StackAtlas.",
 			"title": "Paramètres"
 		}
-	},
-	"pwa": {
-		"dismiss": "Plus tard",
-		"update": "Mettre à jour",
-		"updateAvailable": "Une nouvelle version de StackAtlas est disponible."
-	},
-	"results": {
-		"adjustFilters": "Veuillez ajuster votre recherche ou le filtre de catégorie.",
-		"noneFound": "Aucune entrée trouvée"
-	},
-	"search": {
-		"allCategories": "Toutes les catégories",
-		"categoryLabel": "Catégorie",
-		"inputLabel": "Recherche",
-		"placeholder": "Rechercher une technologie ou un mot-clé …",
-		"regionAria": "Recherche et filtres"
 	}
 }

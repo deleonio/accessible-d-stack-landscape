@@ -45,6 +45,12 @@ jobs:
       - name: Prettier
         run: pnpm format
 
+      - name: Knip
+        run: pnpm check-unused
+
+      - name: Validate JSON Schemas
+        run: pnpm validate-schemas
+
       - name: Build
         run: pnpm build
         env:

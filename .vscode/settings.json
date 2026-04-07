@@ -1,4 +1,21 @@
 {
+	"json.schemas": [
+		{
+			"fileMatch": ["data/layers/*.json"],
+			"url": "./data/schemas/layer.schema.json",
+			"description": "Layer (Splash stack layer) definition"
+		},
+		{
+			"fileMatch": ["data/items/*.json"],
+			"url": "./data/schemas/item.schema.json",
+			"description": "Item (technology/standard) definition"
+		},
+		{
+			"fileMatch": ["data/stacks/*.json"],
+			"url": "./data/schemas/stack.schema.json",
+			"description": "Stack (government or org software stack) definition"
+		}
+	],
 	"editor.formatOnSave": true,
 	"editor.renderWhitespace": "all",
 	// Configure glob patterns for excluding files and folders.

@@ -1,0 +1,33 @@
+{
+	"id": "joget",
+	"name": "Joget",
+	"layer": "platform",
+	"sublayer": "lowcode",
+	"description": {
+		"de": "Joget beschleunigt die Entwicklung und Automatisierung von Enterprise-Anwendungen mit visuellem Builder, Governance-Funktionen und neuen AI-Fähigkeiten in DX 9.",
+		"en": ""
+	},
+	"homepage": "https://www.joget.org/",
+	"logo": "https://raw.githubusercontent.com/jogetworkflow/jw-community/master/wflow-consoleweb/src/main/webapp/images/joget-logo.png",
+	"tags": [
+		"plugins",
+		"no-code-low-code",
+		"ai",
+		"workflow",
+		"java"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": true,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	},
+	"audit": {
+		"lastDate": "2025-11-11",
+		"url": "https://joget.com/joget-earns-govstack-software-requirements-compliance-helping-governments-fast-track-digital-transformation/"
+	}
+}

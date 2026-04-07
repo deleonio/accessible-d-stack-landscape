@@ -1,0 +1,32 @@
+{
+	"id": "huggingface-transformers",
+	"name": "HuggingFace Transformers",
+	"layer": "platform",
+	"sublayer": "ki",
+	"description": {
+		"de": "HuggingFace Transformers ist eine Open-Source-Bibliothek für state-of-the-art Machine Learning Modelle in Text-, Vision-, Audio- und multimodalen Anwendungen. Die Bibliothek fungiert als zentrales Model-Definition-Framework, das nahtlose Kompatibilität zwischen verschiedenen Deep Learning Frameworks wie PyTorch, TensorFlow und JAX bietet. Transformers demokratisiert den Zugang zu über 1 Million vortrainierten Modellen auf dem Hugging Face Hub und ermöglicht sowohl Inferenz als auch Training mit einer einheitlichen API.",
+		"en": ""
+	},
+	"homepage": "https://huggingface.co/docs/transformers/index",
+	"logo": "https://commons.wikimedia.org/wiki/Special:FilePath/HuggingFace_logo.svg",
+	"tags": [
+		"deep-learning",
+		"dl",
+		"transformer",
+		"verarbeitung"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": true,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	},
+	"audit": {
+		"lastDate": "2025-11-11",
+		"url": "https://github.com/huggingface/transformers"
+	}
+}

@@ -1,0 +1,30 @@
+{
+	"id": "chroma",
+	"name": "Chroma",
+	"layer": "platform",
+	"sublayer": "daten",
+	"description": {
+		"de": "Chroma ist eine Vektor-Datenbank.",
+		"en": ""
+	},
+	"homepage": "https://www.trychroma.com/",
+	"logo": "https://raw.githubusercontent.com/chroma-core/chroma/main/docs/assets/chroma.svg",
+	"tags": [
+		"datenbank",
+		"vektor"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": true,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	},
+	"audit": {
+		"lastDate": "2025-11-11",
+		"url": "https://docs.trychroma.com/docs/overview/introduction"
+	}
+}

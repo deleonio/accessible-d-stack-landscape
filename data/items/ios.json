@@ -1,0 +1,27 @@
+{
+	"id": "ios",
+	"name": "iOS",
+	"layer": "applications",
+	"sublayer": "native-apps",
+	"description": {
+		"de": "iOS ist das Betriebssystem für die Arbeit auf mobilen Endgeräten von Apple.",
+		"en": ""
+	},
+	"homepage": "https://www.apple.com/de/os/ios/",
+	"logo": "https://commons.wikimedia.org/wiki/Special:FilePath/IOS_2020_wordmark_black.svg",
+	"tags": [
+		"mobil",
+		"app",
+		"betriebssystem"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": false,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	}
+}
