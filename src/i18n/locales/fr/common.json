@@ -8,8 +8,8 @@
 		"mainNavigationAria": "Navigation principale",
 		"nav": {
 			"home": "Accueil",
-			"imprint": "Mentions légales",
-			"settings": "Paramètres"
+			"categories": "Catégories",
+			"docs": "Docs"
 		},
 		"homeLogoAria": "Aller à l’accueil",
 		"eyebrow": "Public Digital Infrastructure",
@@ -68,17 +68,6 @@
 		"categoryLabel": "Catégorie : {{category}}",
 		"relatedTitle": "Entrées liées dans cette catégorie",
 		"logoAlt": "Logo de {{name}}"
-	},
-	"pages": {
-		"settings": {
-			"title": "Paramètres",
-			"text": "Les futurs paramètres de l’application mobile pourront être ajoutés ici."
-		},
-		"imprint": {
-			"title": "Mentions légales",
-			"text": "StackAtlas – démo conceptuelle d’une cartographie technologique accessible.",
-			"contact": "Contact : opensource@example.org"
-		}
 	},
 	"pwa": {
 		"updateAvailable": "Une nouvelle version de StackAtlas est disponible.",

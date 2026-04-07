@@ -8,8 +8,8 @@
 		"mainNavigationAria": "Hauptnavigation",
 		"nav": {
 			"home": "Home",
-			"imprint": "Impressum",
-			"settings": "Einstellungen"
+			"categories": "Kategorien",
+			"docs": "Docs"
 		},
 		"homeLogoAria": "Zur Startseite",
 		"eyebrow": "Public Digital Infrastructure",
@@ -68,17 +68,6 @@
 		"categoryLabel": "Kategorie: {{category}}",
 		"relatedTitle": "Verwandte Einträge aus dieser Kategorie",
 		"logoAlt": "Logo von {{name}}"
-	},
-	"pages": {
-		"settings": {
-			"title": "Einstellungen",
-			"text": "Hier können später App-Einstellungen für mobile Nutzung ergänzt werden."
-		},
-		"imprint": {
-			"title": "Impressum",
-			"text": "StackAtlas – Konzept-Demo einer barrierefreien Technologie-Landkarte.",
-			"contact": "Kontakt: opensource@example.org"
-		}
 	},
 	"pwa": {
 		"updateAvailable": "Eine neue Version von StackAtlas ist verfügbar.",

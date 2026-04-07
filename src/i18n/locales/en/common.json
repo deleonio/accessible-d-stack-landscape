@@ -8,8 +8,8 @@
 		"mainNavigationAria": "Main navigation",
 		"nav": {
 			"home": "Home",
-			"imprint": "Imprint",
-			"settings": "Settings"
+			"categories": "Categories",
+			"docs": "Docs"
 		},
 		"homeLogoAria": "Go to home page",
 		"eyebrow": "Public Digital Infrastructure",
@@ -68,17 +68,6 @@
 		"categoryLabel": "Category: {{category}}",
 		"relatedTitle": "Related entries from this category",
 		"logoAlt": "Logo of {{name}}"
-	},
-	"pages": {
-		"settings": {
-			"title": "Settings",
-			"text": "Future app settings for mobile usage can be added here."
-		},
-		"imprint": {
-			"title": "Imprint",
-			"text": "StackAtlas – concept demo of an accessible technology landscape.",
-			"contact": "Contact: opensource@example.org"
-		}
 	},
 	"pwa": {
 		"updateAvailable": "A new version of StackAtlas is available.",
