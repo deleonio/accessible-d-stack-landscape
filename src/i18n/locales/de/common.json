@@ -13,8 +13,8 @@
 			"imprint": "Impressum",
 			"settings": "Einstellungen"
 		},
-		"eyebrow": "Public Digital Infrastructure",
-		"subtitle": "Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung.",
+		"eyebrow": "Digitale Souveränität messen & vergleichen",
+		"subtitle": "Wie souverän ist dein Tech-Stack? StackAtlas bewertet Technologien und Standards weltweit mit einem transparenten Souveränitäts-Score von 0–100 – und zeigt, welche Abhängigkeiten deine digitale Unabhängigkeit gefährden.",
 		"languageSwitcher": {
 			"ariaLabel": "Sprache wechseln",
 			"label": "Sprache",
@@ -23,7 +23,7 @@
 		}
 	},
 	"footer": {
-		"subtitle": "Barrierefreie Technologie-Landkarte für öffentliche Plattformen",
+		"subtitle": "Tech-Stacks weltweit nach digitaler Souveränität bewerten und vergleichen",
 		"navigationAria": "Footer-Navigation",
 		"links": {
 			"github": "GitHub",
@@ -42,7 +42,7 @@
 	"search": {
 		"regionAria": "Suche und Filter",
 		"inputLabel": "Suche",
-		"placeholder": "Technologie oder Stichwort suchen …",
+		"placeholder": "Technologie, Standard oder Framework suchen …",
 		"categoryLabel": "Kategorie",
 		"allCategories": "Alle Kategorien"
 	},
@@ -55,7 +55,7 @@
 			"entries": "Einträgen",
 			"inCategory": "in {{category}}",
 			"forQuery": "für „{{query}}“",
-			"totalTechnologiesAndStandards": "Technologien & Standards"
+			"totalTechnologiesAndStandards": "bewertete Technologien & Standards"
 		},
 		"paginationLabel": "Navigiere durch die Artikel"
 	},
@@ -78,7 +78,7 @@
 	},
 	"article": {
 		"categoryAria": "Kategorie: {{category}}",
-		"openDetails": "Details öffnen",
+		"openDetails": "Score & Details →",
 		"featured": "Empfohlen",
 		"detailsFor": "Details zu {{name}}",
 		"categoryLabel": "Kategorie: {{category}}",
@@ -88,9 +88,9 @@
 		"relatedSubtitleStack": "Gefiltert auf Stack – {{count}} Einträge im gleichen Layer.",
 		"website": "Produktseite ↗",
 		"repository": "Repository ↗",
-		"scoreTitle": "Souveränitätswert",
-		"scoreAria": "Souveränitätswert: {{score}} von 100",
-		"sovereigntyScore": "Souveränitätswert",
+		"scoreTitle": "Souveränitäts-Score",
+		"scoreAria": "Souveränitäts-Score: {{score}} von 100",
+		"sovereigntyScore": "Souveränitäts-Score (0–100)",
 		"criteria": {
 			"openSource": "Open Source (öffentlicher Quellcode)",
 			"euHeadquartered": "EU-Hauptsitz oder Registrierung",
