@@ -792,7 +792,6 @@ kol-card.article-card,
 	position: fixed;
 	bottom: var(--ds-space-6);
 	left: 50%;
-	right: var(--ds-space-4);
 	transform: translateX(-50%);
 	z-index: 10000;
 	display: flex;
@@ -817,7 +816,6 @@ kol-card.article-card,
 	// Mobile: More aggressive spacing adjustments
 	@media (width < 480px) {
 		bottom: var(--ds-space-2);
-		right: var(--ds-space-2);
 		padding: var(--ds-space-2) var(--ds-space-3);
 		gap: var(--ds-space-2);
 	}
@@ -828,10 +826,6 @@ kol-card.article-card,
 		color: var(--ds-color-text);
 		margin: 0;
 		line-height: 1.5;
-
-		@media (width < 480px) {
-			font-size: clamp(0.875rem, 2.5vw, 1rem);
-		}
 	}
 
 	&__actions {
