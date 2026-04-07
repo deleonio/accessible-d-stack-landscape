@@ -46,13 +46,17 @@ export function CategoryGrid({
 				const layerCmp = (layerOrder.get(a.layer) ?? Number.MAX_SAFE_INTEGER) - (layerOrder.get(b.layer) ?? Number.MAX_SAFE_INTEGER);
 				if (layerCmp !== 0) return layerCmp;
 
+				const localizedNameA = getLocalizedText(a.name, i18n.language);
+				const localizedNameB = getLocalizedText(b.name, i18n.language);
+				const nameCmp = localizedNameA.localeCompare(localizedNameB, i18n.language);
+
 				const cmp =
 					sortField === 'name'
-						? getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language)
+						? nameCmp
 						: computeSovereigntyScore(a.sovereigntyCriteria) - computeSovereigntyScore(b.sovereigntyCriteria);
 				if (cmp !== 0) return sortDir === 'asc' ? cmp : -cmp;
 
-				return getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language);
+				return nameCmp;
 			});
 		},
 		[articles, layers, sortField, sortDir, i18n.language],
