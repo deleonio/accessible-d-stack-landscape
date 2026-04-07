@@ -1,4 +1,3 @@
-import { Link } from 'preact-router/match';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
@@ -38,9 +37,9 @@ export function Header() {
 					</a>
 					<div className="header__controls">
 						<nav className="header__nav" aria-label={t('header.mainNavigationAria')}>
-							<Link href="/">{t('header.nav.home')}</Link>
-							<Link href="/settings">{t('header.nav.settings')}</Link>
-							<Link href="/imprint">{t('header.nav.imprint')}</Link>
+							<a href="/">{t('header.nav.home')}</a>
+							<a href="/settings">{t('header.nav.settings')}</a>
+							<a href="/imprint">{t('header.nav.imprint')}</a>
 							<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
 								{t('header.nav.docs')}
 							</a>
