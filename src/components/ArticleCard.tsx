@@ -32,7 +32,19 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			setFailedLogos((prev) => new Set([...prev, logo]));
 		};
 
-		return <KolImage _src={src} _alt={localizedName} _loading="lazy" className="article-logo" width={40} height={40} onError={handleImageError} />;
+		return (
+			<KolImage
+				_src={src}
+				_alt={localizedName}
+				_loading="lazy"
+				className="article-logo"
+				_width={40}
+				_height={40}
+				_on={{
+					error: handleImageError,
+				}}
+			/>
+		);
 	};
 
 	return (
