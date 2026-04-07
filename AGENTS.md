@@ -18,16 +18,15 @@ pnpm build
 ## Code Quality
 
 ```bash
-# Type check (TypeScript --noEmit)
+# Run all linters (TypeScript, ESLint, Stylelint) in parallel (via npm-run-all2)
 pnpm lint
 
-# ESLint
-pnpm eslint
+# Individual linters:
+pnpm lint:ts        # TypeScript type check
+pnpm lint:eslint    # ESLint
+pnpm lint:stylelint # Stylelint (SCSS)
 
-# Stylelint (SCSS)
-pnpm stylelint
-
-# Prettier (check formatting)
+# Check formatting
 pnpm format
 
 # Unused exports/dependencies
