@@ -82,6 +82,26 @@
 				align-items: center;
 				gap: 1.8rem;
 			}
+			.splash__powered-by {
+				position: absolute;
+				left: 50%;
+				bottom: clamp(0.75rem, 3vh, 1.5rem);
+				display: inline-flex;
+				align-items: center;
+				gap: 0.45rem;
+				transform: translateX(-50%);
+				opacity: 0.72;
+				color: rgba(255, 255, 255, 0.92);
+				font-family: 'Fira Sans', system-ui, sans-serif;
+				font-size: clamp(0.68rem, 1.8vw, 0.78rem);
+				letter-spacing: 0.03em;
+			}
+			.splash__powered-by img {
+				width: 0.95rem;
+				height: 0.95rem;
+				border-radius: 0.2rem;
+				filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.28));
+			}
 
 			/* ── Labels ── */
 			.splash__labels {
@@ -338,6 +358,9 @@
 				.splash {
 					transition-duration: 0.25s;
 				}
+				.splash__powered-by {
+					opacity: 0.85;
+				}
 			}
 
 			/* ── Screen-reader only ── */
@@ -353,12 +376,12 @@
 				border: 0;
 			}
 		</style>
-		<script type="module" crossorigin src="./assets/index-tg-driG9.js"></script>
+		<script type="module" crossorigin src="./assets/index-Dn05ZXBu.js"></script>
 		<link rel="modulepreload" crossorigin href="./assets/preload-helper-Chd9yIcd.js">
-		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-BSEXsRB_.js">
+		<link rel="modulepreload" crossorigin href="./assets/index-G8af0_gG-DaQnDBNi.js">
 		<link rel="modulepreload" crossorigin href="./assets/component-names-Dy77vq43-y0h3WhLS.js">
 		<link rel="modulepreload" crossorigin href="./assets/i18n-B2d_exHc-B0S3j5ey.js">
-		<link rel="stylesheet" crossorigin href="./assets/index-Dn4X1VUB.css">
+		<link rel="stylesheet" crossorigin href="./assets/index-CKjrhmNq.css">
 	<link rel="manifest" href="./manifest.webmanifest"></head>
 	<body>
 		<div id="splash" class="splash" role="status" aria-label="Application loading">
@@ -459,6 +482,10 @@
 					<span class="splash__label">become digitally sovereign</span>
 					<span class="splash__heading">StackAtlas</span>
 				</div>
+			</div>
+			<div class="splash__powered-by" aria-hidden="true">
+				<span>Powered by KoliBri</span>
+				<img src="./assets/kolibri.ico" alt="" />
 			</div>
 			<span class="splash-sr-only" aria-live="polite" id="splash-status">Application loading</span>
 		</div>
