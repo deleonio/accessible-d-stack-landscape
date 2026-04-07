@@ -70,15 +70,6 @@ export type Item = {
 
 export type ParticipantRole = 'maintainer' | 'contributor' | 'funder' | 'consumer';
 
-export type Participant = {
-	name: string;
-	role: ParticipantRole;
-	/** ISO country code or "EU" — used to flag non-EU funders */
-	jurisdiction?: string;
-	url?: string;
-	since?: string;
-};
-
 export type StackItemStatus = 'recommended' | 'approved' | 'deprecated';
 
 export type StackItem = {
