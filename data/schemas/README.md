@@ -41,3 +41,66 @@ Optional können Dateien mit `ajv-cli` validiert werden:
 npm install -g ajv-cli
 ajv validate -s data/schemas/item.schema.json -d data/items/*.json
 ```
+
+## Quality Gate Validierung
+
+Für lokale Entwicklung und CI/CD wird eine automatische Schema-Validierung bereitgestellt:
+
+### Lokal (pnpm)
+
+```bash
+# Alle JSON-Dateien gegen ihre Schemas validieren
+pnpm validate-schemas
+```
+
+Dies validiert:
+
+- `data/layers/*.json` gegen `layer.schema.json`
+- `data/items/*.json` gegen `item.schema.json`
+- `data/stacks/*.json` gegen `stack.schema.json`
+- `data/relations/*.json` gegen `relation.schema.json`
+
+Der Validierungsprozess:
+
+1. Lädt alle Schemas
+2. Validiert mit AJV (Another JSON Schema Validator)
+3. Zeigt detaillierte Fehlerberichte für ungültige Dateien
+4. Gibt Exit-Code `1` zurück bei Fehlern (blockiert CI)
+
+### GitHub Actions Workflow
+
+Die Schema-Validierung ist in der CI-Pipeline automatisch integriert:
+
+1. `build` → `lint` → `eslint` → `stylelint` → `format` → `check-unused` → **`validate-schemas`** → `build`
+2. Jeder Fehler blockiert die Pipeline und verhindert Merges
+3. PR-Kommentare zeigen genaue Fehlerorte
+
+### Output-Beispiel
+
+```
+🔍 JSON Schema Validation - Starting...
+
+📋 Validating Layers (5 files):
+   .....
+   ✓ 5/5 valid
+
+📋 Validating Items (128 files):
+   ................................................................
+   ✓ 128/128 valid
+
+📋 Validating Stacks (1 files):
+   .
+   ✓ 1/1 valid
+
+📋 Validating Relations (1 files):
+   .
+   ✓ 1/1 valid
+
+📊 Summary
+────────────────────────────────────
+Total files:  135
+Valid:        135
+Errors:       0
+
+✅ All validations passed!
+```
