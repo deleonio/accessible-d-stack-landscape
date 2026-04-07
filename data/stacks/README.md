@@ -17,88 +17,71 @@ Beispiele:
 
 ```json
 {
-	"id": "germany-stack",
+	"id": "germany",
 	"name": { "de": "Deutschland Stack", "en": "Germany Stack" },
 	"description": { "de": "...", "en": "..." },
-	"region": "Germany",
+	"country": "DE",
+	"issuer": "Bundesministeriums für Digitales und Staatsmodernisierung (BMDS)",
+	"version": "0.1.0",
+	"publishedAt": "2026-04-07",
 	"items": [
 		{
-			"id": "nextjs",
+			"itemId": "kubernetes",
+			"status": "recommended",
+			"role": "consumer",
 			"rationale": { "de": "...", "en": "..." },
-			"priority": "high",
-			"alternatives": ["svelte", "nuxt"]
+			"alternatives": ["docker-swarm", "nomad"]
 		}
-	],
-	"maintainers": [
-		{
-			"name": "Max Mustermann",
-			"role": "maintainer",
-			"email": "max@example.com",
-			"institution": "BMAS"
-		}
-	],
-	"createdAt": "2026-01-15",
-	"lastUpdated": "2026-04-07",
-	"version": "1.0.0"
+	]
 }
 ```
 
 ### Felder
 
-| Feld          | Typ    | Beschreibung                                | Erforderlich |
-| ------------- | ------ | ------------------------------------------- | ------------ |
-| `id`          | string | Eindeutige Stack-ID (lowercase, kebab-case) | ✓            |
-| `name`        | object | Lokalisierte Namen (de, en, optional fr)    | ✓            |
-| `description` | object | Lokalisierte Beschreibungen                 | ✓            |
-| `region`      | string | Zielregion/Land (z.B. "Germany", "EU")      | ✓            |
-| `items`       | array  | Items mit Empfehlungen                      | ✓            |
-| `maintainers` | array  | Personen/Institutionen (optional)           | ✗            |
-| `createdAt`   | string | ISO-Datum der Erstellung                    | ✗            |
-| `lastUpdated` | string | ISO-Datum letzter Update                    | ✗            |
-| `version`     | string | SemVer Version                              | ✗            |
+| Feld           | Typ    | Beschreibung                                | Erforderlich |
+| -------------- | ------ | ------------------------------------------- | ------------ |
+| `id`           | string | Eindeutige Stack-ID (lowercase, kebab-case) | ✓            |
+| `name`         | object | Lokalisierte Namen (de, en, optional fr)    | ✓            |
+| `description`  | object | Lokalisierte Beschreibungen                 | ✓            |
+| `country`      | string | ISO 3166-1 alpha-2 Code (z.B. "DE", "EU")   | ✓            |
+| `issuer`       | string | Verantwortliche Organisation                | ✓            |
+| `version`      | string | Semantische Versionsnummer                  | ✓            |
+| `publishedAt`  | string | ISO 8601 Publikationsdatum                  | ✓            |
+| `items`        | array  | Items mit Role-Scoring und Status           | ✓            |
+| `participants` | array  | Organisationen (optional)                   | ✗            |
 
 ### Stack Item Struktur
 
 ```json
 {
-	"id": "nextjs", // Item-ID (muss in items/ existieren)
+	"itemId": "kubernetes",
+	"status": "recommended",
+	"role": "consumer",
 	"rationale": {
-		// Begründung für Auswahl
-		"de": "...",
-		"en": "..."
+		"de": "Deutschland nutzt Kubernetes als Industrie-Standard für Container-Orchestrierung. Kubernetes ist 100% Open-Source (CNCF), aber Deutschland ist nur Konsument ohne aktive Mitgestaltung.",
+		"en": "Germany uses Kubernetes as the industry standard for container orchestration. Kubernetes is 100% open-source (CNCF), but Germany is only a consumer without active contribution."
 	},
-	"priority": "high", // high | medium | low
-	"alternatives": [
-		// Alternative Items
-		"svelte",
-		"nuxt"
-	]
+	"alternatives": ["docker-swarm", "nomad"]
 }
 ```
 
-### Maintainer Struktur
+| Feld           | Typ    | Beschreibung                                         | Erforderlich |
+| -------------- | ------ | ---------------------------------------------------- | ------------ |
+| `itemId`       | string | Referenz auf Item-ID (muss existieren)               | ✓            |
+| `status`       | enum   | `recommended` / `approved` / `deprecated`            | ✓            |
+| `role`         | enum   | `maintainer` / `contributor` / `funder` / `consumer` | ✓            |
+| `since`        | string | ISO 8601 Hinzufügungsdatum (optional)                | ✗            |
+| `rationale`    | object | Begründung (de, en, optional fr)                     | ✗            |
+| `alternatives` | array  | Alternative Item-IDs                                 | ✗            |
 
-```json
-{
-	"name": "Max Mustermann",
-	"role": "maintainer|contributor|funder|consumer",
-	"email": "max@example.com",
-	"institution": "BMAS"
-}
-```
+## Rollen & Multiplikatoren
 
-## Rollen (role)
-
-- `maintainer` — Pflegt und entwickelt den Stack
-- `contributor` — Trägt zu Stack-Entscheidungen bei
-- `funder` — Finanziert/sponsort
-- `consumer` — Nutzt/implementiert den Stack
-
-## Priority Levels
-
-- `high` — Kritische/zentrale Komponente
-- `medium` — Wichtig für Standard-Setup
-- `low` — Optional/für spezifische Use Cases
+| Rolle         | Multiplikator | Beschreibung                                        |
+| ------------- | ------------- | --------------------------------------------------- |
+| `maintainer`  | ×1.0          | Das Land pflegt und entwickelt dieses Item aktiv    |
+| `contributor` | ×0.75         | Das Land trägt aktiv bei (Code, Standards, Reviews) |
+| `funder`      | ×0.5          | Das Land finanziert/sponsert dieses Item            |
+| `consumer`    | ×0.25         | Das Land nutzt dieses Item nur als Konsument        |
 
 ## Validierung
 
@@ -113,14 +96,15 @@ pnpm validate-schemas
 1. Neue Datei: `data/stacks/{id}.json`
 2. Alle Required-Felder füllen
 3. Nur existierende Item-IDs referenzieren
-4. `pnpm validate-schemas` → sollte passen
-5. Git commit
+4. Jedes Item muss mindestens itemId, status, role haben
+5. `pnpm validate-schemas` → sollte passen
+6. Git commit
 
 ## Änderungen
 
 - ✅ Items hinzufügen/entfernen
-- ✅ Rationale und Priority aktualisieren
-- ✅ Maintainers/Version anpassen
+- ✅ Role, Rationale, Status, Alternatives aktualisieren
+- ✅ Participants/Version anpassen
 - ⚠️ Stack-ID umbenennen → URL-Verluste
 - ⚠️ Stack komplett löschen → Breaking Change
 

@@ -33,11 +33,6 @@ const validationMap = [
 		dataDir: 'data/stacks',
 		name: 'Stack',
 	},
-	{
-		schemaFile: 'data/schemas/relation.schema.json',
-		dataDir: 'data/relations',
-		name: 'Relation',
-	},
 ];
 
 let totalFiles = 0;

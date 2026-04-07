@@ -9,21 +9,19 @@ data/
 ├── layers/           # Die 5 Splash-Stack-Layer
 ├── items/            # Technologien, Standards und Tools
 ├── stacks/           # Regierungs- und Organisations-Stacks
-├── relations/        # Relationen zwischen Items
 └── schemas/          # JSON Schema Validierungsdateien
 ```
 
 ## Übersicht
 
-| Verzeichnis  | Beschreibung                           | Format      | Validierung            |
-| ------------ | -------------------------------------- | ----------- | ---------------------- |
-| `layers/`    | Die 5 konzeptionellen Ebenen           | JSON        | `layer.schema.json`    |
-| `items/`     | Alle Technologien & Standards          | JSON        | `item.schema.json`     |
-| `stacks/`    | Gov-Stacks mit Item-Empfehlungen       | JSON        | `stack.schema.json`    |
-| `relations/` | Stack-Item Relationen mit Souveränität | JSON        | `relation.schema.json` |
-| `schemas/`   | JSON Schema Definitionen               | JSON Schema | -                      |
+| Verzeichnis | Beschreibung                     | Format      | Validierung         |
+| ----------- | -------------------------------- | ----------- | ------------------- |
+| `layers/`   | Die 5 konzeptionellen Ebenen     | JSON        | `layer.schema.json` |
+| `items/`    | Alle Technologien & Standards    | JSON        | `item.schema.json`  |
+| `stacks/`   | Gov-Stacks mit Item-Empfehlungen | JSON        | `stack.schema.json` |
+| `schemas/`  | JSON Schema Definitionen         | JSON Schema | -                   |
 
-## Datenmodell: Layers → Items → Stacks → Relations
+## Datenmodell: Layers → Items → Stacks (mit integriertem Scoring)
 
 ```mermaid
 graph LR
@@ -41,36 +39,23 @@ graph LR
         I3["opendesk<br/>sovereigntyCriteria → 95 Pkt"]
     end
 
-    subgraph Stacks["🌍 Stacks"]
-        S1["Germany Stack"]
-        S2["EU Sovereignty Stack"]
-    end
-
-    subgraph Relations["🔗 Relations (Stack → Item)"]
-        R1["role: consumer ×0.25"]
-        R2["role: contributor ×0.75"]
-        R3["role: maintainer ×1.0"]
+    subgraph Stacks["🌍 Stacks (mit Rollen)"]
+        S1["Germany Stack<br/>Items mit role & rationale"]
+        S2["EU Stacks<br/>Items mit role & rationale"]
     end
 
     I1 & I2 & I3 --> |gehört zu| Layers
 
-    S1 --> |enthält Items| Items
-    S2 --> |enthält Items| Items
-
-    S1 --> |Rollenbeziehung| Relations
-    S2 --> |Rollenbeziehung| Relations
-
-    Relations -.->|Rolle zu Item| Items
+    S1 --> |enthält| Items
+    S2 --> |enthält| Items
 
     classDef layers fill:#1a56a0,stroke:#0f3a66,color:#fff
     classDef items fill:#7c3aed,stroke:#5b21b6,color:#fff
     classDef stacks fill:#db2777,stroke:#be185d,color:#fff
-    classDef relations fill:#059669,stroke:#047857,color:#fff
 
     class Layers layers
     class Items items
     class Stacks stacks
-    class Relations relations
 ```
 
 ## Scoring-Modell
@@ -100,12 +85,11 @@ Stack-Score = (70.0×1.0 + 18.75×1.5) / (1.0 + 1.5) = 39.25
 
 ### Verantwortlichkeiten pro Schema
 
-| Schema       | Verantwortung                                                 |
-| ------------ | ------------------------------------------------------------- |
-| **Item**     | Intrinsischer Souveränitäts-Score (aus `sovereigntyCriteria`) |
-| **Layer**    | Gewichtung (`weight`) für Gesamtberechnung                    |
-| **Stack**    | Welche Items enthalten sind + Status + Teilnehmer-Metadaten   |
-| **Relation** | Rollenbeziehung Land↔Item (Multiplikator für Scoring)         |
+| Schema    | Verantwortung                                                 |
+| --------- | ------------------------------------------------------------- |
+| **Item**  | Intrinsischer Souveränitäts-Score (aus `sovereigntyCriteria`) |
+| **Layer** | Gewichtung (`weight`) für Gesamtberechnung                    |
+| **Stack** | Items mit status, role, rationale & alternatives              |
 
 ## Daten-Pipeline
 
@@ -135,5 +119,4 @@ CSV-Daten (Quelle)
 - [data/layers/README.md](layers/README.md)
 - [data/items/README.md](items/README.md)
 - [data/stacks/README.md](stacks/README.md)
-- [data/relations/README.md](relations/README.md)
 - [data/schemas/README.md](schemas/README.md)

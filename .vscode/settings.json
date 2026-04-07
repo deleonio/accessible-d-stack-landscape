@@ -14,11 +14,6 @@
 			"fileMatch": ["data/stacks/*.json"],
 			"url": "./data/schemas/stack.schema.json",
 			"description": "Stack (government or org software stack) definition"
-		},
-		{
-			"fileMatch": ["data/relations/*.json"],
-			"url": "./data/schemas/relation.schema.json",
-			"description": "Relation between items definition"
 		}
 	],
 	"editor.formatOnSave": true,
