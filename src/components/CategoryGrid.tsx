@@ -178,4 +178,6 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 					)}
 				</>
 			)}
-                </main>
+		</main>
+	);
+}
