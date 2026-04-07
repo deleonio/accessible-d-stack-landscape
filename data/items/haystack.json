@@ -1,0 +1,32 @@
+{
+	"id": "haystack",
+	"name": "Haystack",
+	"layer": "platform",
+	"sublayer": "ki",
+	"description": {
+		"de": "Haystack ist Framework für die Entwicklung von KI-Anwendungen. Das Framework ermöglicht es Entwicklern, produktionsreife Systeme für Aufgaben wie Retrieval-Augmented Generation (RAG), Dokumentensuche und Frage-Antwort-Systeme zu erstellen.",
+		"en": ""
+	},
+	"homepage": "https://haystack.deepset.ai/",
+	"logo": "https://raw.githubusercontent.com/deepset-ai/haystack/main/docs/img/haystack_icon_colored.png",
+	"tags": [
+		"orchestrierung",
+		"rag",
+		"verarbeitung",
+		"pipeline"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": true,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	},
+	"audit": {
+		"lastDate": "2025-11-11",
+		"url": "https://docs.haystack.deepset.ai/docs/intro"
+	}
+}

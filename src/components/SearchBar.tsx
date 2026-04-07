@@ -1,19 +1,19 @@
 import { KolInputText, KolSingleSelect } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
-import { Category, FilterState } from '../types';
+import { FilterState, Layer } from '../types';
 import { getLocalizedText } from '../utils';
 
 interface SearchBarProps {
 	filters: FilterState;
 	onFilterChange: (filters: FilterState) => void;
-	categories: Category[];
+	layers: Layer[];
 }
 
-export function SearchBar({ filters, onFilterChange, categories }: SearchBarProps) {
+export function SearchBar({ filters, onFilterChange, layers }: SearchBarProps) {
 	const { i18n, t } = useTranslation();
-	const categoryOptions = [
+	const layerOptions = [
 		{ label: t('search.allCategories'), value: '' },
-		...categories.map((cat) => ({ label: getLocalizedText(cat.name, i18n.language), value: cat.id })),
+		...layers.map((layer) => ({ label: getLocalizedText(layer.name, i18n.language), value: layer.id })),
 	];
 
 	return (
@@ -29,10 +29,10 @@ export function SearchBar({ filters, onFilterChange, categories }: SearchBarProp
 				/>
 				<KolSingleSelect
 					_label={t('search.categoryLabel')}
-					_options={categoryOptions}
-					_value={filters.selectedCategory || ''}
+					_options={layerOptions}
+					_value={filters.selectedLayer || ''}
 					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedCategory: value ? (value as string) : null }),
+						onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedLayer: value ? (value as string) : null }),
 					}}
 				/>
 			</div>

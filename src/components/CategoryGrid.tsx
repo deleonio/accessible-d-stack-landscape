@@ -1,13 +1,13 @@
 import { KolButton, KolPagination } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
-import { Article, Category, FilterState } from '../types';
+import { FilterState, Item, Layer } from '../types';
 import { getLocalizedText } from '../utils';
 import { ArticleCard } from './ArticleCard';
 
 interface CategoryGridProps {
-	categories: Category[];
-	articles: Article[];
+	layers: Layer[];
+	articles: Item[];
 	filters: FilterState;
 	onFilterChange: (filters: FilterState) => void;
 	totalCount: number;
@@ -15,7 +15,7 @@ interface CategoryGridProps {
 
 const ITEMS_PER_PAGE = 12;
 
-export function CategoryGrid({ categories, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
+export function CategoryGrid({ layers, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
 	const { i18n, t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
 	const activeCount = articles.length;
@@ -36,37 +36,37 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 
 				<KolButton
 					_label={t('category.all')}
-					_variant={filters.selectedCategory === null ? 'primary' : 'secondary'}
+					_variant={filters.selectedLayer === null ? 'primary' : 'secondary'}
 					_on={{
-						onClick: () => handleFilterChange({ ...filters, selectedCategory: null }),
+						onClick: () => handleFilterChange({ ...filters, selectedLayer: null }),
 					}}
 				/>
 
-				{categories.map((cat) => (
+				{layers.map((cat) => (
 					<KolButton
 						key={cat.id}
 						_label={getLocalizedText(cat.name, i18n.language)}
-						_variant={filters.selectedCategory === cat.id ? 'primary' : 'secondary'}
+						_variant={filters.selectedLayer === cat.id ? 'primary' : 'secondary'}
 						_on={{
 							onClick: () =>
 								handleFilterChange({
 									...filters,
-									selectedCategory: filters.selectedCategory === cat.id ? null : cat.id,
+									selectedLayer: filters.selectedLayer === cat.id ? null : cat.id,
 								}),
 						}}
 					/>
 				))}
 			</div>
 			<p className="results-info" aria-live="polite" aria-atomic="true">
-				{filters.searchQuery || filters.selectedCategory ? (
+				{filters.searchQuery || filters.selectedLayer ? (
 					<>
 						<strong>{activeCount}</strong> {t('category.results.filteredPrefix')} {totalCount} {t('category.results.entries')}
-						{filters.selectedCategory && (
+						{filters.selectedLayer && (
 							<>
 								{' '}
 								<em>
 									{t('category.results.inCategory', {
-										category: getLocalizedText(categories.find((c) => c.id === filters.selectedCategory)?.name ?? '', i18n.language),
+										category: getLocalizedText(layers.find((c) => c.id === filters.selectedLayer)?.name ?? '', i18n.language),
 									})}
 								</em>
 							</>

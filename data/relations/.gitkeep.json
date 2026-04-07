@@ -1,0 +1,3 @@
+{
+	"_readme": "Place one JSON file per relation here. Filename convention: [from-item-id]--[to-item-id].json"
+}

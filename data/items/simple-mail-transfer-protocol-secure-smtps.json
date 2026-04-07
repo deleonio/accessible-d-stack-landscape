@@ -1,0 +1,28 @@
+{
+	"id": "simple-mail-transfer-protocol-secure-smtps",
+	"name": "Simple Mail Transfer Protocol Secure (SMTPS)",
+	"layer": "infrastructure",
+	"sublayer": "transport",
+	"description": {
+		"de": "SMTPS dient dem sicheren Austausch von E-Mails.",
+		"en": ""
+	},
+	"homepage": "https://datatracker.ietf.org/doc/html/rfc8314",
+	"tags": [
+		"msa",
+		"e-mail",
+		"mta",
+		"datenuebertragung",
+		"mua"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": false,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	}
+}

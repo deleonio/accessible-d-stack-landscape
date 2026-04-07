@@ -1,0 +1,13 @@
+{
+	"id": "germany",
+	"name": { "de": "Deutschland Stack", "en": "Germany Stack" },
+	"description": {
+		"de": "Empfohlener und zugelassener Software-Stack für die deutsche öffentliche Verwaltung.",
+		"en": "Recommended and approved software stack for German public administration."
+	},
+	"country": "DE",
+	"issuer": "Bundesministeriums für Digitales und Staatsmodernisierung (BMDS)",
+	"version": "0.1.0",
+	"publishedAt": "2026-04-07",
+	"items": []
+}

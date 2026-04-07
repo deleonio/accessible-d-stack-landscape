@@ -1,12 +1,12 @@
 import { KolBadge, KolButton, KolCard, KolDrawer, KolImage } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
-import { ARTICLES, CATEGORIES } from '../data/articles';
-import { Article } from '../types';
+import { ITEMS, LAYERS } from '../data/catalog';
+import { Item } from '../types';
 import { getLocalizedText } from '../utils';
 
 interface ArticleCardProps {
-	article: Article;
+	article: Item;
 }
 
 export function ArticleCard({ article }: ArticleCardProps) {
@@ -16,10 +16,10 @@ export function ArticleCard({ article }: ArticleCardProps) {
 	const [failedLogos, setFailedLogos] = useState<Set<string>>(new Set());
 	const localizedArticleName = getLocalizedText(article.name, i18n.language);
 	const localizedSelectedArticleName = getLocalizedText(selectedArticle.name, i18n.language);
-	const category = CATEGORIES.find((c) => c.id === selectedArticle.category);
+	const category = LAYERS.find((c) => c.id === selectedArticle.layer);
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = getLocalizedText(category?.name ?? { de: 'Allgemein', en: 'General', fr: 'Général' }, i18n.language);
-	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id).sort((a, b) =>
+	const relatedArticles = ITEMS.filter((candidate) => candidate.layer === selectedArticle.layer && candidate.id !== selectedArticle.id).sort((a, b) =>
 		getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language),
 	);
 	const renderArticleLogo = (logo: string | undefined, localizedName: string) => {
@@ -80,11 +80,6 @@ export function ArticleCard({ article }: ArticleCardProps) {
 					</div>
 				</div>
 			</KolCard>
-			{article.featured && (
-				<div className="featured-indicator">
-					<KolBadge _label={t('article.featured')} _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />
-				</div>
-			)}
 
 			<KolDrawer
 				_label={t('article.detailsFor', { name: localizedSelectedArticleName })}
@@ -102,7 +97,6 @@ export function ArticleCard({ article }: ArticleCardProps) {
 								{renderArticleLogo(selectedArticle.logo, localizedSelectedArticleName)}
 								<div>
 									<p className="drawer-category">{t('article.categoryLabel', { category: categoryName })}</p>
-									{selectedArticle.featured && <KolBadge _label={t('article.featured')} _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />}
 								</div>
 							</div>
 							<p className="drawer-description">{getLocalizedText(selectedArticle.description, i18n.language)}</p>

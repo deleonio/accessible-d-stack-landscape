@@ -1,0 +1,32 @@
+{
+	"id": "jenkins",
+	"name": "Jenkins",
+	"layer": "building-blocks",
+	"sublayer": "inbetriebnahme",
+	"description": {
+		"de": "Jenkins ist ein Open-Source-Automatisierungsserver, der für die kontinuierliche Integration (CI) und kontinuierliche Bereitstellung (CD) von Software verwendet wird.",
+		"en": ""
+	},
+	"homepage": "https://www.jenkins.io/",
+	"logo": "https://commons.wikimedia.org/wiki/Special:FilePath/Jenkins_logo.svg",
+	"tags": [
+		"pipeline",
+		"cd",
+		"bereitstellung",
+		"ci"
+	],
+	"oss": true,
+	"maturity": "graduated",
+	"sovereigntyCriteria": {
+		"openSource": true,
+		"euHeadquartered": false,
+		"hasAudit": true,
+		"permissiveLicense": false,
+		"matureProject": true,
+		"largeEcosystem": false
+	},
+	"audit": {
+		"lastDate": "2025-11-11",
+		"url": "https://github.com/jenkinsci/jenkins"
+	}
+}
