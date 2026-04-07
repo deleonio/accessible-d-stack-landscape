@@ -374,21 +374,40 @@ body {
 		display: grid;
 		gap: var(--ds-space-2);
 
-		// Mobile: two columns — stack+layer side by side, search full width, sort+toggle row
-		grid-template-columns: 1fr 1fr;
+		// Mobile <480px: alles untereinander
+		grid-template-columns: 1fr;
 		grid-template-areas:
-			'stack  layer'
-			'search search'
-			'sort   toggle';
+			'stack'
+			'layer'
+			'search'
+			'sort'
+			'toggle';
 
-		// When no stack selector is rendered, layer gets full top row
 		&:not(:has(.filter-bar__select--stack)) {
 			grid-template-areas:
-				'layer  layer'
-				'search search'
-				'sort   toggle';
+				'layer'
+				'search'
+				'sort'
+				'toggle';
 		}
 
+		// Ab 480px: Stack+Schicht nebeneinander, Sort+Toggle in einer Reihe
+		@media (width >= 480px) {
+			grid-template-columns: 1fr 1fr;
+			grid-template-areas:
+				'stack  layer'
+				'search search'
+				'sort   toggle';
+
+			&:not(:has(.filter-bar__select--stack)) {
+				grid-template-areas:
+					'layer  layer'
+					'search search'
+					'sort   toggle';
+			}
+		}
+
+		// Ab 600px: alles in einer Zeile
 		@media (width >= 600px) {
 			grid-template-columns: 1fr 1fr 2fr auto auto;
 			grid-template-areas: 'stack layer search sort toggle';
