@@ -568,21 +568,13 @@ kol-card.article-card,
 	}
 
 	.card-action {
-		margin-top: var(--ds-space-2);
-
 		kol-button {
-			display: inline-block;
-		}
-
-		&:focus-within {
-			outline: 2px solid var(--ds-color-primary);
-			outline-offset: 2px;
-			border-radius: var(--ds-radius-sm);
+			display: block;
 		}
 
 		@media (hover: hover) {
 			&:hover kol-button {
-				filter: brightness(0.96);
+				filter: brightness(0.9);
 			}
 		}
 	}
