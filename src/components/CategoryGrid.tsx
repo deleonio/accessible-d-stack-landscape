@@ -1,9 +1,10 @@
 import { KolButton, KolPagination } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
-import { FilterState, Item, Layer } from '../types';
+import { FilterState, Item, Layer, Stack, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
 import { ArticleCard } from './ArticleCard';
+import { StackStats } from './StackStats';
 
 interface CategoryGridProps {
 	layers: Layer[];
@@ -11,11 +12,13 @@ interface CategoryGridProps {
 	filters: FilterState;
 	onFilterChange: (filters: FilterState) => void;
 	totalCount: number;
+	activeStack?: Stack;
+	stackItemMap?: Map<string, StackItem>;
 }
 
 const ITEMS_PER_PAGE = 12;
 
-export function CategoryGrid({ layers, articles, filters, onFilterChange, totalCount }: CategoryGridProps) {
+export function CategoryGrid({ layers, articles, filters, onFilterChange, totalCount, activeStack, stackItemMap }: CategoryGridProps) {
 	const { i18n, t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
 	const activeCount = articles.length;
@@ -31,6 +34,7 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 
 	return (
 		<main id="main-content" className="category-container">
+			{activeStack && stackItemMap && <StackStats stack={activeStack} items={articles} stackItemMap={stackItemMap} />}
 			<div className="category-filters" role="toolbar" aria-label={t('category.toolbarAria')}>
 				<span className="category-filters__label">{t('category.label')}</span>
 
@@ -95,7 +99,7 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 					<ul className="articles-grid">
 						{paginatedArticles.map((article) => (
 							<li key={article.id}>
-								<ArticleCard article={article} />
+								<ArticleCard article={article} stackItem={stackItemMap?.get(article.id)} />
 							</li>
 						))}
 					</ul>

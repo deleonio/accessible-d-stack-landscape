@@ -1,15 +1,19 @@
 import { KolInputText, KolSingleSelect } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
-import { FilterState, Layer } from '../types';
+import { FilterState, Layer, Stack } from '../types';
 import { getLocalizedText } from '../utils';
+import { StackSelector } from './StackSelector';
 
 interface SearchBarProps {
 	filters: FilterState;
 	onFilterChange: (filters: FilterState) => void;
 	layers: Layer[];
+	stacks: Stack[];
+	activeStackId: string | null;
+	onStackChange: (id: string | null) => void;
 }
 
-export function SearchBar({ filters, onFilterChange, layers }: SearchBarProps) {
+export function SearchBar({ filters, onFilterChange, layers, stacks, activeStackId, onStackChange }: SearchBarProps) {
 	const { i18n, t } = useTranslation();
 	const layerOptions = [
 		{ label: t('search.allCategories'), value: '' },
@@ -36,6 +40,7 @@ export function SearchBar({ filters, onFilterChange, layers }: SearchBarProps) {
 					}}
 				/>
 			</div>
+			<StackSelector stacks={stacks} activeStackId={activeStackId} onStackChange={onStackChange} />
 		</section>
 	);
 }

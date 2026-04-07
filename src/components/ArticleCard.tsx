@@ -2,14 +2,29 @@ import { KolBadge, KolButton, KolCard, KolDrawer, KolImage } from '@public-ui/pr
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS } from '../data/catalog';
-import { Item } from '../types';
+import { Item, ParticipantRole, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
+import { computeSovereigntyScore } from '../utils/sovereigntyScore';
 
 interface ArticleCardProps {
 	article: Item;
+	stackItem?: StackItem;
 }
 
-export function ArticleCard({ article }: ArticleCardProps) {
+const ROLE_COLORS: Record<ParticipantRole, string> = {
+	maintainer: '#1565c0',
+	contributor: '#2e7d32',
+	funder: '#e65100',
+	consumer: '#546e7a',
+};
+
+function scoreColor(score: number): string {
+	if (score >= 70) return '#2e7d32';
+	if (score >= 40) return '#f57c00';
+	return '#c62828';
+}
+
+export function ArticleCard({ article, stackItem }: ArticleCardProps) {
 	const { i18n, t } = useTranslation();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [selectedArticle, setSelectedArticle] = useState(article);
@@ -22,6 +37,11 @@ export function ArticleCard({ article }: ArticleCardProps) {
 	const relatedArticles = ITEMS.filter((candidate) => candidate.layer === selectedArticle.layer && candidate.id !== selectedArticle.id).sort((a, b) =>
 		getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language),
 	);
+
+	const score = computeSovereigntyScore(article.sovereigntyCriteria);
+	const selectedScore = computeSovereigntyScore(selectedArticle.sovereigntyCriteria);
+	const criteriaKeys = Object.keys(article.sovereigntyCriteria) as Array<keyof typeof article.sovereigntyCriteria>;
+
 	const renderArticleLogo = (logo: string | undefined, localizedName: string) => {
 		if (!logo) {
 			return null;
@@ -58,7 +78,20 @@ export function ArticleCard({ article }: ArticleCardProps) {
 							style={{ background: categoryColor }}
 							title={categoryName}
 							aria-label={t('article.categoryAria', { category: categoryName })}
-						/>
+						/>{' '}
+						<span
+							className="card-score-badge"
+							style={{ background: scoreColor(score), color: '#fff' }}
+							title={t('article.scoreTitle')}
+							aria-label={t('article.scoreAria', { score })}
+						>
+							{score}
+						</span>
+						{stackItem && (
+							<span className="card-role-badge" style={{ background: ROLE_COLORS[stackItem.role], color: '#fff' }} title={t(`stack.roles.${stackItem.role}`)}>
+								{t(`stack.roles.${stackItem.role}`)}
+							</span>
+						)}{' '}
 					</div>
 					<p className="card-description">{getLocalizedText(article.description, i18n.language)}</p>
 					<div className="card-tags">
@@ -98,7 +131,29 @@ export function ArticleCard({ article }: ArticleCardProps) {
 								<div>
 									<p className="drawer-category">{t('article.categoryLabel', { category: categoryName })}</p>
 								</div>
-							</div>
+							</div>{' '}
+							<div className="drawer-score-section">
+								<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
+								<div className="drawer-score-total" style={{ color: scoreColor(selectedScore) }}>
+									{selectedScore}/100
+								</div>
+								<ul className="drawer-criteria-list">
+									{criteriaKeys.map((key) => (
+										<li key={key} className={`drawer-criteria-item drawer-criteria-item--${selectedArticle.sovereigntyCriteria[key] ? 'yes' : 'no'}`}>
+											<span className="drawer-criteria-icon" aria-hidden="true">
+												{selectedArticle.sovereigntyCriteria[key] ? '✓' : '✗'}
+											</span>
+											{t(`article.criteria.${key}`)}
+										</li>
+									))}
+								</ul>
+								{stackItem?.rationale && (
+									<div className="drawer-rationale">
+										<p className="drawer-rationale__title">{t('stack.rationale')}</p>
+										<p>{getLocalizedText(stackItem.rationale, i18n.language)}</p>
+									</div>
+								)}
+							</div>{' '}
 							<p className="drawer-description">{getLocalizedText(selectedArticle.description, i18n.language)}</p>
 							<div className="drawer-tags">
 								{selectedArticle.tags.map((tag) => (

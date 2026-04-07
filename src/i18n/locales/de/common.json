@@ -65,11 +65,39 @@
 		"featured": "Empfohlen",
 		"detailsFor": "Details zu {{name}}",
 		"categoryLabel": "Kategorie: {{category}}",
-		"relatedTitle": "Verwandte Einträge aus dieser Kategorie"
+		"relatedTitle": "Verwandte Einträge aus dieser Kategorie",
+		"scoreTitle": "Souveränitätswert",
+		"scoreAria": "Souveränitätswert: {{score}} von 100",
+		"sovereigntyScore": "Souveränitätswert",
+		"criteria": {
+			"openSource": "Open Source (öffentlicher Quellcode)",
+			"euHeadquartered": "EU-Hauptsitz oder Registrierung",
+			"hasAudit": "Sicherheitsaudit vorhanden",
+			"permissiveLicense": "Permissive oder Copyleft-Lizenz",
+			"matureProject": "Reifes Projekt (graduiert/stabil)",
+			"largeEcosystem": "Großes Community-Ökosystem"
+		}
 	},
 	"pwa": {
 		"updateAvailable": "Eine neue Version von StackAtlas ist verfügbar.",
 		"update": "Jetzt aktualisieren",
 		"dismiss": "Später"
+	},
+	"stack": {
+		"label": "Stack:",
+		"all": "Alle Stacks",
+		"selectorAria": "Stack auswählen",
+		"rationale": "Begründung",
+		"stats": {
+			"version": "v{{version}}",
+			"items": "{{count}} Einträge",
+			"avgScore": "Ø Souveränitätswert"
+		},
+		"roles": {
+			"maintainer": "Maintainer",
+			"contributor": "Contributor",
+			"funder": "Förderer",
+			"consumer": "Nutzer"
+		}
 	}
 }
