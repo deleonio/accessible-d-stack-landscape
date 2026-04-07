@@ -514,6 +514,16 @@ kol-card.article-card,
 	height: 100%;
 }
 
+.article-logo {
+	width: 40px;
+	height: 40px;
+	border-radius: var(--ds-radius-sm);
+	object-fit: contain;
+	flex-shrink: 0;
+	background: var(--ds-color-bg);
+	padding: 2px;
+}
+
 .card-content {
 	display: flex;
 	flex-direction: column;
@@ -524,16 +534,6 @@ kol-card.article-card,
 		display: flex;
 		align-items: flex-start;
 		gap: var(--ds-space-3);
-	}
-
-	.card-logo {
-		width: 40px;
-		height: 40px;
-		border-radius: var(--ds-radius-sm);
-		object-fit: contain;
-		flex-shrink: 0;
-		background: var(--ds-color-bg);
-		padding: 2px;
 	}
 
 	.card-category-dot {
