@@ -43,12 +43,12 @@
 		"regionAria": "Recherche et filtres",
 		"inputLabel": "Recherche",
 		"placeholder": "Rechercher une technologie, un standard ou un framework …",
-		"categoryLabel": "Catégorie",
-		"allCategories": "Toutes les catégories"
+		"categoryLabel": "Couche",
+		"allCategories": "Toutes les couches"
 	},
 	"category": {
-		"toolbarAria": "Filtrer les catégories",
-		"label": "Catégorie",
+		"toolbarAria": "Filtrer les couches",
+		"label": "Couche",
 		"all": "Toutes",
 		"results": {
 			"filteredPrefix": "sur",

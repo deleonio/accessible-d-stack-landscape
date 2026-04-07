@@ -43,12 +43,12 @@
 		"regionAria": "Suche und Filter",
 		"inputLabel": "Suche",
 		"placeholder": "Technologie, Standard oder Framework suchen …",
-		"categoryLabel": "Kategorie",
-		"allCategories": "Alle Kategorien"
+		"categoryLabel": "Schicht",
+		"allCategories": "Alle Schichten"
 	},
 	"category": {
-		"toolbarAria": "Kategorien filtern",
-		"label": "Kategorie",
+		"toolbarAria": "Schichten filtern",
+		"label": "Schicht",
 		"all": "Alle",
 		"results": {
 			"filteredPrefix": "von",

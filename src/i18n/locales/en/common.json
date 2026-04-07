@@ -43,12 +43,12 @@
 		"regionAria": "Search and filter",
 		"inputLabel": "Search",
 		"placeholder": "Search technology, standard or framework …",
-		"categoryLabel": "Category",
-		"allCategories": "All categories"
+		"categoryLabel": "Layer",
+		"allCategories": "All layers"
 	},
 	"category": {
-		"toolbarAria": "Filter categories",
-		"label": "Category",
+		"toolbarAria": "Filter layers",
+		"label": "Layer",
 		"all": "All",
 		"results": {
 			"filteredPrefix": "of",
