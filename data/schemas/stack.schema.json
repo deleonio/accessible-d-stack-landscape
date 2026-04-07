@@ -50,10 +50,10 @@
 		},
 		"items": {
 			"type": "array",
-			"description": "Items included in this stack with status. Sovereignty scoring is handled via relations, not here.",
+			"description": "Items included in this stack with status and role-based sovereignty scoring",
 			"items": {
 				"type": "object",
-				"required": ["itemId", "status"],
+				"required": ["itemId", "status", "role"],
 				"additionalProperties": false,
 				"properties": {
 					"itemId": {
@@ -66,26 +66,36 @@
 						"description": "Status in this stack",
 						"enum": ["recommended", "approved", "deprecated"]
 					},
+					"role": {
+						"type": "string",
+						"description": "Role of the stack (country) relative to this item. Multiplier: maintainer=1.0, contributor=0.75, funder=0.5, consumer=0.25",
+						"enum": ["maintainer", "contributor", "funder", "consumer"]
+					},
 					"since": {
 						"type": "string",
 						"description": "ISO 8601 date when this item was added to the stack"
 					},
-					"note": {
+					"rationale": {
 						"type": "object",
-						"description": "Optional localized note or rationale for inclusion",
+						"description": "Localized explanation of the role and inclusion rationale",
 						"additionalProperties": false,
 						"properties": {
 							"de": { "type": "string" },
 							"en": { "type": "string" },
 							"fr": { "type": "string" }
 						}
+					},
+					"alternatives": {
+						"type": "array",
+						"description": "Alternative item IDs that could replace this one",
+						"items": { "type": "string" }
 					}
 				}
 			}
 		},
 		"participants": {
 			"type": "array",
-			"description": "Organizations involved with this stack (metadata only — role-based sovereignty scoring is in relations/)",
+			"description": "Organizations involved with this stack (metadata only)",
 			"items": {
 				"type": "object",
 				"required": ["name", "role"],
