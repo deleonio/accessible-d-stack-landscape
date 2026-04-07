@@ -371,23 +371,58 @@ body {
 		max-width: 1400px;
 		margin: 0 auto;
 		width: 100%;
-		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-end;
-		gap: var(--ds-space-3);
-	}
+		display: grid;
+		gap: var(--ds-space-2);
 
-	&__search {
-		flex: 2;
-		min-width: 200px;
+		// Mobile: two columns — stack+layer side by side, search full width, sort+toggle row
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas:
+			'stack  layer'
+			'search search'
+			'sort   toggle';
+
+		// When no stack selector is rendered, layer gets full top row
+		&:not(:has(.filter-bar__select--stack)) {
+			grid-template-areas:
+				'layer  layer'
+				'search search'
+				'sort   toggle';
+		}
+
+		@media (width >= 600px) {
+			grid-template-columns: 1fr 1fr 2fr auto auto;
+			grid-template-areas: 'stack layer search sort toggle';
+
+			&:not(:has(.filter-bar__select--stack)) {
+				grid-template-columns: 1fr 2fr auto auto;
+				grid-template-areas: 'layer search sort toggle';
+			}
+		}
+
+		@media (width >= 1024px) {
+			gap: var(--ds-space-3);
+		}
 	}
 
 	&__select {
-		flex: 1;
-		min-width: 160px;
+		width: 100%;
+
+		&--stack {
+			grid-area: stack;
+		}
+
+		&--layer {
+			grid-area: layer;
+		}
+	}
+
+	&__search {
+		grid-area: search;
+		width: 100%;
 	}
 
 	&__sort {
+		grid-area: sort;
 		display: flex;
 		align-items: flex-end;
 		gap: var(--ds-space-2);
@@ -395,8 +430,8 @@ body {
 	}
 
 	&__view-toggle {
-		flex-shrink: 0;
-		margin-left: auto;
+		grid-area: toggle;
+		place-self: end;
 	}
 }
 

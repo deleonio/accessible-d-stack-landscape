@@ -56,7 +56,7 @@ export function FilterBar({
 			<div className="filter-bar__inner">
 				{stacks.length > 0 && (
 					<KolSingleSelect
-						className="filter-bar__select sort-select"
+						className="filter-bar__select filter-bar__select--stack sort-select"
 						_label={t('stack.label')}
 						_options={stackOptions}
 						_value={activeStackId ?? ''}
@@ -66,7 +66,7 @@ export function FilterBar({
 					/>
 				)}
 				<KolSingleSelect
-					className="filter-bar__select sort-select"
+					className="filter-bar__select filter-bar__select--layer sort-select"
 					_label={t('search.categoryLabel')}
 					_options={layerOptions}
 					_value={filters.selectedLayer ?? ''}
