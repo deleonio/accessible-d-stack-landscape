@@ -48,7 +48,7 @@
 	},
 	"category": {
 		"toolbarAria": "Kategorien filtern",
-		"label": "Kategorie:",
+		"label": "Kategorie",
 		"all": "Alle",
 		"results": {
 			"filteredPrefix": "von",
@@ -106,7 +106,7 @@
 		"dismiss": "Später"
 	},
 	"stack": {
-		"label": "Stack:",
+		"label": "Stack",
 		"all": "Ohne",
 		"selectorAria": "Stack auswählen",
 		"rationale": "Begründung",

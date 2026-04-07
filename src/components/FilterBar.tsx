@@ -58,6 +58,7 @@ export function FilterBar({
 					<KolSingleSelect
 						className="filter-bar__select filter-bar__select--stack sort-select"
 						_label={t('stack.label')}
+						_hideLabel
 						_options={stackOptions}
 						_value={activeStackId ?? ''}
 						_on={{
@@ -68,6 +69,7 @@ export function FilterBar({
 				<KolSingleSelect
 					className="filter-bar__select filter-bar__select--layer sort-select"
 					_label={t('search.categoryLabel')}
+					_hideLabel
 					_options={layerOptions}
 					_value={filters.selectedLayer ?? ''}
 					_on={{
@@ -77,6 +79,7 @@ export function FilterBar({
 				<KolInputText
 					className="filter-bar__search"
 					_label={t('search.inputLabel')}
+					_hideLabel
 					_value={filters.searchQuery}
 					_placeholder={t('search.placeholder')}
 					_on={{
@@ -108,6 +111,7 @@ export function FilterBar({
 				<KolInputCheckbox
 					className="filter-bar__view-toggle"
 					_label={t('view.viewToggle')}
+					_hideLabel
 					_variant="switch"
 					_checked={viewMode === 'list'}
 					_on={{

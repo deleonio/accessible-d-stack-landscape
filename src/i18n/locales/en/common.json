@@ -48,7 +48,7 @@
 	},
 	"category": {
 		"toolbarAria": "Filter categories",
-		"label": "Category:",
+		"label": "Category",
 		"all": "All",
 		"results": {
 			"filteredPrefix": "of",
@@ -106,7 +106,7 @@
 		"dismiss": "Later"
 	},
 	"stack": {
-		"label": "Stack:",
+		"label": "Stack",
 		"all": "Without",
 		"selectorAria": "Select stack",
 		"rationale": "Rationale",
