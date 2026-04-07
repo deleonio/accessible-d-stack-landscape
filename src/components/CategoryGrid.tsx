@@ -30,7 +30,7 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 	};
 
 	return (
-		<main id="main-content" className="category-container">
+		<section className="category-container">
 			<div className="category-filters" role="toolbar" aria-label={t('category.toolbarAria')}>
 				<span className="category-filters__label">{t('category.label')}</span>
 
@@ -115,6 +115,6 @@ export function CategoryGrid({ categories, articles, filters, onFilterChange, to
 					)}
 				</>
 			)}
-		</main>
+		</section>
 	);
 }

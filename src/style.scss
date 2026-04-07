@@ -833,7 +833,7 @@ kol-card.article-card,
 
 // ─── Static Content Pages ────────────────────────────────────────────────────
 .content-page {
-	width: min(var(--ds-layout-max-width), calc(100% - 2 * var(--ds-space-6)));
+	width: min(1400px, calc(100% - 2 * var(--ds-space-6)));
 	margin: 0 auto;
 	padding: var(--ds-space-8) 0 var(--ds-space-12);
 
@@ -847,6 +847,6 @@ kol-card.article-card,
 		max-width: 70ch;
 		font-size: var(--ds-text-md);
 		line-height: 1.65;
-		color: var(--ds-color-text-soft);
+		color: var(--ds-color-text-muted);
 	}
 }

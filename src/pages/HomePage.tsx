@@ -7,9 +7,9 @@ export function HomePage() {
 	const { filters, setFilters, filtered } = useFilters(ARTICLES);
 
 	return (
-		<>
+		<main id="main-content">
 			<SearchBar filters={filters} onFilterChange={setFilters} categories={CATEGORIES} />
 			<CategoryGrid categories={CATEGORIES} articles={filtered} filters={filters} onFilterChange={setFilters} totalCount={ARTICLES.length} />
-		</>
+		</main>
 	);
 }

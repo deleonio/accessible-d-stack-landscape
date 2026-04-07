@@ -7,22 +7,26 @@ import { ImprintPage } from './pages/ImprintPage';
 import { SettingsPage } from './pages/SettingsPage';
 
 type RouteProps = {
+	default?: boolean;
 	path?: string;
 };
 
-function HomeRoute({ path }: RouteProps) {
+function HomeRoute({ default: isDefault, path }: RouteProps) {
+	void isDefault;
 	void path;
 
 	return <HomePage />;
 }
 
-function SettingsRoute({ path }: RouteProps) {
+function SettingsRoute({ default: isDefault, path }: RouteProps) {
+	void isDefault;
 	void path;
 
 	return <SettingsPage />;
 }
 
-function ImprintRoute({ path }: RouteProps) {
+function ImprintRoute({ default: isDefault, path }: RouteProps) {
+	void isDefault;
 	void path;
 
 	return <ImprintPage />;
@@ -36,6 +40,9 @@ function App() {
 				<HomeRoute path="/" />
 				<SettingsRoute path="/einstellungen" />
 				<ImprintRoute path="/impressum" />
+				<SettingsRoute path="/settings" />
+				<ImprintRoute path="/imprint" />
+				<HomeRoute default />
 			</Router>
 			<Footer />
 			<PwaWrapper />
