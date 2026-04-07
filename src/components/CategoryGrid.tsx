@@ -99,7 +99,7 @@ export function CategoryGrid({ layers, articles, filters, onFilterChange, totalC
 					<ul className="articles-grid">
 						{paginatedArticles.map((article) => (
 							<li key={article.id}>
-								<ArticleCard article={article} stackItem={stackItemMap?.get(article.id)} />
+								<ArticleCard article={article} stackItem={stackItemMap?.get(article.id)} stackItemMap={stackItemMap} />
 							</li>
 						))}
 					</ul>

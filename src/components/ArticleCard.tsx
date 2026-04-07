@@ -1,4 +1,4 @@
-import { KolBadge, KolButton, KolCard, KolDrawer, KolImage } from '@public-ui/preact';
+import { KolButton, KolCard, KolDrawer, KolImage } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS } from '../data/catalog';
@@ -9,6 +9,7 @@ import { computeSovereigntyScore } from '../utils/sovereigntyScore';
 interface ArticleCardProps {
 	article: Item;
 	stackItem?: StackItem;
+	stackItemMap?: Map<string, StackItem>;
 }
 
 const ROLE_COLORS: Record<ParticipantRole, string> = {
@@ -24,7 +25,7 @@ function scoreColor(score: number): string {
 	return '#c62828';
 }
 
-export function ArticleCard({ article, stackItem }: ArticleCardProps) {
+export function ArticleCard({ article, stackItem, stackItemMap }: ArticleCardProps) {
 	const { i18n, t } = useTranslation();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [selectedArticle, setSelectedArticle] = useState(article);
@@ -34,9 +35,10 @@ export function ArticleCard({ article, stackItem }: ArticleCardProps) {
 	const category = LAYERS.find((c) => c.id === selectedArticle.layer);
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = getLocalizedText(category?.name ?? { de: 'Allgemein', en: 'General', fr: 'Général' }, i18n.language);
-	const relatedArticles = ITEMS.filter((candidate) => candidate.layer === selectedArticle.layer && candidate.id !== selectedArticle.id).sort((a, b) =>
-		getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language),
-	);
+	const relatedArticles = ITEMS.filter(
+		(candidate) =>
+			candidate.layer === selectedArticle.layer && candidate.id !== selectedArticle.id && (stackItemMap === undefined || stackItemMap.has(candidate.id)),
+	).sort((a, b) => getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language));
 
 	const score = computeSovereigntyScore(article.sovereigntyCriteria);
 	const selectedScore = computeSovereigntyScore(selectedArticle.sovereigntyCriteria);
@@ -94,11 +96,6 @@ export function ArticleCard({ article, stackItem }: ArticleCardProps) {
 						)}{' '}
 					</div>
 					<p className="card-description">{getLocalizedText(article.description, i18n.language)}</p>
-					<div className="card-tags">
-						{article.tags.slice(0, 4).map((tag) => (
-							<KolBadge key={tag} _label={tag} _color="#e8eaed" className="tag-badge" />
-						))}
-					</div>
 					<div className="card-action">
 						<KolButton
 							_label={t('article.openDetails')}
@@ -155,11 +152,6 @@ export function ArticleCard({ article, stackItem }: ArticleCardProps) {
 								)}
 							</div>{' '}
 							<p className="drawer-description">{getLocalizedText(selectedArticle.description, i18n.language)}</p>
-							<div className="drawer-tags">
-								{selectedArticle.tags.map((tag) => (
-									<KolBadge key={`${selectedArticle.id}-${tag}`} _label={tag} _color="#e8eaed" className="tag-badge" />
-								))}
-							</div>
 							{relatedArticles.length > 0 && (
 								<div className="drawer-related">
 									<p className="drawer-related__title">{t('article.relatedTitle')}</p>
