@@ -13,6 +13,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 	const { i18n, t } = useTranslation();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [selectedArticle, setSelectedArticle] = useState(article);
+	const [failedLogos, setFailedLogos] = useState<Set<string>>(new Set());
 	const localizedArticleName = getLocalizedText(article.name, i18n.language);
 	const localizedSelectedArticleName = getLocalizedText(selectedArticle.name, i18n.language);
 	const category = CATEGORIES.find((c) => c.id === selectedArticle.category);
@@ -26,20 +27,12 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			return null;
 		}
 
-		return (
-			<KolImage
-				_src={logo}
-				_alt={localizedName}
-				_loading="lazy"
-				className="article-logo"
-				width={40}
-				height={40}
-				onError={(event: unknown) => {
-					const imageElement = (event as { currentTarget: HTMLElement & { _src?: string } }).currentTarget;
-					imageElement._src = 'assets/broken-logo.svg';
-				}}
-			/>
-		);
+		const src = failedLogos.has(logo) ? 'assets/broken-logo.svg' : logo;
+		const handleImageError = () => {
+			setFailedLogos((prev) => new Set([...prev, logo]));
+		};
+
+		return <KolImage _src={src} _alt={localizedName} _loading="lazy" className="article-logo" width={40} height={40} onError={handleImageError} />;
 	};
 
 	return (
