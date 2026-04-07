@@ -37,6 +37,7 @@ let renderApp: (() => void) | null = null;
 const splash = document.getElementById('splash');
 
 if (splash instanceof HTMLElement) {
+	splash.style.cursor = 'pointer';
 	splash.addEventListener('click', () => {
 		dismissSplash();
 		renderApp?.();
