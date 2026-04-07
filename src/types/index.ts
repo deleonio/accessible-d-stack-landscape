@@ -84,9 +84,10 @@ export type StackItemStatus = 'recommended' | 'approved' | 'deprecated';
 export type StackItem = {
 	itemId: string;
 	status: StackItemStatus;
+	role: ParticipantRole;
 	since?: string;
-	note?: LocalizableText;
-	participants: Participant[];
+	rationale?: LocalizableText;
+	alternatives?: string[];
 };
 
 export type Stack = {
@@ -98,21 +99,6 @@ export type Stack = {
 	version: string;
 	publishedAt?: string;
 	items: StackItem[];
-};
-
-// ---------------------------------------------------------------------------
-// Relations between items
-// ---------------------------------------------------------------------------
-
-export type RelationType = 'requires' | 'complements' | 'replaces';
-
-export type Relation = {
-	from: string;
-	to: string;
-	types: RelationType[];
-	/** Compatibility score 0–1 */
-	score?: number;
-	note?: LocalizableText;
 };
 
 // ---------------------------------------------------------------------------

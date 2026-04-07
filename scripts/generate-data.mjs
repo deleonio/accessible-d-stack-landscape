@@ -4,7 +4,6 @@
  *   data/layers/      → LAYERS
  *   data/items/       → ITEMS   (logo resolved via src/data/logo-urls.json)
  *   data/stacks/      → STACKS
- *   data/relations/   → RELATIONS
  *
  * Writes: src/data/items.generated.ts
  *
@@ -76,7 +75,6 @@ const rawItems = readJsonDir(join(DATA_DIR, 'items'));
 const items = rawItems.map((item) => ({ ...item, logo: resolveLogo(item) }));
 
 const stacks = readJsonDir(join(DATA_DIR, 'stacks'));
-const relations = readJsonDir(join(DATA_DIR, 'relations'));
 
 // ---------------------------------------------------------------------------
 // Generate TypeScript output
@@ -90,11 +88,11 @@ function serialize(value) {
 }
 
 const output = `// GENERATED FILE - DO NOT EDIT MANUALLY
-// Generated from: data/layers/ + data/items/ + data/stacks/ + data/relations/
+// Generated from: data/layers/ + data/items/ + data/stacks/
 // Logo fallback via: src/data/logo-urls.json
 // Generated at: ${new Date().toISOString()}
 
-import type { Item, Layer, Stack, Relation } from '../types';
+import type { Item, Layer, Stack } from '../types';
 
 const ASSET_BASE_URL = (import.meta.env.VITE_ASSET_BASE_URL ?? '').replace(/\\/+$/, '');
 
@@ -114,8 +112,6 @@ export const ITEMS: Item[] = RAW_ITEMS.map((item) => ({
 }));
 
 export const STACKS: Stack[] = ${serialize(stacks)};
-
-export const RELATIONS: Relation[] = ${serialize(relations)};
 `;
 
 writeFileSync(OUTPUT_TS, output, 'utf-8');
@@ -129,7 +125,6 @@ console.log(`✅  Generated ${OUTPUT_TS.replace(ROOT, '.')}`);
 console.log(`   Layers:    ${layers.length}`);
 console.log(`   Items:     ${items.length}`);
 console.log(`   Stacks:    ${stacks.length}`);
-console.log(`   Relations: ${relations.length}`);
 console.log('');
 console.log('   Items per layer:');
 for (const [layer, count] of Object.entries(layerCounts)) {
