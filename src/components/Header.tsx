@@ -1,8 +1,11 @@
+import { KolButton, KolDrawer } from '@public-ui/preact';
+import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Header() {
 	const { t } = useTranslation();
+	const [langDrawerOpen, setLangDrawerOpen] = useState(false);
 	const baseUrl = import.meta.env.BASE_URL;
 	const brandUrl = import.meta.env.VITE_BRAND_URL ?? baseUrl;
 	const commitSha = (import.meta.env.VITE_COMMIT_SHA || 'dev').slice(0, 7);
@@ -44,9 +47,28 @@ export function Header() {
 								{t('header.nav.docs')}
 							</a>
 						</nav>
-						<LanguageSwitcher />
+						<KolButton
+							className="lang-drawer-trigger"
+							_label={t('header.languageSwitcher.label')}
+							_hideLabel
+							_icons={{ left: 'kolicon kolicon-cogwheel' }}
+							_variant="ghost"
+							_on={{ onClick: () => setLangDrawerOpen(true) }}
+						/>
 					</div>
 				</div>
+
+				<KolDrawer
+					_label={t('header.languageSwitcher.label')}
+					_align="right"
+					_hasCloser
+					_open={langDrawerOpen}
+					_on={{ onClose: () => setLangDrawerOpen(false) }}
+				>
+					<div className="lang-drawer-content">
+						<LanguageSwitcher />
+					</div>
+				</KolDrawer>
 
 				<div className="header__content">
 					<p className="header__eyebrow">{t('header.eyebrow')}</p>

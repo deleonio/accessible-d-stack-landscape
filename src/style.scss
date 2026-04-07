@@ -280,14 +280,9 @@ body {
 		}
 	}
 
-	.language-switcher {
-		min-width: 8.5rem;
-
-		kol-select {
-			background: transparent;
-			display: block;
-			min-width: 8.5rem;
-		}
+	.lang-drawer-trigger {
+		color: #fff;
+		flex-shrink: 0;
 	}
 
 	&__content {
@@ -346,14 +341,15 @@ body {
 		&__nav a {
 			font-size: var(--ds-text-sm);
 		}
+	}
+}
 
-		.language-switcher {
-			min-width: 10rem;
+// ─── Language drawer ──────────────────────────────────────────────────────────
+.lang-drawer-content {
+	padding: var(--ds-space-4);
 
-			kol-select {
-				min-width: 10rem;
-			}
-		}
+	.language-switcher {
+		min-width: 14rem;
 	}
 }
 
