@@ -42,6 +42,13 @@
 			"type": "string",
 			"description": "Hex color code",
 			"pattern": "^#[0-9a-fA-F]{6}$"
+		},
+		"weight": {
+			"type": "number",
+			"description": "Weight factor for overall sovereignty score calculation. Higher weight = more impact on the total stack score. Default: 1.0",
+			"minimum": 0,
+			"maximum": 5,
+			"default": 1
 		}
 	}
 }

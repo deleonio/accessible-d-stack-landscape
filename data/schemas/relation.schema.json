@@ -1,9 +1,9 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"title": "Stack-Item Relation Definition",
-	"description": "Defines the relationship and sovereignty score between a Stack and an Item. Maps which items are part of a stack and how they rate on sovereignty.",
+	"description": "Defines the role-based relationship between a Stack (country) and an Item. The sovereignty score is calculated from the item's intrinsic sovereigntyCriteria combined with the role multiplier.",
 	"type": "object",
-	"required": ["stack", "item", "role", "sovereigntyScore"],
+	"required": ["stack", "item", "role"],
 	"additionalProperties": false,
 	"properties": {
 		"stack": {
@@ -16,14 +16,8 @@
 		},
 		"role": {
 			"type": "string",
-			"description": "Role of the stack relative to this item (what is the stack's relationship to this item)",
+			"description": "Role of the stack (country) relative to this item. Used as multiplier for sovereignty scoring: maintainer=1.0, contributor=0.75, funder=0.5, consumer=0.25",
 			"enum": ["maintainer", "contributor", "funder", "consumer"]
-		},
-		"sovereigntyScore": {
-			"type": "number",
-			"description": "Sovereignty score for this item in this stack context (0–1, where 1 = fully sovereign)",
-			"minimum": 0,
-			"maximum": 1
 		},
 		"rationale": {
 			"type": "object",
