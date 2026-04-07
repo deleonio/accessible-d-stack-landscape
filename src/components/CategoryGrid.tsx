@@ -38,29 +38,23 @@ export function CategoryGrid({
 	const { i18n, t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const sortedArticles = useMemo(
-		() => {
-			const layerOrder = new Map(layers.map((layer, index) => [layer.id, layer.order ?? index]));
+	const sortedArticles = useMemo(() => {
+		const layerOrder = new Map(layers.map((layer, index) => [layer.id, layer.order ?? index]));
 
-			return [...articles].sort((a, b) => {
-				const layerCmp = (layerOrder.get(a.layer) ?? Number.MAX_SAFE_INTEGER) - (layerOrder.get(b.layer) ?? Number.MAX_SAFE_INTEGER);
-				if (layerCmp !== 0) return layerCmp;
+		return [...articles].sort((a, b) => {
+			const layerCmp = (layerOrder.get(a.layer) ?? Number.MAX_SAFE_INTEGER) - (layerOrder.get(b.layer) ?? Number.MAX_SAFE_INTEGER);
+			if (layerCmp !== 0) return layerCmp;
 
-				const localizedNameA = getLocalizedText(a.name, i18n.language);
-				const localizedNameB = getLocalizedText(b.name, i18n.language);
-				const nameCmp = localizedNameA.localeCompare(localizedNameB, i18n.language);
+			const localizedNameA = getLocalizedText(a.name, i18n.language);
+			const localizedNameB = getLocalizedText(b.name, i18n.language);
+			const nameCmp = localizedNameA.localeCompare(localizedNameB, i18n.language);
 
-				const cmp =
-					sortField === 'name'
-						? nameCmp
-						: computeSovereigntyScore(a.sovereigntyCriteria) - computeSovereigntyScore(b.sovereigntyCriteria);
-				if (cmp !== 0) return sortDir === 'asc' ? cmp : -cmp;
+			const cmp = sortField === 'name' ? nameCmp : computeSovereigntyScore(a.sovereigntyCriteria) - computeSovereigntyScore(b.sovereigntyCriteria);
+			if (cmp !== 0) return sortDir === 'asc' ? cmp : -cmp;
 
-				return nameCmp;
-			});
-		},
-		[articles, layers, sortField, sortDir, i18n.language],
-	);
+			return nameCmp;
+		});
+	}, [articles, layers, sortField, sortDir, i18n.language]);
 
 	const activeCount = articles.length;
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
