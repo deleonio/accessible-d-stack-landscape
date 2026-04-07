@@ -1,12 +1,15 @@
 import { useMemo, useState } from 'preact/hooks';
 import { CategoryGrid } from '../components/CategoryGrid';
-import { SearchBar } from '../components/SearchBar';
+import { FilterBar, SortDir, SortField, ViewMode } from '../components/FilterBar';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { useFilters } from '../hooks/useFilters';
 import { StackItem } from '../types';
 
 export function HomePage() {
 	const [activeStackId, setActiveStackId] = useState<string | null>(null);
+	const [sortField, setSortField] = useState<SortField>('name');
+	const [sortDir, setSortDir] = useState<SortDir>('asc');
+	const [viewMode, setViewMode] = useState<ViewMode>('tile');
 
 	const activeStack = useMemo(() => STACKS.find((s) => s.id === activeStackId) ?? null, [activeStackId]);
 
@@ -24,7 +27,20 @@ export function HomePage() {
 
 	return (
 		<main id="main-content">
-			<SearchBar filters={filters} onFilterChange={setFilters} layers={LAYERS} stacks={STACKS} activeStackId={activeStackId} onStackChange={setActiveStackId} />
+			<FilterBar
+				filters={filters}
+				onFilterChange={setFilters}
+				layers={LAYERS}
+				stacks={STACKS}
+				activeStackId={activeStackId}
+				onStackChange={setActiveStackId}
+				sortField={sortField}
+				onSortFieldChange={setSortField}
+				sortDir={sortDir}
+				onSortDirToggle={() => setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))}
+				viewMode={viewMode}
+				onViewModeChange={setViewMode}
+			/>
 			<CategoryGrid
 				layers={LAYERS}
 				articles={filtered}
@@ -33,6 +49,9 @@ export function HomePage() {
 				totalCount={baseItems.length}
 				activeStack={activeStack ?? undefined}
 				stackItemMap={stackItemMap}
+				sortField={sortField}
+				sortDir={sortDir}
+				viewMode={viewMode}
 			/>
 		</main>
 	);
