@@ -29,17 +29,22 @@ export function Header() {
 
 				<div className="header__brand-bar">
 					<a href={brandUrl} className="brand-logo" rel="noopener noreferrer">
+						<span className="brand-logo__mark">
+							<img src={`${baseUrl}favicon.svg`} alt="StackAtlas Logo" width="28" height="28" loading="eager" decoding="async" />
+						</span>
 						<span>StackAtlas</span>
 						<span className="brand-logo__badge">MVP</span>
 					</a>
-					<nav className="header__nav" aria-label={t('header.mainNavigationAria')}>
-						<a href={baseUrl}>{t('header.nav.home')}</a>
-						<a href="#main-content">{t('header.nav.categories')}</a>
-						<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
-							{t('header.nav.docs')}
-						</a>
-					</nav>
-					<LanguageSwitcher />
+					<div className="header__controls">
+						<nav className="header__nav" aria-label={t('header.mainNavigationAria')}>
+							<a href={baseUrl}>{t('header.nav.home')}</a>
+							<a href="#main-content">{t('header.nav.categories')}</a>
+							<a href="https://github.com/deleonio/accessible-d-stack-landscape#readme" rel="noopener noreferrer">
+								{t('header.nav.docs')}
+							</a>
+						</nav>
+						<LanguageSwitcher />
+					</div>
 				</div>
 
 				<div className="header__content">
