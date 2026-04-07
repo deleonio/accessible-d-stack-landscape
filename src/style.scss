@@ -854,8 +854,12 @@ kol-card.article-card,
 		width: 100%;
 		justify-content: center;
 
-		@media (width < 768px) {
-			flex-wrap: wrap;
+		@media (width < 480px) {
+			flex-direction: column;
+
+			kol-button {
+				width: 100%;
+			}
 		}
 
 		@media (width < 480px) {
