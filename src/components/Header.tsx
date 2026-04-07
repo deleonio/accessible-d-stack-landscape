@@ -30,7 +30,7 @@ export function Header() {
 				<div className="header__brand-bar">
 					<a href={brandUrl} className="brand-logo" rel="noopener noreferrer">
 						<span className="brand-logo__mark">
-							<img src={`${baseUrl}favicon.svg`} alt="StackAtlas Logo" width="28" height="28" loading="eager" decoding="async" />
+							<img src={`${baseUrl}favicon.svg`} alt="" width="28" height="28" loading="eager" decoding="async" />
 						</span>
 						<span>StackAtlas</span>
 						<span className="brand-logo__badge">MVP</span>
