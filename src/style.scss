@@ -251,33 +251,8 @@ body {
 
 	&__controls {
 		display: flex;
-		flex-direction: column-reverse;
-		align-items: flex-end;
-		gap: var(--ds-space-1);
-	}
-
-	&__nav {
-		display: flex;
 		align-items: center;
-		justify-content: flex-end;
-		flex-wrap: nowrap;
 		gap: var(--ds-space-2);
-
-		a {
-			color: rgb(255 255 255 / 85%);
-			text-decoration: none;
-			font-size: var(--ds-text-xs);
-			min-height: 44px;
-			display: inline-flex;
-			align-items: center;
-
-			&:hover,
-			&:focus {
-				color: #fff;
-				text-decoration: underline;
-				text-underline-offset: 2px;
-			}
-		}
 	}
 
 	.lang-drawer-trigger {
@@ -333,13 +308,7 @@ body {
 
 	@media (width >= 768px) {
 		&__controls {
-			flex-direction: row;
-			align-items: center;
 			gap: var(--ds-space-3);
-		}
-
-		&__nav a {
-			font-size: var(--ds-text-sm);
 		}
 	}
 }
