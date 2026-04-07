@@ -50,16 +50,18 @@ export function ArticleCard({ article }: ArticleCardProps) {
 							<KolBadge key={tag} _label={tag} _color="#e8eaed" className="tag-badge" />
 						))}
 					</div>
-					<KolButton
-						_label={t('article.openDetails')}
-						_variant="secondary"
-						_on={{
-							onClick: () => {
-								setSelectedArticle(article);
-								setIsDrawerOpen(true);
-							},
-						}}
-					/>
+					<div className="card-action">
+						<KolButton
+							_label={t('article.openDetails')}
+							_variant="secondary"
+							_on={{
+								onClick: () => {
+									setSelectedArticle(article);
+									setIsDrawerOpen(true);
+								},
+							}}
+						/>
+					</div>
 				</div>
 			</KolCard>
 			{article.featured && (
