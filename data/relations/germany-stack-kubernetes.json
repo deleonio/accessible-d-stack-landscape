@@ -1,0 +1,11 @@
+{
+	"stack": "germany-stack",
+	"item": "kubernetes",
+	"role": "consumer",
+	"sovereigntyScore": 0.95,
+	"rationale": {
+		"de": "Kubernetes ist der Industrie-Standard für Container-Orchestrierung und zu 100% Open-Source (CNCF). Essentiell für den Germany Stack.",
+		"en": "Kubernetes is the industry standard for container orchestration and 100% open-source (CNCF). Essential for the Germany Stack."
+	},
+	"alternatives": ["docker-swarm", "nomad"]
+}

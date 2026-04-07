@@ -1,42 +1,45 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "Relation Definition",
-	"description": "Defines a relationship or compatibility between two items in the digital stack",
+	"title": "Stack-Item Relation Definition",
+	"description": "Defines the relationship and sovereignty score between a Stack and an Item. Maps which items are part of a stack and how they rate on sovereignty.",
 	"type": "object",
-	"required": ["from", "to", "types"],
+	"required": ["stack", "item", "role", "sovereigntyScore"],
 	"additionalProperties": false,
 	"properties": {
-		"from": {
+		"stack": {
 			"type": "string",
-			"description": "Source item ID (must exist in data/items/)"
+			"description": "Stack ID (must exist in data/stacks/)"
 		},
-		"to": {
+		"item": {
 			"type": "string",
-			"description": "Target item ID (must exist in data/items/)"
+			"description": "Item ID (must exist in data/items/)"
 		},
-		"types": {
-			"type": "array",
-			"description": "Types of relationships between the items",
-			"items": {
-				"type": "string",
-				"enum": ["requires", "complements", "replaces"]
-			},
-			"minItems": 1
+		"role": {
+			"type": "string",
+			"description": "Role of the stack relative to this item (what is the stack's relationship to this item)",
+			"enum": ["maintainer", "contributor", "funder", "consumer"]
 		},
-		"score": {
+		"sovereigntyScore": {
 			"type": "number",
-			"description": "Compatibility/strength score (0–1)",
+			"description": "Sovereignty score for this item in this stack context (0–1, where 1 = fully sovereign)",
 			"minimum": 0,
 			"maximum": 1
 		},
-		"note": {
+		"rationale": {
 			"type": "object",
-			"description": "Optional localized explanation of the relationship",
+			"description": "Localized explanation why this item is in the stack and its sovereignty rating",
 			"additionalProperties": false,
 			"properties": {
 				"de": { "type": "string" },
 				"en": { "type": "string" },
 				"fr": { "type": "string" }
+			}
+		},
+		"alternatives": {
+			"type": "array",
+			"description": "Alternative items that could replace this one",
+			"items": {
+				"type": "string"
 			}
 		}
 	}
