@@ -39,15 +39,23 @@ export function CategoryGrid({
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const sortedArticles = useMemo(
-		() =>
-			[...articles].sort((a, b) => {
+		() => {
+			const layerOrder = new Map(layers.map((layer, index) => [layer.id, layer.order ?? index]));
+
+			return [...articles].sort((a, b) => {
+				const layerCmp = (layerOrder.get(a.layer) ?? Number.MAX_SAFE_INTEGER) - (layerOrder.get(b.layer) ?? Number.MAX_SAFE_INTEGER);
+				if (layerCmp !== 0) return layerCmp;
+
 				const cmp =
 					sortField === 'name'
 						? getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language)
 						: computeSovereigntyScore(a.sovereigntyCriteria) - computeSovereigntyScore(b.sovereigntyCriteria);
-				return sortDir === 'asc' ? cmp : -cmp;
-			}),
-		[articles, sortField, sortDir, i18n.language],
+				if (cmp !== 0) return sortDir === 'asc' ? cmp : -cmp;
+
+				return getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language);
+			});
+		},
+		[articles, layers, sortField, sortDir, i18n.language],
 	);
 
 	const activeCount = articles.length;
