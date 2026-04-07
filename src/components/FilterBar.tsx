@@ -54,24 +54,6 @@ export function FilterBar({
 	return (
 		<section className="filter-bar" aria-label={t('search.regionAria')}>
 			<div className="filter-bar__inner">
-				<KolInputText
-					className="filter-bar__search"
-					_label={t('search.inputLabel')}
-					_value={filters.searchQuery}
-					_placeholder={t('search.placeholder')}
-					_on={{
-						onInput: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, searchQuery: value as string }),
-					}}
-				/>
-				<KolSingleSelect
-					className="filter-bar__select sort-select"
-					_label={t('search.categoryLabel')}
-					_options={layerOptions}
-					_value={filters.selectedLayer ?? ''}
-					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedLayer: value ? (value as string) : null }),
-					}}
-				/>
 				{stacks.length > 0 && (
 					<KolSingleSelect
 						className="filter-bar__select sort-select"
@@ -83,6 +65,24 @@ export function FilterBar({
 						}}
 					/>
 				)}
+				<KolSingleSelect
+					className="filter-bar__select sort-select"
+					_label={t('search.categoryLabel')}
+					_options={layerOptions}
+					_value={filters.selectedLayer ?? ''}
+					_on={{
+						onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedLayer: value ? (value as string) : null }),
+					}}
+				/>
+				<KolInputText
+					className="filter-bar__search"
+					_label={t('search.inputLabel')}
+					_value={filters.searchQuery}
+					_placeholder={t('search.placeholder')}
+					_on={{
+						onInput: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, searchQuery: value as string }),
+					}}
+				/>
 				<div className="filter-bar__sort">
 					<KolSingleSelect
 						className="sort-select"
@@ -97,7 +97,13 @@ export function FilterBar({
 							onChange: (_e: globalThis.Event, value: unknown) => onSortFieldChange(value as SortField),
 						}}
 					/>
-					<KolButton _label={sortDir === 'asc' ? t('view.sort.asc') : t('view.sort.desc')} _variant="secondary" _on={{ onClick: onSortDirToggle }} />
+					<KolButton
+						_label={sortDir === 'asc' ? t('view.sort.asc') : t('view.sort.desc')}
+						_hideLabel
+						_icons={{ left: sortDir === 'asc' ? 'kolicon kolicon-sort-asc' : 'kolicon kolicon-sort-desc' }}
+						_variant="secondary"
+						_on={{ onClick: onSortDirToggle }}
+					/>
 				</div>
 				<KolInputCheckbox
 					className="filter-bar__view-toggle"
