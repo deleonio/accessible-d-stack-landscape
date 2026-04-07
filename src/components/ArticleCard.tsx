@@ -1,4 +1,4 @@
-import { KolBadge, KolButton, KolCard, KolDrawer } from '@public-ui/preact';
+import { KolBadge, KolButton, KolCard, KolDrawer, KolImage } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { ARTICLES, CATEGORIES } from '../data/articles';
@@ -13,30 +13,41 @@ export function ArticleCard({ article }: ArticleCardProps) {
 	const { i18n, t } = useTranslation();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [selectedArticle, setSelectedArticle] = useState(article);
+	const localizedArticleName = getLocalizedText(article.name, i18n.language);
+	const localizedSelectedArticleName = getLocalizedText(selectedArticle.name, i18n.language);
 	const category = CATEGORIES.find((c) => c.id === selectedArticle.category);
 	const categoryColor = category?.color ?? '#003d82';
 	const categoryName = getLocalizedText(category?.name ?? { de: 'Allgemein', en: 'General', fr: 'Général' }, i18n.language);
 	const relatedArticles = ARTICLES.filter((candidate) => candidate.category === selectedArticle.category && candidate.id !== selectedArticle.id).sort((a, b) =>
 		getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language),
 	);
+	const renderArticleLogo = (logo: string | undefined, localizedName: string) => {
+		if (!logo) {
+			return null;
+		}
+
+		return (
+			<KolImage
+				_src={logo}
+				_alt={localizedName}
+				_loading="lazy"
+				className="article-logo"
+				width={40}
+				height={40}
+				onError={(event: unknown) => {
+					const imageElement = (event as { currentTarget: HTMLElement & { _src?: string } }).currentTarget;
+					imageElement._src = 'assets/broken-logo.svg';
+				}}
+			/>
+		);
+	};
 
 	return (
 		<div className="article-card-wrapper">
-			<KolCard _label={getLocalizedText(article.name, i18n.language)} className="article-card">
+			<KolCard _label={localizedArticleName} className="article-card">
 				<div className="card-content">
 					<div className="card-header">
-						{article.logo && (
-							<img
-								src={article.logo}
-								alt=""
-								role="presentation"
-								className="card-logo"
-								loading="lazy"
-								onError={(e) => {
-									e.currentTarget.src = 'assets/broken-logo.svg';
-								}}
-							/>
-						)}
+						{renderArticleLogo(article.logo, localizedArticleName)}
 						<span
 							className="card-category-dot"
 							style={{ background: categoryColor }}
@@ -71,7 +82,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 			)}
 
 			<KolDrawer
-				_label={t('article.detailsFor', { name: getLocalizedText(selectedArticle.name, i18n.language) })}
+				_label={t('article.detailsFor', { name: localizedSelectedArticleName })}
 				_align="right"
 				_hasCloser
 				_open={isDrawerOpen}
@@ -80,21 +91,10 @@ export function ArticleCard({ article }: ArticleCardProps) {
 				}}
 			>
 				<div className="drawer-content">
-					<KolCard _label={getLocalizedText(selectedArticle.name, i18n.language)} className="drawer-card">
+					<KolCard _label={localizedSelectedArticleName} className="drawer-card">
 						<div className="drawer-details">
 							<div className="drawer-headline">
-								{selectedArticle.logo && (
-									<img
-										src={selectedArticle.logo}
-										alt=""
-										role="presentation"
-										className="card-logo"
-										loading="lazy"
-										onError={(e) => {
-											e.currentTarget.src = 'assets/broken-logo.svg';
-										}}
-									/>
-								)}
+								{renderArticleLogo(selectedArticle.logo, localizedSelectedArticleName)}
 								<div>
 									<p className="drawer-category">{t('article.categoryLabel', { category: categoryName })}</p>
 									{selectedArticle.featured && <KolBadge _label={t('article.featured')} _color={{ backgroundColor: '#003d82', foregroundColor: '#ffffff' }} />}
