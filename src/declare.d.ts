@@ -17,3 +17,8 @@ interface ImportMetaEnv {
 	readonly VITE_BRAND_URL?: string;
 	readonly VITE_ENABLE_PWA?: string;
 }
+
+interface ImportMeta {
+	readonly env: ImportMetaEnv;
+	glob: <T = unknown>(pattern: string, options?: { eager?: boolean }) => Record<string, T>;
+}
