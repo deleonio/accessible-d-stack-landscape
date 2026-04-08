@@ -62,7 +62,7 @@ function normalizeEntries(): NewsEntry[] {
 
 export function NewsPage() {
 	const { i18n, t } = useTranslation();
-	const dateFormatter = new Intl.DateTimeFormat(i18n.language, { dateStyle: 'long' });
+	const dateFormatter = useMemo(() => new Intl.DateTimeFormat(i18n.language, { dateStyle: 'long' }), [i18n.language]);
 	const entries = useMemo(() => normalizeEntries(), []);
 
 	return (
@@ -81,7 +81,7 @@ export function NewsPage() {
 						const Content = entry.Content;
 
 						return (
-							<KolCard _label={entry.title} className="news-report-card" key={entry.slug}>
+							<KolCard _label={entry.title} className="news-report-card" key={`${entry.date}-${entry.slug}`}>
 								<div className="news-report-card__meta">
 									<span>{t('pages.news.metaDate', { date: publishedDate })}</span>
 									{entry.focus && <span>{t(`pages.news.focus.${entry.focus}`, { defaultValue: entry.focus })}</span>}
