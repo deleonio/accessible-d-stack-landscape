@@ -31,7 +31,8 @@
 			"contact": "Contact",
 			"community": "Community",
 			"imprint": "Imprint",
-			"settings": "Settings"
+			"settings": "Settings",
+			"news": "News"
 		},
 		"license": "License: EUPL-1.2",
 		"builtWith": "Built with",
@@ -130,6 +131,29 @@
 		"settings": {
 			"description": "Manage application settings and preferences for StackAtlas here.",
 			"title": "Settings"
+		},
+		"news": {
+			"title": "Rating Reports & Community News",
+			"description": "This page publishes all rating reports so the community can review the evaluation process transparently and improve it together.",
+			"sectionAria": "List of published rating reports",
+			"pushHint": "Whenever a new score is calculated, we publish an update here and can trigger targeted push notifications.",
+			"metaDate": "Published on {{date}}",
+			"metaScore": "New score: {{score}}/100",
+			"metaFocus": "Community focus: {{focus}}",
+			"reports": {
+				"identityWalletInteroperability": {
+					"title": "Rating Report: Identity Wallet Interoperability",
+					"summary": "The community reviewed interfaces, open standards, and portability. Result: strong foundations, but standardized export formats still need improvement."
+				},
+				"openDataGovernance": {
+					"title": "Rating Report: Open Data Governance",
+					"summary": "The review focused on data usage, control mechanisms, and governance transparency. Result: clear progress through traceable role models."
+				},
+				"publicCloudExitReadiness": {
+					"title": "Rating Report: Public Cloud Exit Readiness",
+					"summary": "We assessed exit strategies, interoperability, and vendor lock-in risks. Result: first exit paths exist, but migration effort remains high."
+				}
+			}
 		}
 	}
 }

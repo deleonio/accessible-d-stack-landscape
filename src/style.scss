@@ -1226,3 +1226,31 @@ kol-select {
 		color: var(--ds-color-text-muted);
 	}
 }
+
+.news-page {
+	margin-top: var(--ds-space-6);
+}
+
+.news-page__hint {
+	margin: 0 0 var(--ds-space-4);
+	font-weight: 600;
+	color: var(--ds-color-primary);
+}
+
+.news-page__reports {
+	display: grid;
+	gap: var(--ds-space-4);
+}
+
+.news-report-card {
+	display: block;
+}
+
+.news-report-card__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--ds-space-2);
+	margin-bottom: var(--ds-space-2);
+	font-size: var(--ds-text-xs);
+	color: var(--ds-color-text-muted);
+}

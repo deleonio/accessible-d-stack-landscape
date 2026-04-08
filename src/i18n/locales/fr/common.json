@@ -31,7 +31,8 @@
 			"contact": "Contact",
 			"community": "Communauté",
 			"imprint": "Mentions légales",
-			"settings": "Paramètres"
+			"settings": "Paramètres",
+			"news": "Actualités"
 		},
 		"license": "Licence : EUPL-1.2",
 		"builtWith": "Built with",
@@ -130,6 +131,29 @@
 		"settings": {
 			"description": "Gérez ici les paramètres et préférences de l’application StackAtlas.",
 			"title": "Paramètres"
+		},
+		"news": {
+			"title": "Rapports de notation & actualités communauté",
+			"description": "Cette page publie tous les rapports de notation afin que la communauté puisse suivre l’évaluation de manière transparente et l’améliorer ensemble.",
+			"sectionAria": "Liste des rapports de notation publiés",
+			"pushHint": "À chaque nouveau score calculé, nous publions une mise à jour ici et pouvons envoyer des notifications push ciblées.",
+			"metaDate": "Publié le {{date}}",
+			"metaScore": "Nouveau score : {{score}}/100",
+			"metaFocus": "Focus communauté : {{focus}}",
+			"reports": {
+				"identityWalletInteroperability": {
+					"title": "Rapport de notation : Identity Wallet Interoperability",
+					"summary": "La communauté a évalué les interfaces, les standards ouverts et la portabilité. Résultat : base solide, mais des améliorations restent nécessaires sur les formats d’export standardisés."
+				},
+				"openDataGovernance": {
+					"title": "Rapport de notation : Open Data Governance",
+					"summary": "L’analyse a porté sur l’usage des données, les mécanismes de contrôle et la transparence de la gouvernance. Résultat : progrès clairs grâce à des rôles mieux traçables."
+				},
+				"publicCloudExitReadiness": {
+					"title": "Rapport de notation : Public Cloud Exit Readiness",
+					"summary": "Nous avons évalué les stratégies de sortie, l’interopérabilité et les risques de dépendance fournisseur. Résultat : premiers chemins de sortie disponibles, mais effort de migration encore élevé."
+				}
+			}
 		}
 	}
 }
