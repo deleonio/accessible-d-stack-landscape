@@ -141,7 +141,8 @@
 			"empty": "Aucune actualité publiée pour le moment.",
 			"focus": {
 				"openDataGovernance": "Focus : Open Data Governance",
-				"identityWalletInteroperability": "Focus : Identity Wallet Interoperability"
+				"identityWalletInteroperability": "Focus : Identity Wallet Interoperability",
+				"reportTemplate": "Focus : Modèle de rapport"
 			}
 		}
 	}
