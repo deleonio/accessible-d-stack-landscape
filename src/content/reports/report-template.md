@@ -71,6 +71,14 @@ Beispiel: Kurzer Log- oder CLI-Auszug als Evidenzblock.
 - [ ] Maßnahme 2: Zieltermin setzen
 - [ ] Maßnahme 3: Re-Assessment einplanen
 
+### Beispiel-Tabelle (Kennzahlen)
+
+| Kriterium         | Score | Trend | Kommentar                      |
+| ----------------- | ----: | :---: | ------------------------------ |
+| Interoperabilität |    78 |   ↗   | Offene APIs vorhanden          |
+| Transparenz       |    70 |   →   | Audit-Prozess etabliert        |
+| Exit-Fähigkeit    |    68 |   ↘   | Migrationspfade noch aufwendig |
+
 ## 7. Community-Feedback
 
 Zitat oder Rückmeldung aus der Community:
@@ -90,6 +98,10 @@ Nächste geplante Aktualisierung: **YYYY-MM-DD**
 - **Interoperabilität:** Fähigkeit, mit anderen Systemen zusammenzuarbeiten.
 - **Exit-Fähigkeit:** Fähigkeit, Anbieter/Plattform ohne massiven Lock-in zu wechseln.
 
-### B) Bildplatzhalter
+### B) Bildbeispiele
 
 ![Optionales Diagramm oder Screenshot](https://placehold.co/1200x600?text=Report+Grafik)
+
+![Lokaler Bildplatzhalter](./bilder/report-chart.png)
+
+_Hinweis:_ Für reproduzierbare Inhalte bevorzugt lokale Bilder im Repository, externe Bilder nur als Fallback.
