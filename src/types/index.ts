@@ -57,6 +57,7 @@ export type Item = {
 	oss: boolean;
 	maturity?: Maturity;
 	sovereigntyCriteria: SovereigntyCriteria;
+	sovereigntyScore?: number;
 	github?: {
 		repo?: string;
 		stars?: number;
