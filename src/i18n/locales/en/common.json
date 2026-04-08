@@ -141,7 +141,8 @@
 			"empty": "No news posts published yet.",
 			"focus": {
 				"openDataGovernance": "Focus: Open Data Governance",
-				"identityWalletInteroperability": "Focus: Identity Wallet Interoperability"
+				"identityWalletInteroperability": "Focus: Identity Wallet Interoperability",
+				"reportTemplate": "Focus: Report Template"
 			}
 		}
 	}
