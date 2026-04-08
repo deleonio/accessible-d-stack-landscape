@@ -1,1 +1,0 @@
-import{at as e}from"./index-G8af0_gG-Z60vozDK.js";var t=(t,n,r)=>{e(t,`_open`,n,r)};export{t};
