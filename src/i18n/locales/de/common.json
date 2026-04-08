@@ -134,26 +134,11 @@
 		},
 		"news": {
 			"title": "Rating-Reports & Community-News",
-			"description": "Hier veröffentlichen wir alle aktuellen Rating-Reports, damit die Community die Evaluierung transparent nachvollziehen und gemeinsam weiterentwickeln kann.",
-			"sectionAria": "Liste der veröffentlichten Rating-Reports",
-			"pushHint": "Bei jedem neu ermittelten Score veröffentlichen wir hier ein Update und können gezielt Push-Benachrichtigungen ausspielen.",
+			"description": "Lege neue News einfach als datierte MD/MDX-Datei in `src/content/news/` ab. Inhalte können direkt weitere Report-Markdown-Dateien importieren.",
+			"sectionAria": "Liste der veröffentlichten News",
+			"pushHint": "Sobald ein neuer Score vorliegt, veröffentlichen wir einen MDX-Post und können darauf basierend Push-Benachrichtigungen ausspielen.",
 			"metaDate": "Veröffentlicht am {{date}}",
-			"metaScore": "Neuer Score: {{score}}/100",
-			"metaFocus": "Community-Fokus: {{focus}}",
-			"reports": {
-				"identityWalletInteroperability": {
-					"title": "Rating-Report: Identity Wallet Interoperability",
-					"summary": "Die Community hat Schnittstellen, offene Standards und Portabilität bewertet. Ergebnis: solide Basis, aber noch Nachholbedarf bei standardisierten Exportformaten."
-				},
-				"openDataGovernance": {
-					"title": "Rating-Report: Open Data Governance",
-					"summary": "Im Fokus standen Datennutzung, Kontrollmöglichkeiten und Transparenz in Governance-Prozessen. Ergebnis: deutliche Fortschritte durch nachvollziehbare Rollenmodelle."
-				},
-				"publicCloudExitReadiness": {
-					"title": "Rating-Report: Public Cloud Exit Readiness",
-					"summary": "Bewertet wurden Exit-Strategien, Interoperabilität und Anbieterabhängigkeiten. Ergebnis: erste Exit-Pfade vorhanden, jedoch weiterhin hohe Migrationsaufwände."
-				}
-			}
+			"empty": "Noch keine News veröffentlicht."
 		}
 	}
 }

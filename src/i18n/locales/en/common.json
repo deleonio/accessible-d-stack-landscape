@@ -134,26 +134,11 @@
 		},
 		"news": {
 			"title": "Rating Reports & Community News",
-			"description": "This page publishes all rating reports so the community can review the evaluation process transparently and improve it together.",
-			"sectionAria": "List of published rating reports",
-			"pushHint": "Whenever a new score is calculated, we publish an update here and can trigger targeted push notifications.",
+			"description": "Add new dated MD/MDX files to `src/content/news/`. News posts can directly import additional report markdown files.",
+			"sectionAria": "List of published news posts",
+			"pushHint": "As soon as a new score is available, we publish an MDX post and can trigger push notifications from it.",
 			"metaDate": "Published on {{date}}",
-			"metaScore": "New score: {{score}}/100",
-			"metaFocus": "Community focus: {{focus}}",
-			"reports": {
-				"identityWalletInteroperability": {
-					"title": "Rating Report: Identity Wallet Interoperability",
-					"summary": "The community reviewed interfaces, open standards, and portability. Result: strong foundations, but standardized export formats still need improvement."
-				},
-				"openDataGovernance": {
-					"title": "Rating Report: Open Data Governance",
-					"summary": "The review focused on data usage, control mechanisms, and governance transparency. Result: clear progress through traceable role models."
-				},
-				"publicCloudExitReadiness": {
-					"title": "Rating Report: Public Cloud Exit Readiness",
-					"summary": "We assessed exit strategies, interoperability, and vendor lock-in risks. Result: first exit paths exist, but migration effort remains high."
-				}
-			}
+			"empty": "No news posts published yet."
 		}
 	}
 }
