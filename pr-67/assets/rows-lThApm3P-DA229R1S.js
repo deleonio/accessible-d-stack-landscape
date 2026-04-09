@@ -1,1 +1,0 @@
-import{ct as e}from"./index-G8af0_gG-CKNLc_po.js";var t=(t,n)=>{e(t,`_rows`,n,{min:1})};export{t};
