@@ -9,12 +9,7 @@
 	},
 	"homepage": "https://www.appsmith.com/",
 	"logo": "https://raw.githubusercontent.com/appsmithorg/appsmith/release/app/client/public/static/media/appsmith_logo.svg",
-	"tags": [
-		"rest-graphql",
-		"open-source",
-		"drag-drop",
-		"javascript"
-	],
+	"tags": ["rest-graphql", "open-source", "drag-drop", "javascript"],
 	"oss": true,
 	"maturity": "graduated",
 	"sovereigntyCriteria": {

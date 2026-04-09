@@ -8,12 +8,7 @@
 		"en": ""
 	},
 	"homepage": "https://pyro.ai/",
-	"tags": [
-		"deep-learning",
-		"verarbeitung",
-		"probabilistische-programmierung",
-		"ppl"
-	],
+	"tags": ["deep-learning", "verarbeitung", "probabilistische-programmierung", "ppl"],
 	"oss": true,
 	"maturity": "graduated",
 	"sovereigntyCriteria": {

@@ -8,12 +8,7 @@
 		"en": ""
 	},
 	"homepage": "https://a2aprotocol.ai/",
-	"tags": [
-		"agent",
-		"prozess",
-		"agentische-ki",
-		"automatisierung"
-	],
+	"tags": ["agent", "prozess", "agentische-ki", "automatisierung"],
 	"oss": true,
 	"maturity": "graduated",
 	"sovereigntyCriteria": {

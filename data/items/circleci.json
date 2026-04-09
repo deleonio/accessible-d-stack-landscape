@@ -9,12 +9,7 @@
 	},
 	"homepage": "https://circleci.com/",
 	"logo": "https://commons.wikimedia.org/wiki/Special:FilePath/CircleCI_Logo.svg",
-	"tags": [
-		"pipeline",
-		"cd",
-		"bereitstellung",
-		"ci"
-	],
+	"tags": ["pipeline", "cd", "bereitstellung", "ci"],
 	"oss": true,
 	"maturity": "graduated",
 	"sovereigntyCriteria": {

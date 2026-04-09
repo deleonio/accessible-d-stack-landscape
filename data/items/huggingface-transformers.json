@@ -9,12 +9,7 @@
 	},
 	"homepage": "https://huggingface.co/docs/transformers/index",
 	"logo": "https://commons.wikimedia.org/wiki/Special:FilePath/HuggingFace_logo.svg",
-	"tags": [
-		"deep-learning",
-		"dl",
-		"transformer",
-		"verarbeitung"
-	],
+	"tags": ["deep-learning", "dl", "transformer", "verarbeitung"],
 	"oss": true,
 	"maturity": "graduated",
 	"sovereigntyCriteria": {
