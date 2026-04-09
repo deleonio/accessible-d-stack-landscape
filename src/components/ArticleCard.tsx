@@ -147,6 +147,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 			)}
 
 			<KolDrawer
+				className="article-details-drawer"
 				_label={t('article.detailsFor', { name: localizedSelectedArticleName })}
 				_align="right"
 				_hasCloser
