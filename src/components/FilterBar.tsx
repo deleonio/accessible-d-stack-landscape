@@ -52,61 +52,63 @@ export function FilterBar({
 	];
 
 	return (
-		<section className="filter-bar" aria-label={t('search.regionAria')}>
-			<KolSingleSelect
-				className="filter-bar__select filter-bar__select--stack sort-select"
-				_label={t('stack.label')}
-				_hideLabel
-				_options={stackOptions}
-				_value={activeStackId ?? ''}
-				_on={{
-					onChange: (_e: globalThis.Event, value: unknown) => onStackChange(value ? (value as string) : null),
-				}}
-			/>
-			<KolSingleSelect
-				className="filter-bar__select filter-bar__select--layer sort-select"
-				_label={t('search.categoryLabel')}
-				_hideLabel
-				_options={layerOptions}
-				_value={filters.selectedLayer ?? ''}
-				_on={{
-					onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedLayer: value ? (value as string) : null }),
-				}}
-			/>
-			<KolInputText
-				className="filter-bar__search md:col-span-2 lg:col-span-1"
-				_label={t('search.inputLabel')}
-				_hideLabel
-				_value={filters.searchQuery}
-				_placeholder={t('search.placeholder')}
-				_on={{
-					onInput: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, searchQuery: value as string }),
-				}}
-			/>
-			<div className="filter-bar__sort flex gap-2 items-center md:col-span-1 lg:col-span-1">
+		<section className="filter-bar px-3 md:px-4 lg:px-5 py-2" aria-label={t('search.regionAria')}>
+			<div className="filter-bar__inner">
 				<KolSingleSelect
-					className="sort-select flex-1"
-					_label={t('view.sort.label')}
+					className="filter-bar__select filter-bar__select--stack sort-select"
+					_label={t('stack.label')}
 					_hideLabel
-					_options={[
-						{ label: t('view.sort.name'), value: 'name' },
-						{ label: t('view.sort.score'), value: 'score' },
-					]}
-					_value={sortField}
+					_options={stackOptions}
+					_value={activeStackId ?? ''}
 					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) => onSortFieldChange(value as SortField),
+						onChange: (_e: globalThis.Event, value: unknown) => onStackChange(value ? (value as string) : null),
 					}}
 				/>
-				<KolButton
-					_label={sortDir === 'asc' ? t('view.sort.asc') : t('view.sort.desc')}
+				<KolSingleSelect
+					className="filter-bar__select filter-bar__select--layer sort-select"
+					_label={t('search.categoryLabel')}
 					_hideLabel
-					_icons={{ left: sortDir === 'asc' ? 'kolicon kolicon-sort-asc' : 'kolicon kolicon-sort-desc' }}
-					_variant="secondary"
-					_on={{ onClick: onSortDirToggle }}
+					_options={layerOptions}
+					_value={filters.selectedLayer ?? ''}
+					_on={{
+						onChange: (_e: globalThis.Event, value: unknown) =>
+							onFilterChange({ ...filters, selectedLayer: value ? (value as string) : null }),
+					}}
 				/>
-			</div>
-			<div className="filter-bar__view-toggle flex items-center justify-start md:justify-end">
+				<KolInputText
+					className="filter-bar__search"
+					_label={t('search.inputLabel')}
+					_hideLabel
+					_value={filters.searchQuery}
+					_placeholder={t('search.placeholder')}
+					_on={{
+						onInput: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, searchQuery: value as string }),
+					}}
+				/>
+				<div className="filter-bar__sort">
+					<KolSingleSelect
+						className="sort-select"
+						_label={t('view.sort.label')}
+						_hideLabel
+						_options={[
+							{ label: t('view.sort.name'), value: 'name' },
+							{ label: t('view.sort.score'), value: 'score' },
+						]}
+						_value={sortField}
+						_on={{
+							onChange: (_e: globalThis.Event, value: unknown) => onSortFieldChange(value as SortField),
+						}}
+					/>
+					<KolButton
+						_label={sortDir === 'asc' ? t('view.sort.asc') : t('view.sort.desc')}
+						_hideLabel
+						_icons={{ left: sortDir === 'asc' ? 'kolicon kolicon-sort-asc' : 'kolicon kolicon-sort-desc' }}
+						_variant="secondary"
+						_on={{ onClick: onSortDirToggle }}
+					/>
+				</div>
 				<KolInputCheckbox
+					className="filter-bar__view-toggle"
 					_label={t('view.viewToggle')}
 					_hideLabel
 					_variant="switch"
