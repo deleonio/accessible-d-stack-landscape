@@ -1,8 +1,8 @@
 import { KolButton, KolDrawer } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
-import { SettingsForm } from './SettingsForm';
 import { getCommitDisplay } from '../utils';
+import { SettingsForm } from './SettingsForm';
 
 export function Header() {
 	const { t } = useTranslation();

@@ -71,8 +71,7 @@ export function FilterBar({
 					_options={layerOptions}
 					_value={filters.selectedLayer ?? ''}
 					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) =>
-							onFilterChange({ ...filters, selectedLayer: value ? (value as string) : null }),
+						onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedLayer: value ? (value as string) : null }),
 					}}
 				/>
 				<KolInputText

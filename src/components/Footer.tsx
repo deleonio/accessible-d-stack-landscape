@@ -52,8 +52,7 @@ export function Footer() {
 						</a>
 					</p>
 					<p className="footer__build-info" aria-label={t('footer.buildCommitAria', { commit: commitDisplay })}>
-						<span className="footer__build-label">{t('footer.buildCommitLabel')}</span>{' '}
-						<code className="footer__build-code">{commitDisplay}</code>
+						<span className="footer__build-label">{t('footer.buildCommitLabel')}</span> <code className="footer__build-code">{commitDisplay}</code>
 					</p>
 				</div>
 			</div>
