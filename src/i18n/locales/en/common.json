@@ -27,10 +27,8 @@
 		"navigationAria": "Footer navigation",
 		"links": {
 			"github": "GitHub",
-			"documentation": "Documentation",
-			"contact": "Contact",
 			"community": "Community",
-			"imprint": "Imprint",
+			"documentation": "Documentation",
 			"settings": "Settings",
 			"news": "News"
 		},

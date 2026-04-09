@@ -5,39 +5,33 @@ export default defineConfig({
 	presets: [presetMini()],
 	theme: {
 		colors: {
-			// Brand colours (brand-primary palette)
-			'brand-primary': '#003d82',
-			'brand-primary-dark': '#002d62',
-			'brand-primary-light': '#1a56a0',
-			'brand-accent': '#0070cb',
+			// Brand colours (direct HEX values)
+			primary: '#003d82',
+			'primary-dark': '#002d62',
+			'primary-light': '#1a56a0',
+			accent: '#0070cb',
 
 			// Neutral palette
-			'neutral-bg': '#f6f7f8',
-			'neutral-bg-white': '#fff',
-			'neutral-surface': '#fff',
-			'neutral-border': '#d0d3d9',
-			'neutral-border-light': '#e8eaed',
+			bg: '#f6f7f8',
+			'bg-white': '#fff',
+			surface: '#fff',
+			border: '#d0d3d9',
+			'border-light': '#e8eaed',
 
 			// Text
-			'text-primary': '#1d2129',
+			text: '#1d2129',
 			'text-muted': '#6b7280',
-			'text-inverse': '#fff',
-
-			// Category colours
-			'cat-betrieb': '#00883d',
-			'cat-infrastruktur': '#c5192d',
-			'cat-plattform': '#003d82',
-			'cat-zugang': '#f39c12',
+			'white-text': '#fff',
 		},
 		spacing: {
 			0: '0',
-			1: '0.25rem', // 4px
-			2: '0.5rem', // 8px
-			3: '0.75rem', // 12px
-			4: '1rem', // 16px
-			6: '1.5rem', // 24px
-			8: '2rem', // 32px
-			12: '3rem', // 48px
+			1: '0.25rem',
+			2: '0.5rem',
+			3: '0.75rem',
+			4: '1rem',
+			6: '1.5rem',
+			8: '2rem',
+			12: '3rem',
 			14: '3.5rem',
 		},
 		borderRadius: {
@@ -71,22 +65,79 @@ export default defineConfig({
 		},
 	},
 	shortcuts: [
-		['btn-base', 'inline-flex items-center justify-center px-3 py-2 rounded-md font-500 transition-all duration-150 ease-in-out'],
-		['btn-primary', 'btn-base bg-brand-primary text-text-inverse hover:bg-brand-primary-dark focus:outline-none focus:ring-2 focus:ring-brand-accent'],
-		[
-			'btn-secondary',
-			'btn-base border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-text-inverse focus:outline-2 focus:outline-offset-2 focus:outline-brand-primary',
-		],
-		['badge-base', 'inline-flex items-center px-2 py-1 rounded-sm text-xs font-600'],
-		['card-base', 'rounded-md border border-neutral-border bg-neutral-surface shadow-card transition-all duration-150'],
-		['form-group', 'mb-4 flex flex-col gap-1'],
+		// Responsive container queries & max-width utilities
+		['container-max', 'max-w-6xl mx-auto'],
+		['container-full', 'w-full'],
+
+		// Layout helpers
+		['flex-center', 'flex items-center justify-center'],
+		['flex-between', 'flex items-center justify-between'],
+		['flex-col-gap', 'flex flex-col gap-4'],
+		['grid-auto', 'grid auto-cols-fr'],
+
+		// Typography alignment (layout-only, colors in SCSS)
+		['text-left', 'text-left'],
+		['text-center', 'text-center'],
+		['text-right', 'text-right'],
+
+		// Responsive text sizes (layout helper, actual styling in SCSS)
+		['text-responsive-base', 'text-base md:text-lg'],
+		['text-responsive-lg', 'text-lg md:text-xl'],
+
+		// Aspect ratios & sizing
+		['aspect-square', 'aspect-square'],
+		['aspect-video', 'aspect-video'],
+
+		// Common spacing patterns
+		['space-stack', 'flex flex-col gap-4'],
+		['space-sticky', 'sticky top-0 z-10'],
+
+		// Visually hidden
 		['visually-hidden', 'absolute w-1 h-1 p-0 -m-1 overflow-hidden clip-[rect(0,0,0,0)] border-0 whitespace-nowrap'],
 	],
 	safelist: [
-		// Common utility combinations
-		'bg-brand-primary',
-		'text-text-inverse',
-		'border-brand-primary',
+		// Brand colors
+		'bg-primary',
+		'bg-primary-dark',
+		'bg-primary-light',
+		'bg-accent',
+		'text-primary',
+		'text-primary-light',
+		'text-accent',
+		'border-primary',
+		'border-primary-dark',
+		'border-accent',
+		'ring-primary',
+		'ring-accent',
+
+		// Text colors
+		'text-white-text',
+		'text-text-primary',
+		'text-text-muted',
+
+		// White opacity variants
+		'bg-white/8',
+		'bg-white/10',
+		'bg-white/12',
+		'bg-white/60',
+		'text-white/45',
+		'text-white/50',
+		'text-white/55',
+		'text-white/60',
+		'text-white/65',
+		'text-white/75',
+		'text-white/80',
+		'text-white/82',
+		'border-white/12',
+
+		// Neutral colors
+		'bg-neutral-bg',
+		'bg-neutral-bg-white',
+		'bg-neutral-surface',
+		'border-neutral-border',
+		'border-neutral-border-light',
+
+		// Animations
 		'animate-slide-up',
 	],
 });

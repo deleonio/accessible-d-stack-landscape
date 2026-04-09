@@ -1,9 +1,9 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   Design System – Brand Tokens (shared with uno.config.ts)
+   CSS Variables (Design System Tokens)
    ───────────────────────────────────────────────────────────────────────────── */
 
 :root {
-	/* Brand colours (brand-primary palette) */
+	/* Brand colours */
 	--ds-color-primary: #003d82;
 	--ds-color-primary-dark: #002d62;
 	--ds-color-primary-light: #1a56a0;
@@ -21,13 +21,13 @@
 	--ds-color-text-muted: #6b7280;
 	--ds-color-text-inverse: #fff;
 
-	/* Category colours – semantic product palette */
+	/* Category colours */
 	--ds-cat-betrieb: #00883d;
 	--ds-cat-infrastruktur: #c5192d;
 	--ds-cat-plattform: #003d82;
 	--ds-cat-zugang: #f39c12;
 
-	/* Spacing (8 px base) */
+	/* Spacing (8px base) */
 	--ds-space-1: 0.25rem;
 	--ds-space-2: 0.5rem;
 	--ds-space-3: 0.75rem;
@@ -36,13 +36,11 @@
 	--ds-space-8: 2rem;
 	--ds-space-12: 3rem;
 
-	/* KoliBri spacing aliases */
+	/* KoliBri aliases */
 	--kol-spacing-unit: 0.25rem;
 	--kol-spacing-small: 0.5rem;
 	--kol-spacing-medium: 1rem;
 	--kol-spacing-large: 2rem;
-
-	/* KoliBri colour aliases */
 	--kol-color-primary: var(--ds-color-primary);
 
 	/* Radius */
@@ -68,20 +66,25 @@
 	--ds-lh-heading: 1.2;
 }
 
-/* Optional theme hook */
-[data-theme='custom'] {
-	--ds-color-primary: #003d82;
-	--ds-color-primary-dark: #002d62;
-	--ds-color-primary-light: #1a56a0;
-	--ds-color-accent: #0070cb;
+/* ─────────────────────────────────────────────────────────────────────────────
+   Base Styles
+   ───────────────────────────────────────────────────────────────────────────── */
+
+html {
+	box-sizing: border-box;
+	overflow-x: hidden;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Base Styles (handled by UnoCSS preset, kept for reference)
-   ───────────────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
 
 html,
 body {
+	margin: 0;
+	padding: 0;
 	font-family: var(--ds-font-body);
 	font-size: var(--ds-text-base);
 	line-height: var(--ds-lh-body);
@@ -91,7 +94,7 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   Accessibility & App Shell
+   Accessibility
    ───────────────────────────────────────────────────────────────────────────── */
 
 .skip-nav {
@@ -115,189 +118,436 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   Header (kept minimal, most styling via UnoCSS in components)
+   Main Content Area
+   ───────────────────────────────────────────────────────────────────────────── */
+
+main {
+	padding: 0 var(--ds-space-4);
+	margin: 0 auto;
+	width: 100%;
+
+	@media (width >= 768px) {
+		padding: 0 var(--ds-space-6);
+	}
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Header (BEM Component Styling)
    ───────────────────────────────────────────────────────────────────────────── */
 
 .header {
-	background: var(--ds-color-primary);
+	background-color: var(--ds-color-primary);
 	color: var(--ds-color-text-inverse);
 	border-bottom: 4px solid var(--ds-color-accent);
 }
 
-.header__instance-strip,
-.header__utility-bar {
-	background: var(--ds-color-primary-dark);
-	padding: var(--ds-space-2) var(--ds-space-4);
-	font-size: var(--ds-text-xs);
+.header__inner {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: var(--ds-space-4);
+	flex-direction: column;
 }
 
 .header__instance-strip {
-	@media (width < 768px) {
-		display: none;
-	}
-}
-
-.official-label {
-	display: flex;
-	align-items: center;
-	gap: var(--ds-space-2);
-	font-weight: 600;
-}
-
-.official-label__emblem {
-	display: inline-flex;
-	gap: 3px;
-}
-
-.official-label__emblem span {
-	display: inline-block;
-	width: 6px;
-	height: 6px;
-	border-radius: 50%;
-	background: rgb(255 255 255 / 60%);
-}
-
-.official-info {
+	background-color: var(--ds-color-primary-dark);
+	color: var(--ds-color-text-inverse);
 	font-size: var(--ds-text-xs);
-	color: rgb(255 255 255 / 65%);
 }
 
-.official-info code {
+.header__instance-meta {
+	color: rgb(255 255 255 / 0.65);
+	font-size: var(--ds-text-xs);
+}
+
+.header__instance-code {
 	font-family: var(--ds-font-mono);
-	background: rgb(255 255 255 / 10%);
-	padding: 0 var(--ds-space-1);
+	background-color: rgb(255 255 255 / 0.1);
 	border-radius: var(--ds-radius-sm);
+	padding: var(--ds-space-1) var(--ds-space-2);
+	font-size: var(--ds-text-xs);
+	color: var(--ds-color-text-inverse);
 }
 
 .header__brand-bar {
-	background: var(--ds-color-primary);
-	padding: var(--ds-space-3) var(--ds-space-4);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: var(--ds-space-4);
+	/* Layout and visual properties handled in JSX with UnoCSS */
 }
 
-.brand-logo {
-	display: flex;
-	align-items: center;
-	gap: var(--ds-space-2);
+.header__brand-link {
 	color: var(--ds-color-text-inverse);
 	text-decoration: none;
-	font-weight: 700;
-	font-size: var(--ds-text-lg);
-}
-
-.brand-logo:hover,
-.brand-logo:focus {
-	opacity: 0.9;
+	transition: opacity 150ms ease-in-out;
 	outline: none;
+
+	&:hover {
+		opacity: 0.9;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--ds-color-accent);
+		outline-offset: 2px;
+	}
 }
 
-.brand-logo:focus-visible {
-	outline: 2px solid var(--ds-color-accent);
-	outline-offset: 2px;
+.header__brand-mark {
+	/* Image sizing handled in JSX */
 }
 
-.brand-logo__mark {
-	inline-size: 28px;
-	block-size: 28px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	flex: 0 0 28px;
-}
-
-.brand-logo__mark img {
-	inline-size: 100%;
-	block-size: 100%;
-	display: block;
-}
-
-.brand-logo__badge {
-	background: var(--ds-color-accent);
-	color: #fff;
-	font-size: 0.65rem;
+.header__brand-badge {
+	background-color: var(--ds-color-accent);
+	color: var(--ds-color-text-inverse);
 	font-weight: 700;
-	padding: 2px 6px;
+	font-size: var(--ds-text-xs);
 	border-radius: var(--ds-radius-sm);
-	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	margin-left: var(--ds-space-1);
+	letter-spacing: 0.05em;
+	padding: var(--ds-space-1) var(--ds-space-3);
 }
 
 .header__controls {
-	display: flex;
-	align-items: center;
-	gap: var(--ds-space-2);
-	margin-left: auto;
+	/* Layout handled in JSX */
 }
 
-.lang-drawer-trigger {
-	color: #fff;
+.header__lang-trigger {
+	/* KoliBri component styling handled by component */
+}
+
+.header__drawer-content {
+	/* Container class for drawer content */
 }
 
 .header__content {
-	background: var(--ds-color-primary);
 	color: var(--ds-color-text-inverse);
-	padding: var(--ds-space-6) var(--ds-space-4);
-	text-align: left;
-}
-
-@media (width >= 768px) {
-	.header__content {
-		padding: var(--ds-space-8) var(--ds-space-6);
-	}
 }
 
 .header__eyebrow {
 	font-size: var(--ds-text-xs);
-	font-weight: 600;
-	letter-spacing: 0.08em;
+	font-weight: 700;
 	text-transform: uppercase;
-	color: rgb(255 255 255 / 65%);
-	margin-bottom: var(--ds-space-2);
+	letter-spacing: 0.05em;
+	color: rgb(255 255 255 / 0.65);
+	margin: 0 0 var(--ds-space-2) 0;
+
+	@media (width >= 768px) {
+		margin-bottom: var(--ds-space-3);
+	}
 }
 
-.header h1 {
-	font-size: 1.35rem;
+.header__title {
+	font-size: var(--ds-text-2xl);
 	font-weight: 700;
 	line-height: var(--ds-lh-heading);
-	letter-spacing: -0.01em;
-	margin: 0 0 var(--ds-space-2);
-}
+	letter-spacing: -0.005em;
+	margin: 0 0 var(--ds-space-2) 0;
 
-@media (width >= 768px) {
-	.header h1 {
-		font-size: clamp(1.5rem, 5vw, var(--ds-text-3xl));
+	@media (width >= 768px) {
+		font-size: var(--ds-text-3xl);
 		margin-bottom: var(--ds-space-3);
 	}
 }
 
 .header__subtitle {
 	font-size: var(--ds-text-sm);
-	color: rgb(255 255 255 / 82%);
-	max-width: 52ch;
+	color: rgb(255 255 255 / 0.8);
 	line-height: var(--ds-lh-body);
+	max-width: 52ch;
 	margin: 0;
-}
 
-@media (width >= 768px) {
-	.header__subtitle {
-		font-size: var(--ds-text-lg);
+	@media (width >= 768px) {
+		font-size: var(--ds-text-base);
 	}
 }
 
-.lang-drawer-content {
-	padding: var(--ds-space-4);
+/* ─────────────────────────────────────────────────────────────────────────────
+   Footer (BEM Component Styling)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.footer {
+	background-color: var(--ds-color-primary-dark);
+	color: rgb(255 255 255 / 0.75);
+	border-top: 1px solid rgb(255 255 255 / 0.12);
+	margin-top: auto;
 }
 
-.language-switcher {
-	min-width: 14rem;
+.footer__inner {
+	display: flex;
+	flex-direction: column;
+}
+
+.footer__nav {
+	border-bottom: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.footer__brand {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ds-space-1);
+}
+
+.footer__title {
+	font-weight: 700;
+	font-size: var(--ds-text-sm);
+	color: var(--ds-color-text-inverse);
+	margin: 0 0 var(--ds-space-2) 0;
+}
+
+.footer__subtitle {
+	font-size: var(--ds-text-xs);
+	color: rgb(255 255 255 / 0.55);
+	margin: 0;
+}
+
+.footer__nav-section {
+	font-size: var(--ds-text-sm);
+	gap: var(--ds-space-3);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.footer__link {
+	color: rgb(255 255 255 / 0.6);
+	text-decoration: none;
+	font-size: var(--ds-text-sm);
+	transition: color 150ms ease-in-out;
+	min-height: 2.75rem; /* 44px minimum touch target */
+	display: inline-flex;
+	align-items: center;
+
+	&:hover {
+		color: var(--ds-color-text-inverse);
+		text-decoration: underline;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--ds-color-accent);
+		outline-offset: 2px;
+	}
+}
+
+.footer__meta {
+	font-size: var(--ds-text-xs);
+	display: flex;
+	flex-direction: column;
+	gap: var(--ds-space-2);
+}
+
+.footer__copy {
+	color: rgb(255 255 255 / 0.5);
+	margin: 0;
+
+	a {
+		color: rgb(255 255 255 / 0.75);
+		text-decoration: underline;
+		transition: color 150ms ease-in-out;
+
+		&:hover {
+			color: var(--ds-color-text-inverse);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--ds-color-accent);
+			outline-offset: 2px;
+		}
+	}
+}
+
+.footer__copy-link {
+	color: rgb(255 255 255 / 0.75);
+	text-decoration: underline;
+	transition: color 150ms ease-in-out;
+
+	&:hover {
+		color: var(--ds-color-text-inverse);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--ds-color-accent);
+		outline-offset: 2px;
+	}
+}
+
+.footer__build-info {
+	color: rgb(255 255 255 / 0.5);
+	margin: 0;
+}
+
+.footer__build-code {
+	font-family: var(--ds-font-mono);
+	background-color: rgb(255 255 255 / 0.08);
+	color: rgb(255 255 255 / 0.82);
+	border-radius: var(--ds-radius-sm);
+	padding: var(--ds-space-1) var(--ds-space-2);
+	font-size: var(--ds-text-xs);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Filter Bar (Complex Grid Layout)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.filter-bar__inner {
+	display: grid;
+	gap: var(--ds-space-2);
+	grid-template-columns: 1fr;
+	grid-template-areas: 'stack' 'layer' 'search' 'sort' 'toggle';
+}
+
+.filter-bar__inner:not(:has(.filter-bar__select--stack)) {
+	grid-template-areas: 'layer' 'search' 'sort' 'toggle';
+}
+
+@media (width >= 480px) {
+	.filter-bar__inner {
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas: 'stack  layer' 'search search' 'sort   toggle';
+	}
+
+	.filter-bar__inner:not(:has(.filter-bar__select--stack)) {
+		grid-template-areas: 'layer  layer' 'search search' 'sort   toggle';
+	}
+}
+
+@media (width >= 600px) {
+	.filter-bar__inner {
+		grid-template-columns: 1fr 1fr 2fr auto auto;
+		grid-template-areas: 'stack layer search sort toggle';
+		gap: var(--ds-space-2);
+	}
+
+	.filter-bar__inner:not(:has(.filter-bar__select--stack)) {
+		grid-template-columns: 1fr 2fr auto auto;
+		grid-template-areas: 'layer search sort toggle';
+	}
+}
+
+@media (width >= 1024px) {
+	.filter-bar__inner {
+		gap: var(--ds-space-3);
+	}
+}
+
+.filter-bar__select--stack {
+	grid-area: stack;
+}
+
+.filter-bar__select--layer {
+	grid-area: layer;
+}
+
+.filter-bar__search {
+	grid-area: search;
+}
+
+.filter-bar__sort {
+	grid-area: sort;
+}
+
+.filter-bar__view-toggle {
+	grid-area: toggle;
+}
+
+@media (width < 480px) {
+	.filter-bar__view-toggle {
+		place-self: start;
+	}
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Articles Grid (Responsive Columns)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.articles-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--ds-space-3);
+	margin: 0 0 var(--ds-space-12);
+	padding: 0;
+	list-style: none;
+}
+
+@media (width >= 480px) {
+	.articles-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--ds-space-4);
+		margin-bottom: var(--ds-space-14);
+	}
+}
+
+@media (width >= 768px) {
+	.articles-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (width >= 1024px) {
+	.articles-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+@media (width >= 1440px) {
+	.articles-grid {
+		grid-template-columns: repeat(5, 1fr);
+	}
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Articles List (List View)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.articles-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ds-space-2);
+	margin: 0 0 var(--ds-space-12);
+	padding: 0;
+	list-style: none;
+}
+
+/* Truncation Utilities */
+.truncate-4-lines {
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.truncate-1-line {
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   PWA Update Prompt Animation
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.pwa-update-prompt {
+	animation: slide-up 0.3s ease;
+}
+
+@keyframes slide-up {
+	from {
+		opacity: 0;
+		transform: translateX(-50%) translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   KoliBri Form Field Overrides
+   ───────────────────────────────────────────────────────────────────────────── */
+
+kol-single-select,
+kol-input-text,
+kol-input-checkbox,
+kol-select,
+.sort-select {
+	--kol-color-background: transparent;
+	--kol-color-input-background: transparent;
+	background: transparent;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -667,118 +917,7 @@ kol-card.article-card,
    Footer
    ───────────────────────────────────────────────────────────────────────────── */
 
-.footer {
-	background: var(--ds-color-primary-dark);
-	color: rgb(255 255 255 / 75%);
-	margin-top: auto;
-}
-
-.footer__inner {
-	max-width: 1400px;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	gap: var(--ds-space-4);
-}
-
-@media (width >= 768px) {
-	.footer__inner {
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-end;
-	}
-}
-
-.footer__inner--top {
-	padding-bottom: var(--ds-space-4);
-	border-bottom: 1px solid rgb(255 255 255 / 12%);
-}
-
-@media (width >= 768px) {
-	.footer__inner--top {
-		align-items: flex-start;
-		gap: var(--ds-space-8);
-	}
-}
-
-.footer__inner--bottom {
-	padding-top: var(--ds-space-2);
-}
-
-@media (width >= 768px) {
-	.footer__inner--bottom {
-		align-items: center;
-	}
-}
-
-.footer-title {
-	font-size: var(--ds-text-sm);
-	font-weight: 700;
-	color: #fff;
-	margin: 0 0 var(--ds-space-1);
-}
-
-.footer-sub {
-	font-size: var(--ds-text-xs);
-	color: rgb(255 255 255 / 55%);
-	margin: 0;
-}
-
-.footer__brand {
-	display: flex;
-	flex-direction: column;
-	gap: var(--ds-space-1);
-}
-
-.footer__links {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
-	gap: var(--ds-space-2) var(--ds-space-4);
-	font-size: var(--ds-text-sm);
-	width: min(100%, 48rem);
-}
-
-.footer__links a {
-	color: rgb(255 255 255 / 60%);
-	text-decoration: none;
-	min-height: 44px;
-	display: inline-flex;
-	align-items: center;
-}
-
-.footer__links a:hover,
-.footer__links a:focus {
-	color: #fff;
-	text-decoration: underline;
-}
-
-@media (width >= 1200px) {
-	.footer__links {
-		grid-template-columns: repeat(4, minmax(9rem, 1fr));
-	}
-}
-
-.footer__copy {
-	font-size: var(--ds-text-xs);
-	color: rgb(255 255 255 / 45%);
-}
-
-.footer__copy a {
-	color: rgb(255 255 255 / 75%);
-}
-
-.footer__meta {
-	font-size: var(--ds-text-xs);
-	color: rgb(255 255 255 / 50%);
-}
-
-.footer__meta code {
-	font-family: var(--ds-font-mono);
-	color: rgb(255 255 255 / 82%);
-	background: rgb(255 255 255 / 8%);
-	border-radius: var(--ds-radius-sm);
-	padding: 0 var(--ds-space-1);
-}
+/* Footer styling moved to Tailwind utility classes in Footer.tsx */
 
 /* ─────────────────────────────────────────────────────────────────────────────
    PWA Update Prompt

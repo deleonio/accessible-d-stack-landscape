@@ -27,10 +27,8 @@
 		"navigationAria": "Navigation du pied de page",
 		"links": {
 			"github": "GitHub",
-			"documentation": "Documentation",
-			"contact": "Contact",
 			"community": "Communauté",
-			"imprint": "Mentions légales",
+			"documentation": "Documentation",
 			"settings": "Paramètres",
 			"news": "Actualités"
 		},

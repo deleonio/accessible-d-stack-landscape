@@ -144,68 +144,142 @@ Example: A technology list should use `KolCard` (pre-styled) with UnoCSS/SCSS fo
 
 ## Styling Guidelines
 
-### UnoCSS First
+### Hybrid Approach: BEM Components + UnoCSS Layout
 
-Styling is primarily handled by **UnoCSS** (presetMini). Prefer utility-first styling whenever possible:
+This project uses a **clear separation of concerns**:
 
-- Use UnoCSS utility classes for responsive layouts, spacing, sizing, and common patterns
-- Only use component-scoped SCSS in `src/style.scss` for KoliBri component customizations or complex custom patterns
-- Keep SCSS minimal and maintainable – avoid over-nesting or complex selectors
+#### 1. **Component Styling (SCSS + BEM)**
 
-### CSS Class Naming Convention (BEM)
+All custom components get **BEM-named classes** with full styling in `src/style.scss`:
 
-All CSS classes in component-scoped SCSS **must strictly follow the BEM (Block Element Modifier) pattern**:
+- Colors, borders, shadows, typography, effects
+- State variants (hover, active, disabled)
+- All visual properties of the component
 
-```scss
-/* ✅ CORRECT BEM structure */
-.component-name {
-} /* Block */
-.component-name__element {
-} /* Element */
-.component-name--modifier {
-} /* Modifier */
-.component-name__element--modifier {
-} /* Element with modifier */
+**Example:**
 
-/* ❌ INCORRECT - avoid these patterns */
-.component-name_element {
-} /* Use __ not _ */
-.component-name-modifier {
-} /* Use -- not - for modifiers */
-.component-name > .element {
-} /* Avoid child selectors */
+```tsx
+// Header.tsx
+<header className="header">
+	<div className="header__content">
+		<div className="header__brand">Logo</div>
+		<div className="header__controls">Menu</div>
+	</div>
+</header>
 ```
 
-### SCSS Architecture
+#### 2. **Layout Utilities (UnoCSS Only)**
 
-- Use flat BEM selectors at the root level (do not nest BEM modifiers)
-- Apply contextual nesting only when a modifier changes how a child element behaves
-- Never use `$root` variables or `@at-root` – use direct descendant selectors instead
-- Do not overuse CSS custom properties to avoid collisions with host-page styles
-- Rely on SCSS variables for internal calculations; expose only well-prefixed design tokens as CSS custom properties
+Only these layout/responsive utilities appear in `className`:
 
-### Example
+- `flex`, `grid`, `gap`, `items-center`, `justify-between` (layout)
+- `w-full`, `max-w-6xl`, `px-4`, `md:px-6` (sizing, spacing)
+- `mb-4`, `pt-8`, `mx-auto` (margins, padding, centering)
+- `md:`, `lg:`, `sm:` (responsive breakpoints)
+- Width, height, margin, padding utilities
+
+**Never** use UnoCSS for component styling (gradients, colors, borders, shadows via utilities).
+
+#### 3. **No Inline Styles**
+
+❌ Don't use inline JavaScript styles for component appearance:
+
+```tsx
+// WRONG:
+<header style={{ backgroundColor: 'var(--ds-color-primary)', ... }}>
+```
+
+✅ Use BEM classes instead:
+
+```tsx
+// CORRECT:
+<header className="header">
+```
+
+#### Separation Matrix
+
+| Concern                   | Tool     | Location     | Example                                                             |
+| ------------------------- | -------- | ------------ | ------------------------------------------------------------------- |
+| Colors, borders, shadows  | SCSS BEM | `style.scss` | `.header { background-color: var(--ds-color-primary); }`            |
+| Typography, font-size     | SCSS BEM | `style.scss` | `.header__title { font-weight: bold; font-size: 1.25rem; }`         |
+| Layout, flex/grid, gaps   | UnoCSS   | `className`  | `className="flex gap-4 md:gap-6"`                                   |
+| Responsive sizing         | UnoCSS   | `className`  | `className="w-full md:max-w-6xl px-4 md:px-6"`                      |
+| Responsive layout changes | UnoCSS   | `className`  | `className="flex flex-col md:flex-row items-start md:items-center"` |
+
+This approach eliminates duplication and keeps styling intent clear.
+
+### SCSS Architecture (BEM Rules)
+
+- **Flat BEM selectors** at the root level (do not nest BEM modifiers)
+- **Contextual nesting** only when a modifier changes element behavior
+- **Never** use `$root` variables or `@at-root` – use direct descendant selectors
+- **No inline margin/padding for responsive layout** – use UnoCSS utilities in className
+- **Rely on SCSS variables** for internal calculations (colors, spacing vars)
+- **Layout properties stay out of SCSS** (no flex, grid, gap, etc. in component CSS)
+
+### BEM + UnoCSS Example
+
+**Header Component (Header.tsx):**
+
+```tsx
+<header className="header flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+	<div className="header__content flex-1 px-4 md:px-6">
+		<h1 className="header__title">Title</h1>
+	</div>
+	<div className="header__controls flex gap-2">
+		<button className="header__button">Menu</button>
+	</div>
+</header>
+```
+
+**Corresponding SCSS (style.scss):**
 
 ```scss
-.pwa-update-prompt {
-	display: flex;
-	flex-direction: column;
+.header {
+	/* Colors, borders, background */
+	background-color: var(--ds-color-primary);
+	color: var(--ds-color-text-inverse);
+	border-bottom: 4px solid var(--ds-color-accent);
 }
 
-.pwa-update-prompt__text {
-	font-size: var(--ds-text-sm);
+.header__content {
+	/* Typography, visual styling – NOT layout */
+	padding: 1.5rem 0; /* internal rhythm, use SCSS */
 }
 
-.pwa-update-prompt__actions {
-	display: flex;
-	flex-direction: row;
-	gap: var(--ds-space-2);
+.header__title {
+	/* Component-level styling only */
+	font-size: var(--ds-text-lg);
+	font-weight: 600;
+	margin: 0;
+}
 
-	@media (width < 480px) {
-		flex-direction: column;
-	}
+.header__controls {
+	/* Visual properties, NOT gap/flex (in className instead) */
+	border-left: 1px solid rgba(255, 255, 255, 0.2);
+	padding-left: 1rem;
+}
+
+.header__button {
+	/* Button-specific visual properties */
+	background-color: transparent;
+	color: inherit;
+	border: none;
+	cursor: pointer;
+}
+
+.header__button:hover {
+	opacity: 0.9;
 }
 ```
+
+**Layout logic is entirely in className (UnoCSS):**
+
+- `flex flex-col md:flex-row` – layout direction change
+- `items-center` – alignment
+- `gap-4 md:gap-6` – spacing between items
+- `flex-1` – flex grow
+- `px-4 md:px-6` – responsive padding
 
 ## Deployment
 

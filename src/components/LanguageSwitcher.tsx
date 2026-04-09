@@ -20,7 +20,6 @@ export function LanguageSwitcher() {
 		<div className="language-switcher">
 			<KolSingleSelect
 				_label={t('header.languageSwitcher.label')}
-				_hideLabel
 				_accessKey={t('header.languageSwitcher.accessKey')}
 				_options={languageOptions}
 				_value={activeLanguage}
