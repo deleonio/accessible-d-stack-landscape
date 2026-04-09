@@ -74,9 +74,7 @@ export function Header() {
 					</KolDrawer>
 
 					{/* Header content section */}
-					<div className="header__content py-6 md:py-8">
-						<p className="header__eyebrow text-xs font-bold tracking-widest uppercase mb-2 md:mb-3">{t('header.eyebrow')}</p>
-						<h1 className="header__title text-2xl md:text-4xl font-bold leading-tight -tracking-0.5px mb-2 md:mb-3">StackAtlas</h1>
+					<div className="header__content py-3 md:py-4">
 						<p className="header__subtitle text-sm md:text-base max-w-prose leading-relaxed">{t('header.subtitle')}</p>
 					</div>
 				</div>
