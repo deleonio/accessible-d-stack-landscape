@@ -42,7 +42,7 @@ function ImprintRoute({ default: isDefault, path }: RouteProps) {
 
 function App() {
 	return (
-		<div className="app">
+		<div className="flex flex-col min-h-screen w-full">
 			<Header />
 			<Router>
 				<HomeRoute path="/" default />

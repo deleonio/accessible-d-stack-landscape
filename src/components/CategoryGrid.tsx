@@ -62,7 +62,7 @@ export function CategoryGrid({
 	void handleFilterChange;
 
 	return (
-		<div id="main-content" className="category-container">
+		<div id="main-content" className="category-container px-3 md:px-4 lg:px-5">
 			{activeStack && stackItemMap && <StackStats stack={activeStack} items={articles} stackItemMap={stackItemMap} />}
 
 			<p className="results-info" aria-live="polite" aria-atomic="true">
@@ -114,6 +114,7 @@ export function CategoryGrid({
 					</ul>
 					{activeCount > ITEMS_PER_PAGE && (
 						<KolPagination
+							className="my-4"
 							style={{ background: 'transparent' }}
 							_page={currentPage}
 							_max={activeCount}

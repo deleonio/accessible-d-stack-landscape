@@ -2,7 +2,7 @@
 	"header": {
 		"skipToContent": "Direkt zum Inhalt springen",
 		"instanceInfoAria": "Instanz-Informationen",
-		"officialProjectSetup": "Offizielles Projekt-Setup",
+		"officialProjectSetup": "Digitale Souveränität messen & vergleichen",
 		"mvpLayoutAligned": "Ausgerichtet an den Doku-Vorgaben (MVP Layout)",
 		"commit": "Commit",
 		"mainNavigationAria": "Hauptnavigation",
@@ -27,10 +27,8 @@
 		"navigationAria": "Footer-Navigation",
 		"links": {
 			"github": "GitHub",
-			"documentation": "Dokumentation",
-			"contact": "Kontakt",
 			"community": "Community",
-			"imprint": "Impressum",
+			"documentation": "Dokumentation",
 			"settings": "Einstellungen",
 			"news": "News"
 		},

@@ -1,71 +1,82 @@
 import { KolButton, KolDrawer } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { getCommitDisplay } from '../utils';
+import { SettingsForm } from './SettingsForm';
 
 export function Header() {
 	const { t } = useTranslation();
-	const [langDrawerOpen, setLangDrawerOpen] = useState(false);
+	const [settingsDrawerOpen, setSettingsDrawerOpen] = useState(false);
+
 	const baseUrl = import.meta.env.BASE_URL;
 	const brandUrl = import.meta.env.VITE_BRAND_URL ?? baseUrl;
-	const commitSha = (import.meta.env.VITE_COMMIT_SHA || 'dev').slice(0, 7);
+	const commitDisplay = getCommitDisplay();
 
 	return (
 		<>
 			<a href="#main-content" className="skip-nav">
 				{t('header.skipToContent')}
 			</a>
-			<header className="header">
-				<div className="header__instance-strip" role="note" aria-label={t('header.instanceInfoAria')}>
-					<div className="official-label">
-						<span className="official-label__emblem" aria-hidden="true">
-							<span />
-							<span />
-							<span />
+			<header className="header w-full">
+				{/* Instance info strip – hidden on mobile */}
+				<div
+					className="header__instance-strip hidden md:flex items-center justify-between gap-4 px-4 md:px-6 py-2 text-xs"
+					role="note"
+					aria-label={t('header.instanceInfoAria')}
+				>
+					<div className="flex items-center gap-2">
+						<span className="flex gap-1.5" aria-hidden="true">
+							<span className="inline-block w-1.5 h-1.5 rounded-full bg-white/60" />
+							<span className="inline-block w-1.5 h-1.5 rounded-full bg-white/60" />
+							<span className="inline-block w-1.5 h-1.5 rounded-full bg-white/60" />
 						</span>
 						{t('header.officialProjectSetup')}
 					</div>
-					<span className="official-info">
-						{t('header.mvpLayoutAligned')} • {t('header.commit')}: <code>{commitSha}</code>
+					<span className="header__instance-meta">
+						{t('header.mvpLayoutAligned')} • {t('header.commit')}: <code className="header__instance-code">{commitDisplay}</code>
 					</span>
 				</div>
 
-				<div className="header__brand-bar">
-					<a href={brandUrl} className="brand-logo" rel="noopener noreferrer">
-						<span className="brand-logo__mark">
-							<img src={`${baseUrl}favicon.svg`} alt="" width="28" height="28" loading="eager" decoding="async" />
-						</span>
-						<span>StackAtlas</span>
-						<span className="brand-logo__badge">MVP</span>
-					</a>
-					<div className="header__controls">
-						<KolButton
-							className="lang-drawer-trigger"
-							_label={t('header.languageSwitcher.label')}
-							_hideLabel
-							_icons={{ left: 'kolicon kolicon-cogwheel' }}
-							_variant="ghost"
-							_on={{ onClick: () => setLangDrawerOpen(true) }}
-						/>
+				{/* Main header container with max-width */}
+				<div className="header__inner flex flex-col max-w-6xl mx-auto px-4 md:px-6 w-full">
+					{/* Brand bar */}
+					<div className="header__brand-bar flex items-center justify-between gap-4 py-3">
+						<a href={brandUrl} className="header__brand-link flex items-center gap-2 no-underline font-bold text-lg hover:opacity-90" rel="noopener noreferrer">
+							<span className="header__brand-mark inline-flex w-7 h-7 flex-shrink-0">
+								<img src={`${baseUrl}favicon.svg`} alt="" width="28" height="28" loading="eager" decoding="async" />
+							</span>
+							<span>StackAtlas</span>
+							<span className="header__brand-badge text-white font-bold text-xs px-1.5 py-0.5 rounded ml-1 uppercase tracking-wider">MVP</span>
+						</a>
+						<div className="header__controls flex items-center gap-2 ml-auto">
+							<KolButton
+								className="header__lang-trigger"
+								_label={t('header.languageSwitcher.label')}
+								_hideLabel
+								_icons={{ left: 'kolicon kolicon-cogwheel' }}
+								_variant="ghost"
+								_on={{ onClick: () => setSettingsDrawerOpen(true) }}
+							/>
+						</div>
 					</div>
-				</div>
 
-				<KolDrawer
-					_label={t('header.languageSwitcher.label')}
-					_align="right"
-					_hasCloser
-					_open={langDrawerOpen}
-					_on={{ onClose: () => setLangDrawerOpen(false) }}
-				>
-					<div className="lang-drawer-content">
-						<LanguageSwitcher />
+					{/* Settings drawer */}
+					<KolDrawer
+						_label={t('pages.settings.title')}
+						_align="right"
+						_hasCloser
+						_open={settingsDrawerOpen}
+						_on={{ onClose: () => setSettingsDrawerOpen(false) }}
+					>
+						<div className="header__settings-drawer-content p-4">
+							<SettingsForm />
+						</div>
+					</KolDrawer>
+
+					{/* Header content section */}
+					<div className="header__content py-3 md:py-4">
+						<p className="header__subtitle text-sm md:text-base max-w-prose leading-relaxed">{t('header.subtitle')}</p>
 					</div>
-				</KolDrawer>
-
-				<div className="header__content">
-					<p className="header__eyebrow">{t('header.eyebrow')}</p>
-					<h1>StackAtlas</h1>
-					<p className="header__subtitle">{t('header.subtitle')}</p>
 				</div>
 			</header>
 		</>
