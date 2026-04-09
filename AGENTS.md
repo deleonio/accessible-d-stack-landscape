@@ -118,6 +118,18 @@ mcp_kolibri-mcp_fetch(url: "https://kolibri.digital/<component>")
 
 Only fall back to custom HTML/CSS if KoliBri provably has no solution.
 
+### Styling Implication
+
+KoliBri components come with **built-in styling** that follows accessibility and design standards. This means:
+
+- **Reuse MaxiM**: Use as many KoliBri components as possible to minimize custom CSS work
+- **App-Specific Styling Focus**: Component-specific styling in `src/style.scss` should focus primarily on **responsive page layout** – positioning components on the page, media queries, spacing, and responsive grid adjustments
+- **Component Styling**: Do NOT override KoliBri component internals (buttons, inputs, etc.). Each component is pre-styled for consistency and accessibility
+- **Global Tokens**: Leverage CSS custom properties (`--ds-*` tokens) in `style.scss` for theming and layout adjustments instead of adding custom component styles
+- **Minimal Custom CSS**: The less custom CSS needed, the better. If you find yourself writing many page-specific styles, consider if a KoliBri component can solve it
+
+Example: A technology list should use `KolCard` (pre-styled) with UnoCSS/SCSS for grid layout and spacing, not custom card HTML.
+
 ## Coding Conventions
 
 - Use ESM imports exclusively (`"type": "module"`).
@@ -129,6 +141,71 @@ Only fall back to custom HTML/CSS if KoliBri provably has no solution.
 - Use exact version numbers in `package.json` dependencies.
 - Keep lists and enumerations in alphabetical order.
 - Formatting is enforced via Prettier (tabs, single quotes).
+
+## Styling Guidelines
+
+### UnoCSS First
+
+Styling is primarily handled by **UnoCSS** (presetMini). Prefer utility-first styling whenever possible:
+
+- Use UnoCSS utility classes for responsive layouts, spacing, sizing, and common patterns
+- Only use component-scoped SCSS in `src/style.scss` for KoliBri component customizations or complex custom patterns
+- Keep SCSS minimal and maintainable – avoid over-nesting or complex selectors
+
+### CSS Class Naming Convention (BEM)
+
+All CSS classes in component-scoped SCSS **must strictly follow the BEM (Block Element Modifier) pattern**:
+
+```scss
+/* ✅ CORRECT BEM structure */
+.component-name {
+} /* Block */
+.component-name__element {
+} /* Element */
+.component-name--modifier {
+} /* Modifier */
+.component-name__element--modifier {
+} /* Element with modifier */
+
+/* ❌ INCORRECT - avoid these patterns */
+.component-name_element {
+} /* Use __ not _ */
+.component-name-modifier {
+} /* Use -- not - for modifiers */
+.component-name > .element {
+} /* Avoid child selectors */
+```
+
+### SCSS Architecture
+
+- Use flat BEM selectors at the root level (do not nest BEM modifiers)
+- Apply contextual nesting only when a modifier changes how a child element behaves
+- Never use `$root` variables or `@at-root` – use direct descendant selectors instead
+- Do not overuse CSS custom properties to avoid collisions with host-page styles
+- Rely on SCSS variables for internal calculations; expose only well-prefixed design tokens as CSS custom properties
+
+### Example
+
+```scss
+.pwa-update-prompt {
+	display: flex;
+	flex-direction: column;
+}
+
+.pwa-update-prompt__text {
+	font-size: var(--ds-text-sm);
+}
+
+.pwa-update-prompt__actions {
+	display: flex;
+	flex-direction: row;
+	gap: var(--ds-space-2);
+
+	@media (width < 480px) {
+		flex-direction: column;
+	}
+}
+```
 
 ## Deployment
 
