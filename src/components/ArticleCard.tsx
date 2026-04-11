@@ -93,10 +93,13 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 			<span
 				className="card-score-badge"
 				style={{ background: scoreColor, color: '#fff' }}
-				title={t('article.scoreTitle')}
+				title={`${t('article.scoreTitle')}: ${score}/100 (${t(`article.scoreCategories.${scoreResult.category}`)})`}
 				aria-label={t('article.scoreAria', { score })}
 			>
-				{score}
+				<span className="card-score-number">{score}</span>
+				<span className="card-score-category" title={t(`article.scoreCategories.${scoreResult.category}`)}>
+					{t(`article.scoreCategories.${scoreResult.category}`)}
+				</span>
 			</span>
 			{stackItem && (
 				<span className="card-role-badge" style={{ background: ROLE_COLORS[stackItem.role], color: '#fff' }} title={t(`stack.roles.${stackItem.role}`)}>

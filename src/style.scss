@@ -804,16 +804,30 @@ kol-card.article-card,
 
 .card-score-badge {
 	display: inline-flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-width: 36px;
-	padding: 2px 6px;
+	min-width: 44px;
+	padding: 4px 6px;
 	border-radius: var(--ds-radius-sm);
-	font-size: var(--ds-text-xs);
-	font-weight: 700;
 	color: #fff;
 	flex-shrink: 0;
 	margin-left: auto;
+	gap: 2px;
+}
+
+.card-score-number {
+	font-size: var(--ds-text-base);
+	font-weight: 700;
+	line-height: 1;
+}
+
+.card-score-category {
+	font-size: 0.65rem;
+	font-weight: 600;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
 }
 
 .card-role-badge {
@@ -1153,10 +1167,23 @@ kol-card.article-card,
 	color: var(--ds-color-text-muted);
 }
 
+.stack-stats__score-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+}
+
 .stack-stats__score-value {
 	font-size: 1.75rem;
 	font-weight: 700;
 	line-height: 1;
+}
+
+.stack-stats__score-category {
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
 }
 
 .stack-stats__roles {
