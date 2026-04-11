@@ -64,10 +64,11 @@ function describeArc(x: number, y: number, radius: number, startAngle: number, e
 }
 
 export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGaugeProps) {
-	const radius = size / 2;
+	const radius = size / 2 - 30;
 	const innerRadius = radius - 12;
 	const outerRadius = radius - 4;
-	const center = size / 2;
+	const centerX = size / 2;
+	const centerY = size * 0.45;
 
 	const angle = scoreToAngle(score);
 	const color = CATEGORY_COLORS[category];
@@ -76,8 +77,8 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 	const segmentPaths = CATEGORY_RANGES.map((range, idx) => {
 		const nextRange = CATEGORY_RANGES[idx + 1];
 		const endAngle = nextRange ? nextRange.angle : 180;
-		const path = describeArc(center, center, outerRadius, range.angle, endAngle);
-		const innerPath = describeArc(center, center, innerRadius, range.angle, endAngle);
+		const path = describeArc(centerX, centerY, outerRadius, range.angle, endAngle);
+		const innerPath = describeArc(centerX, centerY, innerRadius, range.angle, endAngle);
 
 		return (
 			<g key={range.category}>
@@ -94,16 +95,16 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 	});
 
 	// Aktiver Gauge-Ring (zeigt Score)
-	const activePath = describeArc(center, center, outerRadius, 0, angle);
+	const activePath = describeArc(centerX, centerY, outerRadius, 0, angle);
 
 	// Nadel/Zeiger
-	const needleEnd = polarToCartesian(center, center, innerRadius - 8, angle);
+	const needleEnd = polarToCartesian(centerX, centerY, innerRadius - 8, angle);
 
 	return (
 		<svg
 			width={size}
-			height={size * 0.6}
-			viewBox={`0 0 ${size} ${size * 0.6}`}
+			height={size * 0.8}
+			viewBox={`0 0 ${size} ${size * 0.8}`}
 			className="sovereignty-gauge"
 			role="img"
 			aria-label={`Sovereignty Score: ${score}/100 (${category})`}
@@ -126,8 +127,8 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 
 			{/* Kategorie-Markierungs-Linien */}
 			{CATEGORY_RANGES.map((range) => {
-				const start = polarToCartesian(center, center, innerRadius - 2, range.angle);
-				const end = polarToCartesian(center, center, outerRadius + 6, range.angle);
+				const start = polarToCartesian(centerX, centerY, innerRadius - 2, range.angle);
+				const end = polarToCartesian(centerX, centerY, outerRadius + 6, range.angle);
 				return (
 					<line
 						key={`marker-${range.angle}`}
@@ -144,8 +145,8 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 
 			{/* Nadel/Zeiger */}
 			<line
-				x1={center}
-				y1={center}
+				x1={centerX}
+				y1={centerY}
 				x2={needleEnd.x}
 				y2={needleEnd.y}
 				stroke={color}
@@ -158,12 +159,12 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 			/>
 
 			{/* Mittelpunkt-Kreis */}
-			<circle cx={center} cy={center} r="6" fill={color} opacity="0.8" />
+			<circle cx={centerX} cy={centerY} r="6" fill={color} opacity="0.8" />
 
 			{/* Score-Text in der Mitte */}
 			<text
-				x={center}
-				y={center + 8}
+				x={centerX}
+				y={centerY + 8}
 				textAnchor="middle"
 				dominantBaseline="middle"
 				fontSize={Math.round(size * 0.15)}
