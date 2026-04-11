@@ -2,9 +2,9 @@
 
 ## Überblick
 
-Das Accessible D-Stack Landscape nutzt ein **hierarchisches Metriken-System**, um die Souveränität und Eignung von Technologien, Standards und Tools zu bewerten. Dieses System arbeitet auf mehreren Ebenen:
+Das Accessible D-Stack Landscape nutzt ein **hierarchisches Metriken-System mit Hybrid-Skala**, um die Souveränität und Eignung von Technologien, Standards und Tools zu bewerten. Dieses System arbeitet auf mehreren Ebenen:
 
-1. **Items** (einzelne Technologien) - haben Sovereignty Criteria
+1. **Items** (einzelne Technologien) - haben Sovereignty Criteria (0-100 Score + Kategorie)
 2. **Sublayer** (Kategorien) - aggregieren Item-Metriken + eigene Criteria
 3. **Layer** (5 Top-Level Layer) - aggregieren Sublayer-Metriken + eigene Criteria
 4. **Stacks** (Regierungen/Organisationen) - kombinieren alle Scores mit Rollen-Multiplikatoren
@@ -13,8 +13,28 @@ Das Accessible D-Stack Landscape nutzt ein **hierarchisches Metriken-System**, u
 Item → Sublayer → Layer → Stack
    ↓       ↓        ↓        ↓
  Criteria + Criteria + Criteria + Relation
-   Score    Score     Score     Score
+Score+Cat  Score     Score     Score
 ```
+
+### Hybrid-Skala (6 Kategorien)
+
+Jeder Score wird in eine Kategorie mit Farbcodierung eingeordnet:
+
+| Kategorie | Range | Farbe | Bedeutung |
+|-----------|-------|-------|-----------|
+| Unzureichend | 0-30 | 🔴 Rot | Nicht empfohlen, erhebliche Risiken |
+| Minimal | 31-45 | 🟠 Orange | Nur unter bestimmten Bedingungen |
+| Ausreichend | 46-60 | 🟡 Gelb | Akzeptabel, Verbesserung nötig |
+| Gut | 61-75 | 🟢 Hellgrün | Empfohlen für die meisten Fälle |
+| Ausgezeichnet | 76-90 | 🟢 Grün | Sehr empfohlen, hervorragende Souveränität |
+| Hervorragend | 91-100 | 🟢 Dunkelgrün | Gold-Standard, optimale Souveränität |
+
+**Vorteile der Hybrid-Skala:**
+- ✅ Psychologisch optimal (6 Kategorien für menschliche Wahrnehmung)
+- ✅ Visuelle Differenzierung durch Farbcodierung
+- ✅ Numerische Granularität (0-100) bleibt sichtbar
+- ✅ Intuitiv verstehbar für Laien und Techniker
+- ✅ International verständliche Farbzuordnung
 
 ---
 
@@ -102,7 +122,7 @@ Der `ownerType` beschreibt das **Geschäftsmodell/die Eigentumsstruktur** und ka
 ### Scoring-Logik für Items
 
 ```javascript
-// Basis-Score: Summe aller true-Kriterien
+// 1. BASIS-SCORE: Summe aller true-Kriterien
 baseScore = (openSource ? 30 : 0) 
           + (euHeadquartered ? 25 : 0)
           + (hasAudit ? 20 : 0)
@@ -111,19 +131,52 @@ baseScore = (openSource ? 30 : 0)
           + (largeEcosystem ? 5 : 0)
 // Basis kann maximal 100 Punkte sein
 
-// Owner Score hinzufügen
+// 2. OWNER-SCORE hinzufügen
 ownerScore = ownerType ? OWNER_WEIGHTS[ownerType] : 0
 
-// Gesamtscore berechnen
-finalScore = baseScore + ownerScore
+// 3. GESAMTSCORE berechnen
+numericScore = baseScore + ownerScore
 
-// WICHTIG: Cap ohne ownerType
+// 4. WICHTIG: Cap ohne ownerType
 if (!ownerType) {
-  finalScore = Math.min(finalScore, 60)  // Maximum 60 wenn ownerType fehlt
+  numericScore = Math.min(numericScore, 60)  // Maximum 60 wenn ownerType fehlt
 }
 
-// Gesamtscore ist immer 0-100
-finalScore = Math.min(finalScore, 100)
+// 5. Finaler Score (0-100)
+numericScore = Math.min(numericScore, 100)
+
+// 6. KATEGORISIERUNG (Hybrid-Skala)
+if (numericScore <= 30) category = 'insufficient'      // 🔴
+else if (numericScore <= 45) category = 'minimal'      // 🟠
+else if (numericScore <= 60) category = 'adequate'     // 🟡
+else if (numericScore <= 75) category = 'good'         // 🟢 (hellgrün)
+else if (numericScore <= 90) category = 'excellent'    // 🟢 (grün)
+else category = 'outstanding'                          // 🟢 (dunkelgrün)
+
+// 7. FARBE zuweisen
+const colors = {
+  'insufficient': '#D32F2F',   // Rot
+  'minimal': '#F57C00',        // Orange
+  'adequate': '#F9A825',       // Gelb
+  'good': '#7CB342',           // Hellgrün
+  'excellent': '#388E3C',      // Grün
+  'outstanding': '#1B5E20'     // Dunkelgrün
+}
+color = colors[category]
+
+// 8. PERCENTILE in Kategorie berechnen (0-100)
+categoryRange = CATEGORY_RANGES[category]  // z.B. 46-60 für 'adequate'
+percentileInCategory = ((numericScore - categoryRange.min) / (categoryRange.max - categoryRange.min)) * 100
+```
+
+**Ergebnis:**
+```typescript
+SovereigntyScoreResult {
+  score: 72,              // 0-100
+  category: 'good',       // Eine von 6 Kategorien
+  color: '#7CB342',       // Hex-Farbe für UI
+  percentileInCategory: 60 // Position in Kategorie (0-100)
+}
 ```
 
 ### Beispiele für Item-Scoring

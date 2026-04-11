@@ -105,6 +105,20 @@
 			"community": "Community",
 			"oneManShow": "One-Man-Show",
 			"unknown": "Nicht gepflegt"
+		},
+		"scoreCategories": {
+			"insufficient": "Unzureichend",
+			"insufficientDescription": "Nicht empfohlen – erhebliche Souveränitätsrisiken",
+			"minimal": "Minimal",
+			"minimalDescription": "Nur unter bestimmten Bedingungen",
+			"adequate": "Ausreichend",
+			"adequateDescription": "Akzeptabel, aber Verbesserung nötig",
+			"good": "Gut",
+			"goodDescription": "Empfohlen für die meisten Fälle",
+			"excellent": "Ausgezeichnet",
+			"excellentDescription": "Sehr empfohlen – hervorragende Souveränität",
+			"outstanding": "Hervorragend",
+			"outstandingDescription": "Gold-Standard – optimale Souveränität"
 		}
 	},
 	"pwa": {

@@ -27,6 +27,26 @@ export type Layer = {
 export type Maturity = 'sandbox' | 'incubation' | 'graduated';
 export type OwnerType = 'independentConsortium' | 'corporation' | 'community' | 'oneManShow';
 
+// Hybrid Scoring Scale: 6 Categories + Numeric Score
+export type SovereigntyScoreCategory =
+	| 'insufficient'    // 0-30
+	| 'minimal'         // 31-45
+	| 'adequate'        // 46-60
+	| 'good'            // 61-75
+	| 'excellent'       // 76-90
+	| 'outstanding';    // 91-100
+
+export type SovereigntyScoreResult = {
+	/** Raw score: 0-100 */
+	score: number;
+	/** Category: one of 6 categories */
+	category: SovereigntyScoreCategory;
+	/** Color code for UI visualization (hex) */
+	color: string;
+	/** Position within category range (0-100) */
+	percentileInCategory: number;
+};
+
 export type SovereigntyCriteria = {
 	/** Open-source with publicly accessible source code (+30) */
 	openSource: boolean;
@@ -58,6 +78,8 @@ export type Item = {
 	maturity?: Maturity;
 	sovereigntyCriteria: SovereigntyCriteria;
 	sovereigntyScore?: number;
+	/** Computed from sovereigntyCriteria: category, color, percentile */
+	sovereigntyScoreResult?: SovereigntyScoreResult;
 	github?: {
 		repo?: string;
 		stars?: number;

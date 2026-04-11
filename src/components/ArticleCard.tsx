@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS } from '../data/catalog';
 import { Item, ParticipantRole, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
-import { computeOwnerScore, computeSovereigntyScore } from '../utils/sovereigntyScore';
+import { computeOwnerScore, computeSovereigntyScore, computeSovereigntyScoreResult } from '../utils/sovereigntyScore';
 
 type ViewMode = 'tile' | 'list';
 
@@ -22,12 +22,6 @@ const ROLE_COLORS: Record<ParticipantRole, string> = {
 	consumer: '#546e7a',
 };
 
-function scoreColor(score: number): string {
-	if (score >= 70) return '#2e7d32';
-	if (score >= 40) return '#f57c00';
-	return '#c62828';
-}
-
 export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile' }: ArticleCardProps) {
 	const { i18n, t } = useTranslation();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -43,8 +37,13 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 			candidate.layer === selectedArticle.layer && candidate.id !== selectedArticle.id && (stackItemMap === undefined || stackItemMap.has(candidate.id)),
 	).sort((a, b) => getLocalizedText(a.name, i18n.language).localeCompare(getLocalizedText(b.name, i18n.language), i18n.language));
 
-	const score = computeSovereigntyScore(article.sovereigntyCriteria);
-	const selectedScore = computeSovereigntyScore(selectedArticle.sovereigntyCriteria);
+	const scoreResult = computeSovereigntyScoreResult(article.sovereigntyCriteria);
+	const score = scoreResult.score;
+	const scoreColor = scoreResult.color;
+	const selectedScoreResult = computeSovereigntyScoreResult(selectedArticle.sovereigntyCriteria);
+	const selectedScore = selectedScoreResult.score;
+	const selectedScoreColor = selectedScoreResult.color;
+	const selectedScoreCategory = selectedScoreResult.category;
 	const criteriaKeys = (Object.keys(article.sovereigntyCriteria) as Array<keyof typeof article.sovereigntyCriteria>).filter((key) => key !== 'ownerType');
 
 	const renderArticleLogo = (logo: string | undefined, localizedName: string, large = false) => {
@@ -93,7 +92,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 		<>
 			<span
 				className="card-score-badge"
-				style={{ background: scoreColor(score), color: '#fff' }}
+				style={{ background: scoreColor, color: '#fff' }}
 				title={t('article.scoreTitle')}
 				aria-label={t('article.scoreAria', { score })}
 			>
@@ -178,9 +177,13 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 							</div>
 							<div className="drawer-score-section">
 								<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
-								<div className="drawer-score-total" style={{ color: scoreColor(selectedScore) }}>
+								<div className="drawer-score-total" style={{ color: selectedScoreColor }}>
 									{selectedScore}/100
+									<span className="drawer-score-category" style={{ marginLeft: '12px', fontSize: '0.8em' }}>
+										({t(`article.scoreCategories.${selectedScoreCategory}`)})
+									</span>
 								</div>
+								<p className="drawer-score-description">{t(`article.scoreCategories.${selectedScoreCategory}Description`)}</p>
 								<ul className="drawer-criteria-list">
 									{criteriaKeys.map((key) => (
 										<li key={key} className={`drawer-criteria-item drawer-criteria-item--${selectedArticle.sovereigntyCriteria[key] ? 'yes' : 'no'}`}>

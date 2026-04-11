@@ -105,6 +105,20 @@
 			"community": "Community",
 			"oneManShow": "One-man show",
 			"unknown": "Not maintained"
+		},
+		"scoreCategories": {
+			"insufficient": "Insufficient",
+			"insufficientDescription": "Not recommended – significant sovereignty risks",
+			"minimal": "Minimal",
+			"minimalDescription": "Only under specific conditions",
+			"adequate": "Adequate",
+			"adequateDescription": "Acceptable, but improvement needed",
+			"good": "Good",
+			"goodDescription": "Recommended for most cases",
+			"excellent": "Excellent",
+			"excellentDescription": "Highly recommended – excellent sovereignty",
+			"outstanding": "Outstanding",
+			"outstandingDescription": "Gold standard – optimal sovereignty"
 		}
 	},
 	"pwa": {
