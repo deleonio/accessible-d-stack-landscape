@@ -78,7 +78,6 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 		const nextRange = CATEGORY_RANGES[idx + 1];
 		const endAngle = nextRange ? nextRange.angle : 180;
 		const path = describeArc(centerX, centerY, outerRadius, range.angle, endAngle);
-		const innerPath = describeArc(centerX, centerY, innerRadius, range.angle, endAngle);
 
 		return (
 			<g key={range.category}>

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS } from '../data/catalog';
 import { Item, ParticipantRole, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
-import { computeOwnerScore, computeSovereigntyScore, computeSovereigntyScoreResult } from '../utils/sovereigntyScore';
+import { computeOwnerScore, computeSovereigntyScoreResult } from '../utils/sovereigntyScore';
 import { SovereigntyGauge } from './SovereigntyGauge';
 
 type ViewMode = 'tile' | 'list';
