@@ -847,11 +847,49 @@ kol-card.article-card,
 	max-width: 600px;
 	overflow: hidden;
 	box-sizing: border-box;
+	padding: 0;
 }
 
 .drawer-content > * {
 	box-sizing: border-box;
 	overflow-x: hidden;
+	max-width: 100%;
+	width: 100%;
+}
+
+/* Stelle sicher, dass KolCard und alle inneren Elemente responsive sind */
+.drawer-content kol-card,
+.drawer-card {
+	width: 100% !important;
+	max-width: 100% !important;
+	overflow: hidden !important;
+}
+
+.drawer-details {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.drawer-headline,
+.drawer-score-section,
+.drawer-criteria-list,
+.drawer-related,
+.drawer-description {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+/* Text und Elemente sollen nicht über den Container hinausgehen */
+.drawer-content p,
+.drawer-content span,
+.drawer-content a {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
