@@ -5,6 +5,7 @@ import { ITEMS, LAYERS } from '../data/catalog';
 import { Item, ParticipantRole, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
 import { computeOwnerScore, computeSovereigntyScore, computeSovereigntyScoreResult } from '../utils/sovereigntyScore';
+import { SovereigntyGauge } from './SovereigntyGauge';
 
 type ViewMode = 'tile' | 'list';
 
@@ -180,6 +181,9 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 							</div>
 							<div className="drawer-score-section">
 								<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
+								<div className="drawer-gauge-container">
+									<SovereigntyGauge score={selectedScore} category={selectedScoreCategory} size={200} />
+								</div>
 								<div className="drawer-score-total" style={{ color: selectedScoreColor }}>
 									{selectedScore}/100
 									<span className="drawer-score-category" style={{ marginLeft: '12px', fontSize: '0.8em' }}>

@@ -1097,6 +1097,37 @@ kol-card.article-card,
 	background: var(--ds-color-bg);
 }
 
+.drawer-gauge-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: var(--ds-space-4) 0;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+
+	svg.sovereignty-gauge {
+		max-width: 100%;
+		height: auto;
+		filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+		/* Smooth animation für Score-Änderungen */
+		path,
+		line,
+		circle {
+			transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+		}
+	}
+}
+
+/* Responsive Gauge auf schmalen Bildschirmen */
+@media (max-width: 480px) {
+	.drawer-gauge-container svg.sovereignty-gauge {
+		width: 140px;
+		height: auto;
+	}
+}
+
 .drawer-score-title {
 	font-weight: 600;
 	font-size: var(--ds-text-sm);

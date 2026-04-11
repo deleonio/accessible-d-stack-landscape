@@ -1,0 +1,177 @@
+import { SovereigntyScoreCategory } from '../types';
+
+interface SovereigntyGaugeProps {
+	score: number;
+	category: SovereigntyScoreCategory;
+	size?: number;
+}
+
+// Kategorie-Farben für das Gauge
+const CATEGORY_COLORS: Record<SovereigntyScoreCategory, string> = {
+	insufficient: '#D32F2F',    // Rot
+	minimal: '#F57C00',         // Orange
+	adequate: '#F9A825',        // Gelb
+	good: '#7CB342',            // Hellgrün
+	excellent: '#388E3C',       // Grün
+	outstanding: '#1B5E20',     // Dunkelgrün
+};
+
+// Kategorie-Ranges für Winkel-Berechnung (0-180°)
+const CATEGORY_RANGES = [
+	{ category: 'insufficient' as const, min: 0, max: 30, angle: 0 },
+	{ category: 'minimal' as const, min: 31, max: 45, angle: 30 },
+	{ category: 'adequate' as const, min: 46, max: 60, angle: 60 },
+	{ category: 'good' as const, min: 61, max: 75, angle: 90 },
+	{ category: 'excellent' as const, min: 76, max: 90, angle: 120 },
+	{ category: 'outstanding' as const, min: 91, max: 100, angle: 150 },
+];
+
+/**
+ * Konvertiert einen Score (0-100) in einen Winkel (0-180°)
+ * Wird für die Gauge-Nadel verwendet
+ */
+function scoreToAngle(score: number): number {
+	const clampedScore = Math.max(0, Math.min(100, score));
+	return (clampedScore / 100) * 180;
+}
+
+/**
+ * Konvertiert einen Winkel (Grad) in SVG-Koordinaten für Kurve
+ */
+function angleToRadians(angle: number): number {
+	return (angle - 90) * (Math.PI / 180);
+}
+
+/**
+ * Berechnet SVG-Koordinaten für einen Punkt auf dem Kreis
+ */
+function polarToCartesian(centerX: number, centerY: number, radius: number, angleInDegrees: number): { x: number; y: number } {
+	const angleInRadians = angleToRadians(angleInDegrees);
+	return {
+		x: centerX + radius * Math.cos(angleInRadians),
+		y: centerY + radius * Math.sin(angleInRadians),
+	};
+}
+
+/**
+ * Erstellt einen SVG-Bogen für die Gauge-Ringe
+ */
+function describeArc(x: number, y: number, radius: number, startAngle: number, endAngle: number): string {
+	const start = polarToCartesian(x, y, radius, endAngle);
+	const end = polarToCartesian(x, y, radius, startAngle);
+	const largeArc = endAngle - startAngle <= 180 ? '0' : '1';
+	return ['M', start.x, start.y, 'A', radius, radius, 0, largeArc, 0, end.x, end.y].join(' ');
+}
+
+export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGaugeProps) {
+	const radius = size / 2;
+	const innerRadius = radius - 12;
+	const outerRadius = radius - 4;
+	const center = size / 2;
+
+	const angle = scoreToAngle(score);
+	const color = CATEGORY_COLORS[category];
+
+	// Gauge-Ring Segmente für alle Kategorien (Hintergrund)
+	const segmentPaths = CATEGORY_RANGES.map((range, idx) => {
+		const nextRange = CATEGORY_RANGES[idx + 1];
+		const endAngle = nextRange ? nextRange.angle : 180;
+		const path = describeArc(center, center, outerRadius, range.angle, endAngle);
+		const innerPath = describeArc(center, center, innerRadius, range.angle, endAngle);
+
+		return (
+			<g key={range.category}>
+				{/* Hintergrund-Segment (hell) */}
+				<path
+					d={path}
+					stroke={CATEGORY_COLORS[range.category]}
+					strokeWidth={outerRadius - innerRadius}
+					fill="none"
+					opacity="0.2"
+				/>
+			</g>
+		);
+	});
+
+	// Aktiver Gauge-Ring (zeigt Score)
+	const activePath = describeArc(center, center, outerRadius, 0, angle);
+
+	// Nadel/Zeiger
+	const needleEnd = polarToCartesian(center, center, innerRadius - 8, angle);
+
+	return (
+		<svg
+			width={size}
+			height={size * 0.6}
+			viewBox={`0 0 ${size} ${size * 0.6}`}
+			className="sovereignty-gauge"
+			role="img"
+			aria-label={`Sovereignty Score: ${score}/100 (${category})`}
+		>
+			{/* Hintergrund-Segmente (alle Kategorien) */}
+			{segmentPaths}
+
+			{/* Aktiver Fortschritts-Ring */}
+			<path
+				d={activePath}
+				stroke={color}
+				strokeWidth={outerRadius - innerRadius}
+				fill="none"
+				strokeLinecap="round"
+				style={{
+					transition: 'all 0.5s ease-in-out',
+					filter: `drop-shadow(0 0 4px ${color}40)`,
+				}}
+			/>
+
+			{/* Kategorie-Markierungs-Linien */}
+			{CATEGORY_RANGES.map((range) => {
+				const start = polarToCartesian(center, center, innerRadius - 2, range.angle);
+				const end = polarToCartesian(center, center, outerRadius + 6, range.angle);
+				return (
+					<line
+						key={`marker-${range.angle}`}
+						x1={start.x}
+						y1={start.y}
+						x2={end.x}
+						y2={end.y}
+						stroke="#999"
+						strokeWidth="1"
+						opacity="0.5"
+					/>
+				);
+			})}
+
+			{/* Nadel/Zeiger */}
+			<line
+				x1={center}
+				y1={center}
+				x2={needleEnd.x}
+				y2={needleEnd.y}
+				stroke={color}
+				strokeWidth="3"
+				strokeLinecap="round"
+				style={{
+					transition: 'all 0.5s ease-in-out',
+					filter: `drop-shadow(0 0 2px ${color}60)`,
+				}}
+			/>
+
+			{/* Mittelpunkt-Kreis */}
+			<circle cx={center} cy={center} r="6" fill={color} opacity="0.8" />
+
+			{/* Score-Text in der Mitte */}
+			<text
+				x={center}
+				y={center + 8}
+				textAnchor="middle"
+				dominantBaseline="middle"
+				fontSize={Math.round(size * 0.15)}
+				fontWeight="700"
+				fill="#1d2129"
+			>
+				{score}
+			</text>
+		</svg>
+	);
+}
