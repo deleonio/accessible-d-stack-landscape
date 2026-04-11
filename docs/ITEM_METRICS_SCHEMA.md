@@ -1,0 +1,578 @@
+# Item-Ranking-Metriken und Hierarchisches Scoring-System
+
+## Überblick
+
+Das Accessible D-Stack Landscape nutzt ein **hierarchisches Metriken-System**, um die Souveränität und Eignung von Technologien, Standards und Tools zu bewerten. Dieses System arbeitet auf mehreren Ebenen:
+
+1. **Items** (einzelne Technologien) - haben Sovereignty Criteria
+2. **Sublayer** (Kategorien) - aggregieren Item-Metriken + eigene Criteria
+3. **Layer** (5 Top-Level Layer) - aggregieren Sublayer-Metriken + eigene Criteria
+4. **Stacks** (Regierungen/Organisationen) - kombinieren alle Scores mit Rollen-Multiplikatoren
+
+```
+Item → Sublayer → Layer → Stack
+   ↓       ↓        ↓        ↓
+ Criteria + Criteria + Criteria + Relation
+   Score    Score     Score     Score
+```
+
+---
+
+## Hierarchische Architektur
+
+### Layer (Top-Level)
+
+Die Architektur folgt dem **Splash-Modell** mit 5 Layers:
+
+| ID | Name | Beschreibung | Weight | Zweck |
+|----|------|-------------|--------|-------|
+| `infrastructure` | Infrastructure | Server, Cloud, Netzwerk | 1.0 | Basis-Infrastruktur |
+| `platform` | Platform | Betriebssysteme, Middleware | 1.0 | Plattform-Services |
+| `building-blocks` | Building Blocks | Bibliotheken, APIs, Standards | 1.0 | Bausteine |
+| `applications` | Applications | End-User Applikationen | 1.0 | Anwendungen |
+| `sovereign-standards` | Sovereign Standards | Technische Standards & Protokolle | 1.0 | Standards |
+
+**Layer-Weight:** Faktor für die Berechnung des Gesamtscores. Default: 1.0 (Bereich: 0-5)
+
+### Sublayer (Kategorien)
+
+Jeder Layer kann mehrere **Sublayer** enthalten. Diese sind **nicht optional** - Items gehören immer zu einem Sublayer innerhalb eines Layers.
+
+**Beispiele:**
+- Layer: `infrastructure` 
+  - Sublayer: `storage`, `compute`, `networking`, `security`
+- Layer: `platform`
+  - Sublayer: `operating-systems`, `database`, `messaging`
+- Layer: `applications`
+  - Sublayer: `office`, `communication`, `content-management`
+
+**Sublayer haben:**
+- `id` (eindeutig)
+- `name` (lokalisiert)
+- `parentLayer` (Zugehörigkeit)
+- `weight` (0-5, default 1.0) - für aggregierte Scoring
+- Eigene Metrics/Criteria
+
+### Items
+
+Items sind **konkrete Technologien oder Standards** (z.B. Nextcloud, Kubernetes, ActivityPub).
+
+**Jedes Item muss zu genau einem Sublayer gehören:**
+
+```json
+{
+  "id": "nextcloud",
+  "name": "Nextcloud",
+  "layer": "applications",
+  "sublayer": "content-management",
+  "description": { "de": "...", "en": "..." },
+  "sovereigntyCriteria": { ... }
+}
+```
+
+---
+
+## Item-Metriken (Sovereignty Criteria)
+
+Items werden anhand von **7 booleschen Kriterien** und einem optionalen **Ownership-Typ** bewertet.
+
+### Kriterium-Katalog
+
+| Kriterium | Punkte | Beschreibung |
+|-----------|--------|-------------|
+| `openSource` | +30 | Open-Source mit öffentlich zugänglichem Quellcode |
+| `euHeadquartered` | +25 | Hauptsitz oder rechtliche Registrierung in der EU |
+| `hasAudit` | +20 | Dokumentierter, öffentlich verfügbarer Sicherheits-/Compliance-Audit |
+| `permissiveLicense` | +10 | Permissive oder Copyleft Open-Source Lizenz |
+| `matureProject` | +10 | Reifes Projekt mit stabiler Lifecycle-Status |
+| `largeEcosystem` | +5 | Große Community/Ecosystem (z.B. >1000 GitHub Stars) |
+| **Summe (ohne ownerType)** | **+100** | **Maximaler Score ohne Owner-Typ** |
+
+### Owner Type (Optional, aber wichtig)
+
+Der `ownerType` beschreibt das **Geschäftsmodell/die Eigentumsstruktur** und kann den Score um 0-15 Punkte erhöhen:
+
+| Owner Type | Punkte | Beschreibung |
+|-----------|--------|-------------|
+| `independentConsortium` | +15 | Unabhängige Konsortien oder Multi-Stakeholder Projekte |
+| `community` | +10 | Community-getriebenes Projekt |
+| `corporation` | +5 | Unternehmensgestütztes Projekt |
+| `oneManShow` | +0 | Einzelne Person / Minimale Unterstützung |
+
+### Scoring-Logik für Items
+
+```javascript
+// Basis-Score: Summe aller true-Kriterien
+baseScore = (openSource ? 30 : 0) 
+          + (euHeadquartered ? 25 : 0)
+          + (hasAudit ? 20 : 0)
+          + (permissiveLicense ? 10 : 0)
+          + (matureProject ? 10 : 0)
+          + (largeEcosystem ? 5 : 0)
+// Basis kann maximal 100 Punkte sein
+
+// Owner Score hinzufügen
+ownerScore = ownerType ? OWNER_WEIGHTS[ownerType] : 0
+
+// Gesamtscore berechnen
+finalScore = baseScore + ownerScore
+
+// WICHTIG: Cap ohne ownerType
+if (!ownerType) {
+  finalScore = Math.min(finalScore, 60)  // Maximum 60 wenn ownerType fehlt
+}
+
+// Gesamtscore ist immer 0-100
+finalScore = Math.min(finalScore, 100)
+```
+
+### Beispiele für Item-Scoring
+
+**Beispiel 1: Linux (sehr souveränisch)**
+```
+openSource: true         (+30)
+euHeadquartered: false   (0)
+hasAudit: true          (+20)
+permissiveLicense: true (+10)
+matureProject: true     (+10)
+largeEcosystem: true    (+5)
+ownerType: community    (+10)
+─────────────────────
+Score: 85/100
+```
+
+**Beispiel 2: Proprietary Software (nicht souveränisch)**
+```
+openSource: false        (0)
+euHeadquartered: false   (0)
+hasAudit: true          (+20)
+permissiveLicense: false (0)
+matureProject: true     (+10)
+largeEcosystem: true    (+5)
+ownerType: corporation  (+5)
+─────────────────────
+Score: 40/100
+```
+
+**Beispiel 3: Open-Source ohne Owner-Type (limitiert)**
+```
+openSource: true         (+30)
+euHeadquartered: true    (+25)
+hasAudit: true          (+20)
+permissiveLicense: true (+10)
+matureProject: true     (+10)
+largeEcosystem: true    (+5)
+ownerType: undefined    (0)
+────────────────── → 100 Basis
+ABER: Maximum ohne ownerType = 60
+─────────────────────
+Score: 60/100 (gedeckelt!)
+```
+
+**Wichtig:** Ein Item mit fehlendem `ownerType` kann maximum 60 Punkte bekommen, auch wenn alle anderen Kriterien erfüllt sind!
+
+---
+
+## Sublayer-Metriken (Proposed)
+
+Sublayer aggregieren nicht nur die Item-Scores, sondern haben auch **eigene Criteria**, die die Gesamtqualität der Kategorie beschreiben.
+
+### Vorgeschlagene Sublayer-Criteria
+
+| Kriterium | Punkte | Beschreibung |
+|-----------|--------|-------------|
+| `completeness` | +20 | Anteil Items mit vollständiger Dokumentation (≥80%) |
+| `standards_compliance` | +15 | Items folgen gemeinsamen Standards/Schnittstellen |
+| `integration_maturity` | +15 | Tools/Technologien sind reif für Integration |
+| `vendor_diversity` | +15 | Mehrere unabhängige Anbieter/Projekte verfügbar |
+| `active_maintenance` | +20 | ≥80% der Items werden aktiv gepflegt (letzte Update <1 Jahr) |
+| `ecosystem_size` | +15 | Große durchschnittliche Community (avg Stars >1000) |
+| **Summe** | **+100** | **Maximaler Score** |
+
+### Sublayer-Score Berechnung
+
+```javascript
+// Basis-Score: Eigene Criteria
+sublayerBaseScore = (completeness ? 20 : 0)
+                  + (standards_compliance ? 15 : 0)
+                  + (integration_maturity ? 15 : 0)
+                  + (vendor_diversity ? 15 : 0)
+                  + (active_maintenance ? 20 : 0)
+                  + (ecosystem_size ? 15 : 0)
+
+// Aggregierte Item-Scores (gewichtet)
+itemsAverageScore = AVERAGE(item.sovereigntyScore für alle Items im Sublayer)
+
+// Kombinierter Score (Gewichtung: 60% Items, 40% Criteria)
+sublayerScore = (itemsAverageScore * 0.6) + (sublayerBaseScore * 0.4)
+
+// Mit Sublayer-Weight anwenden
+finalSublayerScore = sublayerScore * (sublayer.weight / 1.0)
+```
+
+---
+
+## Layer-Metriken (Proposed)
+
+Layer sind Top-Level-Kategorien und aggregieren Sublayer. Sie haben auch eigene Criteria für die strategische Bewertung.
+
+### Vorgeschlagene Layer-Criteria
+
+| Kriterium | Punkte | Beschreibung |
+|-----------|--------|-------------|
+| `strategic_importance` | +20 | Kritisch für digitale Souveränität? |
+| `solution_availability` | +15 | Genug alternative Lösungsoptionen? |
+| `lock_in_risk` | +15 | Geringes Risiko für Vendor Lock-in? |
+| `skills_availability` | +15 | Sind Fachkräfte für diesen Layer verfügbar? |
+| `interoperability` | +20 | Hohe Interoperabilität zwischen Items/Sublayern? |
+| `compliance_landscape` | +15 | Alle Items erfüllen regulatorische Anforderungen? |
+| **Summe** | **+100** | **Maximaler Score** |
+
+### Layer-Score Berechnung
+
+```javascript
+// Basis-Score: Eigene Criteria
+layerBaseScore = (strategic_importance ? 20 : 0)
+               + (solution_availability ? 15 : 0)
+               + (lock_in_risk ? 15 : 0)
+               + (skills_availability ? 15 : 0)
+               + (interoperability ? 20 : 0)
+               + (compliance_landscape ? 15 : 0)
+
+// Aggregierte Sublayer-Scores (gewichtet nach weight)
+sublayersWeightedScore = WEIGHTED_AVERAGE(
+  sublayer.score, 
+  weight_by: sublayer.weight
+)
+
+// Kombinierter Score (Gewichtung: 70% Sublayer, 30% Criteria)
+layerScore = (sublayersWeightedScore * 0.7) + (layerBaseScore * 0.3)
+
+// Mit Layer-Weight anwenden
+finalLayerScore = layerScore * (layer.weight / 1.0)
+```
+
+---
+
+## Aggregations-Logik
+
+### Schritt-für-Schritt-Beispiel
+
+**Annahme:** Infrastructure Layer mit 2 Sublayern (Storage, Compute)
+
+**1. Item-Scores berechnen**
+```
+Storage Sublayer:
+  - Nextcloud:    60/100
+  - Ceph:         75/100
+  - MinIO:        70/100
+  Average:        68/100
+
+Compute Sublayer:
+  - Kubernetes:   85/100
+  - OpenStack:    80/100
+  - OpenShift:    82/100
+  Average:        82/100
+```
+
+**2. Sublayer-Scores**
+```
+Storage:
+  - Items Average:        68/100
+  - Criteria (z.B.):      80/100
+  - Combined: (68 × 0.6) + (80 × 0.4) = 72.8
+  - Weight (1.0):         72.8/100
+
+Compute:
+  - Items Average:        82/100
+  - Criteria (z.B.):      90/100
+  - Combined: (82 × 0.7) + (90 × 0.3) = 84.4
+  - Weight (1.0):         84.4/100
+```
+
+**3. Layer-Score**
+```
+Infrastructure:
+  - Sublayer Average:     (72.8 + 84.4) / 2 = 78.6
+  - Criteria (z.B.):      85/100
+  - Combined: (78.6 × 0.7) + (85 × 0.3) = 80.82
+  - Weight (1.0):         80.82/100
+```
+
+---
+
+## Stack-Integration
+
+### Rollen-Multiplikatoren
+
+Ein Stack kombiniert Items aus verschiedenen Sublayern/Layern und weist ihnen **Rollen** zu. Jede Rolle hat einen Multiplikator:
+
+| Rolle | Multiplikator | Bedeutung |
+|-------|--------------|----------|
+| `maintainer` | 1.0x | Wir entwickeln/warten dieses Projekt aktiv |
+| `contributor` | 0.75x | Wir tragen bei, haben aber nicht vollständige Kontrolle |
+| `funder` | 0.5x | Wir finanzieren das Projekt |
+| `consumer` | 0.25x | Wir nutzen es nur |
+
+### Stack-Score Berechnung
+
+```javascript
+// Für jedes Item im Stack:
+itemStackScore = item.sovereigntyScore × role.multiplier
+
+// Durchschnitt aller Items im Stack:
+stackAverageScore = AVERAGE(itemStackScore für alle Items)
+
+// Optional: Gewichtet nach Layer-Weight:
+stackLayerWeightedScore = WEIGHTED_AVERAGE(
+  item.sovereigntyScore,
+  weight_by: item.layer.weight
+) × role.multiplier
+
+// Gesamtscore des Stacks:
+stackFinalScore = AVERAGE oder WEIGHTED_AVERAGE
+```
+
+### Beispiel: Germany Stack
+
+```
+Items im Stack:
+  - Nextcloud (applications/content-management):     60/100 × 1.0 (maintainer) = 60
+  - Kubernetes (infrastructure/compute):             85/100 × 0.75 (contributor) = 63.75
+  - Keycloak (platform/identity):                    72/100 × 0.5 (funder) = 36
+  - OnlyOffice (applications/office):               55/100 × 0.25 (consumer) = 13.75
+  
+Stack Average:  (60 + 63.75 + 36 + 13.75) / 4 = 43.4/100
+
+Stack Status: "Low Sovereignty" (unter 50)
+```
+
+---
+
+## JSON Schema Referenz
+
+### Layer Schema
+**Datei:** `/data/schemas/layer.schema.json`
+
+```json
+{
+  "id": "infrastructure",              // Eindeutige ID
+  "order": 1,                           // Display-Reihenfolge (1-5)
+  "name": {                             // Lokalisiert
+    "de": "Infrastruktur",
+    "en": "Infrastructure"
+  },
+  "description": { ... },               // Optional
+  "color": "#FF5722",                   // Hex-Farbe
+  "weight": 1.0                         // 0-5, für Scoring-Gewichtung
+}
+```
+
+### Item Schema
+**Datei:** `/data/schemas/item.schema.json`
+
+```json
+{
+  "id": "nextcloud",
+  "name": "Nextcloud",
+  "layer": "applications",
+  "sublayer": "content-management",      // ERFORDERLICH!
+  "description": { "de": "...", "en": "..." },
+  "oss": true,
+  "license": "AGPL-3.0",
+  "sovereigntyCriteria": {
+    "openSource": true,
+    "euHeadquartered": true,
+    "hasAudit": true,
+    "permissiveLicense": true,
+    "matureProject": true,
+    "largeEcosystem": true,
+    "ownerType": "community"              // Optional, max 60 wenn fehlt
+  },
+  "github": { "repo": "...", "stars": 5000 },
+  "audit": { "lastDate": "2024-06-15", "url": "..." },
+  "homepage": "https://nextcloud.com",
+  "logo": "...",
+  "tags": ["cloud", "storage", "office"]
+}
+```
+
+### Stack Schema
+**Datei:** `/data/schemas/stack.schema.json`
+
+```json
+{
+  "id": "germany",
+  "name": { "de": "Deutschland Stack", "en": "Germany Stack" },
+  "version": "1.0.0",
+  "items": [
+    {
+      "itemId": "nextcloud",
+      "status": "recommended",
+      "role": "maintainer",               // Multiplikator!
+      "since": "2024-01-01",
+      "rationale": { "de": "...", "en": "..." }
+    }
+  ]
+}
+```
+
+### Relation Schema
+**Datei:** `/data/schemas/relation.schema.json`
+
+```json
+{
+  "stack": "germany",
+  "item": "nextcloud",
+  "role": "maintainer",                  // 1.0x
+  "rationale": { ... },
+  "alternatives": ["owncloud", "pydio"]
+}
+```
+
+---
+
+## TypeScript Types
+
+**Datei:** `/src/types/index.ts`
+
+```typescript
+export type Layer = {
+  id: string;                           // "infrastructure", etc.
+  order: number;                        // 1-5
+  name: LocalizableText;
+  description?: LocalizableText;
+  color: string;                        // Hex (#RRGGBB)
+  weight?: number;                      // 0-5, default 1
+};
+
+export type Item = {
+  id: string;
+  name: LocalizableText;
+  layer: string;                        // Layer ID
+  sublayer?: string;                    // WICHTIG: Zugehörigkeit!
+  description: LocalizableText;
+  sovereigntyCriteria: SovereigntyCriteria;
+  sovereigntyScore?: number;            // Berechnet, nicht manuell
+  // ... weitere Felder
+};
+
+export type SovereigntyCriteria = {
+  openSource: boolean;                  // +30
+  euHeadquartered: boolean;             // +25
+  hasAudit: boolean;                    // +20
+  permissiveLicense: boolean;           // +10
+  matureProject: boolean;               // +10
+  largeEcosystem: boolean;              // +5
+  ownerType?: OwnerType;                // Optional: +0 to +15
+};
+
+export type OwnerType = 
+  | 'independentConsortium'             // +15
+  | 'community'                         // +10
+  | 'corporation'                       // +5
+  | 'oneManShow';                       // +0
+```
+
+---
+
+## Scoring-Utility
+
+**Datei:** `/src/utils/sovereigntyScore.ts`
+
+```typescript
+export function computeSovereigntyScore(criteria: SovereigntyCriteria): number {
+  // Berechnet 0-100 Score basierend auf Criteria
+  // Siehe Implementation für Details
+}
+
+export function computeOwnerScore(ownerType?: OwnerType): number {
+  // Gibt Punkte für Owner Type (0-15)
+}
+```
+
+---
+
+## Praktische Beispiele
+
+### Vollständiges Item-Beispiel (JSON)
+
+```json
+{
+  "id": "kubernetes",
+  "name": "Kubernetes",
+  "layer": "infrastructure",
+  "sublayer": "compute",
+  "description": {
+    "de": "Open-Source Orchestrierungsplattform für Container",
+    "en": "Open-source container orchestration platform"
+  },
+  "oss": true,
+  "license": "Apache-2.0",
+  "maturity": "graduated",
+  "tags": ["container", "orchestration", "kubernetes"],
+  "sovereigntyCriteria": {
+    "openSource": true,
+    "euHeadquartered": false,
+    "hasAudit": true,
+    "permissiveLicense": true,
+    "matureProject": true,
+    "largeEcosystem": true,
+    "ownerType": "independentConsortium"
+  },
+  "github": {
+    "repo": "https://github.com/kubernetes/kubernetes",
+    "stars": 105000
+  },
+  "audit": {
+    "lastDate": "2024-05-20",
+    "url": "https://www.cncf.io/blog/kubernetes-security-audit-2024/"
+  },
+  "homepage": "https://kubernetes.io"
+}
+```
+
+**Berechneter Score:** 85/100
+- openSource: ✓ +30
+- euHeadquartered: ✗ 0
+- hasAudit: ✓ +20
+- permissiveLicense: ✓ +10
+- matureProject: ✓ +10
+- largeEcosystem: ✓ +5
+- ownerType (independentConsortium): +15
+- **Total: 85/100** ✓
+
+---
+
+## UI-Integration
+
+### Komponenten, die Metriken verwenden
+
+1. **ArticleCard.tsx** - Zeigt Item-Score mit Farbcodierung
+   - Score ≥ 70: Grün (High Sovereignty)
+   - Score 40-70: Orange (Medium Sovereignty)
+   - Score < 40: Rot (Low Sovereignty)
+
+2. **CategoryGrid.tsx** - Sortiert Items nach Score (aufsteigend/absteigend)
+
+3. **StackStats.tsx** - Berechnet durchschnittlichen Score für einen Stack
+
+4. **FilterBar.tsx** - UI zum Sortieren nach Name oder Score
+
+---
+
+## Zusammenfassung
+
+Die **Hierarchy of Metrics** ermöglicht:
+
+✓ **Detaillierte Item-Bewertung** via Sovereignty Criteria (0-100)
+✓ **Kategorie-Bewertung** auf Sublayer-Ebene (Item-Aggregation + eigene Criteria)
+✓ **Strategic Assessment** auf Layer-Ebene (Sublayer-Aggregation + eigene Criteria)
+✓ **Stack-bezogene Scores** mit Rollen-Multiplikatoren (für Regierungen/Organisationen)
+✓ **Gewichtung auf allen Ebenen** via `weight` Feld (0-5)
+
+Dieses System ermöglicht es:
+- **Transparente Bewertung:** Jeder Punkt ist nachvollziehbar
+- **Flexible Aggregation:** Gewichtung nach Wichtigkeit
+- **Mehrdimensionale Analyse:** Items, Kategorien, Layer, Stacks
+- **Differenzierte Rollenmodelle:** Stack-Kontext mit Multiplikatoren
