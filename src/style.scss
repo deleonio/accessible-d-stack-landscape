@@ -804,16 +804,30 @@ kol-card.article-card,
 
 .card-score-badge {
 	display: inline-flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-width: 36px;
-	padding: 2px 6px;
+	min-width: 44px;
+	padding: 4px 6px;
 	border-radius: var(--ds-radius-sm);
-	font-size: var(--ds-text-xs);
-	font-weight: 700;
 	color: #fff;
 	flex-shrink: 0;
 	margin-left: auto;
+	gap: 2px;
+}
+
+.card-score-number {
+	font-size: var(--ds-text-base);
+	font-weight: 700;
+	line-height: 1;
+}
+
+.card-score-category {
+	font-size: 0.65rem;
+	font-weight: 600;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
 }
 
 .card-role-badge {
@@ -831,6 +845,48 @@ kol-card.article-card,
 .drawer-content {
 	width: 100dvw;
 	max-width: 600px;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.drawer-content > * {
+	box-sizing: border-box;
+	overflow-x: hidden;
+	max-width: 100%;
+	width: 100%;
+}
+
+/* Stelle sicher, dass KolCard und alle inneren Elemente responsive sind */
+.drawer-content kol-card,
+.drawer-card {
+	width: 100% !important;
+	max-width: 100% !important;
+	overflow: hidden !important;
+}
+
+.drawer-details {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+}
+
+.drawer-headline,
+.drawer-score-section,
+.drawer-criteria-list,
+.drawer-related,
+.drawer-description {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+/* Text und Elemente sollen nicht über den Container hinausgehen */
+.drawer-content p,
+.drawer-content span,
+.drawer-content a {
+	overflow-wrap: break-word;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -1038,6 +1094,44 @@ kol-card.article-card,
 	background: var(--ds-color-bg);
 }
 
+.drawer-gauge-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: var(--ds-space-4) 0;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+
+	svg.sovereignty-gauge {
+		max-width: 100%;
+		height: auto;
+		filter: drop-shadow(0 2px 4px rgb(0 0 0 / 10%));
+
+		/* Smooth animation für Score-Änderungen */
+		path,
+		line,
+		circle,
+		rect {
+			transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+		}
+
+		/* Text-Styling */
+		text {
+			font-family: inherit;
+			letter-spacing: -0.02em;
+		}
+	}
+}
+
+/* Responsive Gauge auf schmalen Bildschirmen */
+@media (width <= 480px) {
+	.drawer-gauge-container svg.sovereignty-gauge {
+		width: 140px;
+		height: 140px;
+	}
+}
+
 .drawer-score-title {
 	font-weight: 600;
 	font-size: var(--ds-text-sm);
@@ -1153,10 +1247,23 @@ kol-card.article-card,
 	color: var(--ds-color-text-muted);
 }
 
+.stack-stats__score-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+}
+
 .stack-stats__score-value {
 	font-size: 1.75rem;
 	font-weight: 700;
 	line-height: 1;
+}
+
+.stack-stats__score-category {
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
 }
 
 .stack-stats__roles {
