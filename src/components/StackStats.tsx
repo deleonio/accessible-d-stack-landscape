@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Item, ParticipantRole, Stack, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
-import { computeSovereigntyScore, getScoreCategoryColor, getScoreCategory, getScorePercentileInCategory } from '../utils/sovereigntyScore';
+import { computeSovereigntyScore, getScoreCategory, getScoreCategoryColor, getScorePercentileInCategory } from '../utils/sovereigntyScore';
 
 interface StackStatsProps {
 	stack: Stack;

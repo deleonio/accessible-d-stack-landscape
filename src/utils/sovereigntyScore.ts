@@ -1,4 +1,4 @@
-import { OwnerType, SovereigntyCriteria, SovereigntyScoreResult, SovereigntyScoreCategory } from '../types';
+import { OwnerType, SovereigntyCriteria, SovereigntyScoreCategory, SovereigntyScoreResult } from '../types';
 
 const WEIGHTS: Record<keyof SovereigntyCriteria, number> = {
 	openSource: 30,
@@ -26,12 +26,12 @@ const SCORE_CATEGORIES: Array<{
 	max: number;
 	color: string;
 }> = [
-	{ category: 'insufficient', min: 0, max: 30, color: '#D32F2F' },      // Red
-	{ category: 'minimal', min: 31, max: 45, color: '#F57C00' },           // Orange
-	{ category: 'adequate', min: 46, max: 60, color: '#F9A825' },          // Yellow
-	{ category: 'good', min: 61, max: 75, color: '#7CB342' },              // Light Green
-	{ category: 'excellent', min: 76, max: 90, color: '#388E3C' },         // Green
-	{ category: 'outstanding', min: 91, max: 100, color: '#1B5E20' },      // Dark Green
+	{ category: 'insufficient', min: 0, max: 30, color: '#D32F2F' }, // Red
+	{ category: 'minimal', min: 31, max: 45, color: '#F57C00' }, // Orange
+	{ category: 'adequate', min: 46, max: 60, color: '#F9A825' }, // Yellow
+	{ category: 'good', min: 61, max: 75, color: '#7CB342' }, // Light Green
+	{ category: 'excellent', min: 76, max: 90, color: '#388E3C' }, // Green
+	{ category: 'outstanding', min: 91, max: 100, color: '#1B5E20' }, // Dark Green
 ];
 
 export function computeOwnerScore(ownerType?: OwnerType): number {
@@ -61,7 +61,7 @@ export function computeSovereigntyScore(criteria: SovereigntyCriteria): number {
  */
 export function getScoreCategory(score: number): SovereigntyScoreCategory {
 	const clampedScore = Math.max(0, Math.min(100, score));
-	const categoryData = SCORE_CATEGORIES.find(c => clampedScore >= c.min && clampedScore <= c.max);
+	const categoryData = SCORE_CATEGORIES.find((c) => clampedScore >= c.min && clampedScore <= c.max);
 	return categoryData?.category || 'insufficient';
 }
 
@@ -73,7 +73,7 @@ export function getScoreCategory(score: number): SovereigntyScoreCategory {
  */
 export function getScorePercentileInCategory(score: number): number {
 	const clampedScore = Math.max(0, Math.min(100, score));
-	const categoryData = SCORE_CATEGORIES.find(c => clampedScore >= c.min && clampedScore <= c.max);
+	const categoryData = SCORE_CATEGORIES.find((c) => clampedScore >= c.min && clampedScore <= c.max);
 
 	if (!categoryData) return 0;
 
@@ -91,7 +91,7 @@ export function getScorePercentileInCategory(score: number): number {
  */
 export function getScoreCategoryColor(score: number): string {
 	const clampedScore = Math.max(0, Math.min(100, score));
-	const categoryData = SCORE_CATEGORIES.find(c => clampedScore >= c.min && clampedScore <= c.max);
+	const categoryData = SCORE_CATEGORIES.find((c) => clampedScore >= c.min && clampedScore <= c.max);
 	return categoryData?.color || '#999999';
 }
 

@@ -8,12 +8,12 @@ interface SovereigntyGaugeProps {
 
 // Kategorie-Farben für das Gauge
 const CATEGORY_COLORS: Record<SovereigntyScoreCategory, string> = {
-	insufficient: '#D32F2F',    // Rot
-	minimal: '#F57C00',         // Orange
-	adequate: '#F9A825',        // Gelb
-	good: '#7CB342',            // Hellgrün
-	excellent: '#388E3C',       // Grün
-	outstanding: '#1B5E20',     // Dunkelgrün
+	insufficient: '#D32F2F', // Rot
+	minimal: '#F57C00', // Orange
+	adequate: '#F9A825', // Gelb
+	good: '#7CB342', // Hellgrün
+	excellent: '#388E3C', // Grün
+	outstanding: '#1B5E20', // Dunkelgrün
 };
 
 // Kategorie-Ranges für Winkel-Berechnung (0-180°)
@@ -82,13 +82,7 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 		return (
 			<g key={range.category}>
 				{/* Hintergrund-Segment (hell) */}
-				<path
-					d={path}
-					stroke={CATEGORY_COLORS[range.category]}
-					strokeWidth={outerRadius - innerRadius}
-					fill="none"
-					opacity="0.2"
-				/>
+				<path d={path} stroke={CATEGORY_COLORS[range.category]} strokeWidth={outerRadius - innerRadius} fill="none" opacity="0.2" />
 			</g>
 		);
 	});
@@ -128,18 +122,7 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 			{CATEGORY_RANGES.map((range) => {
 				const start = polarToCartesian(centerX, centerY, innerRadius - 2, range.angle);
 				const end = polarToCartesian(centerX, centerY, outerRadius + 6, range.angle);
-				return (
-					<line
-						key={`marker-${range.angle}`}
-						x1={start.x}
-						y1={start.y}
-						x2={end.x}
-						y2={end.y}
-						stroke="#999"
-						strokeWidth="1"
-						opacity="0.5"
-					/>
-				);
+				return <line key={`marker-${range.angle}`} x1={start.x} y1={start.y} x2={end.x} y2={end.y} stroke="#999" strokeWidth="1" opacity="0.5" />;
 			})}
 
 			{/* Nadel/Zeiger */}
@@ -161,15 +144,7 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 			<circle cx={centerX} cy={centerY} r="6" fill={color} opacity="0.8" />
 
 			{/* Score-Text in der Mitte */}
-			<text
-				x={centerX}
-				y={centerY + 8}
-				textAnchor="middle"
-				dominantBaseline="middle"
-				fontSize={Math.round(size * 0.15)}
-				fontWeight="700"
-				fill="#1d2129"
-			>
+			<text x={centerX} y={centerY + 8} textAnchor="middle" dominantBaseline="middle" fontSize={Math.round(size * 0.15)} fontWeight="700" fill="#1d2129">
 				{score}
 			</text>
 		</svg>

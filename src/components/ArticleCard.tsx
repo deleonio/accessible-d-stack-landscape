@@ -98,9 +98,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 				aria-label={t('article.scoreAria', { score })}
 			>
 				<span className="card-score-number">{score}</span>
-				<span className="card-score-category">
-					{t(`article.scoreCategories.${scoreResult.category}`)}
-				</span>
+				<span className="card-score-category">{t(`article.scoreCategories.${scoreResult.category}`)}</span>
 			</span>
 			{stackItem && (
 				<span className="card-role-badge" style={{ background: ROLE_COLORS[stackItem.role], color: '#fff' }} title={t(`stack.roles.${stackItem.role}`)}>

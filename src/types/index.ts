@@ -29,12 +29,12 @@ export type OwnerType = 'independentConsortium' | 'corporation' | 'community' | 
 
 // Hybrid Scoring Scale: 6 Categories + Numeric Score
 export type SovereigntyScoreCategory =
-	| 'insufficient'    // 0-30
-	| 'minimal'         // 31-45
-	| 'adequate'        // 46-60
-	| 'good'            // 61-75
-	| 'excellent'       // 76-90
-	| 'outstanding';    // 91-100
+	| 'insufficient' // 0-30
+	| 'minimal' // 31-45
+	| 'adequate' // 46-60
+	| 'good' // 61-75
+	| 'excellent' // 76-90
+	| 'outstanding'; // 91-100
 
 export type SovereigntyScoreResult = {
 	/** Raw score: 0-100 */
