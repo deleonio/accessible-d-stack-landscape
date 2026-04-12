@@ -37,9 +37,10 @@ function scoreToAngle(score: number): number {
 
 /**
  * Konvertiert einen Winkel (Grad) in SVG-Koordinaten für Kurve
+ * Rotiert um 135° gegen den Uhrzeigersinn für Tachometer-Layout (Öffnung unten mittig)
  */
 function angleToRadians(angle: number): number {
-	return (angle - 90) * (Math.PI / 180);
+	return (angle + 45) * (Math.PI / 180);
 }
 
 /**
@@ -144,18 +145,10 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 			<circle cx={centerX} cy={centerY} r="6" fill={color} opacity="0.8" />
 
 			{/* Score-Text Hintergrund-Rechteck (unten in der Lücke) */}
-			<rect x={centerX - 32} y={centerY + radius + 15} width="64" height="36" rx="6" ry="6" fill="white" stroke={color} strokeWidth="2" opacity="0.95" />
+			<rect x={centerX - 28} y={centerY + radius - 10} width="56" height="30" rx="5" ry="5" fill="white" stroke={color} strokeWidth="2" opacity="0.95" />
 
 			{/* Score-Text in der unteren Lücke */}
-			<text
-				x={centerX}
-				y={centerY + radius + 36}
-				textAnchor="middle"
-				dominantBaseline="middle"
-				fontSize={Math.round(size * 0.18)}
-				fontWeight="700"
-				fill={color}
-			>
+			<text x={centerX} y={centerY + radius + 5} textAnchor="middle" dominantBaseline="middle" fontSize={Math.round(size * 0.16)} fontWeight="700" fill={color}>
 				{score}
 			</text>
 		</svg>
