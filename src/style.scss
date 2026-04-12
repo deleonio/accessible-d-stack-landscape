@@ -1111,8 +1111,15 @@ kol-card.article-card,
 		/* Smooth animation für Score-Änderungen */
 		path,
 		line,
-		circle {
+		circle,
+		rect {
 			transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+		}
+
+		/* Text-Styling */
+		text {
+			font-family: inherit;
+			letter-spacing: -0.02em;
 		}
 	}
 }
@@ -1121,7 +1128,7 @@ kol-card.article-card,
 @media (width <= 480px) {
 	.drawer-gauge-container svg.sovereignty-gauge {
 		width: 140px;
-		height: auto;
+		height: 140px;
 	}
 }
 

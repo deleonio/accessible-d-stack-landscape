@@ -16,23 +16,23 @@ const CATEGORY_COLORS: Record<SovereigntyScoreCategory, string> = {
 	outstanding: '#1B5E20', // Dunkelgrün
 };
 
-// Kategorie-Ranges für Winkel-Berechnung (0-180°)
+// Kategorie-Ranges für Winkel-Berechnung (0-270° Tachometer)
 const CATEGORY_RANGES = [
 	{ category: 'insufficient' as const, min: 0, max: 30, angle: 0 },
-	{ category: 'minimal' as const, min: 31, max: 45, angle: 30 },
-	{ category: 'adequate' as const, min: 46, max: 60, angle: 60 },
-	{ category: 'good' as const, min: 61, max: 75, angle: 90 },
-	{ category: 'excellent' as const, min: 76, max: 90, angle: 120 },
-	{ category: 'outstanding' as const, min: 91, max: 100, angle: 150 },
+	{ category: 'minimal' as const, min: 31, max: 45, angle: 45 },
+	{ category: 'adequate' as const, min: 46, max: 60, angle: 90 },
+	{ category: 'good' as const, min: 61, max: 75, angle: 135 },
+	{ category: 'excellent' as const, min: 76, max: 90, angle: 180 },
+	{ category: 'outstanding' as const, min: 91, max: 100, angle: 225 },
 ];
 
 /**
- * Konvertiert einen Score (0-100) in einen Winkel (0-180°)
- * Wird für die Gauge-Nadel verwendet
+ * Konvertiert einen Score (0-100) in einen Winkel (0-270°)
+ * Wird für die Gauge-Nadel verwendet (Tachometer-Stil)
  */
 function scoreToAngle(score: number): number {
 	const clampedScore = Math.max(0, Math.min(100, score));
-	return (clampedScore / 100) * 180;
+	return (clampedScore / 100) * 270;
 }
 
 /**
@@ -68,7 +68,7 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 	const innerRadius = radius - 12;
 	const outerRadius = radius - 4;
 	const centerX = size / 2;
-	const centerY = size * 0.45;
+	const centerY = size / 2;
 
 	const angle = scoreToAngle(score);
 	const color = CATEGORY_COLORS[category];
@@ -76,7 +76,7 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 	// Gauge-Ring Segmente für alle Kategorien (Hintergrund)
 	const segmentPaths = CATEGORY_RANGES.map((range, idx) => {
 		const nextRange = CATEGORY_RANGES[idx + 1];
-		const endAngle = nextRange ? nextRange.angle : 180;
+		const endAngle = nextRange ? nextRange.angle : 270;
 		const path = describeArc(centerX, centerY, outerRadius, range.angle, endAngle);
 
 		return (
@@ -96,8 +96,8 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 	return (
 		<svg
 			width={size}
-			height={size * 0.8}
-			viewBox={`0 0 ${size} ${size * 0.8}`}
+			height={size}
+			viewBox={`0 0 ${size} ${size}`}
 			className="sovereignty-gauge"
 			role="img"
 			aria-label={`Sovereignty Score: ${score}/100 (${category})`}
@@ -143,8 +143,30 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 			{/* Mittelpunkt-Kreis */}
 			<circle cx={centerX} cy={centerY} r="6" fill={color} opacity="0.8" />
 
-			{/* Score-Text in der Mitte */}
-			<text x={centerX} y={centerY + 8} textAnchor="middle" dominantBaseline="middle" fontSize={Math.round(size * 0.15)} fontWeight="700" fill="#1d2129">
+			{/* Score-Text Hintergrund-Rechteck (unten in der Lücke) */}
+			<rect
+				x={centerX - 32}
+				y={centerY + radius + 15}
+				width="64"
+				height="36"
+				rx="6"
+				ry="6"
+				fill="white"
+				stroke={color}
+				strokeWidth="2"
+				opacity="0.95"
+			/>
+
+			{/* Score-Text in der unteren Lücke */}
+			<text
+				x={centerX}
+				y={centerY + radius + 36}
+				textAnchor="middle"
+				dominantBaseline="middle"
+				fontSize={Math.round(size * 0.18)}
+				fontWeight="700"
+				fill={color}
+			>
 				{score}
 			</text>
 		</svg>
