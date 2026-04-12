@@ -30,7 +30,7 @@
 		"postinstall:theme-kern": "cpy \"node_modules/@public-ui/theme-kern/assets/**/*\" public/assets --dot",
 		"migrate": "node scripts/migrate-csv-to-json.mjs",
 		"prebuild": "node scripts/generate-data.mjs && node scripts/generate-icons.mjs",
-		"prepare": "husky install",
+		"prepare": "husky",
 		"preview": "vite preview",
 		"start": "pnpm run dev",
 		"stylelint": "stylelint \"src/**/*.scss\"",
