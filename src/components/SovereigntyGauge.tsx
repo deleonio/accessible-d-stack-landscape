@@ -144,18 +144,7 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 			<circle cx={centerX} cy={centerY} r="6" fill={color} opacity="0.8" />
 
 			{/* Score-Text Hintergrund-Rechteck (unten in der Lücke) */}
-			<rect
-				x={centerX - 32}
-				y={centerY + radius + 15}
-				width="64"
-				height="36"
-				rx="6"
-				ry="6"
-				fill="white"
-				stroke={color}
-				strokeWidth="2"
-				opacity="0.95"
-			/>
+			<rect x={centerX - 32} y={centerY + radius + 15} width="64" height="36" rx="6" ry="6" fill="white" stroke={color} strokeWidth="2" opacity="0.95" />
 
 			{/* Score-Text in der unteren Lücke */}
 			<text
