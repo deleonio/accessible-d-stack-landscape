@@ -39,9 +39,12 @@ ohne jeden Hard-Cap.
 | Element                            | Datei                          | Grund               |
 |------------------------------------|--------------------------------|---------------------|
 | `Math.min(100, ...)`               | `sovereigntyScore.ts`          | nicht mehr nötig    |
+| `Math.min(100, ...)`               | `scripts/generate-data.mjs`    | nicht mehr nötig    |
 | `MAX_SCORE_WITHOUT_OWNER = 60`     | `sovereigntyScore.ts`          | nicht mehr nötig    |
+| `MAX_SCORE_WITHOUT_OWNER = 60`     | `scripts/generate-data.mjs`    | nicht mehr nötig    |
 | `ownerType: 0` in `WEIGHTS`        | `sovereigntyScore.ts`          | redundante Zeile    |
 | `if (key === 'ownerType') return`  | `sovereigntyScore.ts`          | entfällt mit obigem |
+| Typ `Record<keyof SovereigntyCriteria, number>` | `sovereigntyScore.ts` | → `Record<keyof Omit<SovereigntyCriteria, 'ownerType'>, number>` |
 
 ---
 
