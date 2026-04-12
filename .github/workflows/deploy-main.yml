@@ -19,9 +19,6 @@ jobs:
       - uses: actions/checkout@v6
 
       - uses: pnpm/action-setup@v5
-        with:
-          version: latest
-          cache: true
 
       - uses: actions/setup-node@v4
         with:

@@ -2,6 +2,7 @@
 	"name": "accessible-d-stack-landscape",
 	"version": "0.0.0",
 	"type": "module",
+	"packageManager": "pnpm@10.33.0",
 	"scripts": {
 		"assign-owner-types": "node scripts/assign-owner-types.mjs",
 		"build": "tsc && vite build",
