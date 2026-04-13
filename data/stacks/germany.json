@@ -536,6 +536,15 @@
 			}
 		},
 		{
+			"itemId": "kern-ux-standard",
+			"status": "approved",
+			"role": "consumer",
+			"rationale": {
+				"de": "Integriert in den Deutschland Stack",
+				"en": "Integrated into Germany Stack"
+			}
+		},
+		{
 			"itemId": "kong",
 			"status": "approved",
 			"role": "consumer",
@@ -869,6 +878,15 @@
 			}
 		},
 		{
+			"itemId": "public-ui-kolibri",
+			"status": "approved",
+			"role": "consumer",
+			"rationale": {
+				"de": "Integriert in den Deutschland Stack",
+				"en": "Integrated into Germany Stack"
+			}
+		},
+		{
 			"itemId": "pyro",
 			"status": "approved",
 			"role": "consumer",
@@ -1131,6 +1149,15 @@
 		},
 		{
 			"itemId": "user-datagram-protocol-udp",
+			"status": "approved",
+			"role": "consumer",
+			"rationale": {
+				"de": "Integriert in den Deutschland Stack",
+				"en": "Integrated into Germany Stack"
+			}
+		},
+		{
+			"itemId": "vuejs",
 			"status": "approved",
 			"role": "consumer",
 			"rationale": {

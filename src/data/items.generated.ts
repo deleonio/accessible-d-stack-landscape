@@ -1,7 +1,7 @@
 // GENERATED FILE - DO NOT EDIT MANUALLY
 // Generated from: data/layers/ + data/items/ + data/stacks/
 // Logo fallback via: src/data/logo-urls.json
-// Generated at: 2026-04-13T09:19:13.224Z
+// Generated at: 2026-04-13T10:35:21.698Z
 
 import type { Item, Layer, Stack } from '../types';
 
@@ -2148,6 +2148,45 @@ const RAW_ITEMS: Item[] = [
 			"sovereigntyScore": 85
 		},
 		{
+			"id": "kern-ux-standard",
+			"name": "KERN UX Standard",
+			"layer": "building-blocks",
+			"sublayer": "entwicklung",
+			"description": {
+				"de": "Der KERN UX Standard ist ein deutschsprachiger Standard für barrierefreie und benutzergerechte Gestaltung von digitalen Schnittstellen. Er definiert Best Practices und Anforderungen für Accessibility, Usability und User Experience in der Entwicklung von Government-Anwendungen.",
+				"en": "The KERN UX Standard is a German-language standard for accessible and user-friendly design of digital interfaces. It defines best practices and requirements for accessibility, usability and user experience in the development of government applications."
+			},
+			"homepage": "https://www.kern-ux-standard.de/",
+			"tags": [
+				"standard",
+				"user-interface",
+				"accessibility",
+				"ux",
+				"usability",
+				"wcag"
+			],
+			"oss": true,
+			"maturity": "graduated",
+			"sovereigntyCriteria": {
+				"openSource": true,
+				"euHeadquartered": true,
+				"hasAudit": true,
+				"permissiveLicense": true,
+				"matureProject": true,
+				"selfHostable": true,
+				"dataPortability": true,
+				"openStandards": true,
+				"noTelemetryByDefault": true,
+				"ownerType": "independentConsortium"
+			},
+			"audit": {
+				"lastDate": "2025-11-11",
+				"url": "https://www.kern-ux-standard.de/"
+			},
+			"logo": "assets/broken-logo.svg",
+			"sovereigntyScore": 100
+		},
+		{
 			"id": "kong",
 			"name": "Kong",
 			"layer": "platform",
@@ -3472,6 +3511,44 @@ const RAW_ITEMS: Item[] = [
 			"sovereigntyScore": 78
 		},
 		{
+			"id": "public-ui-kolibri",
+			"name": "Public UI KoliBri",
+			"layer": "building-blocks",
+			"sublayer": "entwicklung",
+			"description": {
+				"de": "Public UI KoliBri ist eine Komponentenbibliothek für die Entwicklung barrierefreier Weboberflächen. Sie bietet vorgefertigte, zugängliche UI-Komponenten nach WCAG-Standards und ermöglicht die schnelle Entwicklung von Government-Anwendungen mit hohen Anforderungen an Accessibility.",
+				"en": "Public UI KoliBri is a component library for developing accessible web interfaces. It provides pre-built, accessible UI components that comply with WCAG standards and enables rapid development of government applications with high accessibility requirements."
+			},
+			"homepage": "https://public-ui.github.io/",
+			"logo": "https://public-ui.github.io/logo.svg",
+			"tags": [
+				"webframework",
+				"user-interface",
+				"components",
+				"accessibility",
+				"wcag"
+			],
+			"oss": true,
+			"maturity": "graduated",
+			"sovereigntyCriteria": {
+				"openSource": true,
+				"euHeadquartered": true,
+				"hasAudit": true,
+				"permissiveLicense": true,
+				"matureProject": true,
+				"selfHostable": true,
+				"dataPortability": true,
+				"openStandards": true,
+				"noTelemetryByDefault": true,
+				"ownerType": "independentConsortium"
+			},
+			"audit": {
+				"lastDate": "2025-11-11",
+				"url": "https://github.com/public-ui/kolibri"
+			},
+			"sovereigntyScore": 100
+		},
+		{
 			"id": "pyro",
 			"name": "Pyro",
 			"layer": "platform",
@@ -4532,6 +4609,43 @@ const RAW_ITEMS: Item[] = [
 			"sovereigntyScore": 90
 		},
 		{
+			"id": "vuejs",
+			"name": "Vue.js",
+			"layer": "building-blocks",
+			"sublayer": "entwicklung",
+			"description": {
+				"de": "Vue.js ist ein progressives JavaScript-Framework für die Erstellung von Benutzeroberflächen. Es ermöglicht die deklarative Entwicklung von interaktiven Web-Anwendungen mit reaktiven Datenmodellen.",
+				"en": "Vue.js is a progressive JavaScript framework for building user interfaces. It enables declarative development of interactive web applications with reactive data models."
+			},
+			"homepage": "https://vuejs.org/",
+			"logo": "https://raw.githubusercontent.com/vuejs/art/master/logo.svg",
+			"tags": [
+				"webframework",
+				"user-interface",
+				"javascript",
+				"rendering"
+			],
+			"oss": true,
+			"maturity": "graduated",
+			"sovereigntyCriteria": {
+				"openSource": true,
+				"euHeadquartered": false,
+				"hasAudit": true,
+				"permissiveLicense": true,
+				"matureProject": true,
+				"selfHostable": true,
+				"dataPortability": true,
+				"openStandards": true,
+				"noTelemetryByDefault": false,
+				"ownerType": "independentConsortium"
+			},
+			"audit": {
+				"lastDate": "2025-11-11",
+				"url": "https://vuejs.org/guide/"
+			},
+			"sovereigntyScore": 90
+		},
+		{
 			"id": "webkit",
 			"name": "WebKit",
 			"layer": "applications",
@@ -5184,6 +5298,15 @@ export const STACKS: Stack[] = [
 					}
 				},
 				{
+					"itemId": "kern-ux-standard",
+					"status": "approved",
+					"role": "consumer",
+					"rationale": {
+						"de": "Integriert in den Deutschland Stack",
+						"en": "Integrated into Germany Stack"
+					}
+				},
+				{
 					"itemId": "kong",
 					"status": "approved",
 					"role": "consumer",
@@ -5517,6 +5640,15 @@ export const STACKS: Stack[] = [
 					}
 				},
 				{
+					"itemId": "public-ui-kolibri",
+					"status": "approved",
+					"role": "consumer",
+					"rationale": {
+						"de": "Integriert in den Deutschland Stack",
+						"en": "Integrated into Germany Stack"
+					}
+				},
+				{
 					"itemId": "pyro",
 					"status": "approved",
 					"role": "consumer",
@@ -5779,6 +5911,15 @@ export const STACKS: Stack[] = [
 				},
 				{
 					"itemId": "user-datagram-protocol-udp",
+					"status": "approved",
+					"role": "consumer",
+					"rationale": {
+						"de": "Integriert in den Deutschland Stack",
+						"en": "Integrated into Germany Stack"
+					}
+				},
+				{
+					"itemId": "vuejs",
 					"status": "approved",
 					"role": "consumer",
 					"rationale": {
