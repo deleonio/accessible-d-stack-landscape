@@ -26,7 +26,8 @@ files.forEach(file => {
   const stackItem = {
     itemId: data.id,
     status: 'approved',
-    note: {
+    role: 'consumer',
+    rationale: {
       de: 'Integriert in den Deutschland Stack',
       en: 'Integrated into Germany Stack'
     }

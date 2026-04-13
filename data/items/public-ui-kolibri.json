@@ -28,7 +28,7 @@
 		"dataPortability": true,
 		"openStandards": true,
 		"noTelemetryByDefault": true,
-		"ownerType": "government"
+		"ownerType": "independentConsortium"
 	},
 	"audit": {
 		"lastDate": "2025-11-11",
