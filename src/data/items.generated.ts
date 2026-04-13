@@ -1,7 +1,7 @@
 // GENERATED FILE - DO NOT EDIT MANUALLY
 // Generated from: data/layers/ + data/items/ + data/stacks/
 // Logo fallback via: src/data/logo-urls.json
-// Generated at: 2026-04-13T10:35:21.698Z
+// Generated at: 2026-04-13T11:01:54.805Z
 
 import type { Item, Layer, Stack } from '../types';
 
@@ -3512,7 +3512,7 @@ const RAW_ITEMS: Item[] = [
 		},
 		{
 			"id": "public-ui-kolibri",
-			"name": "Public UI KoliBri",
+			"name": "KoliBri - Public-UI",
 			"layer": "building-blocks",
 			"sublayer": "entwicklung",
 			"description": {
