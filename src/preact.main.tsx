@@ -27,22 +27,31 @@ function dismissSplash(): void {
 	if (status) status.textContent = 'Anwendung bereit';
 
 	splash.classList.add('splash--exiting');
-	const cleanup = () => splash.remove();
+	splash.style.display = 'none';
+	splash.style.visibility = 'hidden';
+	splash.style.pointerEvents = 'none';
+
+	const cleanup = () => {
+		try {
+			splash.remove();
+		} catch {
+			// ignore
+		}
+	};
 	splash.addEventListener('transitionend', cleanup, { once: true });
-	// Fallback if transitionend doesn't fire (e.g. reduced motion)
 	setTimeout(cleanup, 600);
 }
 
 let renderApp: (() => void) | null = null;
-const splash = document.getElementById('splash');
 
-if (splash instanceof HTMLElement) {
-	splash.style.cursor = 'pointer';
-	splash.addEventListener('click', () => {
+// Register click and keyboard handlers FIRST
+document.addEventListener('click', (e) => {
+	const splash = document.getElementById('splash');
+	if (splash?.contains(e.target as HTMLElement)) {
 		dismissSplash();
 		renderApp?.();
-	});
-}
+	}
+});
 
 document.addEventListener('keydown', (e: globalThis.KeyboardEvent) => {
 	if (e.key === 'Escape') {
@@ -51,8 +60,14 @@ document.addEventListener('keydown', (e: globalThis.KeyboardEvent) => {
 	}
 });
 
+// Safety timeout to dismiss splash after max 10 seconds regardless
+setTimeout(dismissSplash, 10000);
+
 Promise.all([
-	register([KERN_V2, DEFAULT], defineCustomElements, { translation: { name: 'de' } }),
+	Promise.race([
+		register([KERN_V2, DEFAULT], defineCustomElements, { translation: { name: 'de' } }),
+		new Promise<void>((_, reject) => setTimeout(() => reject(new Error('KoliBri registration timeout')), 3000)),
+	]),
 	new Promise<void>((resolve) => {
 		renderApp = resolve;
 		setTimeout(resolve, SPLASH_MIN_MS);
@@ -69,4 +84,12 @@ Promise.all([
 		const remaining = Math.max(0, SPLASH_MIN_MS - elapsed);
 		setTimeout(dismissSplash, remaining);
 	})
-	.catch(console.error);
+	.catch((error) => {
+		console.error('Error during app initialization:', error);
+		// Force splash to disappear even if there's an error
+		dismissSplash();
+		const htmlElement: HTMLElement | null = document.querySelector<HTMLDivElement>('div#app');
+		if (htmlElement instanceof HTMLElement) {
+			render(<App />, htmlElement);
+		}
+	});
