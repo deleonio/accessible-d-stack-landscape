@@ -7,8 +7,8 @@ import { StackItem } from '../types';
 
 export function HomePage() {
 	const [activeStackId, setActiveStackId] = useState<string | null>(null);
-	const [sortField, setSortField] = useState<SortField>('name');
-	const [sortDir, setSortDir] = useState<SortDir>('asc');
+	const [sortField, setSortField] = useState<SortField>('score');
+	const [sortDir, setSortDir] = useState<SortDir>('desc');
 	const [viewMode, setViewMode] = useState<ViewMode>('tile');
 
 	const activeStack = useMemo(() => STACKS.find((s) => s.id === activeStackId) ?? null, [activeStackId]);
