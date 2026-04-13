@@ -73,6 +73,17 @@ export function FilterBar({
 						onChange: (_e: globalThis.Event, value: unknown) => onStackChange(value ? (value as string) : null),
 					}}
 				/>
+				<KolInputText
+					className="filter-bar__search"
+					_label={t('search.inputLabel')}
+					_hideLabel
+					_type="search"
+					_value={filters.searchQuery}
+					_placeholder={t('search.placeholder')}
+					_on={{
+						onInput: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, searchQuery: value as string }),
+					}}
+				/>
 				<KolSingleSelect
 					className="filter-bar__select filter-bar__select--layer sort-select"
 					_label={t('search.categoryLabel')}
@@ -99,17 +110,6 @@ export function FilterBar({
 						}}
 					/>
 				)}
-				<KolInputText
-					className="filter-bar__search"
-					_label={t('search.inputLabel')}
-					_hideLabel
-					_type="search"
-					_value={filters.searchQuery}
-					_placeholder={t('search.placeholder')}
-					_on={{
-						onInput: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, searchQuery: value as string }),
-					}}
-				/>
 				<div className="filter-bar__sort">
 					<KolSingleSelect
 						className="sort-select"
