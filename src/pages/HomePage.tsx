@@ -9,9 +9,9 @@ export function HomePage() {
 	const [activeStackId, setActiveStackId] = useState<string | null>(null);
 
 	// Beim ersten Rendern: ?stack=<id> aus dem URL-Hash lesen und Stack vorauswählen.
-	// Hash-Routing: URL sieht z. B. so aus: #/?stack=germany
+	// Hash-Routing: URL sieht z. B. so aus: #/deps?stack=germany
 	useEffect(() => {
-		const hash = window.location.hash; // z.B. "#/?stack=germany"
+		const hash = window.location.hash; // z.B. "#/deps?stack=germany"
 		const query = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : '';
 		const stackParam = new URLSearchParams(query).get('stack');
 		if (stackParam && STACKS.some((s) => s.id === stackParam)) {

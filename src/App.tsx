@@ -23,7 +23,14 @@ function getHashUrl(): string {
 	return hash.length > 1 ? hash.slice(1) : '/';
 }
 
-function HomeRoute({ default: isDefault, path }: RouteProps) {
+function StackGalleryRoute({ default: isDefault, path }: RouteProps) {
+	void isDefault;
+	void path;
+
+	return <StackGalleryPage />;
+}
+
+function DepsRoute({ default: isDefault, path }: RouteProps) {
 	void isDefault;
 	void path;
 
@@ -51,13 +58,6 @@ function ImprintRoute({ default: isDefault, path }: RouteProps) {
 	return <ImprintPage />;
 }
 
-function StackGalleryRoute({ default: isDefault, path }: RouteProps) {
-	void isDefault;
-	void path;
-
-	return <StackGalleryPage />;
-}
-
 function App() {
 	const [currentUrl, setCurrentUrl] = useState(getHashUrl);
 
@@ -69,9 +69,11 @@ function App() {
 
 	return (
 		<div className="flex flex-col min-h-screen w-full">
-			<Header />
+			<Header currentUrl={currentUrl} />
 			<Router url={currentUrl}>
-				<HomeRoute path="/" default />
+				<StackGalleryRoute path="/" default />
+				<DepsRoute path="/deps" />
+				<DepsRoute path="/abhängigkeiten" />
 				<SettingsRoute path="/settings" />
 				<SettingsRoute path="/einstellungen" />
 				<NewsRoute path="/news" />
