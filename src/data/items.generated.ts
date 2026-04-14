@@ -1,7 +1,7 @@
 // GENERATED FILE - DO NOT EDIT MANUALLY
 // Generated from: data/layers/ + data/items/ + data/stacks/
 // Logo fallback via: src/data/logo-urls.json
-// Generated at: 2026-04-13T19:51:26.565Z
+// Generated at: 2026-04-14T03:23:00.594Z
 
 import type { Item, Layer, Stack } from '../types';
 
