@@ -1,4 +1,4 @@
-import { createHashHistory } from 'history';
+import { useEffect, useState } from 'preact/hooks';
 import { Router } from 'preact-router';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
@@ -14,18 +14,14 @@ type RouteProps = {
 	path?: string;
 };
 
-// preact-router erwartet listen(callback: (location) => void),
-// history@5 liefert jedoch listen(listener: (update: { action, location }) => void).
-// Dieser Adapter gleicht die Signaturen an.
-const _raw = createHashHistory();
-const hashHistory = {
-	listen(callback: (location: { pathname: string; search: string }) => void) {
-		return _raw.listen(({ location }) => callback(location));
-	},
-	location: _raw.location,
-	push: (path: string) => _raw.push(path),
-	replace: (path: string) => _raw.replace(path),
-};
+// preact-router unterstützt keinen history-Prop.
+// Hash-Routing: URL-State aus window.location.hash lesen und per
+// hashchange-Listener aktualisieren. Der Router erhält die aktuelle
+// Route über den kontrollierten url-Prop – unabhängig vom Server-Pfad.
+function getHashUrl(): string {
+	const hash = window.location.hash;
+	return hash.length > 1 ? hash.slice(1) : '/';
+}
 
 function HomeRoute({ default: isDefault, path }: RouteProps) {
 	void isDefault;
@@ -63,10 +59,18 @@ function StackGalleryRoute({ default: isDefault, path }: RouteProps) {
 }
 
 function App() {
+	const [currentUrl, setCurrentUrl] = useState(getHashUrl);
+
+	useEffect(() => {
+		const onHashChange = () => setCurrentUrl(getHashUrl());
+		window.addEventListener('hashchange', onHashChange);
+		return () => window.removeEventListener('hashchange', onHashChange);
+	}, []);
+
 	return (
 		<div className="flex flex-col min-h-screen w-full">
 			<Header />
-			<Router history={hashHistory}>
+			<Router url={currentUrl}>
 				<HomeRoute path="/" default />
 				<SettingsRoute path="/settings" />
 				<SettingsRoute path="/einstellungen" />

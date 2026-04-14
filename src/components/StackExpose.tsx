@@ -1,3 +1,4 @@
+import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { Layer, ParticipantRole, SovereigntyScoreCategory, Stack } from '../types';
 import { getLocalizedText } from '../utils';
@@ -32,6 +33,14 @@ const CATEGORY_COLORS: Record<SovereigntyScoreCategory, string> = {
 
 const PARTICIPANT_ROLES: ParticipantRole[] = ['maintainer', 'contributor', 'funder', 'consumer'];
 
+// Farben für Metrik-Werte: ≥50 % positiv (grün), <50 % negativ (rot)
+const METRIC_COLOR_POSITIVE = '#2e7d32';
+const METRIC_COLOR_NEGATIVE = '#c62828';
+
+function metricColor(pct: number): string {
+	return pct >= 50 ? METRIC_COLOR_POSITIVE : METRIC_COLOR_NEGATIVE;
+}
+
 /**
  * Konvertiert einen 2-buchstabigen ISO-Ländercode in ein Flag-Emoji.
  * 'DE' → '🇩🇪', 'EU' → '🇪🇺', etc.
@@ -47,9 +56,14 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 	const localizedName = getLocalizedText(stack.name, i18n.language);
 	const localizedDescription = stack.description ? getLocalizedText(stack.description, i18n.language) : '';
 
-	const formattedDate = stack.publishedAt
-		? new Intl.DateTimeFormat(i18n.language, { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(stack.publishedAt))
-		: null;
+	// Datumsformatierung memoizieren – stack.publishedAt und i18n.language sind stabil
+	const formattedDate = useMemo(
+		() =>
+			stack.publishedAt
+				? new Intl.DateTimeFormat(i18n.language, { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(stack.publishedAt))
+				: null,
+		[stack.publishedAt, i18n.language],
+	);
 
 	return (
 		<article
@@ -134,13 +148,15 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 								<div className="stack-expose__dist-track" role="presentation">
 									<div
 										className="stack-expose__dist-fill"
+										role="progressbar"
+										aria-label={`${t(`article.scoreCategories.${cat}`)}: ${count}`}
 										style={{ width: `${fillPct}%`, background: CATEGORY_COLORS[cat] }}
 										aria-valuenow={count}
 										aria-valuemin={0}
 										aria-valuemax={metrics.totalItems}
 									/>
 								</div>
-								<span className="stack-expose__dist-count" aria-label={`${count} Items`}>
+								<span className="stack-expose__dist-count" aria-hidden="true">
 									{count}
 								</span>
 							</li>
@@ -155,33 +171,23 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 				<dl className="stack-expose__metrics">
 					<div className="stack-expose__metric">
 						<dt>{t('stackGallery.metrics.selfHostable')}</dt>
-						<dd style={{ color: metrics.pctSelfHostable >= 50 ? '#2e7d32' : '#c62828' }}>
-							{metrics.pctSelfHostable}%
-						</dd>
+						<dd style={{ color: metricColor(metrics.pctSelfHostable) }}>{metrics.pctSelfHostable}%</dd>
 					</div>
 					<div className="stack-expose__metric">
 						<dt>{t('stackGallery.metrics.openSource')}</dt>
-						<dd style={{ color: metrics.pctOpenSource >= 50 ? '#2e7d32' : '#c62828' }}>
-							{metrics.pctOpenSource}%
-						</dd>
+						<dd style={{ color: metricColor(metrics.pctOpenSource) }}>{metrics.pctOpenSource}%</dd>
 					</div>
 					<div className="stack-expose__metric">
 						<dt>{t('stackGallery.metrics.euHQ')}</dt>
-						<dd style={{ color: metrics.pctEuHQ >= 50 ? '#2e7d32' : '#c62828' }}>
-							{metrics.pctEuHQ}%
-						</dd>
+						<dd style={{ color: metricColor(metrics.pctEuHQ) }}>{metrics.pctEuHQ}%</dd>
 					</div>
 					<div className="stack-expose__metric">
 						<dt>{t('stackGallery.metrics.permissiveLicense')}</dt>
-						<dd style={{ color: metrics.pctPermissiveLicense >= 50 ? '#2e7d32' : '#c62828' }}>
-							{metrics.pctPermissiveLicense}%
-						</dd>
+						<dd style={{ color: metricColor(metrics.pctPermissiveLicense) }}>{metrics.pctPermissiveLicense}%</dd>
 					</div>
 					<div className="stack-expose__metric">
 						<dt>{t('stackGallery.metrics.audit')}</dt>
-						<dd style={{ color: metrics.pctAudit >= 50 ? '#2e7d32' : '#c62828' }}>
-							{metrics.pctAudit}%
-						</dd>
+						<dd style={{ color: metricColor(metrics.pctAudit) }}>{metrics.pctAudit}%</dd>
 					</div>
 				</dl>
 			</div>
@@ -248,7 +254,7 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 
 			{/* ── CTA-Button ────────────────────────────────────────────── */}
 			<div className="stack-expose__cta">
-				<a href={`/?stack=${stack.id}`} className="stack-expose__explore-link">
+				<a href={`#/?stack=${stack.id}`} className="stack-expose__explore-link">
 					{t('stackGallery.exploreStack')}
 				</a>
 			</div>

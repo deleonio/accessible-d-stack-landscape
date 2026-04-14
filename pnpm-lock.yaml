@@ -30,9 +30,6 @@ importers:
       '@public-ui/theme-kern':
         specifier: 4.1.2
         version: 4.1.2(@public-ui/components@4.1.2(adopted-style-sheets@1.1.9-rc.21))
-      history:
-        specifier: ^5.3.0
-        version: 5.3.0
       i18next:
         specifier: 26.0.4
         version: 26.0.4(typescript@6.0.2)
@@ -2989,9 +2986,6 @@ packages:
 
   hermes-parser@0.25.1:
     resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
-
-  history@5.3.0:
-    resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
 
   hookified@1.15.1:
     resolution: {integrity: sha512-MvG/clsADq1GPM2KGo2nyfaWVyn9naPiXrqIe4jYjXNZQt238kWyOGrsyc/DmRAQ+Re6yeo6yX/yoNCG5KAEVg==}
@@ -8068,10 +8062,6 @@ snapshots:
   hermes-parser@0.25.1:
     dependencies:
       hermes-estree: 0.25.1
-
-  history@5.3.0:
-    dependencies:
-      '@babel/runtime': 7.29.2
 
   hookified@1.15.1: {}
 
