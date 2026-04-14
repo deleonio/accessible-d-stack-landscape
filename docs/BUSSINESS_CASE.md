@@ -43,9 +43,26 @@ StackAtlas macht digitale Souveraenitaet von Technologie-Stacks sichtbar, vergle
 
 ## Fachliches Modell
 
-- Ein Stack besteht aus Items, die in Layern organisiert sind.
+### Items als Dependencies (Abhängigkeiten)
+
+- **Alle Items sind Dependencies** — Technologien, Standards und Tools, die in hierarchischen Layern organisiert sind.
+- Ein Stack besteht aus Items (Dependencies), die er auswählt und zu denen er sich in verschiedenen Rollen committet.
 - Die Bewertung erfolgt zuerst auf Item-Ebene und wird spaeter zu Layer- und Stack-Sichten aggregiert.
+
+### Sovereign-Standards als Grundprinzipien
+
+- **Nur Items im Layer "Sovereign-Standards" sind echte Standards** — Offene Standards, Interoperabilitätsprinzipien, Datenschutz und Regulierungsanforderungen.
+- Sie sind die Grundlagen, auf denen alle anderen Abhängigkeiten aufgebaut sind.
+- Ein Stack zeigt seine **Verantwortung für Standards** durch die Rolle, die er beim Item annimmt:
+  - **maintainer**: Der Stack entwickelt und wartet den Standard mit
+  - **contributor**: Der Stack trägt aktiv zur Entwicklung bei
+  - **funder**: Der Stack finanziert die Entwicklung
+  - **consumer**: Der Stack nutzt den Standard
+
+### Konsolidierungs- und Synergien-Perspektive
+
 - Die Plattform soll nicht nur den Status quo abbilden, sondern auch Synergien und Konsolidierungspotenziale aufzeigen.
+- Durch die explizite Modellierung von Abhängigkeiten und Rollen können Stacks erkennen, wo sie gemeinsame Standards und Systeme teilen.
 
 ## Scoring-Grundsaetze
 

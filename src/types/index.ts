@@ -70,9 +70,18 @@ export type SovereigntyCriteria = {
 	ownerType?: OwnerType;
 };
 
+/**
+ * Item: A technology, standard, or tool — essentially a dependency.
+ *
+ * All Items are dependencies organized by layer. Items in the "sovereign-standards"
+ * layer are foundational standards that stacks may commit to maintaining or contributing.
+ * Items in other layers (infrastructure, platform, building-blocks, applications) are
+ * operational dependencies.
+ */
 export type Item = {
 	id: string;
 	name: LocalizableText;
+	/** The layer this item belongs to (infrastructure, platform, building-blocks, applications, sovereign-standards) */
 	layer: string;
 	sublayer?: string;
 	description: LocalizableText;
@@ -100,10 +109,32 @@ export type Item = {
 // Stack (Gov-Stack mapping)
 // ---------------------------------------------------------------------------
 
+/**
+ * ParticipantRole: The role a stack plays in relation to an item (dependency).
+ * - maintainer: Actively develops and maintains the item/standard
+ * - contributor: Actively contributes to the development
+ * - funder: Provides funding for development
+ * - consumer: Uses the item/standard but does not contribute
+ *
+ * For items in the "sovereign-standards" layer, the role indicates the stack's
+ * responsibility level for that foundational standard.
+ */
 export type ParticipantRole = 'maintainer' | 'contributor' | 'funder' | 'consumer';
 
 export type StackItemStatus = 'recommended' | 'approved' | 'deprecated';
 
+/**
+ * StackItem: A dependency declaration.
+ *
+ * Represents a Stack's relationship to an Item (dependency), including:
+ * - What role the stack plays (maintainer, contributor, funder, consumer)
+ * - Whether this is a recommended, approved, or deprecated choice
+ * - The rationale for including this dependency
+ * - Alternative items that could fulfill the same function
+ *
+ * For items in the "sovereign-standards" layer, the role indicates the stack's
+ * commitment to that foundational standard.
+ */
 export type StackItem = {
 	itemId: string;
 	status: StackItemStatus;

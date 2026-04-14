@@ -24,3 +24,16 @@ Dieses Dokument ist das Rahmendokument fuer die aktive Projektdokumentation.
 1. Produkt- und Strategiefragen: `docs/BUSSINESS_CASE.md`
 2. Technische Umsetzung und Architektur: `docs/ARC42.md`
 3. Repo- und Verzeichnis-Kontext: `README.md` im Root und `data/README.md`
+4. Exemplarische Erklärung des Dependency-Modells: `docs/examples/items-as-dependencies.md`
+
+## Konzeptueller Überblick: Items → Dependencies → Sovereign Standards → Stack Commitments
+
+Das System folgt einem konsistenten Modell:
+
+- **Items** sind Technologien, Standards und Tools
+- **Alle Items sind Dependencies** — Abhängigkeiten, die in 5 Layern organisiert sind
+- **Sovereign-Standards** (Layer 5) sind die echten Grundlagen-Standards
+- **Stacks** committen sich zu Items durch Rollen: maintainer, contributor, funder, oder consumer
+- Für Sovereign-Standards zeigt die Rolle die Verantwortung: Will der Stack diesen Standard aktiv entwickeln oder nutzt er ihn nur?
+
+Siehe `docs/examples/items-as-dependencies.md` für praktische Beispiele.
