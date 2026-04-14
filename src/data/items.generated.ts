@@ -1,7 +1,7 @@
 // GENERATED FILE - DO NOT EDIT MANUALLY
 // Generated from: data/layers/ + data/items/ + data/stacks/
 // Logo fallback via: src/data/logo-urls.json
-// Generated at: 2026-04-14T03:23:00.594Z
+// Generated at: 2026-04-14T03:39:39.267Z
 
 import type { Item, Layer, Stack } from '../types';
 
@@ -1356,15 +1356,16 @@ const RAW_ITEMS: Item[] = [
 				"en": "Elasticsearch is a distributed search and analytics engine at the heart of the ELK stack (Elasticsearch, Logstash, Kibana). It is used in public administration IT for full-text search, log aggregation and SIEM use cases."
 			},
 			"homepage": "https://www.elastic.co/elasticsearch/",
+			"license": "SSPL-1.0",
 			"tags": [
 				"search",
 				"logging",
 				"analytics"
 			],
-			"oss": true,
+			"oss": false,
 			"maturity": "graduated",
 			"sovereigntyCriteria": {
-				"openSource": true,
+				"openSource": false,
 				"euHeadquartered": false,
 				"hasAudit": true,
 				"permissiveLicense": false,
@@ -1376,7 +1377,7 @@ const RAW_ITEMS: Item[] = [
 				"ownerType": "corporation"
 			},
 			"logo": "assets/broken-logo.svg",
-			"sovereigntyScore": 73
+			"sovereigntyScore": 58
 		},
 		{
 			"id": "elliptic-curve-integrated-encryption-scheme",
@@ -4766,15 +4767,16 @@ const RAW_ITEMS: Item[] = [
 				"en": "Redis is a fast in-memory key-value store. It is typically used for caching, session storage, pub/sub and real-time load peaks in scalable GovTech applications."
 			},
 			"homepage": "https://redis.io/",
+			"license": "RSALv2",
 			"tags": [
 				"cache",
 				"in-memory",
 				"key-value"
 			],
-			"oss": true,
+			"oss": false,
 			"maturity": "graduated",
 			"sovereigntyCriteria": {
-				"openSource": true,
+				"openSource": false,
 				"euHeadquartered": false,
 				"hasAudit": true,
 				"permissiveLicense": false,
@@ -4786,7 +4788,7 @@ const RAW_ITEMS: Item[] = [
 				"ownerType": "corporation"
 			},
 			"logo": "assets/broken-logo.svg",
-			"sovereigntyScore": 78
+			"sovereigntyScore": 63
 		},
 		{
 			"id": "representational-state-transfer",
@@ -5606,10 +5608,10 @@ const RAW_ITEMS: Item[] = [
 				"infrastructure",
 				"automation"
 			],
-			"oss": true,
+			"oss": false,
 			"maturity": "graduated",
 			"sovereigntyCriteria": {
-				"openSource": true,
+				"openSource": false,
 				"euHeadquartered": false,
 				"hasAudit": false,
 				"permissiveLicense": false,
@@ -5621,7 +5623,7 @@ const RAW_ITEMS: Item[] = [
 				"ownerType": "corporation"
 			},
 			"logo": "assets/broken-logo.svg",
-			"sovereigntyScore": 68
+			"sovereigntyScore": 53
 		},
 		{
 			"id": "traefik",
