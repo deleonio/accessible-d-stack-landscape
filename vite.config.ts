@@ -1,6 +1,7 @@
 import mdx from '@mdx-js/rollup';
 import preact from '@preact/preset-vite';
 import UnoCSS from '@unocss/vite';
+import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
@@ -13,6 +14,11 @@ export default defineConfig({
 			exclude: [],
 		},
 		emptyOutDir: true,
+	},
+	resolve: {
+		alias: {
+			'preact-iso': fileURLToPath(new URL('./src/lib/preact-iso.tsx', import.meta.url)),
+		},
 	},
 	plugins: [
 		mdx(),
