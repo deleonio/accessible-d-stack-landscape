@@ -5,7 +5,6 @@ export {
 	computeEffectiveSovereigntyScore,
 	computeEffectiveSovereigntyScoreResult,
 	computeSovereigntyScore,
-	computeSovereigntyScoreResult,
 	getMaintainerBoostedCriteria,
 	getScoreCategory,
 	getScoreCategoryColor,

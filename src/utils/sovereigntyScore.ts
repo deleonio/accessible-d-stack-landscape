@@ -158,25 +158,8 @@ export function getScoreCategoryColor(score: number): string {
 }
 
 /**
- * Compute complete sovereignty score result with category and visualization data.
- * This is the main function to use for getting full scoring information.
- * @param criteria - The sovereignty criteria to evaluate
- * @returns Complete score result with category, color, and percentile
- */
-export function computeSovereigntyScoreResult(criteria: SovereigntyCriteria): SovereigntyScoreResult {
-	const score = computeSovereigntyScore(criteria);
-
-	return {
-		score,
-		category: getScoreCategory(score),
-		color: getScoreCategoryColor(score),
-		percentileInCategory: getScorePercentileInCategory(score),
-	};
-}
-
-/**
- * Context-aware variant of {@link computeSovereigntyScoreResult}. When the
- * stack role grants full maintainer sovereignty, the result reflects the
+ * Compute complete sovereignty score result with context-aware adjustments.
+ * When the stack role grants full maintainer sovereignty, the result reflects the
  * boosted score and also reports the raw score alongside the list of
  * criteria that were contextually satisfied, so the UI can explain the
  * adjustment transparently.
