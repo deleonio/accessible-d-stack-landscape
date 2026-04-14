@@ -94,6 +94,46 @@ Pflichtfelder je Stack-Item:
 - `status` (`recommended|approved|deprecated`)
 - `role` (`maintainer|contributor|funder|consumer`)
 
+### Items als Dependencies (Abhängigkeitsmodell)
+
+**Zentrales Konzept:** Alle Items sind Dependencies — Abhängigkeiten, die in Layern organisiert sind.
+
+```
+Layer-Struktur:
+┌─────────────────────────────────────────┐
+│ Infrastructure, Platform, Building-... │
+│ (Abhängigkeiten zur Umsetzung)          │
+├─────────────────────────────────────────┤
+│ Applications                            │
+│ (Domänenspezifische Abhängigkeiten)     │
+├─────────────────────────────────────────┤
+│ Sovereign-Standards                     │
+│ (Grundlegende Standards, Prinzipien)    │
+└─────────────────────────────────────────┘
+         ↓
+      Stack wählt Items aus
+      und deklariert Verantwortung
+         ↓
+┌─────────────────────────────────────────┐
+│ StackItem (Dependency Declaration):     │
+│ - role: maintainer|contributor|...      │
+│ - status: recommended|approved|...      │
+│ - rationale, alternatives               │
+└─────────────────────────────────────────┘
+```
+
+**Sovereign-Standards als echte Standards:**
+- Nur Items im Layer `sovereign-standards` sind **echte Standards**: Offene Standards, Interoperabilitätsprinzipien, Datenschutz- und Regulierungsanforderungen
+- Sie sind **Grundlagen**, auf denen Stacks aufgebaut sind
+- Ein Stack zeigt seine Verantwortung für Standards durch die Rolle:
+  - `maintainer`: Stack entwickelt und wartet den Standard mit
+  - `contributor`: Stack trägt aktiv zum Standard bei
+  - `funder`: Stack finanziert die Entwicklung
+  - `consumer`: Stack nutzt den Standard
+
+**Stack-Commitment-Modell:**
+Ein Stack ist eine Verantwortungserklärung: Durch die Auswahl einer Rolle für ein Item (insbesondere für Sovereign-Standards) committet sich ein Stack, diesen Standard zu maintainen oder zu unterstützen.
+
 ## 6. Querschnittliche Konzepte
 
 ### Design

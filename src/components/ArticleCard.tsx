@@ -9,9 +9,25 @@ import { SovereigntyGauge } from './SovereigntyGauge';
 
 type ViewMode = 'tile' | 'list';
 
+/**
+ * ArticleCardProps: Displays an Item (dependency) with optional stack-specific metadata.
+ *
+ * The article parameter is a dependency (technology, standard, or tool).
+ * The stackItem parameter (if provided) contains the stack's relationship to this dependency:
+ * - role: The stack's role (maintainer, contributor, funder, consumer)
+ * - status: Whether this is recommended, approved, or deprecated
+ * - rationale: Why the stack chose this dependency
+ * - alternatives: Other items that could fulfill the same function
+ *
+ * For items in the "sovereign-standards" layer, the role indicates the stack's
+ * commitment to that foundational standard.
+ */
 interface ArticleCardProps {
+	/** The item (dependency) to display: a technology, standard, or tool */
 	article: Item;
+	/** Optional: Stack's relationship/role with respect to this item */
 	stackItem?: StackItem;
+	/** Optional: Map of all stack items for context (used when displaying items within a stack context) */
 	stackItemMap?: Map<string, StackItem>;
 	viewMode?: ViewMode;
 }
