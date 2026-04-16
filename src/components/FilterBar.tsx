@@ -79,9 +79,15 @@ export function FilterBar({
 			}));
 	})();
 
+	const innerClassName = [
+		'filter-bar__inner px-3 md:px-4 lg:px-5',
+		activeStackId ? 'filter-bar__inner--with-stack' : 'filter-bar__inner--without-stack',
+		filters.selectedLayer ? 'filter-bar__inner--with-sublayer' : 'filter-bar__inner--without-sublayer',
+	].join(' ');
+
 	return (
 		<section className="filter-bar px-3 md:px-4 lg:px-5 py-2 md:py-3" aria-label={t('search.regionAria')}>
-			<div className="filter-bar__inner px-3 md:px-4 lg:px-5">
+			<div className={innerClassName}>
 				<KolInputText
 					className="filter-bar__search"
 					_label={t('search.inputLabel')}
