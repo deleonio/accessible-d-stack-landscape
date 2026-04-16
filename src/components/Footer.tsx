@@ -1,4 +1,3 @@
-import { RouterLink } from './RouterLink';
 import { useTranslation } from 'react-i18next';
 import { getCommitDisplay } from '../utils';
 
@@ -23,21 +22,21 @@ export function Footer() {
 						<a href="https://github.com/deleonio/accessible-d-stack-landscape/blob/main/docs/README.md" rel="noopener noreferrer" className="footer__link">
 							{t('footer.links.documentation')}
 						</a>
-						<RouterLink href="/news" className="footer__link">
+						<a href="#/news" className="footer__link">
 							{t('footer.links.news')}
-						</RouterLink>
-						<RouterLink href="/stacks" className="footer__link">
+						</a>
+						<a href="#/stacks" className="footer__link">
 							{t('footer.links.stacks')}
-						</RouterLink>
+						</a>
 						<a href="https://github.com/deleonio/accessible-d-stack-landscape" rel="noopener noreferrer" className="footer__link">
 							{t('footer.links.github')}
 						</a>
 						<a href="https://github.com/deleonio/accessible-d-stack-landscape/issues/new" rel="noopener noreferrer" className="footer__link">
 							{t('footer.links.community')}
 						</a>
-						<RouterLink href="/settings" className="footer__link">
+						<a href="#/settings" className="footer__link">
 							{t('footer.links.settings')}
-						</RouterLink>
+						</a>
 					</nav>
 				</div>
 			</div>

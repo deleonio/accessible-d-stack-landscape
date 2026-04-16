@@ -1,4 +1,3 @@
-import { RouterLink } from './RouterLink';
 import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { StackMetrics } from '../hooks/useStackMetrics';
@@ -236,9 +235,9 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 
 			{/* ── CTA-Button ────────────────────────────────────────────── */}
 			<div className="stack-expose__cta">
-				<RouterLink href={`/?stack=${stack.id}`} className="stack-expose__explore-link">
+				<a href={`#/?stack=${stack.id}`} className="stack-expose__explore-link">
 					{t('stackGallery.exploreStack')}
-				</RouterLink>
+				</a>
 			</div>
 		</article>
 	);
