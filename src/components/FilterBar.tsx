@@ -122,10 +122,10 @@ export function FilterBar({
 						className="filter-bar__select filter-bar__select--relation sort-select"
 						_label={t('search.relationLabel')}
 						_hideLabel
-						_options={relationOptions}
-						_value={filters.selectedRelation ?? relationOptions[0]?.value ?? ''}
+						_options={[{ label: t('search.allRelations'), value: '' }, ...relationOptions]}
+						_value={filters.selectedRelation ?? ''}
 						_on={{
-							onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedRelation: value as ParticipantRole }),
+							onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedRelation: value ? (value as ParticipantRole) : null }),
 						}}
 					/>
 				)}

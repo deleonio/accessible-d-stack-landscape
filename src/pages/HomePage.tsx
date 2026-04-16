@@ -4,7 +4,7 @@ import { CategoryGrid } from '../components/CategoryGrid';
 import { FilterBar, SortDir, SortField, ViewMode } from '../components/FilterBar';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { useFilters } from '../hooks/useFilters';
-import { ParticipantRole, StackItem } from '../types';
+import { StackItem } from '../types';
 
 export function HomePage() {
 	const [activeStackId, setActiveStackId] = useState<string | null>(null);
@@ -25,12 +25,6 @@ export function HomePage() {
 	const [viewMode, setViewMode] = useState<ViewMode>('tile');
 
 	const activeStack = useMemo(() => STACKS.find((s) => s.id === activeStackId) ?? null, [activeStackId]);
-	const activeStackRelations = useMemo<ParticipantRole[]>(() => {
-		if (!activeStack) return [];
-		const roles = new Set(activeStack.items.map((item) => item.role));
-		const orderedRoles: ParticipantRole[] = ['maintainer', 'contributor', 'funder', 'consumer'];
-		return orderedRoles.filter((role) => roles.has(role));
-	}, [activeStack]);
 
 	const stackItemMap = useMemo<Map<string, StackItem>>(() => {
 		if (!activeStack) return new Map();
@@ -46,16 +40,9 @@ export function HomePage() {
 
 	useEffect(() => {
 		setFilters((prev) => {
-			if (!activeStackId) {
-				return prev.selectedRelation ? { ...prev, selectedRelation: null } : prev;
-			}
-			if (prev.selectedRelation && activeStackRelations.includes(prev.selectedRelation)) {
-				return prev;
-			}
-			const defaultRelation = activeStackRelations[0] ?? null;
-			return { ...prev, selectedRelation: defaultRelation };
+			return prev.selectedRelation ? { ...prev, selectedRelation: null } : prev;
 		});
-	}, [activeStackId, activeStackRelations, setFilters]);
+	}, [activeStackId, setFilters]);
 
 	return (
 		<main id="main-content">
