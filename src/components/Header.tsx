@@ -16,9 +16,9 @@ export function Header({ currentUrl }: HeaderProps) {
 	const brandUrl = import.meta.env.VITE_BRAND_URL ?? baseUrl;
 	const commitDisplay = getCommitDisplay();
 
-	// Aktive Nav-Route bestimmen: alles was nicht mit /deps beginnt → Stacks
-	const isStacksActive = !currentUrl.startsWith('/deps');
-	const isDepsActive = currentUrl.startsWith('/deps');
+	const isStacksActive = currentUrl === '/' || currentUrl.startsWith('/stacks') || currentUrl.startsWith('/stacks-galerie');
+	const isGovsActive = currentUrl.startsWith('/govs') || currentUrl.startsWith('/deps');
+	const isSettingsActive = currentUrl.startsWith('/settings') || currentUrl.startsWith('/einstellungen');
 
 	return (
 		<>
@@ -61,18 +61,25 @@ export function Header({ currentUrl }: HeaderProps) {
 						</a>
 						<nav className="header__main-nav" aria-label={t('header.mainNavigationAria')}>
 							<a
-								href="#/"
+								href="#/stacks"
 								className={`header__nav-link${isStacksActive ? ' header__nav-link--active' : ''}`}
 								aria-current={isStacksActive ? 'page' : undefined}
 							>
 								{t('header.nav.stacks')}
 							</a>
 							<a
-								href="#/deps"
-								className={`header__nav-link${isDepsActive ? ' header__nav-link--active' : ''}`}
-								aria-current={isDepsActive ? 'page' : undefined}
+								href="#/govs"
+								className={`header__nav-link${isGovsActive ? ' header__nav-link--active' : ''}`}
+								aria-current={isGovsActive ? 'page' : undefined}
 							>
-								{t('header.nav.deps')}
+								{t('header.nav.govs')}
+							</a>
+							<a
+								href="#/settings"
+								className={`header__nav-link${isSettingsActive ? ' header__nav-link--active' : ''}`}
+								aria-current={isSettingsActive ? 'page' : undefined}
+							>
+								{t('header.nav.settings')}
 							</a>
 						</nav>
 						<div className="header__controls flex items-center gap-2 ml-auto">
