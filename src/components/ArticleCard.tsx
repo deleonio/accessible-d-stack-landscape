@@ -307,11 +307,16 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 								)}
 								{!stackItem && stacksContainingItem.length > 0 && (
 									<div className="drawer-stacks">
-										<p className="drawer-stacks__title">Stacks</p>
+										<p className="drawer-stacks__title">{t('header.nav.stacks')}</p>
 										<ul className="drawer-stacks__list">
 											{stacksContainingItem.map((stack) => (
 												<li key={stack.id} className="drawer-stacks__item">
-													{getLocalizedText(stack.name, i18n.language)}
+													<a href={`#/stacks?stack=${stack.id}`} className="drawer-related__link" onClick={() => setIsDrawerOpen(false)}>
+														<span className="drawer-related__link-text">{getLocalizedText(stack.name, i18n.language)}</span>
+														<span className="drawer-related__link-icon" aria-hidden="true">
+															›
+														</span>
+													</a>
 												</li>
 											))}
 										</ul>
