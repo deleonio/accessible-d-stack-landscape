@@ -539,21 +539,22 @@ kol-select,
 	width: 100%;
 	display: grid;
 	gap: var(--ds-space-2);
-
-	/* Mobile <480px: stack vertically */
 	grid-template-columns: 1fr;
-	grid-template-areas: 'search' 'stack' 'layer' 'sort' 'toggle';
 }
 
-.filter-bar__inner:not(:has(.filter-bar__select--stack)) {
+.filter-bar__inner--with-stack {
+	grid-template-areas: 'search' 'stack' 'layer' 'relation' 'sort' 'toggle';
+}
+
+.filter-bar__inner--with-stack.filter-bar__inner--with-sublayer {
+	grid-template-areas: 'search' 'stack' 'layer' 'sublayer' 'relation' 'sort' 'toggle';
+}
+
+.filter-bar__inner--without-stack {
 	grid-template-areas: 'search' 'layer' 'sort' 'toggle';
 }
 
-.filter-bar__inner:has(.filter-bar__select--sublayer) {
-	grid-template-areas: 'search' 'stack' 'layer' 'sublayer' 'sort' 'toggle';
-}
-
-.filter-bar__inner:not(:has(.filter-bar__select--stack)):has(.filter-bar__select--sublayer) {
+.filter-bar__inner--without-stack.filter-bar__inner--with-sublayer {
 	grid-template-areas: 'search' 'layer' 'sublayer' 'sort' 'toggle';
 }
 
@@ -561,41 +562,44 @@ kol-select,
 @media (width >= 480px) {
 	.filter-bar__inner {
 		grid-template-columns: 1fr 1fr;
-		grid-template-areas: 'search search' 'stack  layer' 'sort   toggle';
 	}
 
-	.filter-bar__inner:not(:has(.filter-bar__select--stack)) {
+	.filter-bar__inner--with-stack {
+		grid-template-areas: 'search search' 'stack  layer' 'relation relation' 'sort   toggle';
+	}
+
+	.filter-bar__inner--with-stack.filter-bar__inner--with-sublayer {
+		grid-template-areas: 'search search' 'stack  layer' 'sublayer sublayer' 'relation relation' 'sort   toggle';
+	}
+
+	.filter-bar__inner--without-stack {
 		grid-template-areas: 'search search' 'layer  layer' 'sort   toggle';
 	}
 
-	.filter-bar__inner:has(.filter-bar__select--sublayer) {
-		grid-template-areas: 'search search' 'stack  layer' 'sublayer sublayer' 'sort   toggle';
-	}
-
-	.filter-bar__inner:not(:has(.filter-bar__select--stack)):has(.filter-bar__select--sublayer) {
+	.filter-bar__inner--without-stack.filter-bar__inner--with-sublayer {
 		grid-template-areas: 'search search' 'layer  layer' 'sublayer sublayer' 'sort   toggle';
 	}
 }
 
 /* Desktop 600px: single row */
 @media (width >= 600px) {
-	.filter-bar__inner {
-		grid-template-columns: 2fr 1fr 1fr auto auto;
-		grid-template-areas: 'search stack layer sort toggle';
+	.filter-bar__inner--with-stack {
+		grid-template-columns: 2fr 1fr 1fr 1fr auto auto;
+		grid-template-areas: 'search stack layer relation sort toggle';
 		gap: var(--ds-space-2);
 	}
 
-	.filter-bar__inner:not(:has(.filter-bar__select--stack)) {
+	.filter-bar__inner--with-stack.filter-bar__inner--with-sublayer {
+		grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto auto;
+		grid-template-areas: 'search stack layer sublayer relation sort toggle';
+	}
+
+	.filter-bar__inner--without-stack {
 		grid-template-columns: 2fr 1fr auto auto;
 		grid-template-areas: 'search layer sort toggle';
 	}
 
-	.filter-bar__inner:has(.filter-bar__select--sublayer) {
-		grid-template-columns: 2fr 1fr 1fr 1fr auto auto;
-		grid-template-areas: 'search stack layer sublayer sort toggle';
-	}
-
-	.filter-bar__inner:not(:has(.filter-bar__select--stack)):has(.filter-bar__select--sublayer) {
+	.filter-bar__inner--without-stack.filter-bar__inner--with-sublayer {
 		grid-template-columns: 2fr 1fr 1fr auto auto;
 		grid-template-areas: 'search layer sublayer sort toggle';
 	}
@@ -621,6 +625,10 @@ kol-select,
 
 .filter-bar__select--sublayer {
 	grid-area: sublayer;
+}
+
+.filter-bar__select--relation {
+	grid-area: relation;
 }
 
 .filter-bar__search {

@@ -67,7 +67,7 @@ export function CategoryGrid({
 			{activeStack && stackItemMap && <StackStats stack={activeStack} items={articles} stackItemMap={stackItemMap} />}
 
 			<p className="results-info" aria-live="polite" aria-atomic="true">
-				{filters.searchQuery || filters.selectedLayer ? (
+				{filters.searchQuery || filters.selectedLayer || filters.selectedRelation ? (
 					<>
 						<strong>{activeCount}</strong> {t('category.results.filteredPrefix')} {totalCount} {t('category.results.entries')}
 						{filters.selectedLayer && (
@@ -81,6 +81,7 @@ export function CategoryGrid({
 							</>
 						)}
 						{filters.searchQuery && <> {t('category.results.forQuery', { query: filters.searchQuery })}</>}
+						{filters.selectedRelation && <> {t('category.results.withRelation', { relation: t(`stack.roles.${filters.selectedRelation}`) })}</>}
 					</>
 				) : (
 					<>

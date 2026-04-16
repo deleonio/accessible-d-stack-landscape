@@ -46,7 +46,9 @@
 		"inputLabel": "Recherche",
 		"placeholder": "Rechercher une technologie, un standard ou un framework …",
 		"categoryLabel": "Couche",
-		"allCategories": "Toutes les couches"
+		"allCategories": "Toutes les couches",
+		"relationLabel": "Relation",
+		"allRelations": "Toutes les relations"
 	},
 	"category": {
 		"toolbarAria": "Filtrer les couches",
@@ -57,6 +59,7 @@
 			"entries": "entrées",
 			"inCategory": "dans {{category}}",
 			"forQuery": "pour « {{query}} »",
+			"withRelation": "avec la relation « {{relation}} »",
 			"totalTechnologiesAndStandards": "technologies & standards évalués"
 		},
 		"paginationLabel": "Parcourir les articles"

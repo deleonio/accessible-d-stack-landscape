@@ -36,7 +36,13 @@ export function HomePage() {
 		return ITEMS.filter((item) => stackItemMap.has(item.id));
 	}, [activeStack, stackItemMap]);
 
-	const { filters, setFilters, filtered } = useFilters(baseItems);
+	const { filters, setFilters, filtered } = useFilters(baseItems, activeStack ? stackItemMap : undefined);
+
+	useEffect(() => {
+		setFilters((prev) => {
+			return prev.selectedRelation ? { ...prev, selectedRelation: null } : prev;
+		});
+	}, [activeStackId, setFilters]);
 
 	return (
 		<main id="main-content">
