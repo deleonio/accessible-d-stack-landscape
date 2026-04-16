@@ -9,12 +9,14 @@
 		"forceConsistentCasingInFileNames": true,
 		"module": "ESNext",
 		"moduleResolution": "bundler",
+		"baseUrl": ".",
+		"ignoreDeprecations": "6.0",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "preact",
-		"typeRoots": ["node_modules/@types", "src/types"],
+		"typeRoots": ["node_modules/@types", "src/types"]
 	},
 	"include": ["./src"]
 }
