@@ -67,55 +67,53 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 		<article className={`stack-expose${isTop ? ' stack-expose--rank1' : ''}`} aria-labelledby={`expose-${stack.id}-title`}>
 			{/* ── Header ───────────────────────────────────────────────── */}
 			<div className="stack-expose__header">
-				<span className={`stack-expose__rank${isTop ? ' stack-expose__rank--top' : ''}`} aria-label={t('stackGallery.rankAria', { rank })}>
-					{isTop ? (
-						<>
-							<span aria-hidden="true">★</span>
-						</>
-					) : (
-						rank
-					)}
-				</span>
+				<div className="stack-expose__headline">
+					<span className={`stack-expose__rank${isTop ? ' stack-expose__rank--top' : ''}`} aria-label={t('stackGallery.rankAria', { rank })}>
+						{isTop ? (
+							<>
+								<span aria-hidden="true">★</span>
+							</>
+						) : (
+							rank
+						)}
+					</span>
 
-				<div className="stack-expose__title-group">
-					<h2 id={`expose-${stack.id}-title`} className="stack-expose__name">
-						{flag && (
-							<span className="stack-expose__flag" aria-hidden="true">
-								{flag}{' '}
-							</span>
-						)}
-						{localizedName}
-						{isTop && (
-							<span className="stack-expose__best-badge" aria-label={t('stackGallery.bestStack')}>
-								<span aria-hidden="true"> ★</span>
-							</span>
-						)}
-					</h2>
-					{localizedDescription && <p className="stack-expose__description">{localizedDescription}</p>}
+					<div className="stack-expose__title-group">
+						<h2 id={`expose-${stack.id}-title`} className="stack-expose__name">
+							{flag && (
+								<span className="stack-expose__flag" aria-hidden="true">
+									{flag}{' '}
+								</span>
+							)}
+							{localizedName}
+							{isTop && (
+								<span className="stack-expose__best-badge" aria-label={t('stackGallery.bestStack')}>
+									<span aria-hidden="true"> ★</span>
+								</span>
+							)}
+						</h2>
+					</div>
 				</div>
 
-				<div className="stack-expose__meta">
-					{stack.issuer && <span className="stack-expose__issuer">{stack.issuer}</span>}
-					<span className="stack-expose__version">v{stack.version}</span>
-					{formattedDate && (
-						<time className="stack-expose__date" dateTime={stack.publishedAt}>
-							{formattedDate}
-						</time>
-					)}
+				<div className="stack-expose__meta-row">
+					{stack.issuer && <p className="stack-expose__issuer">{stack.issuer}</p>}
+					<div className="stack-expose__meta">
+						<span className={`stack-expose__version${formattedDate ? ' stack-expose__version--with-date' : ''}`}>v{stack.version}</span>
+						{formattedDate && (
+							<time className="stack-expose__date" dateTime={stack.publishedAt}>
+								{formattedDate}
+							</time>
+						)}
+					</div>
 				</div>
+
+				{localizedDescription && <p className="stack-expose__description">{localizedDescription}</p>}
 			</div>
 
 			{/* ── Score-Sektion ─────────────────────────────────────────── */}
 			<div className="stack-expose__score-section">
 				<SovereigntyGauge score={metrics.avgScore} category={metrics.avgCategory} size={160} />
 				<div className="stack-expose__score-meta">
-					<span
-						className="stack-expose__avg-value"
-						style={{ color: metrics.avgColor }}
-						aria-label={t('stackGallery.avgScoreAria', { score: metrics.avgScore })}
-					>
-						{metrics.avgScore}/100
-					</span>
 					<span className="stack-expose__avg-label">{t('stackGallery.avgScore')}</span>
 					<span className="stack-expose__avg-category" style={{ color: metrics.avgColor }}>
 						{t(`article.scoreCategories.${metrics.avgCategory}`)}
