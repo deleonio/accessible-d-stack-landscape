@@ -60,19 +60,19 @@ export function Header({ currentUrl }: HeaderProps) {
 						</a>
 						<nav className="header__main-nav" aria-label={t('header.mainNavigationAria')}>
 							<a
-									href="#/"
+								href="#/"
 								className={`header__nav-link${isStacksActive ? ' header__nav-link--active' : ''}`}
 								aria-current={isStacksActive ? 'page' : undefined}
 							>
 								{t('header.nav.stacks')}
 							</a>
 							<a
-									href="#/deps"
-									className={`header__nav-link${isDepsActive ? ' header__nav-link--active' : ''}`}
-									aria-current={isDepsActive ? 'page' : undefined}
-								>
-									{t('header.nav.deps')}
-								</a>
+								href="#/deps"
+								className={`header__nav-link${isDepsActive ? ' header__nav-link--active' : ''}`}
+								aria-current={isDepsActive ? 'page' : undefined}
+							>
+								{t('header.nav.deps')}
+							</a>
 						</nav>
 						<div className="header__controls flex items-center gap-2 ml-auto">
 							<KolButton
