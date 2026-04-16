@@ -46,7 +46,9 @@
 		"inputLabel": "Suche",
 		"placeholder": "Technologie, Standard oder Framework suchen …",
 		"categoryLabel": "Schicht",
-		"allCategories": "Alle Schichten"
+		"allCategories": "Alle Schichten",
+		"relationLabel": "Relation",
+		"allRelations": "Alle Relationen"
 	},
 	"category": {
 		"toolbarAria": "Schichten filtern",
@@ -57,6 +59,7 @@
 			"entries": "Einträgen",
 			"inCategory": "in {{category}}",
 			"forQuery": "für „{{query}}“",
+			"withRelation": "mit Relation „{{relation}}“",
 			"totalTechnologiesAndStandards": "bewertete Technologien & Standards"
 		},
 		"paginationLabel": "Navigiere durch die Artikel"

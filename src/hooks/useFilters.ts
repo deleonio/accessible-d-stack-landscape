@@ -1,14 +1,15 @@
 import { useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
-import { FilterState, Item } from '../types';
+import { FilterState, Item, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
 
-export function useFilters(items: Item[]) {
+export function useFilters(items: Item[], stackItemMap?: Map<string, StackItem>) {
 	const { i18n } = useTranslation();
 	const [filters, setFilters] = useState<FilterState>({
 		searchQuery: '',
 		selectedLayer: null,
 		selectedSublayer: null,
+		selectedRelation: null,
 	});
 
 	const filtered = useMemo(() => {
@@ -20,9 +21,10 @@ export function useFilters(items: Item[]) {
 			const matchesSearch = localizedName.includes(normalizedQuery) || localizedDescription.includes(normalizedQuery);
 			const matchesLayer = !filters.selectedLayer || item.layer === filters.selectedLayer;
 			const matchesSublayer = !filters.selectedSublayer || item.sublayer === filters.selectedSublayer;
-			return matchesSearch && matchesLayer && matchesSublayer;
+			const matchesRelation = !filters.selectedRelation || stackItemMap?.get(item.id)?.role === filters.selectedRelation;
+			return matchesSearch && matchesLayer && matchesSublayer && matchesRelation;
 		});
-	}, [items, filters, i18n.language]);
+	}, [items, filters, i18n.language, stackItemMap]);
 
 	return { filters, setFilters, filtered };
 }

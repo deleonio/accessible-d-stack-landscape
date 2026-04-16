@@ -165,6 +165,7 @@ export type FilterState = {
 	searchQuery: string;
 	selectedLayer: string | null;
 	selectedSublayer: string | null;
+	selectedRelation: ParticipantRole | null;
 };
 
 // ---------------------------------------------------------------------------

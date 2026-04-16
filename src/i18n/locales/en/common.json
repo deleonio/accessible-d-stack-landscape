@@ -46,7 +46,9 @@
 		"inputLabel": "Search",
 		"placeholder": "Search technology, standard or framework …",
 		"categoryLabel": "Layer",
-		"allCategories": "All layers"
+		"allCategories": "All layers",
+		"relationLabel": "Relation",
+		"allRelations": "All relations"
 	},
 	"category": {
 		"toolbarAria": "Filter layers",
@@ -57,6 +59,7 @@
 			"entries": "entries",
 			"inCategory": "in {{category}}",
 			"forQuery": "for “{{query}}”",
+			"withRelation": "with relation “{{relation}}”",
 			"totalTechnologiesAndStandards": "rated technologies & standards"
 		},
 		"paginationLabel": "Navigate through the articles"

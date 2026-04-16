@@ -1,6 +1,6 @@
 import { KolButton, KolInputCheckbox, KolInputText, KolSingleSelect } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
-import { FilterState, Item, Layer, Stack } from '../types';
+import { FilterState, Item, Layer, ParticipantRole, Stack } from '../types';
 import { getLocalizedText } from '../utils';
 
 export type ViewMode = 'tile' | 'list';
@@ -52,12 +52,28 @@ export function FilterBar({
 			value: stack.id,
 		})),
 	];
+	const activeStack = activeStackId ? stacks.find((stack) => stack.id === activeStackId) : null;
 
 	const sublayerOptions = (() => {
 		if (!filters.selectedLayer) return [];
 		const layerItems = items.filter((item) => item.layer === filters.selectedLayer);
 		const sublayers = new Set(layerItems.map((item) => item.sublayer).filter(Boolean));
 		return Array.from(sublayers).sort();
+	})();
+
+	const relationOptions = (() => {
+		if (!activeStackId || !activeStack) return [];
+		const roleCounts = items.reduce(
+			(acc, item) => {
+				const stackItem = activeStack.items.find((stackItemCandidate) => stackItemCandidate.itemId === item.id);
+				if (!stackItem) return acc;
+				acc[stackItem.role] = (acc[stackItem.role] ?? 0) + 1;
+				return acc;
+			},
+			{} as Record<ParticipantRole, number>,
+		);
+		const roles: ParticipantRole[] = ['maintainer', 'contributor', 'funder', 'consumer'];
+		return roles.filter((role) => roleCounts[role] > 0).map((role) => ({ label: `${t(`stack.roles.${role}`)} (${roleCounts[role]})`, value: role }));
 	})();
 
 	return (
@@ -81,7 +97,10 @@ export function FilterBar({
 					_options={stackOptions}
 					_value={activeStackId ?? ''}
 					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) => onStackChange(value ? (value as string) : null),
+						onChange: (_e: globalThis.Event, value: unknown) => {
+							onStackChange(value ? (value as string) : null);
+							onFilterChange({ ...filters, selectedRelation: null });
+						},
 					}}
 				/>
 				<KolSingleSelect
@@ -95,6 +114,19 @@ export function FilterBar({
 							onFilterChange({ ...filters, selectedLayer: value ? (value as string) : null, selectedSublayer: null }),
 					}}
 				/>
+				{activeStackId && (
+					<KolSingleSelect
+						className="filter-bar__select filter-bar__select--relation sort-select"
+						_label={t('search.relationLabel')}
+						_hideLabel
+						_options={[{ label: t('search.allRelations'), value: '' }, ...relationOptions]}
+						_value={filters.selectedRelation ?? ''}
+						_disabled={relationOptions.length === 0}
+						_on={{
+							onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, selectedRelation: value ? (value as ParticipantRole) : null }),
+						}}
+					/>
+				)}
 				{filters.selectedLayer && (
 					<KolSingleSelect
 						className="filter-bar__select filter-bar__select--sublayer sort-select"
