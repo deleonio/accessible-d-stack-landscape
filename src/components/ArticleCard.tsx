@@ -227,6 +227,9 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 								<div className="drawer-gauge-container">
 									<SovereigntyGauge score={selectedScore} category={selectedScoreCategory} size={200} />
 								</div>
+								<p className={`drawer-score-category-label drawer-score-category-label--${selectedScoreCategory}`}>
+									({t(`article.scoreCategories.${selectedScoreCategory}`)})
+								</p>
 								{selectedMaintainerBoosted && (
 									<div className="drawer-maintainer-boost" role="note" aria-label={t('article.maintainerBoost.noteAria')}>
 										<p className="drawer-maintainer-boost__title">
