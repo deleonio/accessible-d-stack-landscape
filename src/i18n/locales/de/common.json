@@ -103,7 +103,8 @@
 			"matureProject": "Reifes Projekt (graduiert/stabil)",
 			"noTelemetryByDefault": "Keine Telemetrie im Auslieferungszustand",
 			"euHeadquartered": "EU-Hauptsitz oder Registrierung",
-			"ownerType": "Owner-Modell: {{owner}} (+{{points}})"
+			"ownerType": "Owner-Modell: {{owner}} (+{{points}})",
+			"ownerCountry": "Owner-Land: {{country}}"
 		},
 		"ownerType": {
 			"independentConsortium": "Unabhängiges Konsortium",
@@ -111,6 +112,9 @@
 			"community": "Community",
 			"oneManShow": "One-Man-Show",
 			"unknown": "Nicht gepflegt"
+		},
+		"ownerCountry": {
+			"unknown": "Unbekannt"
 		},
 		"scoreCategories": {
 			"insufficient": "Unzureichend",

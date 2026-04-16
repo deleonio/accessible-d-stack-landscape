@@ -39,6 +39,11 @@ const ROLE_COLORS: Record<ParticipantRole, string> = {
 	consumer: '#546e7a',
 };
 
+function countryToFlagEmoji(code?: string): string {
+	if (!code || code.length !== 2) return '';
+	return [...code.toUpperCase()].map((c) => String.fromCodePoint(0x1f1e6 + c.charCodeAt(0) - 65)).join('');
+}
+
 export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile' }: ArticleCardProps) {
 	const { i18n, t } = useTranslation();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -71,6 +76,8 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const selectedScoreColor = selectedScoreResult.color;
 	const selectedScoreCategory = selectedScoreResult.category;
 	const selectedMaintainerBoosted = selectedScoreResult.maintainerBoosted;
+	const selectedOwnerCountry = selectedArticle.ownerCountry?.toUpperCase();
+	const selectedOwnerCountryFlag = countryToFlagEmoji(selectedOwnerCountry);
 	const selectedBoostedCriteria = new Set<keyof Omit<SovereigntyCriteria, 'ownerType'>>(selectedScoreResult.boostedCriteria);
 	const criteriaKeys = (Object.keys(article.sovereigntyCriteria) as Array<keyof typeof article.sovereigntyCriteria>).filter((key) => key !== 'ownerType');
 
@@ -281,6 +288,14 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 												? t(`article.ownerType.${selectedArticle.sovereigntyCriteria.ownerType}`)
 												: t('article.ownerType.unknown'),
 											points: computeOwnerScore(selectedArticle.sovereigntyCriteria.ownerType),
+										})}
+									</li>
+									<li className={`drawer-criteria-item drawer-criteria-item--${selectedOwnerCountry ? 'yes' : 'no'}`}>
+										<span className="drawer-criteria-icon" aria-hidden="true">
+											{selectedOwnerCountry ? '✓' : '✗'}
+										</span>
+										{t('article.criteria.ownerCountry', {
+											country: selectedOwnerCountry ? `${selectedOwnerCountryFlag} ${selectedOwnerCountry}` : t('article.ownerCountry.unknown'),
 										})}
 									</li>
 								</ul>
