@@ -181,6 +181,8 @@
 			"euHQ": "EU headquartered",
 			"permissiveLicense": "Permissive license",
 			"audit": "Audited",
+			"ownerCountry": "Owner country",
+			"unknown": "Unknown",
 			"layerBreakdown": "Layer breakdown",
 			"roles": "Roles"
 		}

@@ -167,6 +167,8 @@
 			"euHQ": "Siège en UE",
 			"permissiveLicense": "Licence permissive",
 			"audit": "Audité",
+			"ownerCountry": "Pays du propriétaire",
+			"unknown": "Inconnu",
 			"layerBreakdown": "Répartition par couche",
 			"roles": "Rôles"
 		}
