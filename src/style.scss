@@ -66,6 +66,26 @@
 	--ds-lh-heading: 1.2;
 }
 
+:root[data-theme='dark'] {
+	--ds-color-primary: #1f4f8e;
+	--ds-color-primary-dark: #17365f;
+	--ds-color-primary-light: #2a67b8;
+	--ds-color-accent: #63a8ff;
+
+	--ds-color-bg: #101318;
+	--ds-color-bg-white: #171b22;
+	--ds-color-surface: #171b22;
+	--ds-color-border: #303847;
+	--ds-color-border-light: #3a4557;
+
+	--ds-color-text: #f1f5f9;
+	--ds-color-text-muted: #a4afbf;
+	--ds-color-text-inverse: #fff;
+
+	--ds-shadow-card: 0 1px 3px rgb(0 0 0 / 35%), 0 1px 2px rgb(0 0 0 / 28%);
+	--ds-shadow-card-hover: 0 8px 16px rgb(0 0 0 / 45%);
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    Base Styles
    ───────────────────────────────────────────────────────────────────────────── */
@@ -124,6 +144,12 @@ body {
 main {
 	margin: 0 auto;
 	width: 100%;
+}
+
+.settings-form__description {
+	color: var(--ds-color-text-muted);
+	font-size: var(--ds-text-sm);
+	margin: 0;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

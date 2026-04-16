@@ -2,13 +2,16 @@ import { KolButton, KolDrawer } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { getCommitDisplay } from '../utils';
+import type { ThemePreference } from '../utils/theme';
 import { SettingsForm } from './SettingsForm';
 
 interface HeaderProps {
 	currentUrl: string;
+	themePreference: ThemePreference;
+	onThemeChange: (preference: ThemePreference) => void;
 }
 
-export function Header({ currentUrl }: HeaderProps) {
+export function Header({ currentUrl, themePreference, onThemeChange }: HeaderProps) {
 	const { t } = useTranslation();
 	const [settingsDrawerOpen, setSettingsDrawerOpen] = useState(false);
 
@@ -96,7 +99,7 @@ export function Header({ currentUrl }: HeaderProps) {
 						_on={{ onClose: () => setSettingsDrawerOpen(false) }}
 					>
 						<div className="header__settings-drawer-content p-4">
-							<SettingsForm />
+							<SettingsForm themePreference={themePreference} onThemeChange={onThemeChange} />
 						</div>
 					</KolDrawer>
 

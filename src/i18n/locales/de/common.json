@@ -198,7 +198,15 @@
 		},
 		"settings": {
 			"description": "Verwalte hier anwendungsbezogene Einstellungen und Präferenzen für StackAtlas.",
-			"title": "Einstellungen"
+			"title": "Einstellungen",
+			"theme": {
+				"label": "Farbschema",
+				"options": {
+					"light": "Hell",
+					"dark": "Dunkel",
+					"system": "System"
+				}
+			}
 		},
 		"news": {
 			"title": "Rating-Reports & Community-News",
