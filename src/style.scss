@@ -185,17 +185,6 @@ main {
 	/* Image sizing handled in JSX */
 }
 
-.header__brand-badge {
-	background-color: var(--ds-color-accent);
-	color: var(--ds-color-text-inverse);
-	font-weight: 700;
-	font-size: var(--ds-text-xs);
-	border-radius: var(--ds-radius-sm);
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	padding: var(--ds-space-1) var(--ds-space-3);
-}
-
 .header__main-nav {
 	display: flex;
 	align-items: center;
