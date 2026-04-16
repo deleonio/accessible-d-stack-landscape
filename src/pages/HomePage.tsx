@@ -1,3 +1,4 @@
+import { useLocation } from 'preact-iso';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { CategoryGrid } from '../components/CategoryGrid';
 import { FilterBar, SortDir, SortField, ViewMode } from '../components/FilterBar';
@@ -7,17 +8,18 @@ import { StackItem } from '../types';
 
 export function HomePage() {
 	const [activeStackId, setActiveStackId] = useState<string | null>(null);
+	const location = useLocation();
 
-	// Beim ersten Rendern: ?stack=<id> aus dem URL-Hash lesen und Stack vorauswählen.
-	// Hash-Routing: URL sieht z. B. so aus: #/deps?stack=germany
+	// Bei jeder Änderung der URL-Query: ?stack=<id> lesen und Stack vorauswählen.
 	useEffect(() => {
-		const hash = window.location.hash; // z.B. "#/deps?stack=germany"
-		const query = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : '';
-		const stackParam = new URLSearchParams(query).get('stack');
-		if (stackParam && STACKS.some((s) => s.id === stackParam)) {
+		const stackParam = new window.URLSearchParams(location.url.search).get('stack');
+		if (stackParam && STACKS.some((stack) => stack.id === stackParam)) {
 			setActiveStackId(stackParam);
+			return;
 		}
-	}, []);
+		setActiveStackId(null);
+	}, [location.url.search]);
+
 	const [sortField, setSortField] = useState<SortField>('score');
 	const [sortDir, setSortDir] = useState<SortDir>('desc');
 	const [viewMode, setViewMode] = useState<ViewMode>('tile');
