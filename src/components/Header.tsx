@@ -48,7 +48,7 @@ export function Header({ currentUrl }: HeaderProps) {
 				{/* Main header container with max-width */}
 				<div className="header__inner flex flex-col max-w-6xl mx-auto px-4 md:px-6 w-full">
 					{/* Brand bar */}
-					<div className="header__brand-bar flex items-center justify-between gap-3 py-2 md:py-2.5">
+					<div className="header__brand-bar flex items-center justify-between gap-3 py-2">
 						<a href={brandUrl} className="header__brand-link flex items-center gap-2 no-underline font-bold text-base hover:opacity-90" rel="noopener noreferrer">
 							<span className="header__brand-mark inline-flex w-6 h-6 flex-shrink-0">
 								<img src={`${baseUrl}favicon.svg`} alt="" width="24" height="24" loading="eager" decoding="async" />
