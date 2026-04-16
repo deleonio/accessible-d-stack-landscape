@@ -178,6 +178,18 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 						<dt>{t('stackGallery.metrics.audit')}</dt>
 						<dd style={{ color: metricColor(metrics.pctAudit) }}>{metrics.pctAudit}%</dd>
 					</div>
+					<div className="stack-expose__metric">
+						<dt>{t('stackGallery.metrics.ownerCountry')}</dt>
+						<dd>
+							{flag ? (
+								<>
+									<span aria-hidden="true">{flag}</span> {stack.country?.toUpperCase()}
+								</>
+							) : (
+								t('stackGallery.metrics.unknown')
+							)}
+						</dd>
+					</div>
 				</dl>
 			</div>
 

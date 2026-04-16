@@ -24,6 +24,11 @@
 			"type": "string",
 			"description": "Optional sub-category within the layer (e.g., 'security', 'database')"
 		},
+		"ownerCountry": {
+			"type": "string",
+			"description": "ISO 3166-1 alpha-2 country code of the owner/maintainer organization (e.g., DE, FR, US)",
+			"pattern": "^[A-Z]{2}$"
+		},
 		"description": {
 			"type": "object",
 			"description": "Localized description of the item",

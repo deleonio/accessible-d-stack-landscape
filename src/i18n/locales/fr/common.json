@@ -103,7 +103,8 @@
 			"matureProject": "Projet mature (diplômé/stable)",
 			"noTelemetryByDefault": "Aucune télémétrie par défaut",
 			"euHeadquartered": "Siège ou enregistrement dans l'UE",
-			"ownerType": "Modèle d’owner : {{owner}} (+{{points}})"
+			"ownerType": "Modèle d’owner : {{owner}} (+{{points}})",
+			"ownerCountry": "Pays du propriétaire : {{country}}"
 		},
 		"ownerType": {
 			"independentConsortium": "Consortium indépendant",
@@ -111,6 +112,9 @@
 			"community": "Communauté",
 			"oneManShow": "One-man show",
 			"unknown": "Non renseigné"
+		},
+		"ownerCountry": {
+			"unknown": "Inconnu"
 		},
 		"maintainerBoost": {
 			"title": "Souveraineté de mainteneur appliquée",
@@ -167,6 +171,8 @@
 			"euHQ": "Siège en UE",
 			"permissiveLicense": "Licence permissive",
 			"audit": "Audité",
+			"ownerCountry": "Pays du propriétaire",
+			"unknown": "Inconnu",
 			"layerBreakdown": "Répartition par couche",
 			"roles": "Rôles"
 		}
