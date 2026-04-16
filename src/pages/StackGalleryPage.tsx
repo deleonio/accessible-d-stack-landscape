@@ -1,3 +1,4 @@
+import { useLocation } from 'preact-iso';
 import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { StackExpose } from '../components/StackExpose';
@@ -22,11 +23,22 @@ function StackExposeWithMetrics({ stack, isTop, rank }: StackExposeWithMetricsPr
 
 export function StackGalleryPage() {
 	const { t } = useTranslation();
+	const location = useLocation();
+	const selectedStackId = location.query.stack;
 
 	// Stacks absteigend nach Ø-Score sortieren
 	const rankedStacks = useMemo(
-		() => [...STACKS].map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })).sort((a, b) => b.avgScore - a.avgScore),
-		[],
+		() =>
+			[...STACKS]
+				.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) }))
+				.sort((a, b) => b.avgScore - a.avgScore)
+				.sort((a, b) => {
+					if (!selectedStackId) return 0;
+					if (a.stack.id === selectedStackId) return -1;
+					if (b.stack.id === selectedStackId) return 1;
+					return 0;
+				}),
+		[selectedStackId],
 	);
 
 	return (
@@ -40,7 +52,7 @@ export function StackGalleryPage() {
 
 			<ol className="stack-gallery__list" aria-label={t('stackGallery.listAria')}>
 				{rankedStacks.map(({ stack }, index) => (
-					<li key={stack.id} className="stack-gallery__item">
+					<li key={stack.id} className="stack-gallery__item" id={`stack-${stack.id}`}>
 						<StackExposeWithMetrics stack={stack} isTop={index === 0} rank={index + 1} />
 					</li>
 				))}
