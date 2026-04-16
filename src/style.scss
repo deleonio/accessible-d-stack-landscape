@@ -1729,7 +1729,7 @@ kol-select {
 	color: var(--ds-color-primary);
 	margin: 0;
 	white-space: normal;
-	overflow-wrap: anywhere;
+	overflow-wrap: break-word;
 	width: 100%;
 }
 
