@@ -95,7 +95,7 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 				</div>
 
 				<div className="stack-expose__meta">
-					{stack.issuer && <span className="stack-expose__issuer">{stack.issuer}</span>}
+					{stack.issuer && <p className="stack-expose__issuer">{stack.issuer}</p>}
 					<span className="stack-expose__version">v{stack.version}</span>
 					{formattedDate && (
 						<time className="stack-expose__date" dateTime={stack.publishedAt}>

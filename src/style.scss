@@ -1713,9 +1713,10 @@ kol-select {
 	font-size: var(--ds-text-xs);
 	font-weight: 600;
 	color: var(--ds-color-primary);
-	background: rgb(0 61 130 / 8%);
-	padding: 2px var(--ds-space-2);
-	border-radius: var(--ds-radius-sm);
+	margin: 0;
+	white-space: normal;
+	overflow-wrap: anywhere;
+	max-width: min(100%, 26ch);
 }
 
 .stack-expose__version {
