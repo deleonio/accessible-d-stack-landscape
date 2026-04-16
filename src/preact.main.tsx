@@ -6,6 +6,7 @@ import { KERN_V2 } from '@public-ui/theme-kern';
 import { render } from 'preact';
 import App from './App';
 import './i18n';
+import { applyThemeToDocument, getStoredThemePreference } from './utils/theme';
 
 /**
  * Splash minimum display time (ms).
@@ -15,6 +16,8 @@ import './i18n';
 const SPLASH_MIN_MS = 8500;
 const splashStart = performance.now();
 let splashDismissed = false;
+
+applyThemeToDocument(getStoredThemePreference());
 
 function dismissSplash(): void {
 	if (splashDismissed) return;

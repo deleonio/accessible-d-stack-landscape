@@ -184,7 +184,15 @@
 		},
 		"settings": {
 			"description": "Gérez ici les paramètres et préférences de l’application StackAtlas.",
-			"title": "Paramètres"
+			"title": "Paramètres",
+			"theme": {
+				"label": "Mode de couleur",
+				"options": {
+					"light": "Clair",
+					"dark": "Sombre",
+					"system": "Système"
+				}
+			}
 		},
 		"news": {
 			"title": "Rapports de notation & actualités communauté",

@@ -1,7 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { SettingsForm } from '../components/SettingsForm';
+import type { ThemePreference } from '../utils/theme';
 
-export function SettingsPage() {
+interface SettingsPageProps {
+	themePreference: ThemePreference;
+	onThemeChange: (preference: ThemePreference) => void;
+}
+
+export function SettingsPage({ themePreference, onThemeChange }: SettingsPageProps) {
 	const { t } = useTranslation();
 
 	return (
@@ -9,7 +15,7 @@ export function SettingsPage() {
 			<h1 id="settings-page-title" className="text-3xl md:text-4xl font-bold mb-8">
 				{t('pages.settings.title')}
 			</h1>
-			<SettingsForm />
+			<SettingsForm themePreference={themePreference} onThemeChange={onThemeChange} />
 		</main>
 	);
 }
