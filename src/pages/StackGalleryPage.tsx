@@ -1,5 +1,5 @@
 import { useLocation } from 'preact-iso';
-import { useMemo } from 'preact/hooks';
+import { useEffect, useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { StackExpose } from '../components/StackExpose';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
@@ -28,18 +28,18 @@ export function StackGalleryPage() {
 
 	// Stacks absteigend nach Ø-Score sortieren
 	const rankedStacks = useMemo(
-		() =>
-			[...STACKS]
-				.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) }))
-				.sort((a, b) => b.avgScore - a.avgScore)
-				.sort((a, b) => {
-					if (!selectedStackId) return 0;
-					if (a.stack.id === selectedStackId) return -1;
-					if (b.stack.id === selectedStackId) return 1;
-					return 0;
-				}),
-		[selectedStackId],
+		() => [...STACKS].map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })).sort((a, b) => b.avgScore - a.avgScore),
+		[],
 	);
+
+	useEffect(() => {
+		if (!selectedStackId) return;
+
+		window.requestAnimationFrame(() => {
+			const target = document.getElementById(`stack-${selectedStackId}`);
+			target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		});
+	}, [selectedStackId]);
 
 	return (
 		<main id="main-content" className="stack-gallery" aria-labelledby="gallery-page-title">
