@@ -48,13 +48,12 @@ export function Header({ currentUrl }: HeaderProps) {
 				{/* Main header container with max-width */}
 				<div className="header__inner flex flex-col max-w-6xl mx-auto px-4 md:px-6 w-full">
 					{/* Brand bar */}
-					<div className="header__brand-bar flex items-center justify-between gap-4 py-3">
-						<a href={brandUrl} className="header__brand-link flex items-center gap-2 no-underline font-bold text-lg hover:opacity-90" rel="noopener noreferrer">
-							<span className="header__brand-mark inline-flex w-7 h-7 flex-shrink-0">
-								<img src={`${baseUrl}favicon.svg`} alt="" width="28" height="28" loading="eager" decoding="async" />
+					<div className="header__brand-bar flex items-center justify-between gap-3 py-2 md:py-2.5">
+						<a href={brandUrl} className="header__brand-link flex items-center gap-2 no-underline font-bold text-base hover:opacity-90" rel="noopener noreferrer">
+							<span className="header__brand-mark inline-flex w-6 h-6 flex-shrink-0">
+								<img src={`${baseUrl}favicon.svg`} alt="" width="24" height="24" loading="eager" decoding="async" />
 							</span>
 							<span>StackAtlas</span>
-							<span className="header__brand-badge text-white font-bold text-xs px-1.5 py-0.5 rounded ml-1 uppercase tracking-wider">MVP</span>
 						</a>
 						<nav className="header__main-nav" aria-label={t('header.mainNavigationAria')}>
 							<a
