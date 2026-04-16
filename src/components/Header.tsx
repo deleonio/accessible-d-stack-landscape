@@ -18,7 +18,6 @@ export function Header({ currentUrl }: HeaderProps) {
 
 	const isStacksActive = currentUrl === '/' || currentUrl.startsWith('/stacks') || currentUrl.startsWith('/stacks-galerie');
 	const isDepsActive = currentUrl.startsWith('/deps');
-	const isSettingsActive = currentUrl.startsWith('/settings') || currentUrl.startsWith('/einstellungen');
 
 	return (
 		<>
@@ -74,13 +73,6 @@ export function Header({ currentUrl }: HeaderProps) {
 								>
 									{t('header.nav.deps')}
 								</a>
-							<a
-								href="#/settings"
-								className={`header__nav-link${isSettingsActive ? ' header__nav-link--active' : ''}`}
-								aria-current={isSettingsActive ? 'page' : undefined}
-							>
-								{t('header.nav.settings')}
-							</a>
 						</nav>
 						<div className="header__controls flex items-center gap-2 ml-auto">
 							<KolButton
