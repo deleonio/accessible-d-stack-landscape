@@ -78,7 +78,7 @@ i18next.on('languageChanged', (language: string) => {
 
 Promise.all([
 	Promise.race([
-		i18nReady.then(() => syncKoliBriLanguage(i18next.resolvedLanguage ?? i18next.language ?? navigator.language)),
+		i18nReady.then(() => syncKoliBriLanguage(i18next.resolvedLanguage ?? i18next.language ?? globalThis.navigator.language)),
 		new Promise<void>((_, reject) => setTimeout(() => reject(new Error('KoliBri registration timeout')), 3000)),
 	]),
 	new Promise<void>((resolve) => {
