@@ -1,3 +1,4 @@
+import { KolLinkButton } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
 import { getAppVersion, getCommitDisplay } from '../utils';
 
@@ -20,24 +21,45 @@ export function Footer() {
 
 					{/* Links navigation */}
 					<nav className="footer__nav-section flex flex-wrap gap-4 md:gap-6 text-sm" aria-label={t('footer.navigationAria')}>
-						<a href="https://github.com/deleonio/accessible-d-stack-landscape/blob/main/docs/README.md" rel="noopener noreferrer" className="footer__link">
-							{t('footer.links.documentation')}
-						</a>
-						<a href="#/news" className="footer__link">
-							{t('footer.links.news')}
-						</a>
-						<a href="#/stacks" className="footer__link">
-							{t('footer.links.stacks')}
-						</a>
-						<a href="https://github.com/deleonio/accessible-d-stack-landscape" rel="noopener noreferrer" className="footer__link">
-							{t('footer.links.github')}
-						</a>
-						<a href="https://github.com/deleonio/accessible-d-stack-landscape/issues/new" rel="noopener noreferrer" className="footer__link">
-							{t('footer.links.community')}
-						</a>
-						<a href="#/settings" className="footer__link">
-							{t('footer.links.settings')}
-						</a>
+						<KolLinkButton
+							_href="https://github.com/deleonio/accessible-d-stack-landscape/blob/main/docs/README.md"
+							_target="_blank"
+							className="footer__link"
+							_label={t('footer.links.documentation')}
+							_variant="ghost"
+							_icons={{ right: 'kolicon kolicon-external-link' }}
+						/>
+						<KolLinkButton _href="#/news" className="footer__link" _label={t('footer.links.news')} _variant="ghost" _icons={{ left: 'kolicon kolicon-news' }} />
+						<KolLinkButton
+							_href="#/stacks"
+							className="footer__link"
+							_label={t('footer.links.stacks')}
+							_variant="ghost"
+							_icons={{ left: 'kolicon kolicon-layers' }}
+						/>
+						<KolLinkButton
+							_href="https://github.com/deleonio/accessible-d-stack-landscape"
+							_target="_blank"
+							className="footer__link"
+							_label={t('footer.links.github')}
+							_variant="ghost"
+							_icons={{ right: 'kolicon kolicon-external-link' }}
+						/>
+						<KolLinkButton
+							_href="https://github.com/deleonio/accessible-d-stack-landscape/issues/new"
+							_target="_blank"
+							className="footer__link"
+							_label={t('footer.links.community')}
+							_variant="ghost"
+							_icons={{ right: 'kolicon kolicon-external-link' }}
+						/>
+						<KolLinkButton
+							_href="#/settings"
+							className="footer__link"
+							_label={t('footer.links.settings')}
+							_variant="ghost"
+							_icons={{ left: 'kolicon kolicon-cogwheel' }}
+						/>
 					</nav>
 				</div>
 			</div>
@@ -47,13 +69,23 @@ export function Footer() {
 				<div className="footer__meta-inner flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
 					<p className="footer__copy">
 						© {year} StackAtlas · Lizenz: EUPL-1.2 · Built with{' '}
-						<a href="https://public-ui.github.io/en/" rel="noopener noreferrer" className="footer__copy-link underline">
-							KoliBri
-						</a>
+						<KolLinkButton
+							_href="https://public-ui.github.io/en/"
+							_target="_blank"
+							className="footer__copy-link underline"
+							_label="KoliBri"
+							_variant="tertiary"
+							_icons={{ right: 'kolicon kolicon-external-link' }}
+						/>
 						, {t('footer.and')}{' '}
-						<a href="https://designsystem.gov.de/" rel="noopener noreferrer" className="footer__copy-link underline">
-							KERN-UX
-						</a>
+						<KolLinkButton
+							_href="https://designsystem.gov.de/"
+							_target="_blank"
+							className="footer__copy-link underline"
+							_label="KERN-UX"
+							_variant="tertiary"
+							_icons={{ right: 'kolicon kolicon-external-link' }}
+						/>
 					</p>
 					<p className="footer__build-info" aria-label={t('footer.buildInfoAria', { commit: commitDisplay, version: appVersion })}>
 						<span className="footer__build-label">{t('footer.buildVersionLabel')}</span> <code className="footer__build-code">{appVersion}</code> ·{' '}

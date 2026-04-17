@@ -1,4 +1,4 @@
-import { KolButton, KolCard, KolDrawer, KolImage } from '@public-ui/preact';
+import { KolButton, KolCard, KolDrawer, KolImage, KolLinkButton } from '@public-ui/preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
@@ -112,7 +112,8 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const openButton = (
 		<KolButton
 			_label={t('article.openDetails')}
-			_variant="secondary"
+			_variant="primary"
+			_icons={{ right: 'kolicon kolicon-chevron-right' }}
 			_on={{
 				onClick: () => {
 					setSelectedArticle(article);
@@ -210,14 +211,24 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 									<p className="drawer-category">{t('article.categoryLabel', { category: categoryName })}</p>
 									<div className="drawer-links">
 										{selectedArticle.homepage && (
-											<a href={selectedArticle.homepage} target="_blank" rel="noopener noreferrer" className="drawer-link">
-												{t('article.website')}
-											</a>
+											<KolLinkButton
+												_href={selectedArticle.homepage}
+												_target="_blank"
+												className="drawer-link"
+												_label={t('article.website')}
+												_variant="ghost"
+												_icons={{ right: 'kolicon kolicon-external-link' }}
+											/>
 										)}
 										{selectedArticle.github?.repo && (
-											<a href={selectedArticle.github.repo} target="_blank" rel="noopener noreferrer" className="drawer-link drawer-link--github">
-												{t('article.repository')}
-											</a>
+											<KolLinkButton
+												_href={selectedArticle.github.repo}
+												_target="_blank"
+												className="drawer-link drawer-link--github"
+												_label={t('article.repository')}
+												_variant="ghost"
+												_icons={{ right: 'kolicon kolicon-external-link' }}
+											/>
 										)}
 									</div>
 								</div>
@@ -307,12 +318,14 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 										<ul className="drawer-stacks__list">
 											{stacksContainingItem.map((stack) => (
 												<li key={stack.id} className="drawer-stacks__item">
-													<a href={`#/stacks?stack=${stack.id}`} className="drawer-related__link" onClick={() => setIsDrawerOpen(false)}>
-														<span className="drawer-related__link-text">{getLocalizedText(stack.name, i18n.language)}</span>
-														<span className="drawer-related__link-icon" aria-hidden="true">
-															›
-														</span>
-													</a>
+													<KolLinkButton
+														_href={`#/stacks?stack=${stack.id}`}
+														className="drawer-related__link"
+														_label={getLocalizedText(stack.name, i18n.language)}
+														_variant="ghost"
+														_icons={{ right: 'kolicon kolicon-chevron-right' }}
+														_on={{ onClick: () => setIsDrawerOpen(false) }}
+													/>
 												</li>
 											))}
 										</ul>
@@ -331,12 +344,13 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 									<ul className="drawer-related__list">
 										{relatedArticles.map((relatedArticle) => (
 											<li key={relatedArticle.id} className="drawer-related__item">
-												<button className="drawer-related__link" onClick={() => setSelectedArticle(relatedArticle)}>
-													<span className="drawer-related__link-text">{getLocalizedText(relatedArticle.name, i18n.language)}</span>
-													<span className="drawer-related__link-icon" aria-hidden="true">
-														›
-													</span>
-												</button>
+												<KolButton
+													className="drawer-related__link"
+													_label={getLocalizedText(relatedArticle.name, i18n.language)}
+													_variant="ghost"
+													_icons={{ right: 'kolicon kolicon-chevron-right' }}
+													_on={{ onClick: () => setSelectedArticle(relatedArticle) }}
+												/>
 											</li>
 										))}
 									</ul>
