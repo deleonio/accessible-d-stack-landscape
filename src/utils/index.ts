@@ -11,3 +11,5 @@ export {
 	getScorePercentileInCategory,
 	roleGrantsMaintainerSovereignty,
 } from './sovereigntyScore';
+
+export { buildDependencyGraph, getDependencyTypes, getFilteredEdges, hasDependencyWithinDepth } from './dependencies';

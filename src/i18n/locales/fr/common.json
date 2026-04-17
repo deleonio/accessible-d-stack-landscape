@@ -13,7 +13,8 @@
 			"imprint": "Mentions légales",
 			"settings": "Paramètres",
 			"stacks": "Stacks",
-			"deps": "Deps"
+			"deps": "Deps",
+			"depsGraph": "Graphe deps"
 		},
 		"eyebrow": "Mesurer & comparer la souveraineté numérique",
 		"subtitle": "Votre stack technologique est-il souverain ? StackAtlas évalue technologies et standards mondiaux avec un score de souveraineté transparent de 0 à 100 – et révèle les dépendances qui menacent votre indépendance numérique.",
@@ -48,7 +49,26 @@
 		"categoryLabel": "Couche",
 		"allCategories": "Toutes les couches",
 		"relationLabel": "Relation",
-		"allRelations": "Toutes les relations"
+		"allRelations": "Toutes les relations",
+		"dependencies": {
+			"directOnlyLabel": "Dépendances directes uniquement",
+			"depthLabel": "Profondeur des dépendances",
+			"allDepths": "Toutes profondeurs",
+			"allTypes": "Tous les types de dépendance",
+			"depth": {
+				"1": "Profondeur 1",
+				"2": "Profondeur 2",
+				"3": "Profondeur 3"
+			},
+			"typeLabel": "Type de dépendance",
+			"type": {
+				"build": "Build",
+				"compiles-to": "Compile vers",
+				"language": "Langage",
+				"protocol": "Protocole",
+				"runtime": "Runtime"
+			}
+		}
 	},
 	"category": {
 		"toolbarAria": "Filtrer les couches",
@@ -202,6 +222,26 @@
 				"identityWalletInteroperability": "Focus : Identity Wallet Interoperability",
 				"reportTemplate": "Focus : Modèle de rapport"
 			}
+		}
+	},
+	"dependencies": {
+		"requiredByItem": "Nécessite",
+		"usedBy": "Utilisé par",
+		"whyConnection": "Pourquoi cette connexion ?",
+		"meta": "Type : {{type}} · Scope : {{scope}}",
+		"noReason": "Aucun commentaire fourni.",
+		"graph": {
+			"aria": "Graphe des dépendances",
+			"title": "Graphe des dépendances",
+			"empty": "Aucune dépendance trouvée pour la sélection de filtres actuelle.",
+			"typeLegend": "Type",
+			"scopeLegend": "Scope",
+			"canvasAria": "Graphe avec {{count}} arêtes de dépendance",
+			"edgeAria": "Arête de {{source}} vers {{target}}",
+			"whyConnection": "Pourquoi cette connexion ?",
+			"edgeType": "Type de dépendance : {{type}}",
+			"edgeScope": "Scope : {{scope}}",
+			"noReason": "Aucune source ni commentaire disponible."
 		}
 	}
 }
