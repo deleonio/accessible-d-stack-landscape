@@ -2112,6 +2112,12 @@ kol-select {
 	min-width: 52rem;
 }
 
+.dependency-graph__edge-hitbox:focus-visible {
+	stroke: #ffbf47;
+	stroke-opacity: 0.75;
+	stroke-width: 20;
+}
+
 .dependency-graph__empty {
 	color: var(--kolibri-color-grey-70, #4a5568);
 	font-style: italic;

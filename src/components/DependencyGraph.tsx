@@ -21,6 +21,11 @@ const NODE_HEIGHT = 56;
 const COLUMN_GAP = 220;
 const ROW_GAP = 92;
 const CANVAS_PADDING = 56;
+const NODE_LABEL_MAX_LENGTH = 24;
+
+function truncateLabel(label: string): string {
+	return label.length > NODE_LABEL_MAX_LENGTH ? `${label.slice(0, NODE_LABEL_MAX_LENGTH - 1)}…` : label;
+}
 
 export function DependencyGraph({ items, layers, filters }: DependencyGraphProps) {
 	const { i18n, t } = useTranslation();
@@ -143,6 +148,7 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 											<g key={edge.id}>
 												<line x1={x1} y1={y1} x2={x2} y2={y2} stroke={layerColor} strokeWidth={selected ? 4 : 2} opacity={selected ? 1 : 0.45} />
 												<line
+													className="dependency-graph__edge-hitbox"
 													x1={x1}
 													y1={y1}
 													x2={x2}
@@ -168,11 +174,13 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 									})}
 									{Array.from(positionedNodes.values()).map(({ item, x, y }) => {
 										const layerColor = layers.find((layer) => layer.id === item.layer)?.color ?? '#003d82';
+										const fullName = getLocalizedText(item.name, i18n.language);
 										return (
 											<g key={item.id}>
+												<title>{fullName}</title>
 												<rect x={x} y={y} rx={8} ry={8} width={NODE_WIDTH} height={NODE_HEIGHT} fill="white" stroke={layerColor} strokeWidth={2} />
 												<text x={x + 10} y={y + 32} fontSize={13} fill="#1b1f23">
-													{getLocalizedText(item.name, i18n.language).slice(0, 24)}
+													{truncateLabel(fullName)}
 												</text>
 											</g>
 										);

@@ -38,6 +38,7 @@ const ROLE_COLORS: Record<ParticipantRole, string> = {
 	funder: '#e65100',
 	consumer: '#546e7a',
 };
+const CATALOG_DEPENDENCY_GRAPH = buildDependencyGraph(ITEMS);
 
 function countryToFlagEmoji(code?: string): string {
 	if (!code || code.length !== 2) return '';
@@ -63,9 +64,8 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const stacksContainingItem = useMemo(() => {
 		return STACKS.filter((stack) => stack.items.some((item) => item.itemId === selectedArticle.id));
 	}, [selectedArticle.id]);
-	const dependencyGraph = useMemo(() => buildDependencyGraph(ITEMS), []);
-	const outgoingDependencies = dependencyGraph.outgoingById.get(selectedArticle.id) ?? [];
-	const incomingDependencies = dependencyGraph.incomingById.get(selectedArticle.id) ?? [];
+	const outgoingDependencies = CATALOG_DEPENDENCY_GRAPH.outgoingById.get(selectedArticle.id) ?? [];
+	const incomingDependencies = CATALOG_DEPENDENCY_GRAPH.incomingById.get(selectedArticle.id) ?? [];
 	const selectedDependency = [...outgoingDependencies, ...incomingDependencies].find((edge) => edge.id === selectedDependencyId) ?? null;
 
 	const scoreResult = computeEffectiveSovereigntyScoreResult(article.sovereigntyCriteria, stackItem);
