@@ -27,7 +27,7 @@ Die vollstaendige technische Referenz liegt in:
 Jeder Eintrag in `dependencies` beschreibt eine gerichtete Kante vom aktuellen Item zu einem Ziel-Item:
 
 - `targetItemId` (string, slug-pattern wie `id`) → referenziertes Item
-- `type` (`build | compiles-to | language | optional | protocol | runtime`) → Art der Beziehung
+- `type` (`build | compiles-to | language | protocol | runtime`) → Art der Beziehung
 - `scope` (`required | optional | dev`) → Verbindlichkeit/Kontext der Beziehung
 - `reason` (`string` oder lokalisiertes Objekt mit `de`/`en`/`fr`) → kurze Begründung
 

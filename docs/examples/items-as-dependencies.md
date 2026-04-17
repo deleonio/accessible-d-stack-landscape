@@ -45,7 +45,7 @@ Items can reference other items via a typed dependency list:
 Supported relation metadata:
 
 - `targetItemId`: slug of another item
-- `type`: `build | compiles-to | language | optional | protocol | runtime`
+- `type`: `build | compiles-to | language | protocol | runtime`
 - `scope`: `required | optional | dev`
 - `reason`: localized text object or short plain string
 

@@ -26,20 +26,14 @@ export type Layer = {
 
 export type Maturity = 'sandbox' | 'incubation' | 'graduated';
 export type OwnerType = 'independentConsortium' | 'corporation' | 'community' | 'oneManShow';
-export type DependencyType = 'build' | 'compiles-to' | 'language' | 'optional' | 'protocol' | 'runtime';
+export type DependencyType = 'build' | 'compiles-to' | 'language' | 'protocol' | 'runtime';
 export type DependencyScope = 'dev' | 'optional' | 'required';
 
 export type ItemDependency = {
 	targetItemId: string;
 	type: DependencyType;
 	scope?: DependencyScope;
-	reason?:
-		| string
-		| {
-				de: string;
-				en?: string;
-				fr?: string;
-		  };
+	reason?: string | LocalizedText;
 };
 
 // Hybrid Scoring Scale: 6 Categories + Numeric Score
