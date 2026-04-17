@@ -57,10 +57,9 @@ export function getDependencyTypes(items: Item[]): DependencyType[] {
 	return Array.from(types).sort();
 }
 
-export function getFilteredEdges(graph: DependencyGraphData, selectedDependencyType: DependencyType | null, onlyDirectDependencies: boolean): DependencyEdge[] {
+export function getFilteredEdges(graph: DependencyGraphData, selectedDependencyType: DependencyType | null): DependencyEdge[] {
 	const typedEdges = selectedDependencyType ? graph.edges.filter((edge) => edge.dependency.type === selectedDependencyType) : graph.edges;
-	if (!onlyDirectDependencies) return typedEdges;
-	return typedEdges.filter((edge) => edge.source.dependencies?.some((dependency) => dependency.targetItemId === edge.target.id));
+	return typedEdges;
 }
 
 export function hasDependencyWithinDepth(

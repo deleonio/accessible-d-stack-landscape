@@ -25,10 +25,7 @@ const CANVAS_PADDING = 56;
 export function DependencyGraph({ items, layers, filters }: DependencyGraphProps) {
 	const { i18n, t } = useTranslation();
 	const graph = useMemo(() => buildDependencyGraph(items), [items]);
-	const visibleEdges = useMemo(
-		() => getFilteredEdges(graph, filters.selectedDependencyType, filters.onlyDirectDependencies),
-		[graph, filters.selectedDependencyType, filters.onlyDirectDependencies],
-	);
+	const visibleEdges = useMemo(() => getFilteredEdges(graph, filters.selectedDependencyType), [graph, filters.selectedDependencyType]);
 	const visibleItemIds = useMemo(() => new Set(items.map((item) => item.id)), [items]);
 	const scopedEdges = useMemo(
 		() => visibleEdges.filter((edge) => visibleItemIds.has(edge.source.id) && visibleItemIds.has(edge.target.id)),
