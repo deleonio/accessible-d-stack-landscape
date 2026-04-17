@@ -1,3 +1,4 @@
+import { KolLink } from '@public-ui/preact';
 import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { StackMetrics } from '../hooks/useStackMetrics';
@@ -117,9 +118,13 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 								const sourceLabel = source.label ? getLocalizedText(source.label, i18n.language) : source.url;
 								return (
 									<li key={`${stack.id}-${source.url}`} className="stack-expose__sources-item">
-										<a href={source.url} target="_blank" rel="noopener noreferrer" className="stack-expose__source-link">
-											{sourceLabel}
-										</a>
+										<KolLink
+											_href={source.url}
+											_target="_blank"
+											className="stack-expose__source-link"
+											_label={sourceLabel}
+											_icons={{ right: 'kolicon kolicon-external-link' }}
+										/>
 									</li>
 								);
 							})}
@@ -263,9 +268,12 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 
 			{/* ── CTA-Button ────────────────────────────────────────────── */}
 			<div className="stack-expose__cta">
-				<a href={`#/deps?stack=${stack.id}`} className="stack-expose__explore-link">
-					{t('stackGallery.exploreStack')}
-				</a>
+				<KolLink
+					_href={`#/deps?stack=${stack.id}`}
+					className="stack-expose__explore-link"
+					_label={t('stackGallery.exploreStack')}
+					_icons={{ right: 'kolicon kolicon-chevron-right' }}
+				/>
 			</div>
 		</article>
 	);

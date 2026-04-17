@@ -1,4 +1,4 @@
-import { KolButton, KolDrawer } from '@public-ui/preact';
+import { KolButton, KolDrawer, KolLink } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { getAppVersion, getCommitDisplay } from '../utils';
@@ -22,9 +22,7 @@ export function Header({ currentUrl }: HeaderProps) {
 
 	return (
 		<>
-			<a href="#main-content" className="skip-nav">
-				{t('header.skipToContent')}
-			</a>
+			<KolLink className="skip-nav" _href="#main-content" _label={t('header.skipToContent')} _icons={{ right: 'kolicon kolicon-chevron-right' }} />
 			<header className="header w-full">
 				{/* Instance info strip – hidden on mobile */}
 				<div
@@ -50,31 +48,28 @@ export function Header({ currentUrl }: HeaderProps) {
 				<div className="header__inner flex flex-col max-w-6xl mx-auto px-4 md:px-6 w-full">
 					{/* Brand bar */}
 					<div className="header__brand-bar flex items-center justify-between gap-3 py-2">
-						<a
-							href={brandUrl}
+						<KolLink
+							_href={brandUrl}
 							className="header__brand-link flex items-center gap-2 no-underline font-bold text-base hover:opacity-90"
-							rel="noopener noreferrer"
-						>
-							<span className="header__brand-mark inline-flex w-6 h-6 flex-shrink-0">
-								<img src={`${baseUrl}favicon.svg`} alt="" width="24" height="24" loading="eager" decoding="async" />
-							</span>
-							<span>StackAtlas</span>
-						</a>
+							_target={brandUrl.startsWith('http') ? '_blank' : undefined}
+							_label="StackAtlas"
+							_icons={{ left: 'kolicon kolicon-house' }}
+						/>
 						<nav className="header__main-nav" aria-label={t('header.mainNavigationAria')}>
-							<a
-								href="#/"
+							<KolLink
+								_href="#/"
 								className={`header__nav-link${isStacksActive ? ' header__nav-link--active' : ''}`}
 								aria-current={isStacksActive ? 'page' : undefined}
-							>
-								{t('header.nav.stacks')}
-							</a>
-							<a
-								href="#/deps"
+								_label={t('header.nav.stacks')}
+								_icons={{ left: 'kolicon kolicon-layers' }}
+							/>
+							<KolLink
+								_href="#/deps"
 								className={`header__nav-link${isDepsActive ? ' header__nav-link--active' : ''}`}
 								aria-current={isDepsActive ? 'page' : undefined}
-							>
-								{t('header.nav.deps')}
-							</a>
+								_label={t('header.nav.deps')}
+								_icons={{ left: 'kolicon kolicon-code' }}
+							/>
 						</nav>
 						<div className="header__controls flex items-center gap-2 ml-auto">
 							<KolButton
