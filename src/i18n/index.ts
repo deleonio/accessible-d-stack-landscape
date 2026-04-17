@@ -1,10 +1,15 @@
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import { FALLBACK_LANGUAGE, SUPPORTED_LANGUAGES } from './language';
+import { FALLBACK_LANGUAGE, normalizeLanguage, SUPPORTED_LANGUAGES } from './language';
+import daCommon from './locales/da/common.json';
 import deCommon from './locales/de/common.json';
 import enCommon from './locales/en/common.json';
+import esCommon from './locales/es/common.json';
 import frCommon from './locales/fr/common.json';
+import itCommon from './locales/it/common.json';
+import noCommon from './locales/no/common.json';
+import svCommon from './locales/sv/common.json';
 
 const MISSING_TRANSLATION_FALLBACK = 'Übersetzung nicht verfügbar';
 
@@ -17,9 +22,14 @@ export const i18nReady = i18next
 	.use(initReactI18next)
 	.init({
 		resources: {
+			da: { common: daCommon },
 			de: { common: deCommon },
 			en: { common: enCommon },
+			es: { common: esCommon },
 			fr: { common: frCommon },
+			it: { common: itCommon },
+			no: { common: noCommon },
+			sv: { common: svCommon },
 		},
 		defaultNS: 'common',
 		ns: ['common'],
@@ -29,6 +39,7 @@ export const i18nReady = i18next
 		detection: {
 			caches: ['localStorage'],
 			lookupQuerystring: 'lng',
+			// Erst bei initialem Laden ohne Query/Storage greift bewusst `navigator`, damit die Gerätesprache verwendet wird.
 			order: ['querystring', 'localStorage', 'navigator', 'htmlTag'],
 		},
 		interpolation: {
@@ -39,12 +50,12 @@ export const i18nReady = i18next
 		const lng = i18next.resolvedLanguage ?? i18next.language;
 
 		if (lng) {
-			document.documentElement.lang = lng;
+			document.documentElement.lang = normalizeLanguage(lng);
 		}
 	});
 
 i18next.on('languageChanged', (lng: string) => {
 	if (lng) {
-		document.documentElement.lang = lng;
+		document.documentElement.lang = normalizeLanguage(lng);
 	}
 });
