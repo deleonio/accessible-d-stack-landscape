@@ -112,7 +112,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const openButton = (
 		<KolButton
 			_label={t('article.openDetails')}
-			_variant="secondary"
+			_variant="primary"
 			_icons={{ right: 'kolicon kolicon-chevron-right' }}
 			_on={{
 				onClick: () => {

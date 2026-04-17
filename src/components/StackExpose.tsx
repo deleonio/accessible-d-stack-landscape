@@ -1,4 +1,4 @@
-import { KolLink } from '@public-ui/preact';
+import { KolButton, KolLink } from '@public-ui/preact';
 import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { StackMetrics } from '../hooks/useStackMetrics';
@@ -268,11 +268,12 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 
 			{/* ── CTA-Button ────────────────────────────────────────────── */}
 			<div className="stack-expose__cta">
-				<KolLink
-					_href={`#/deps?stack=${stack.id}`}
+				<KolButton
 					className="stack-expose__explore-link"
 					_label={t('stackGallery.exploreStack')}
+					_variant="primary"
 					_icons={{ right: 'kolicon kolicon-chevron-right' }}
+					_on={{ onClick: () => (window.location.hash = `/deps?stack=${stack.id}`) }}
 				/>
 			</div>
 		</article>
