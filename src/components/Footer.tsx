@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { getCommitDisplay } from '../utils';
+import { getAppVersion, getCommitDisplay } from '../utils';
 
 export function Footer() {
 	const { t } = useTranslation();
 	const year = new Date().getFullYear();
 	const commitDisplay = getCommitDisplay();
+	const appVersion = getAppVersion();
 
 	return (
 		<footer className="footer w-full border-t mt-auto">
@@ -54,7 +55,8 @@ export function Footer() {
 							KERN-UX
 						</a>
 					</p>
-					<p className="footer__build-info" aria-label={t('footer.buildCommitAria', { commit: commitDisplay })}>
+					<p className="footer__build-info" aria-label={t('footer.buildInfoAria', { commit: commitDisplay, version: appVersion })}>
+						<span className="footer__build-label">{t('footer.buildVersionLabel')}</span> <code className="footer__build-code">{appVersion}</code> ·{' '}
 						<span className="footer__build-label">{t('footer.buildCommitLabel')}</span> <code className="footer__build-code">{commitDisplay}</code>
 					</p>
 				</div>

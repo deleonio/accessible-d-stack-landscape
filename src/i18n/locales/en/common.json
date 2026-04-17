@@ -22,7 +22,8 @@
 			"label": "Language",
 			"hint": "Select display language",
 			"accessKey": "l"
-		}
+		},
+		"version": "Version"
 	},
 	"footer": {
 		"subtitle": "Rate and compare tech stacks worldwide by digital sovereignty",
@@ -39,7 +40,9 @@
 		"builtWith": "Built with",
 		"and": "and",
 		"buildCommitAria": "Build commit {{commit}}",
-		"buildCommitLabel": "Build commit:"
+		"buildCommitLabel": "Build commit:",
+		"buildInfoAria": "Build version {{version}} and commit {{commit}}",
+		"buildVersionLabel": "Build version:"
 	},
 	"search": {
 		"regionAria": "Search and filter",

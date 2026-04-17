@@ -22,7 +22,8 @@
 			"label": "Sprache",
 			"hint": "Anzeigesprache auswählen",
 			"accessKey": "l"
-		}
+		},
+		"version": "Version"
 	},
 	"footer": {
 		"subtitle": "Tech-Stacks weltweit nach digitaler Souveränität bewerten und vergleichen",
@@ -39,7 +40,9 @@
 		"builtWith": "Built with",
 		"and": "and",
 		"buildCommitAria": "Build Commit {{commit}}",
-		"buildCommitLabel": "Build-Commit:"
+		"buildCommitLabel": "Build-Commit:",
+		"buildInfoAria": "Build Version {{version}} und Commit {{commit}}",
+		"buildVersionLabel": "Build-Version:"
 	},
 	"search": {
 		"regionAria": "Suche und Filter",
