@@ -2,9 +2,14 @@ import { KolSingleSelect } from '@public-ui/preact';
 import { useTranslation } from 'react-i18next';
 
 const SUPPORTED_LANGUAGES = [
+	{ code: 'da', label: 'Dansk' },
 	{ code: 'de', label: 'Deutsch' },
 	{ code: 'en', label: 'English' },
+	{ code: 'es', label: 'Español' },
 	{ code: 'fr', label: 'Français' },
+	{ code: 'it', label: 'Italiano' },
+	{ code: 'no', label: 'Norsk' },
+	{ code: 'sv', label: 'Svenska' },
 ] as const;
 
 export function LanguageSwitcher() {
