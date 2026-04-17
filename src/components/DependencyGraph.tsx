@@ -2,12 +2,13 @@ import { KolButton, KolCard } from '@public-ui/preact';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { FilterState, Item, Layer } from '../types';
-import { buildDependencyGraph, getDependencyTypes, getFilteredEdges, getLocalizedText } from '../utils';
+import { buildDependencyGraph, collectDependencyNeighborhood, getDependencyTypes, getFilteredEdges, getLocalizedText } from '../utils';
 
 interface DependencyGraphProps {
 	items: Item[];
 	layers: Layer[];
 	filters: FilterState;
+	selectedRootItemId: string | null;
 }
 
 type PositionedNode = {
@@ -27,11 +28,21 @@ function truncateLabel(label: string): string {
 	return label.length > NODE_LABEL_MAX_LENGTH ? `${label.slice(0, NODE_LABEL_MAX_LENGTH - 1)}…` : label;
 }
 
-export function DependencyGraph({ items, layers, filters }: DependencyGraphProps) {
+export function DependencyGraph({ items, layers, filters, selectedRootItemId }: DependencyGraphProps) {
 	const { i18n, t } = useTranslation();
 	const graph = useMemo(() => buildDependencyGraph(items), [items]);
 	const visibleEdges = useMemo(() => getFilteredEdges(graph, filters.selectedDependencyType), [graph, filters.selectedDependencyType]);
-	const visibleItemIds = useMemo(() => new Set(items.map((item) => item.id)), [items]);
+	const visibleItemIds = useMemo(() => {
+		if (!selectedRootItemId) {
+			return new Set(items.map((item) => item.id));
+		}
+
+		return collectDependencyNeighborhood(selectedRootItemId, graph, {
+			maxDepth: filters.dependencyDepth,
+			onlyDirectDependencies: filters.onlyDirectDependencies,
+			selectedDependencyType: filters.selectedDependencyType,
+		});
+	}, [selectedRootItemId, items, graph, filters.dependencyDepth, filters.onlyDirectDependencies, filters.selectedDependencyType]);
 	const scopedEdges = useMemo(
 		() => visibleEdges.filter((edge) => visibleItemIds.has(edge.source.id) && visibleItemIds.has(edge.target.id)),
 		[visibleEdges, visibleItemIds],
@@ -57,12 +68,13 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 		}
 		return Array.from(scopes).sort();
 	}, [scopedEdges]);
+	const visibleItems = useMemo(() => items.filter((item) => visibleItemIds.has(item.id)), [items, visibleItemIds]);
 	const layerItems = useMemo(() => {
 		const bucket = new Map<string, Item[]>();
 		for (const layer of layerOrder) {
 			bucket.set(layer.id, []);
 		}
-		for (const item of items) {
+		for (const item of visibleItems) {
 			const group = bucket.get(item.layer) ?? [];
 			group.push(item);
 			bucket.set(item.layer, group);
@@ -74,7 +86,7 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 			);
 		}
 		return bucket;
-	}, [items, i18n.language, layerOrder]);
+	}, [visibleItems, i18n.language, layerOrder]);
 
 	const positionedNodes = useMemo(() => {
 		const nodes = new Map<string, PositionedNode>();

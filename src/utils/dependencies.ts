@@ -13,6 +13,12 @@ export type DependencyGraphData = {
 	outgoingById: Map<string, DependencyEdge[]>;
 };
 
+type NeighborhoodOptions = {
+	maxDepth?: 1 | 2 | 3 | null;
+	onlyDirectDependencies?: boolean;
+	selectedDependencyType?: DependencyType | null;
+};
+
 const DEPTH_LIMIT = 3;
 
 export function buildDependencyGraph(items: Item[]): DependencyGraphData {
@@ -91,4 +97,34 @@ export function hasDependencyWithinDepth(
 	}
 
 	return hasMatch;
+}
+
+export function collectDependencyNeighborhood(
+	rootItemId: string,
+	graph: DependencyGraphData,
+	{ maxDepth = null, onlyDirectDependencies = false, selectedDependencyType = null }: NeighborhoodOptions = {},
+): Set<string> {
+	const depthLimit = onlyDirectDependencies ? 1 : (maxDepth ?? Number.POSITIVE_INFINITY);
+	const visited = new Set<string>([rootItemId]);
+	const queue: Array<{ itemId: string; depth: number }> = [{ itemId: rootItemId, depth: 0 }];
+
+	while (queue.length > 0) {
+		const current = queue.shift();
+		if (!current) break;
+		if (current.depth >= depthLimit) continue;
+
+		const outgoing = graph.outgoingById.get(current.itemId) ?? [];
+		const incoming = graph.incomingById.get(current.itemId) ?? [];
+		const neighbors = [...outgoing, ...incoming]
+			.filter((edge) => !selectedDependencyType || edge.dependency.type === selectedDependencyType)
+			.map((edge) => (edge.source.id === current.itemId ? edge.target.id : edge.source.id));
+
+		for (const neighborId of neighbors) {
+			if (visited.has(neighborId)) continue;
+			visited.add(neighborId);
+			queue.push({ itemId: neighborId, depth: current.depth + 1 });
+		}
+	}
+
+	return visited;
 }

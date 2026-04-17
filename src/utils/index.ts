@@ -12,4 +12,4 @@ export {
 	roleGrantsMaintainerSovereignty,
 } from './sovereigntyScore';
 
-export { buildDependencyGraph, getDependencyTypes, getFilteredEdges, hasDependencyWithinDepth } from './dependencies';
+export { buildDependencyGraph, collectDependencyNeighborhood, getDependencyTypes, getFilteredEdges, hasDependencyWithinDepth } from './dependencies';

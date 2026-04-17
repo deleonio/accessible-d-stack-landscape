@@ -247,6 +247,10 @@
 			"required": "Requis",
 			"optional": "Optionnel",
 			"dev": "Développement"
+		},
+		"root": {
+			"label": "Graphe des dépendances pour",
+			"all": "Toutes les dépendances"
 		}
 	}
 }

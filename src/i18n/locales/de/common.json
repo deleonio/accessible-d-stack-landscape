@@ -261,6 +261,10 @@
 			"required": "Erforderlich",
 			"optional": "Optional",
 			"dev": "Entwicklung"
+		},
+		"root": {
+			"label": "Dependency-Graph für",
+			"all": "Alle Dependencies"
 		}
 	}
 }
