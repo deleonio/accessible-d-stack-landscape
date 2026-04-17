@@ -1,7 +1,7 @@
 // GENERATED FILE - DO NOT EDIT MANUALLY
 // Generated from: data/layers/ + data/items/ + data/stacks/
 // Logo fallback via: src/data/logo-urls.json
-// Generated at: 2026-04-16T16:17:15.365Z
+// Generated at: 2026-04-17T00:33:07.258Z
 
 import type { Item, Layer, Stack } from '../types';
 
@@ -6148,6 +6148,16 @@ export const STACKS: Stack[] = [
 						"en": "TLS/MTLS is mandatory for secure data transport in CDR."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "Digital Transformation Agency",
+						"en": "Digital Transformation Agency",
+						"fr": "Digital Transformation Agency"
+					},
+					"url": "https://www.dta.gov.au/"
+				}
 			]
 		},
 		{
@@ -6246,6 +6256,16 @@ export const STACKS: Stack[] = [
 						"en": "React powers user interfaces in portals and signature services."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "Gov.br",
+						"en": "Gov.br",
+						"fr": "Gov.br"
+					},
+					"url": "https://www.gov.br/"
+				}
 			]
 		},
 		{
@@ -6326,6 +6346,16 @@ export const STACKS: Stack[] = [
 						"en": "TypeScript is the preferred language for frontend and platform clients."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "Canadian Digital Service",
+						"en": "Canadian Digital Service",
+						"fr": "Canadian Digital Service"
+					},
+					"url": "https://digital.canada.ca/"
+				}
 			]
 		},
 		{
@@ -6387,6 +6417,16 @@ export const STACKS: Stack[] = [
 						"de": "TLS-Absicherung ist zentral für den Behördeneinsatz.",
 						"en": "TLS protection is central for federal usage."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "cloud.gov",
+						"en": "cloud.gov",
+						"fr": "cloud.gov"
+					},
+					"url": "https://cloud.gov/"
 				}
 			]
 		},
@@ -6486,6 +6526,16 @@ export const STACKS: Stack[] = [
 						"en": "Terraform is used for infrastructure provisioning and environment automation."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "DIGIT",
+						"en": "DIGIT",
+						"fr": "DIGIT"
+					},
+					"url": "https://digit.org/"
+				}
 			]
 		},
 		{
@@ -6528,6 +6578,16 @@ export const STACKS: Stack[] = [
 						"de": "TLS ist Grundvoraussetzung für abgesicherte Knoten- und API-Kommunikation.",
 						"en": "TLS is a baseline requirement for secure node and API communication."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "European Blockchain Services Infrastructure",
+						"en": "European Blockchain Services Infrastructure",
+						"fr": "European Blockchain Services Infrastructure"
+					},
+					"url": "https://ec.europa.eu/digital-building-blocks/sites/display/EBSI"
 				}
 			]
 		},
@@ -6662,6 +6722,16 @@ export const STACKS: Stack[] = [
 						"de": "Container-Orchestrierung in kleineren Setups.",
 						"en": "Container orchestration in smaller setups."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "X-Road",
+						"en": "X-Road",
+						"fr": "X-Road"
+					},
+					"url": "https://x-road.global/"
 				}
 			]
 		},
@@ -6805,6 +6875,16 @@ export const STACKS: Stack[] = [
 						"en": "Standard encryption for all EU API endpoints."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "EIRA (EU)",
+						"en": "EIRA (EU)",
+						"fr": "EIRA (UE)"
+					},
+					"url": "https://joinup.ec.europa.eu/collection/european-interoperability-reference-architecture-eira"
+				}
 			]
 		},
 		{
@@ -6884,6 +6964,16 @@ export const STACKS: Stack[] = [
 						"de": "React wird für modulare Frontends in staatlichen Portalen genutzt.",
 						"en": "React is used for modular frontends in government portals."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "La Suite Numérique",
+						"en": "La Suite Numérique",
+						"fr": "La Suite Numérique"
+					},
+					"url": "https://lasuite.numerique.gouv.fr/"
 				}
 			]
 		},
@@ -8054,6 +8144,16 @@ export const STACKS: Stack[] = [
 						"en": "Integrated into Germany Stack"
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "Deutschland-Stack Dokumentation",
+						"en": "Germany Stack documentation",
+						"fr": "Documentation Germany Stack"
+					},
+					"url": "https://github.com/deleonio/accessible-d-stack-landscape/blob/main/data/stacks/germany.json"
+				}
 			]
 		},
 		{
@@ -8195,6 +8295,16 @@ export const STACKS: Stack[] = [
 						"de": "Datenkatalog-Komponente in GovStack-Open-Data-Setups.",
 						"en": "Data catalogue component in GovStack open-data setups."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "GovStack",
+						"en": "GovStack",
+						"fr": "GovStack"
+					},
+					"url": "https://www.govstack.global/"
 				}
 			]
 		},
@@ -8339,6 +8449,16 @@ export const STACKS: Stack[] = [
 						"en": "Transport encryption of all India Stack endpoints."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "India Stack",
+						"en": "India Stack",
+						"fr": "India Stack"
+					},
+					"url": "https://indiastack.org/"
+				}
 			]
 		},
 		{
@@ -8400,6 +8520,16 @@ export const STACKS: Stack[] = [
 						"de": "Terraform unterstützt Infrastrukturmanagement im Cloud-Betrieb.",
 						"en": "Terraform supports infrastructure management for cloud operations."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "ONS Technology",
+						"en": "ONS Technology",
+						"fr": "ONS Technology"
+					},
+					"url": "https://technology.blog.gov.uk/"
 				}
 			]
 		},
@@ -8472,6 +8602,16 @@ export const STACKS: Stack[] = [
 						"en": "PostgreSQL is a common datastore among integrated services."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "openDesk",
+						"en": "openDesk",
+						"fr": "openDesk"
+					},
+					"url": "https://opendesk.eu/"
+				}
 			]
 		},
 		{
@@ -8541,6 +8681,16 @@ export const STACKS: Stack[] = [
 						"de": "Redis dient als Queue-/Cache-Baustein im skalierbaren Nachrichtenbetrieb.",
 						"en": "Redis acts as a queue/cache building block in scalable messaging operations."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "RapidPro",
+						"en": "RapidPro",
+						"fr": "RapidPro"
+					},
+					"url": "https://www.rapidpro.io/"
 				}
 			]
 		},
@@ -8685,6 +8835,16 @@ export const STACKS: Stack[] = [
 						"en": "Dashboards for SGTS observability."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "Singapore Government Tech Stack",
+						"en": "Singapore Government Tech Stack",
+						"fr": "Singapore Government Tech Stack"
+					},
+					"url": "https://www.tech.gov.sg/products-and-services/sgts"
+				}
 			]
 		},
 		{
@@ -8756,6 +8916,16 @@ export const STACKS: Stack[] = [
 						"en": "TypeScript supports modern, maintainable frontend implementations."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "eGovFrame",
+						"en": "eGovFrame",
+						"fr": "eGovFrame"
+					},
+					"url": "https://www.egovframe.go.kr/"
+				}
 			]
 		},
 		{
@@ -8817,6 +8987,16 @@ export const STACKS: Stack[] = [
 						"de": "Traefik wird als Ingress- und Routing-Komponente genutzt.",
 						"en": "Traefik is used as ingress and routing component."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "CISA Thorium",
+						"en": "CISA Thorium",
+						"fr": "CISA Thorium"
+					},
+					"url": "https://www.cisa.gov/resources-tools/services/thorium"
 				}
 			]
 		},
@@ -8961,6 +9141,16 @@ export const STACKS: Stack[] = [
 						"en": "Encrypted connections across all GOV.UK services."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "Government Digital Service",
+						"en": "Government Digital Service",
+						"fr": "Government Digital Service"
+					},
+					"url": "https://www.gov.uk/government/organisations/government-digital-service"
+				}
 			]
 		},
 		{
@@ -9041,6 +9231,16 @@ export const STACKS: Stack[] = [
 						"en": "Terraform supports IaC in federal multi-cloud operating models."
 					}
 				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "U.S. Digital Service",
+						"en": "U.S. Digital Service",
+						"fr": "U.S. Digital Service"
+					},
+					"url": "https://www.usds.gov/"
+				}
 			]
 		},
 		{
@@ -9101,6 +9301,16 @@ export const STACKS: Stack[] = [
 						"de": "Prometheus bildet den Kern des Metrik- und Monitoring-Stacks.",
 						"en": "Prometheus forms the core of metrics and monitoring."
 					}
+				}
+			],
+			"sources": [
+				{
+					"label": {
+						"de": "Wikimedia Production Architecture",
+						"en": "Wikimedia Production Architecture",
+						"fr": "Architecture de production Wikimedia"
+					},
+					"url": "https://wikitech.wikimedia.org/wiki/Production_architecture"
 				}
 			]
 		}
