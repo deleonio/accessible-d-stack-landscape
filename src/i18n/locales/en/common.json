@@ -13,8 +13,7 @@
 			"imprint": "Imprint",
 			"settings": "Settings",
 			"stacks": "Stacks",
-			"deps": "Deps",
-			"depsGraph": "Deps graph"
+			"deps": "Deps"
 		},
 		"eyebrow": "Measure & Compare Digital Sovereignty",
 		"subtitle": "How sovereign is your tech stack? StackAtlas scores technologies and standards worldwide with a transparent sovereignty score from 0–100 – and reveals which dependencies threaten your digital independence.",
@@ -34,7 +33,8 @@
 			"documentation": "Documentation",
 			"settings": "Settings",
 			"news": "News",
-			"stacks": "Stacks"
+			"stacks": "Stacks",
+			"graphsBeta": "Graphs (Beta)"
 		},
 		"license": "License: EUPL-1.2",
 		"builtWith": "Built with",

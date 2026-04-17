@@ -21,7 +21,7 @@ function AppContent() {
 				<Route path="/settings" component={SettingsPage} />
 				<Route path="/einstellungen" component={SettingsPage} />
 				<Route path="/deps" component={HomePage} />
-				<Route path="/deps-graph" component={DependencyGraphPage} />
+				<Route path="/graphs" component={DependencyGraphPage} />
 				<Route path="/news" component={NewsPage} />
 				<Route path="/neuigkeiten" component={NewsPage} />
 				<Route path="/imprint" component={ImprintPage} />

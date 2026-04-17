@@ -17,8 +17,7 @@ export function Header({ currentUrl }: HeaderProps) {
 	const commitDisplay = getCommitDisplay();
 
 	const isStacksActive = currentUrl === '/' || currentUrl.startsWith('/stacks');
-	const isDepsActive = currentUrl.startsWith('/deps') || currentUrl.startsWith('/deps-graph');
-	const isDepsGraphActive = currentUrl.startsWith('/deps-graph');
+	const isDepsActive = currentUrl.startsWith('/deps');
 
 	return (
 		<>
@@ -73,13 +72,6 @@ export function Header({ currentUrl }: HeaderProps) {
 								aria-current={isDepsActive ? 'page' : undefined}
 							>
 								{t('header.nav.deps')}
-							</a>
-							<a
-								href="#/deps-graph"
-								className={`header__nav-link${isDepsGraphActive ? ' header__nav-link--active' : ''}`}
-								aria-current={isDepsGraphActive ? 'page' : undefined}
-							>
-								{t('header.nav.depsGraph')}
 							</a>
 						</nav>
 						<div className="header__controls flex items-center gap-2 ml-auto">

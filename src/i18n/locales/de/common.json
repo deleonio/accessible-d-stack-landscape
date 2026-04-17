@@ -13,8 +13,7 @@
 			"imprint": "Impressum",
 			"settings": "Einstellungen",
 			"stacks": "Stacks",
-			"deps": "Deps",
-			"depsGraph": "Deps-Graph"
+			"deps": "Deps"
 		},
 		"eyebrow": "Digitale Souveränität messen & vergleichen",
 		"subtitle": "Wie souverän ist dein Tech-Stack? StackAtlas bewertet Technologien und Standards weltweit mit einem transparenten Souveränitäts-Score von 0–100 – und zeigt, welche Abhängigkeiten deine digitale Unabhängigkeit gefährden.",
@@ -34,7 +33,8 @@
 			"documentation": "Dokumentation",
 			"settings": "Einstellungen",
 			"news": "News",
-			"stacks": "Stacks"
+			"stacks": "Stacks",
+			"graphsBeta": "Graphen (Beta)"
 		},
 		"license": "Lizenz: EUPL-1.2",
 		"builtWith": "Built with",
