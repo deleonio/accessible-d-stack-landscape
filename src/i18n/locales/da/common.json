@@ -1,0 +1,224 @@
+{
+	"header": {
+		"skipToContent": "Spring til hovedindhold",
+		"instanceInfoAria": "Forekomstoplysninger",
+		"officialProjectSetup": "Mål og sammenlign digital suverænitet",
+		"mvpLayoutAligned": "Afstemt med dokumentationskrav (MVP-layout)",
+		"commit": "Begå",
+		"mainNavigationAria": "Hovednavigation",
+		"nav": {
+			"home": "Hjem",
+			"categories": "Kategorier",
+			"docs": "Dokumenter",
+			"imprint": "Aftryk",
+			"settings": "Indstillinger",
+			"stacks": "Stabler",
+			"deps": "Deps"
+		},
+		"eyebrow": "Mål og sammenlign digital suverænitet",
+		"subtitle": "Hvor suveræn er din tech-stack? StackAtlas scorer teknologier og standarder verden over med en gennemsigtig suverænitetsscore fra 0-100 – og afslører, hvilke afhængigheder der truer din digitale uafhængighed.",
+		"languageSwitcher": {
+			"ariaLabel": "Skift sprog",
+			"label": "Sprog",
+			"hint": "Vælg displaysprog",
+			"accessKey": "l"
+		},
+		"version": "Version"
+	},
+	"footer": {
+		"subtitle": "Bedøm og sammenlign teknologistakke over hele verden efter digital suverænitet",
+		"navigationAria": "Footer navigation",
+		"links": {
+			"github": "GitHub",
+			"community": "Fællesskab",
+			"documentation": "Dokumentation",
+			"settings": "Indstillinger",
+			"news": "Nyheder",
+			"stacks": "Stabler"
+		},
+		"license": "Licens: EUPL-1.2",
+		"builtWith": "Bygget med",
+		"and": "og",
+		"buildCommitAria": "Byg commit {{commit}}",
+		"buildCommitLabel": "Byg forpligtelse:",
+		"buildInfoAria": "Byg version {{version}} og commit {{commit}}",
+		"buildVersionLabel": "Byg version:"
+	},
+	"search": {
+		"regionAria": "Søg og filtrer",
+		"inputLabel": "Søge",
+		"placeholder": "Søgeteknologi, standard eller framework …",
+		"categoryLabel": "Lag",
+		"allCategories": "Alle lag",
+		"relationLabel": "Relation",
+		"allRelations": "Alle relationer"
+	},
+	"category": {
+		"toolbarAria": "Filterlag",
+		"label": "Lag",
+		"all": "Alle",
+		"results": {
+			"filteredPrefix": "af",
+			"entries": "indgange",
+			"inCategory": "i {{category}}",
+			"forQuery": "for \"{{query}}\"",
+			"withRelation": "med relationen \"{{relation}}\"",
+			"totalTechnologiesAndStandards": "bedømte teknologier og standarder"
+		},
+		"paginationLabel": "Naviger gennem artiklerne"
+	},
+	"results": {
+		"noneFound": "Ingen poster fundet",
+		"adjustFilters": "Juster venligst dit søge- eller kategorifilter."
+	},
+	"view": {
+		"toolbarAria": "Visning og sortering",
+		"viewToggle": "Fliser / Liste",
+		"tile": "Fliser",
+		"list": "Liste",
+		"sort": {
+			"label": "Sorter efter",
+			"name": "Navn",
+			"score": "Score",
+			"asc": "↑ Stigende",
+			"desc": "↓ Faldende"
+		}
+	},
+	"article": {
+		"categoryAria": "Kategori: {{category}}",
+		"openDetails": "Score & detaljer →",
+		"featured": "Udvalgte",
+		"detailsFor": "Oplysninger om {{name}}",
+		"categoryLabel": "Kategori: {{category}}",
+		"relatedTitle": "Flere poster i samme lag og stak",
+		"relatedTitleLayer": "Alle poster i samme lag",
+		"relatedSubtitleLayer": "Ingen stak aktiv – viser alle {{count}} poster i dette lag.",
+		"relatedSubtitleStack": "Filtreret efter stak – {{count}} poster i samme lag.",
+		"website": "Hjemmeside ↗",
+		"repository": "Depot ↗",
+		"scoreTitle": "Suverænitetsscore",
+		"scoreAria": "Suverænitetsscore: {{score}} på 100",
+		"sovereigntyScore": "Suverænitetsscore (0-100)",
+		"criteria": {
+			"selfHostable": "Selvhostbar (ingen tredjepartsinfrastruktur påkrævet)",
+			"dataPortability": "Data kan eksporteres i åbne, ikke-proprietære formater",
+			"openSource": "Open Source (offentlig kildekode)",
+			"openStandards": "Bygget på åbne, leverandørneutrale standarder",
+			"permissiveLicense": "Tilladende eller copyleft-licens (kan gafflas)",
+			"hasAudit": "Sikkerhedsrevision tilgængelig",
+			"matureProject": "Modent projekt (uddannet/stabilt)",
+			"noTelemetryByDefault": "Ingen telemetri indsamlet som standard",
+			"euHeadquartered": "EU-hovedkvarter eller registrering",
+			"ownerType": "Ejermodel: {{owner}} (+{{points}})",
+			"ownerCountry": "Ejerland: {{country}}"
+		},
+		"ownerType": {
+			"independentConsortium": "Uafhængigt konsortium",
+			"corporation": "Corporation",
+			"community": "Fællesskab",
+			"oneManShow": "One-man show",
+			"unknown": "Ikke vedligeholdt"
+		},
+		"ownerCountry": {
+			"unknown": "Ukendt"
+		},
+		"scoreCategories": {
+			"insufficient": "Utilstrækkelig",
+			"insufficientDescription": "Ikke anbefalet – betydelige suverænitetsrisici",
+			"minimal": "Minimal",
+			"minimalDescription": "Kun under særlige forhold",
+			"adequate": "Tilstrækkelig",
+			"adequateDescription": "Acceptabelt, men forbedring nødvendig",
+			"good": "God",
+			"goodDescription": "Anbefales til de fleste tilfælde",
+			"excellent": "Fremragende",
+			"excellentDescription": "Stærkt anbefalet - fremragende suverænitet",
+			"outstanding": "Udestående",
+			"outstandingDescription": "Guldstandard – optimal suverænitet"
+		},
+		"maintainerBoost": {
+			"title": "Vedligeholdelsessuverænitet blev anvendt",
+			"explanation": "Inden for den aktive stak vedligeholder din organisation dette element. Du kontrollerer kildekode, hosting, dataformater, protokoller og telemetri direkte - enhver mangel på offentlig adgang er en bevidst sikkerhedsposition snarere end en suverænitetskløft. Kontekstscore: {{effectiveScore}}/100 (offentlig score: {{rawScore}}/100).",
+			"boostedCriteriaLabel": "Tilfreds med vedligeholder kontekst",
+			"criterionMarker": "tilfreds som vedligeholder",
+			"criterionTitle": "Dette kriterium er ikke offentligt opfyldt, men det tæller som opfyldt fra vedligeholderens perspektiv, fordi den opretholdende organisation kontrollerer det direkte.",
+			"markerTitle": "Boost vedligeholder kontekst",
+			"badgeTitle": "Vedligeholdelseskontekst aktiv – offentlig score: {{rawScore}}/100",
+			"scoreAria": "Suverænitetsscore (vedligeholdelseskontekst): {{score}} af 100 – offentlig score: {{rawScore}} af 100",
+			"noteAria": "Bemærk om vedligeholdelseskonteksten"
+		}
+	},
+	"pwa": {
+		"updateAvailable": "En ny version af StackAtlas er tilgængelig.",
+		"update": "Opdater nu",
+		"dismiss": "Senere"
+	},
+	"stack": {
+		"label": "Stak",
+		"all": "Uden",
+		"selectorAria": "Vælg stak",
+		"rationale": "Begrundelse",
+		"stats": {
+			"version": "v{{version}}",
+			"items": "{{count}} elementer",
+			"avgScore": "Gns. suverænitetsscore"
+		},
+		"roles": {
+			"maintainer": "Vedligeholder",
+			"contributor": "Bidragyder",
+			"funder": "Funder",
+			"consumer": "Forbruger"
+		}
+	},
+	"stackGallery": {
+		"title": "Stack Gallery",
+		"subtitle": "Alle bedømte teknologistakke rangeret efter digital suverænitetsscore – bedst til lavest.",
+		"listAria": "Tekniske stakke rangeret efter suverænitetsscore",
+		"bestStack": "Toprangerede stak – guldplacering",
+		"rankAria": "Rangering {{rank}}",
+		"avgScore": "Gns. suverænitetsscore",
+		"avgScoreAria": "Gennemsnitlig suverænitetsscore: {{score}} ud af 100",
+		"scoreDistribution": "Scorefordeling efter kategori",
+		"keyMetrics": "Nøglemålinger",
+		"sourcesTitle": "Kilder",
+		"exploreStack": "Udforsk stakken i kataloget →",
+		"itemCount": "{{count}} elementer",
+		"recommended": "Anbefales",
+		"approved": "Godkendt",
+		"deprecated": "Forældet",
+		"metrics": {
+			"selfHostable": "Selvværtbar",
+			"openSource": "Open source",
+			"euHQ": "EU-hovedkvarter",
+			"permissiveLicense": "Tilladende licens",
+			"audit": "Revideret",
+			"ownerCountry": "Ejerland",
+			"unknown": "Ukendt",
+			"layerBreakdown": "Lagnedbrydning",
+			"roles": "Roller"
+		}
+	},
+	"pages": {
+		"imprint": {
+			"description": "Denne side giver juridiske meddelelser og udbyderoplysninger for StackAtlas.",
+			"title": "Aftryk"
+		},
+		"settings": {
+			"description": "Administrer applikationsindstillinger og præferencer for StackAtlas her.",
+			"title": "Indstillinger"
+		},
+		"news": {
+			"title": "Bedømmelsesrapporter og fællesskabsnyheder",
+			"description": "Tilføj nye daterede MD/MDX-filer til `src/content/news/`. Nyhedsindlæg kan direkte importere yderligere rapportafmærkningsfiler.",
+			"sectionAria": "Liste over offentliggjorte nyhedsindlæg",
+			"pushHint": "Så snart en ny score er tilgængelig, udgiver vi et MDX-indlæg og kan udløse push-meddelelser fra det.",
+			"metaDate": "Udgivet den {{date}}",
+			"empty": "Ingen nyhedsindlæg offentliggjort endnu.",
+			"focus": {
+				"openDataGovernance": "Fokus: Open Data Governance",
+				"identityWalletInteroperability": "Fokus: Identity Wallet Interoperabilitet",
+				"reportTemplate": "Fokus: Rapportskabelon"
+			}
+		}
+	}
+}

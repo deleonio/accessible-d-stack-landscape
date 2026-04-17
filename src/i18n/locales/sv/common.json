@@ -1,0 +1,224 @@
+{
+	"header": {
+		"skipToContent": "Hoppa till huvudinnehållet",
+		"instanceInfoAria": "Instansinformation",
+		"officialProjectSetup": "Mät och jämför digital suveränitet",
+		"mvpLayoutAligned": "I linje med dokumentationskrav (MVP-layout)",
+		"commit": "Begå",
+		"mainNavigationAria": "Huvudnavigering",
+		"nav": {
+			"home": "Hem",
+			"categories": "Kategorier",
+			"docs": "Dokument",
+			"imprint": "Avtryck",
+			"settings": "Inställningar",
+			"stacks": "Stackar",
+			"deps": "Deps"
+		},
+		"eyebrow": "Mät och jämför digital suveränitet",
+		"subtitle": "Hur suverän är din tekniska stack? StackAtlas betygsätter teknologier och standarder över hela världen med ett transparent suveränitetspoäng från 0–100 – och avslöjar vilka beroenden som hotar ditt digitala oberoende.",
+		"languageSwitcher": {
+			"ariaLabel": "Byt språk",
+			"label": "Språk",
+			"hint": "Välj visningsspråk",
+			"accessKey": "l"
+		},
+		"version": "Version"
+	},
+	"footer": {
+		"subtitle": "Betygsätt och jämför teknikstackar över hela världen efter digital suveränitet",
+		"navigationAria": "Sidfotsnavigering",
+		"links": {
+			"github": "GitHub",
+			"community": "Gemenskap",
+			"documentation": "Dokumentation",
+			"settings": "Inställningar",
+			"news": "Nyheter",
+			"stacks": "Stackar"
+		},
+		"license": "Licens: EUPL-1.2",
+		"builtWith": "Byggd med",
+		"and": "och",
+		"buildCommitAria": "Bygg commit {{commit}}",
+		"buildCommitLabel": "Bygg engagemang:",
+		"buildInfoAria": "Bygg version {{version}} och commit {{commit}}",
+		"buildVersionLabel": "Byggversion:"
+	},
+	"search": {
+		"regionAria": "Sök och filtrera",
+		"inputLabel": "Söka",
+		"placeholder": "Sökteknik, standard eller ramverk …",
+		"categoryLabel": "Lager",
+		"allCategories": "Alla lager",
+		"relationLabel": "Relation",
+		"allRelations": "Alla relationer"
+	},
+	"category": {
+		"toolbarAria": "Filtrera lager",
+		"label": "Lager",
+		"all": "Alla",
+		"results": {
+			"filteredPrefix": "av",
+			"entries": "poster",
+			"inCategory": "i {{category}}",
+			"forQuery": "för \"{{query}}\"",
+			"withRelation": "med relation \"{{relation}}\"",
+			"totalTechnologiesAndStandards": "klassade teknologier och standarder"
+		},
+		"paginationLabel": "Navigera genom artiklarna"
+	},
+	"results": {
+		"noneFound": "Inga poster hittades",
+		"adjustFilters": "Justera ditt sök- eller kategorifilter."
+	},
+	"view": {
+		"toolbarAria": "Se och sortera",
+		"viewToggle": "Kakel / Lista",
+		"tile": "Kakel",
+		"list": "Lista",
+		"sort": {
+			"label": "Sortera efter",
+			"name": "Namn",
+			"score": "Göra",
+			"asc": "↑ Stigande",
+			"desc": "↓ Fallande"
+		}
+	},
+	"article": {
+		"categoryAria": "Kategori: {{category}}",
+		"openDetails": "Poäng & detaljer →",
+		"featured": "Utvalda",
+		"detailsFor": "Detaljer för {{name}}",
+		"categoryLabel": "Kategori: {{category}}",
+		"relatedTitle": "Fler poster i samma lager och stack",
+		"relatedTitleLayer": "Alla poster i samma lager",
+		"relatedSubtitleLayer": "Ingen stack aktiv – visar alla {{count}} poster i detta lager.",
+		"relatedSubtitleStack": "Filtrerat efter stack – {{count}} poster i samma lager.",
+		"website": "Webbplats ↗",
+		"repository": "Förvar ↗",
+		"scoreTitle": "Suveränitetspoäng",
+		"scoreAria": "Suveränitetspoäng: {{score}} av 100",
+		"sovereigntyScore": "Suveränitetspoäng (0–100)",
+		"criteria": {
+			"selfHostable": "Självvärd (ingen tredjepartsinfrastruktur krävs)",
+			"dataPortability": "Data kan exporteras i öppna, icke-proprietära format",
+			"openSource": "Öppen källkod (offentlig källkod)",
+			"openStandards": "Byggd på öppna, leverantörsneutrala standarder",
+			"permissiveLicense": "Tillåtande eller copyleft-licens (gaffelbar)",
+			"hasAudit": "Säkerhetsrevision tillgänglig",
+			"matureProject": "Moget projekt (examen/stabil)",
+			"noTelemetryByDefault": "Ingen telemetri samlad in som standard",
+			"euHeadquartered": "EU:s huvudkontor eller registrering",
+			"ownerType": "Ägarmodell: {{owner}} (+{{points}})",
+			"ownerCountry": "Ägarland: {{country}}"
+		},
+		"ownerType": {
+			"independentConsortium": "Oberoende konsortium",
+			"corporation": "Företag",
+			"community": "Gemenskap",
+			"oneManShow": "Enmansshow",
+			"unknown": "Ej underhållen"
+		},
+		"ownerCountry": {
+			"unknown": "Okänd"
+		},
+		"scoreCategories": {
+			"insufficient": "Otillräcklig",
+			"insufficientDescription": "Rekommenderas inte – betydande suveränitetsrisker",
+			"minimal": "Minimal",
+			"minimalDescription": "Endast under särskilda förhållanden",
+			"adequate": "Tillräcklig",
+			"adequateDescription": "Acceptabelt, men förbättring behövs",
+			"good": "Bra",
+			"goodDescription": "Rekommenderas för de flesta fall",
+			"excellent": "Excellent",
+			"excellentDescription": "Rekommenderas starkt - utmärkt suveränitet",
+			"outstanding": "Utestående",
+			"outstandingDescription": "Guldstandard – optimal suveränitet"
+		},
+		"maintainerBoost": {
+			"title": "Upprätthållarsuveränitet tillämpades",
+			"explanation": "Inom den aktiva stacken upprätthåller din organisation detta objekt. Du kontrollerar källkod, hosting, dataformat, protokoll och telemetri direkt – all brist på offentlig tillgång är en avsiktlig säkerhetsställning snarare än en suveränitetsklyfta. Kontextpoäng: {{effectiveScore}}/100 (offentligt resultat: {{rawScore}}/100).",
+			"boostedCriteriaLabel": "Nöjd av underhållarens sammanhang",
+			"criterionMarker": "nöjd som underhållare",
+			"criterionTitle": "Detta kriterium är inte offentligt uppfyllt, men det räknas som uppfyllt ur underhållarens perspektiv eftersom den underhållande organisationen kontrollerar det direkt.",
+			"markerTitle": "Förstärkning av underhållarens sammanhang",
+			"badgeTitle": "Underhållarkontext aktiv – offentlig poäng: {{rawScore}}/100",
+			"scoreAria": "Suveränitetspoäng (underhållskontext): {{score}} av 100 – offentlig poäng: {{rawScore}} av 100",
+			"noteAria": "Notera om underhållskontexten"
+		}
+	},
+	"pwa": {
+		"updateAvailable": "En ny version av StackAtlas är tillgänglig.",
+		"update": "Uppdatera nu",
+		"dismiss": "Senare"
+	},
+	"stack": {
+		"label": "Stack",
+		"all": "Utan",
+		"selectorAria": "Välj stack",
+		"rationale": "Logisk grund",
+		"stats": {
+			"version": "v{{version}}",
+			"items": "{{count}} objekt",
+			"avgScore": "Genomsnittlig suveränitetspoäng"
+		},
+		"roles": {
+			"maintainer": "Underhållare",
+			"contributor": "Bidragsgivare",
+			"funder": "Funderare",
+			"consumer": "Konsument"
+		}
+	},
+	"stackGallery": {
+		"title": "Stack Gallery",
+		"subtitle": "Alla rankade teknikstackar rankas efter digital suveränitetspoäng – bäst till lägst.",
+		"listAria": "Teknikstackar rankade efter suveränitetspoäng",
+		"bestStack": "Högst rankad stack – guldplacering",
+		"rankAria": "Rank {{rank}}",
+		"avgScore": "Genomsnittlig suveränitetspoäng",
+		"avgScoreAria": "Genomsnittlig suveränitetspoäng: {{score}} av 100",
+		"scoreDistribution": "Poängfördelning efter kategori",
+		"keyMetrics": "Nyckelmått",
+		"sourcesTitle": "Källor",
+		"exploreStack": "Utforska stack i katalogen →",
+		"itemCount": "{{count}} objekt",
+		"recommended": "Rekommenderad",
+		"approved": "Godkänd",
+		"deprecated": "Utfasad",
+		"metrics": {
+			"selfHostable": "Självvärd",
+			"openSource": "Öppen källkod",
+			"euHQ": "EU:s huvudkontor",
+			"permissiveLicense": "Tillåtande licens",
+			"audit": "Reviderad",
+			"ownerCountry": "Ägarland",
+			"unknown": "Okänd",
+			"layerBreakdown": "Lageruppdelning",
+			"roles": "Roller"
+		}
+	},
+	"pages": {
+		"imprint": {
+			"description": "Den här sidan tillhandahåller juridiska meddelanden och leverantörsinformation för StackAtlas.",
+			"title": "Avtryck"
+		},
+		"settings": {
+			"description": "Hantera programinställningar och preferenser för StackAtlas här.",
+			"title": "Inställningar"
+		},
+		"news": {
+			"title": "Betygsrapporter och communitynyheter",
+			"description": "Lägg till nya daterade MD/MDX-filer till `src/content/news/`. Nyhetsinlägg kan direkt importera ytterligare rapportnedsättningsfiler.",
+			"sectionAria": "Lista över publicerade nyhetsinlägg",
+			"pushHint": "Så snart en ny poäng är tillgänglig publicerar vi ett MDX-inlägg och kan trigga push-notiser från det.",
+			"metaDate": "Publicerad den {{date}}",
+			"empty": "Inga nyhetsinlägg publicerade ännu.",
+			"focus": {
+				"openDataGovernance": "Fokus: Open Data Governance",
+				"identityWalletInteroperability": "Fokus: Interoperabilitet för identitetsplånbok",
+				"reportTemplate": "Fokus: Rapportmall"
+			}
+		}
+	}
+}

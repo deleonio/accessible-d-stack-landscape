@@ -1,9 +1,10 @@
-export type LanguageCode = 'de' | 'en' | 'fr';
+export type LanguageCode = 'da' | 'de' | 'en' | 'es' | 'fr' | 'it' | 'no' | 'sv';
 
 export type LocalizedText = {
+	[K in LanguageCode]?: string;
+} & {
 	de: string;
 	en: string;
-	fr?: string;
 };
 
 export type LocalizableText = string | LocalizedText;
