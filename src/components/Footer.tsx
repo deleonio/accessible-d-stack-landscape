@@ -29,6 +29,9 @@ export function Footer() {
 						<a href="#/stacks" className="footer__link">
 							{t('footer.links.stacks')}
 						</a>
+						<a href="#/graphs" className="footer__link">
+							{t('footer.links.graphsBeta')}
+						</a>
 						<a href="https://github.com/deleonio/accessible-d-stack-landscape" rel="noopener noreferrer" className="footer__link">
 							{t('footer.links.github')}
 						</a>

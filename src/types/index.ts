@@ -185,6 +185,9 @@ export type FilterState = {
 	selectedLayer: string | null;
 	selectedSublayer: string | null;
 	selectedRelation: ParticipantRole | null;
+	onlyDirectDependencies: boolean;
+	dependencyDepth: 1 | 2 | 3 | null;
+	selectedDependencyType: DependencyType | null;
 };
 
 // ---------------------------------------------------------------------------
