@@ -49,7 +49,7 @@ export function DependencyGraph({ items, layers, filters, selectedRootItemId }: 
 	);
 	const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(scopedEdges[0]?.id ?? null);
 	const [focusedEdgeId, setFocusedEdgeId] = useState<string | null>(null);
-	const selectedEdge = useMemo(() => scopedEdges.find((edge) => edge.id === selectedEdgeId) ?? scopedEdges[0] ?? null, [scopedEdges, selectedEdgeId]);
+	const selectedEdge = useMemo(() => scopedEdges.find((edge) => edge.id === selectedEdgeId) ?? null, [scopedEdges, selectedEdgeId]);
 	useEffect(() => {
 		setSelectedEdgeId((previousEdgeId) => {
 			if (previousEdgeId && scopedEdges.some((edge) => edge.id === previousEdgeId)) {
