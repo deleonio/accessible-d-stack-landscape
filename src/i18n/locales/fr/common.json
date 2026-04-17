@@ -40,7 +40,9 @@
 		"builtWith": "Built with",
 		"and": "and",
 		"buildCommitAria": "Commit de build {{commit}}",
-		"buildCommitLabel": "Commit de build :"
+		"buildCommitLabel": "Commit de build :",
+		"buildInfoAria": "Version de build {{version}} et commit {{commit}}",
+		"buildVersionLabel": "Version de build :"
 	},
 	"search": {
 		"regionAria": "Recherche et filtres",
