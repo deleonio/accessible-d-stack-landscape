@@ -1,8 +1,8 @@
 import { KolButton, KolCard } from '@public-ui/preact';
-import { useMemo, useState } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { FilterState, Item, Layer } from '../types';
-import { buildDependencyGraph, getFilteredEdges, getLocalizedText } from '../utils';
+import { buildDependencyGraph, getDependencyTypes, getFilteredEdges, getLocalizedText } from '../utils';
 
 interface DependencyGraphProps {
 	items: Item[];
@@ -36,8 +36,19 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 	);
 	const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(scopedEdges[0]?.id ?? null);
 	const selectedEdge = useMemo(() => scopedEdges.find((edge) => edge.id === selectedEdgeId) ?? scopedEdges[0] ?? null, [scopedEdges, selectedEdgeId]);
+	useEffect(() => {
+		setSelectedEdgeId(scopedEdges[0]?.id ?? null);
+	}, [scopedEdges]);
 
 	const layerOrder = useMemo(() => [...layers].sort((a, b) => a.order - b.order), [layers]);
+	const dependencyTypes = useMemo(() => getDependencyTypes(items), [items]);
+	const dependencyScopes = useMemo(() => {
+		const scopes = new Set<string>();
+		for (const edge of scopedEdges) {
+			scopes.add(edge.dependency.scope ?? 'required');
+		}
+		return Array.from(scopes).sort();
+	}, [scopedEdges]);
 	const layerItems = useMemo(() => {
 		const bucket = new Map<string, Item[]>();
 		for (const layer of layerOrder) {
@@ -95,15 +106,17 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 
 					<div className="dependency-graph__legend dependency-graph__legend--meta flex flex-wrap gap-3">
 						<span className="dependency-graph__legend-caption">{t('dependencies.graph.typeLegend')}</span>
-						<span className="dependency-graph__meta-pill">build</span>
-						<span className="dependency-graph__meta-pill">runtime</span>
-						<span className="dependency-graph__meta-pill">protocol</span>
-						<span className="dependency-graph__meta-pill">language</span>
-						<span className="dependency-graph__meta-pill">compiles-to</span>
+						{dependencyTypes.map((type) => (
+							<span key={type} className="dependency-graph__meta-pill">
+								{t(`search.dependencies.type.${type}`)}
+							</span>
+						))}
 						<span className="dependency-graph__legend-caption">{t('dependencies.graph.scopeLegend')}</span>
-						<span className="dependency-graph__meta-pill">required</span>
-						<span className="dependency-graph__meta-pill">optional</span>
-						<span className="dependency-graph__meta-pill">dev</span>
+						{dependencyScopes.map((scope) => (
+							<span key={scope} className="dependency-graph__meta-pill">
+								{t(`dependencies.scope.${scope}`)}
+							</span>
+						))}
 					</div>
 
 					{scopedEdges.length === 0 ? (
@@ -189,7 +202,7 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 										<strong>{getLocalizedText(selectedEdge.target.name, i18n.language)}</strong>
 									</p>
 									<p>{t('dependencies.graph.edgeType', { type: selectedEdge.dependency.type })}</p>
-									<p>{t('dependencies.graph.edgeScope', { scope: selectedEdge.dependency.scope ?? 'required' })}</p>
+									<p>{t('dependencies.graph.edgeScope', { scope: t(`dependencies.scope.${selectedEdge.dependency.scope ?? 'required'}`) })}</p>
 									<p>{selectedEdge.dependency.reason ? getLocalizedText(selectedEdge.dependency.reason, i18n.language) : t('dependencies.graph.noReason')}</p>
 								</div>
 							)}

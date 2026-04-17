@@ -316,7 +316,8 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 													<li key={edge.id} className="drawer-dependencies__item">
 														<button type="button" className="drawer-related__link" onClick={() => setSelectedDependencyId(edge.id)}>
 															<span className="drawer-related__link-text">
-																{getLocalizedText(edge.target.name, i18n.language)} ({edge.dependency.type}/{edge.dependency.scope ?? 'required'})
+																{getLocalizedText(edge.target.name, i18n.language)} ({edge.dependency.type}/
+																{t(`dependencies.scope.${edge.dependency.scope ?? 'required'}`)})
 															</span>
 															<span className="drawer-related__link-icon" aria-hidden="true">
 																›
@@ -335,7 +336,8 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 													<li key={edge.id} className="drawer-dependencies__item">
 														<button type="button" className="drawer-related__link" onClick={() => setSelectedDependencyId(edge.id)}>
 															<span className="drawer-related__link-text">
-																{getLocalizedText(edge.source.name, i18n.language)} ({edge.dependency.type}/{edge.dependency.scope ?? 'required'})
+																{getLocalizedText(edge.source.name, i18n.language)} ({edge.dependency.type}/
+																{t(`dependencies.scope.${edge.dependency.scope ?? 'required'}`)})
 															</span>
 															<span className="drawer-related__link-icon" aria-hidden="true">
 																›
@@ -355,7 +357,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 											<p>
 												{t('dependencies.meta', {
 													type: selectedDependency.dependency.type,
-													scope: selectedDependency.dependency.scope ?? 'required',
+													scope: t(`dependencies.scope.${selectedDependency.dependency.scope ?? 'required'}`),
 												})}
 											</p>
 											<p>

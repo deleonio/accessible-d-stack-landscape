@@ -256,6 +256,11 @@
 			"edgeType": "Dependency type: {{type}}",
 			"edgeScope": "Scope: {{scope}}",
 			"noReason": "No source hint or comment available."
+		},
+		"scope": {
+			"required": "Required",
+			"optional": "Optional",
+			"dev": "Development"
 		}
 	}
 }

@@ -256,6 +256,11 @@
 			"edgeType": "Dependency-Typ: {{type}}",
 			"edgeScope": "Scope: {{scope}}",
 			"noReason": "Kein Quellenhinweis oder Kommentar verfügbar."
+		},
+		"scope": {
+			"required": "Erforderlich",
+			"optional": "Optional",
+			"dev": "Entwicklung"
 		}
 	}
 }
