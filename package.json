@@ -102,11 +102,6 @@
 			"sharp"
 		]
 	},
-	"knip": {
-		"ignoreIssues": {
-			"src/data/items.generated.ts": ["exports"]
-		}
-	},
 	"lint-staged": {
 		"src/**/*.{tsx,ts}": [
 			"eslint --fix",
