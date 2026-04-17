@@ -37,9 +37,15 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 		[visibleEdges, visibleItemIds],
 	);
 	const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(scopedEdges[0]?.id ?? null);
+	const [focusedEdgeId, setFocusedEdgeId] = useState<string | null>(null);
 	const selectedEdge = useMemo(() => scopedEdges.find((edge) => edge.id === selectedEdgeId) ?? scopedEdges[0] ?? null, [scopedEdges, selectedEdgeId]);
 	useEffect(() => {
-		setSelectedEdgeId(scopedEdges[0]?.id ?? null);
+		setSelectedEdgeId((previousEdgeId) => {
+			if (previousEdgeId && scopedEdges.some((edge) => edge.id === previousEdgeId)) {
+				return previousEdgeId;
+			}
+			return scopedEdges[0]?.id ?? null;
+		});
 	}, [scopedEdges]);
 
 	const layerOrder = useMemo(() => [...layers].sort((a, b) => a.order - b.order), [layers]);
@@ -144,9 +150,11 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 										const x2 = target.x;
 										const layerColor = layers.find((layer) => layer.id === edge.source.layer)?.color ?? '#003d82';
 										const selected = selectedEdge?.id === edge.id;
+										const focused = focusedEdgeId === edge.id;
 										return (
 											<g key={edge.id}>
 												<line x1={x1} y1={y1} x2={x2} y2={y2} stroke={layerColor} strokeWidth={selected ? 4 : 2} opacity={selected ? 1 : 0.45} />
+												{focused && <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#ffbf47" strokeWidth={6} opacity={1} pointerEvents="none" />}
 												<line
 													className="dependency-graph__edge-hitbox"
 													x1={x1}
@@ -162,6 +170,8 @@ export function DependencyGraph({ items, layers, filters }: DependencyGraphProps
 														target: getLocalizedText(edge.target.name, i18n.language),
 													})}
 													onClick={() => setSelectedEdgeId(edge.id)}
+													onFocus={() => setFocusedEdgeId(edge.id)}
+													onBlur={() => setFocusedEdgeId((currentFocusedId) => (currentFocusedId === edge.id ? null : currentFocusedId))}
 													onKeyDown={(event) => {
 														if (event.key === 'Enter' || event.key === ' ') {
 															event.preventDefault();
