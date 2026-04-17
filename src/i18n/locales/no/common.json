@@ -1,223 +1,223 @@
 {
 	"header": {
-		"skipToContent": "Skip to main content",
-		"instanceInfoAria": "Instance information",
-		"officialProjectSetup": "Measure & Compare Digital Sovereignty",
-		"mvpLayoutAligned": "Aligned with documentation requirements (MVP layout)",
-		"commit": "Commit",
-		"mainNavigationAria": "Main navigation",
+		"skipToContent": "Gå til hovedinnhold",
+		"instanceInfoAria": "Forekomstinformasjon",
+		"officialProjectSetup": "Mål og sammenlign digital suverenitet",
+		"mvpLayoutAligned": "Justert med dokumentasjonskrav (MVP-layout)",
+		"commit": "Begå",
+		"mainNavigationAria": "Hovednavigasjon",
 		"nav": {
-			"home": "Home",
-			"categories": "Categories",
-			"docs": "Docs",
-			"imprint": "Imprint",
-			"settings": "Settings",
-			"stacks": "Stacks",
+			"home": "Hjem",
+			"categories": "Kategorier",
+			"docs": "Dokumenter",
+			"imprint": "Avtrykk",
+			"settings": "Innstillinger",
+			"stacks": "Stabler",
 			"deps": "Deps"
 		},
-		"eyebrow": "Measure & Compare Digital Sovereignty",
-		"subtitle": "How sovereign is your tech stack? StackAtlas scores technologies and standards worldwide with a transparent sovereignty score from 0–100 – and reveals which dependencies threaten your digital independence.",
+		"eyebrow": "Mål og sammenlign digital suverenitet",
+		"subtitle": "Hvor suveren er teknologistabelen din? StackAtlas skårer teknologier og standarder over hele verden med en transparent suverenitetsscore fra 0–100 – og avslører hvilke avhengigheter som truer din digitale uavhengighet.",
 		"languageSwitcher": {
-			"ariaLabel": "Switch language",
-			"label": "Language",
-			"hint": "Select display language",
+			"ariaLabel": "Bytt språk",
+			"label": "Språk",
+			"hint": "Velg visningsspråk",
 			"accessKey": "l"
 		},
-		"version": "Version"
+		"version": "Versjon"
 	},
 	"footer": {
-		"subtitle": "Rate and compare tech stacks worldwide by digital sovereignty",
-		"navigationAria": "Footer navigation",
+		"subtitle": "Vurder og sammenlign teknologistabler over hele verden etter digital suverenitet",
+		"navigationAria": "Bunntekstnavigering",
 		"links": {
 			"github": "GitHub",
-			"community": "Community",
-			"documentation": "Documentation",
-			"settings": "Settings",
-			"news": "News",
-			"stacks": "Stacks"
+			"community": "Fellesskap",
+			"documentation": "Dokumentasjon",
+			"settings": "Innstillinger",
+			"news": "Nyheter",
+			"stacks": "Stabler"
 		},
-		"license": "License: EUPL-1.2",
-		"builtWith": "Built with",
-		"and": "and",
-		"buildCommitAria": "Build commit {{commit}}",
-		"buildCommitLabel": "Build commit:",
-		"buildInfoAria": "Build version {{version}} and commit {{commit}}",
-		"buildVersionLabel": "Build version:"
+		"license": "Lisens: EUPL-1.2",
+		"builtWith": "Bygget med",
+		"and": "og",
+		"buildCommitAria": "Bygg commit {{commit}}",
+		"buildCommitLabel": "Bygg forpliktelse:",
+		"buildInfoAria": "Bygg versjon {{version}} og forplikt {{commit}}",
+		"buildVersionLabel": "Byggversjon:"
 	},
 	"search": {
-		"regionAria": "Search and filter",
-		"inputLabel": "Search",
-		"placeholder": "Search technology, standard or framework …",
-		"categoryLabel": "Layer",
-		"allCategories": "All layers",
-		"relationLabel": "Relation",
-		"allRelations": "All relations"
+		"regionAria": "Søk og filtrer",
+		"inputLabel": "Søk",
+		"placeholder": "Søketeknologi, standard eller rammeverk …",
+		"categoryLabel": "Lag",
+		"allCategories": "Alle lag",
+		"relationLabel": "Forhold",
+		"allRelations": "Alle relasjoner"
 	},
 	"category": {
-		"toolbarAria": "Filter layers",
-		"label": "Layer",
-		"all": "All",
+		"toolbarAria": "Filterlag",
+		"label": "Lag",
+		"all": "Alle",
 		"results": {
-			"filteredPrefix": "of",
-			"entries": "entries",
-			"inCategory": "in {{category}}",
-			"forQuery": "for “{{query}}”",
-			"withRelation": "with relation “{{relation}}”",
-			"totalTechnologiesAndStandards": "rated technologies & standards"
+			"filteredPrefix": "av",
+			"entries": "oppføringer",
+			"inCategory": "i {{category}}",
+			"forQuery": "for «{{query}}»",
+			"withRelation": "med relasjonen «{{relation}}»",
+			"totalTechnologiesAndStandards": "vurderte teknologier og standarder"
 		},
-		"paginationLabel": "Navigate through the articles"
+		"paginationLabel": "Naviger gjennom artiklene"
 	},
 	"results": {
-		"noneFound": "No entries found",
-		"adjustFilters": "Please adjust your search or category filter."
+		"noneFound": "Ingen oppføringer funnet",
+		"adjustFilters": "Juster søke- eller kategorifilteret ditt."
 	},
 	"view": {
-		"toolbarAria": "View and sorting",
-		"viewToggle": "Tile / List",
-		"tile": "Tiles",
-		"list": "List",
+		"toolbarAria": "Vis og sortering",
+		"viewToggle": "Fliser / Liste",
+		"tile": "Fliser",
+		"list": "Liste",
 		"sort": {
-			"label": "Sort by",
-			"name": "Name",
+			"label": "Sorter etter",
+			"name": "Navn",
 			"score": "Score",
-			"asc": "↑ Ascending",
-			"desc": "↓ Descending"
+			"asc": "↑ Stigende",
+			"desc": "↓ Synkende"
 		}
 	},
 	"article": {
-		"categoryAria": "Category: {{category}}",
-		"openDetails": "Score & Details →",
-		"featured": "Featured",
-		"detailsFor": "Details for {{name}}",
-		"categoryLabel": "Category: {{category}}",
-		"relatedTitle": "More entries in the same layer & stack",
-		"relatedTitleLayer": "All entries in the same layer",
-		"relatedSubtitleLayer": "No stack active – showing all {{count}} entries in this layer.",
-		"relatedSubtitleStack": "Filtered by stack – {{count}} entries in the same layer.",
-		"website": "Website ↗",
-		"repository": "Repository ↗",
-		"scoreTitle": "Sovereignty Score",
-		"scoreAria": "Sovereignty score: {{score}} of 100",
-		"sovereigntyScore": "Sovereignty Score (0–100)",
+		"categoryAria": "Kategori: {{category}}",
+		"openDetails": "Score og detaljer →",
+		"featured": "Utvalgte",
+		"detailsFor": "Detaljer for {{name}}",
+		"categoryLabel": "Kategori: {{category}}",
+		"relatedTitle": "Flere oppføringer i samme lag og stabel",
+		"relatedTitleLayer": "Alle oppføringer i samme lag",
+		"relatedSubtitleLayer": "Ingen stabel aktiv – viser alle {{count}} oppføringer i dette laget.",
+		"relatedSubtitleStack": "Filtrert etter stabel – {{count}} oppføringer i samme lag.",
+		"website": "Nettsted ↗",
+		"repository": "Depot ↗",
+		"scoreTitle": "Suverenitetspoeng",
+		"scoreAria": "Suverenitetspoeng: {{score}} av 100",
+		"sovereigntyScore": "Suverenitetspoeng (0–100)",
 		"criteria": {
-			"selfHostable": "Self-hostable (no third-party infrastructure required)",
-			"dataPortability": "Data exportable in open, non-proprietary formats",
-			"openSource": "Open Source (public source code)",
-			"openStandards": "Built on open, vendor-neutral standards",
-			"permissiveLicense": "Permissive or copyleft license (forkable)",
-			"hasAudit": "Security audit available",
-			"matureProject": "Mature project (graduated/stable)",
-			"noTelemetryByDefault": "No telemetry collected by default",
-			"euHeadquartered": "EU headquarters or registration",
-			"ownerType": "Owner model: {{owner}} (+{{points}})",
-			"ownerCountry": "Owner country: {{country}}"
+			"selfHostable": "Selv-vert (ingen tredjeparts infrastruktur kreves)",
+			"dataPortability": "Data kan eksporteres i åpne, ikke-proprietære formater",
+			"openSource": "Åpen kildekode (offentlig kildekode)",
+			"openStandards": "Bygget på åpne, leverandørnøytrale standarder",
+			"permissiveLicense": "Tillatende eller copyleft-lisens (forkable)",
+			"hasAudit": "Sikkerhetsrevisjon tilgjengelig",
+			"matureProject": "Modent prosjekt (uteksaminert/stabil)",
+			"noTelemetryByDefault": "Ingen telemetri samlet inn som standard",
+			"euHeadquartered": "EU-hovedkvarter eller registrering",
+			"ownerType": "Eiermodell: {{owner}} (+{{points}})",
+			"ownerCountry": "Eierland: {{country}}"
 		},
 		"ownerType": {
-			"independentConsortium": "Independent consortium",
-			"corporation": "Corporation",
-			"community": "Community",
-			"oneManShow": "One-man show",
-			"unknown": "Not maintained"
+			"independentConsortium": "Uavhengig konsortium",
+			"corporation": "Selskap",
+			"community": "Fellesskap",
+			"oneManShow": "Enmannsshow",
+			"unknown": "Ikke vedlikeholdt"
 		},
 		"ownerCountry": {
-			"unknown": "Unknown"
+			"unknown": "Ukjent"
 		},
 		"scoreCategories": {
-			"insufficient": "Insufficient",
-			"insufficientDescription": "Not recommended – significant sovereignty risks",
+			"insufficient": "Utilstrekkelig",
+			"insufficientDescription": "Anbefales ikke – betydelig suverenitetsrisiko",
 			"minimal": "Minimal",
-			"minimalDescription": "Only under specific conditions",
-			"adequate": "Adequate",
-			"adequateDescription": "Acceptable, but improvement needed",
-			"good": "Good",
-			"goodDescription": "Recommended for most cases",
-			"excellent": "Excellent",
-			"excellentDescription": "Highly recommended – excellent sovereignty",
-			"outstanding": "Outstanding",
-			"outstandingDescription": "Gold standard – optimal sovereignty"
+			"minimalDescription": "Bare under spesifikke forhold",
+			"adequate": "Tilstrekkelig",
+			"adequateDescription": "Akseptabelt, men forbedring nødvendig",
+			"good": "God",
+			"goodDescription": "Anbefales for de fleste tilfeller",
+			"excellent": "Glimrende",
+			"excellentDescription": "Sterkt anbefalt - utmerket suverenitet",
+			"outstanding": "Utestående",
+			"outstandingDescription": "Gullstandard – optimal suverenitet"
 		},
 		"maintainerBoost": {
-			"title": "Maintainer sovereignty applied",
-			"explanation": "Within the active stack your organisation maintains this item. You control source code, hosting, data formats, protocols and telemetry directly – any lack of public access is a deliberate security posture rather than a sovereignty gap. Context score: {{effectiveScore}}/100 (public score: {{rawScore}}/100).",
-			"boostedCriteriaLabel": "Satisfied by maintainer context",
-			"criterionMarker": "satisfied as maintainer",
-			"criterionTitle": "This criterion is not publicly satisfied, but it counts as satisfied from the maintainer's perspective because the maintaining organisation controls it directly.",
-			"markerTitle": "Maintainer context boost",
-			"badgeTitle": "Maintainer context active – public score: {{rawScore}}/100",
-			"scoreAria": "Sovereignty score (maintainer context): {{score}} of 100 – public score: {{rawScore}} of 100",
-			"noteAria": "Note about the maintainer context"
+			"title": "Opprettholdersuverenitet gjaldt",
+			"explanation": "Innenfor den aktive stabelen opprettholder organisasjonen din dette elementet. Du kontrollerer kildekode, hosting, dataformater, protokoller og telemetri direkte – enhver mangel på offentlig tilgang er en bevisst sikkerhetsstilling snarere enn et suverenitetsgap. Kontekstscore: {{effectiveScore}}/100 (offentlig poengsum: {{rawScore}}/100).",
+			"boostedCriteriaLabel": "Fornøyd med vedlikeholdskontekst",
+			"criterionMarker": "fornøyd som vedlikeholder",
+			"criterionTitle": "Dette kriteriet er ikke offentlig tilfredsstilt, men det teller som tilfredsstilt fra vedlikeholders perspektiv fordi vedlikeholdsorganisasjonen kontrollerer det direkte.",
+			"markerTitle": "Opprettholder kontekstøkning",
+			"badgeTitle": "Vedlikeholdskontekst aktiv – offentlig poengsum: {{rawScore}}/100",
+			"scoreAria": "Suverenitetspoeng (vedlikeholdskontekst): {{score}} av 100 – offentlig poengsum: {{rawScore}} av 100",
+			"noteAria": "Merknad om vedlikeholdskonteksten"
 		}
 	},
 	"pwa": {
-		"updateAvailable": "A new version of StackAtlas is available.",
-		"update": "Update now",
-		"dismiss": "Later"
+		"updateAvailable": "En ny versjon av StackAtlas er tilgjengelig.",
+		"update": "Oppdater nå",
+		"dismiss": "Seinere"
 	},
 	"stack": {
-		"label": "Stack",
-		"all": "Without",
-		"selectorAria": "Select stack",
-		"rationale": "Rationale",
+		"label": "Stable",
+		"all": "Uten",
+		"selectorAria": "Velg stabel",
+		"rationale": "Begrunnelse",
 		"stats": {
 			"version": "v{{version}}",
-			"items": "{{count}} items",
-			"avgScore": "Avg. sovereignty score"
+			"items": "{{count}} varer",
+			"avgScore": "Gj.sn. suverenitetspoeng"
 		},
 		"roles": {
-			"maintainer": "Maintainer",
-			"contributor": "Contributor",
+			"maintainer": "Vedlikeholder",
+			"contributor": "Bidragsyter",
 			"funder": "Funder",
-			"consumer": "Consumer"
+			"consumer": "Forbruker"
 		}
 	},
 	"stackGallery": {
 		"title": "Stack Gallery",
-		"subtitle": "All rated tech stacks ranked by digital sovereignty score – best to lowest.",
-		"listAria": "Tech stacks ranked by sovereignty score",
-		"bestStack": "Top-ranked stack – gold placement",
-		"rankAria": "Rank {{rank}}",
-		"avgScore": "Avg. sovereignty score",
-		"avgScoreAria": "Average sovereignty score: {{score}} out of 100",
-		"scoreDistribution": "Score distribution by category",
-		"keyMetrics": "Key metrics",
-		"sourcesTitle": "Sources",
-		"exploreStack": "Explore stack in catalogue →",
-		"itemCount": "{{count}} items",
-		"recommended": "Recommended",
-		"approved": "Approved",
-		"deprecated": "Deprecated",
+		"subtitle": "Alle vurderte teknologistabler rangert etter digital suverenitetspoeng – best til lavest.",
+		"listAria": "Tekniske stabler rangert etter suverenitetspoeng",
+		"bestStack": "Topprangert stabel – gullplassering",
+		"rankAria": "Rangering {{rank}}",
+		"avgScore": "Gj.sn. suverenitetspoeng",
+		"avgScoreAria": "Gjennomsnittlig suverenitetspoeng: {{score}} av 100",
+		"scoreDistribution": "Poengfordeling etter kategori",
+		"keyMetrics": "Nøkkelberegninger",
+		"sourcesTitle": "Kilder",
+		"exploreStack": "Utforsk stabelen i katalogen →",
+		"itemCount": "{{count}} varer",
+		"recommended": "Anbefalt",
+		"approved": "Godkjent",
+		"deprecated": "Avviklet",
 		"metrics": {
-			"selfHostable": "Self-hostable",
-			"openSource": "Open source",
-			"euHQ": "EU headquartered",
-			"permissiveLicense": "Permissive license",
-			"audit": "Audited",
-			"ownerCountry": "Owner country",
-			"unknown": "Unknown",
-			"layerBreakdown": "Layer breakdown",
-			"roles": "Roles"
+			"selfHostable": "Selvvertskapende",
+			"openSource": "Åpen kildekode",
+			"euHQ": "EU-hovedkvarter",
+			"permissiveLicense": "Tillatt lisens",
+			"audit": "Revidert",
+			"ownerCountry": "Eierland",
+			"unknown": "Ukjent",
+			"layerBreakdown": "Lagnedbrytning",
+			"roles": "Roller"
 		}
 	},
 	"pages": {
 		"imprint": {
-			"description": "This page provides legal notices and provider information for StackAtlas.",
-			"title": "Imprint"
+			"description": "Denne siden inneholder juridiske merknader og leverandørinformasjon for StackAtlas.",
+			"title": "Avtrykk"
 		},
 		"settings": {
-			"description": "Manage application settings and preferences for StackAtlas here.",
-			"title": "Settings"
+			"description": "Administrer applikasjonsinnstillinger og preferanser for StackAtlas her.",
+			"title": "Innstillinger"
 		},
 		"news": {
-			"title": "Rating Reports & Community News",
-			"description": "Add new dated MD/MDX files to `src/content/news/`. News posts can directly import additional report markdown files.",
-			"sectionAria": "List of published news posts",
-			"pushHint": "As soon as a new score is available, we publish an MDX post and can trigger push notifications from it.",
-			"metaDate": "Published on {{date}}",
-			"empty": "No news posts published yet.",
+			"title": "Rangeringsrapporter og fellesskapsnyheter",
+			"description": "Legg til nye daterte MD/MDX-filer til `src/content/news/`. Nyhetsinnlegg kan direkte importere ytterligere rapportavmerkingsfiler.",
+			"sectionAria": "Liste over publiserte nyhetsinnlegg",
+			"pushHint": "Så snart en ny score er tilgjengelig, publiserer vi et MDX-innlegg og kan utløse push-varsler fra det.",
+			"metaDate": "Publisert {{date}}",
+			"empty": "Ingen nyhetsinnlegg publisert ennå.",
 			"focus": {
-				"openDataGovernance": "Focus: Open Data Governance",
-				"identityWalletInteroperability": "Focus: Identity Wallet Interoperability",
-				"reportTemplate": "Focus: Report Template"
+				"openDataGovernance": "Fokus: Open Data Governance",
+				"identityWalletInteroperability": "Fokus: Interoperabilitet for identitetslommebok",
+				"reportTemplate": "Fokus: Rapportmal"
 			}
 		}
 	}

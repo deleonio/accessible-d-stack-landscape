@@ -1,223 +1,223 @@
 {
 	"header": {
-		"skipToContent": "Skip to main content",
-		"instanceInfoAria": "Instance information",
-		"officialProjectSetup": "Measure & Compare Digital Sovereignty",
-		"mvpLayoutAligned": "Aligned with documentation requirements (MVP layout)",
-		"commit": "Commit",
-		"mainNavigationAria": "Main navigation",
+		"skipToContent": "Saltar al contenido principal",
+		"instanceInfoAria": "Información de instancia",
+		"officialProjectSetup": "Medir y comparar la soberanía digital",
+		"mvpLayoutAligned": "Alineado con los requisitos de documentación (diseño MVP)",
+		"commit": "Comprometerse",
+		"mainNavigationAria": "Navegación principal",
 		"nav": {
-			"home": "Home",
-			"categories": "Categories",
-			"docs": "Docs",
-			"imprint": "Imprint",
-			"settings": "Settings",
-			"stacks": "Stacks",
-			"deps": "Deps"
+			"home": "Hogar",
+			"categories": "Categorías",
+			"docs": "Documentos",
+			"imprint": "Imprimir",
+			"settings": "Ajustes",
+			"stacks": "pilas",
+			"deps": "departamentos"
 		},
-		"eyebrow": "Measure & Compare Digital Sovereignty",
-		"subtitle": "How sovereign is your tech stack? StackAtlas scores technologies and standards worldwide with a transparent sovereignty score from 0–100 – and reveals which dependencies threaten your digital independence.",
+		"eyebrow": "Medir y comparar la soberanía digital",
+		"subtitle": "¿Qué tan soberano es su paquete tecnológico? StackAtlas califica tecnologías y estándares en todo el mundo con una puntuación de soberanía transparente de 0 a 100 y revela qué dependencias amenazan su independencia digital.",
 		"languageSwitcher": {
-			"ariaLabel": "Switch language",
-			"label": "Language",
-			"hint": "Select display language",
+			"ariaLabel": "Cambiar idioma",
+			"label": "Idioma",
+			"hint": "Seleccionar idioma de visualización",
 			"accessKey": "l"
 		},
-		"version": "Version"
+		"version": "Versión"
 	},
 	"footer": {
-		"subtitle": "Rate and compare tech stacks worldwide by digital sovereignty",
-		"navigationAria": "Footer navigation",
+		"subtitle": "Califique y compare pilas de tecnología en todo el mundo según la soberanía digital",
+		"navigationAria": "Navegación de pie de página",
 		"links": {
 			"github": "GitHub",
-			"community": "Community",
-			"documentation": "Documentation",
-			"settings": "Settings",
-			"news": "News",
-			"stacks": "Stacks"
+			"community": "Comunidad",
+			"documentation": "Documentación",
+			"settings": "Ajustes",
+			"news": "Noticias",
+			"stacks": "pilas"
 		},
-		"license": "License: EUPL-1.2",
-		"builtWith": "Built with",
-		"and": "and",
-		"buildCommitAria": "Build commit {{commit}}",
-		"buildCommitLabel": "Build commit:",
-		"buildInfoAria": "Build version {{version}} and commit {{commit}}",
-		"buildVersionLabel": "Build version:"
+		"license": "Licencia: EUPL-1.2",
+		"builtWith": "Construido con",
+		"and": "y",
+		"buildCommitAria": "Crear compromiso {{commit}}",
+		"buildCommitLabel": "Compromiso de compilación:",
+		"buildInfoAria": "Compile la versión {{version}} y confirme {{commit}}",
+		"buildVersionLabel": "Versión de compilación:"
 	},
 	"search": {
-		"regionAria": "Search and filter",
-		"inputLabel": "Search",
-		"placeholder": "Search technology, standard or framework …",
-		"categoryLabel": "Layer",
-		"allCategories": "All layers",
-		"relationLabel": "Relation",
-		"allRelations": "All relations"
+		"regionAria": "Buscar y filtrar",
+		"inputLabel": "Buscar",
+		"placeholder": "Tecnología de búsqueda, estándar o framework…",
+		"categoryLabel": "Capa",
+		"allCategories": "Todas las capas",
+		"relationLabel": "Relación",
+		"allRelations": "Todas las relaciones"
 	},
 	"category": {
-		"toolbarAria": "Filter layers",
-		"label": "Layer",
-		"all": "All",
+		"toolbarAria": "Filtrar capas",
+		"label": "Capa",
+		"all": "Todo",
 		"results": {
-			"filteredPrefix": "of",
-			"entries": "entries",
-			"inCategory": "in {{category}}",
-			"forQuery": "for “{{query}}”",
-			"withRelation": "with relation “{{relation}}”",
-			"totalTechnologiesAndStandards": "rated technologies & standards"
+			"filteredPrefix": "de",
+			"entries": "entradas",
+			"inCategory": "en {{category}}",
+			"forQuery": "para \"{{query}}\"",
+			"withRelation": "con relación “{{relation}}”",
+			"totalTechnologiesAndStandards": "tecnologías y estándares calificados"
 		},
-		"paginationLabel": "Navigate through the articles"
+		"paginationLabel": "Navegar por los artículos"
 	},
 	"results": {
-		"noneFound": "No entries found",
-		"adjustFilters": "Please adjust your search or category filter."
+		"noneFound": "No se encontraron entradas",
+		"adjustFilters": "Por favor ajuste su filtro de búsqueda o categoría."
 	},
 	"view": {
-		"toolbarAria": "View and sorting",
-		"viewToggle": "Tile / List",
-		"tile": "Tiles",
-		"list": "List",
+		"toolbarAria": "Ver y ordenar",
+		"viewToggle": "Mosaico / Lista",
+		"tile": "Azulejos",
+		"list": "Lista",
 		"sort": {
-			"label": "Sort by",
-			"name": "Name",
-			"score": "Score",
-			"asc": "↑ Ascending",
-			"desc": "↓ Descending"
+			"label": "Ordenar por",
+			"name": "Nombre",
+			"score": "Puntaje",
+			"asc": "↑ Ascendente",
+			"desc": "↓ Descendente"
 		}
 	},
 	"article": {
-		"categoryAria": "Category: {{category}}",
-		"openDetails": "Score & Details →",
-		"featured": "Featured",
-		"detailsFor": "Details for {{name}}",
-		"categoryLabel": "Category: {{category}}",
-		"relatedTitle": "More entries in the same layer & stack",
-		"relatedTitleLayer": "All entries in the same layer",
-		"relatedSubtitleLayer": "No stack active – showing all {{count}} entries in this layer.",
-		"relatedSubtitleStack": "Filtered by stack – {{count}} entries in the same layer.",
-		"website": "Website ↗",
-		"repository": "Repository ↗",
-		"scoreTitle": "Sovereignty Score",
-		"scoreAria": "Sovereignty score: {{score}} of 100",
-		"sovereigntyScore": "Sovereignty Score (0–100)",
+		"categoryAria": "Categoría: {{category}}",
+		"openDetails": "Puntuación y detalles →",
+		"featured": "Presentado",
+		"detailsFor": "Detalles de {{name}}",
+		"categoryLabel": "Categoría: {{category}}",
+		"relatedTitle": "Más entradas en la misma capa y pila",
+		"relatedTitleLayer": "Todas las entradas en la misma capa.",
+		"relatedSubtitleLayer": "Ninguna pila activa: muestra todas las {{count}} entradas en esta capa.",
+		"relatedSubtitleStack": "Filtrado por pila: {{count}} entradas en la misma capa.",
+		"website": "Sitio web ↗",
+		"repository": "Repositorio ↗",
+		"scoreTitle": "Puntuación de soberanía",
+		"scoreAria": "Puntuación de soberanía: {{score}} de 100",
+		"sovereigntyScore": "Puntuación de soberanía (0–100)",
 		"criteria": {
-			"selfHostable": "Self-hostable (no third-party infrastructure required)",
-			"dataPortability": "Data exportable in open, non-proprietary formats",
-			"openSource": "Open Source (public source code)",
-			"openStandards": "Built on open, vendor-neutral standards",
-			"permissiveLicense": "Permissive or copyleft license (forkable)",
-			"hasAudit": "Security audit available",
-			"matureProject": "Mature project (graduated/stable)",
-			"noTelemetryByDefault": "No telemetry collected by default",
-			"euHeadquartered": "EU headquarters or registration",
-			"ownerType": "Owner model: {{owner}} (+{{points}})",
-			"ownerCountry": "Owner country: {{country}}"
+			"selfHostable": "Autohospedable (no se requiere infraestructura de terceros)",
+			"dataPortability": "Datos exportables en formatos abiertos y no propietarios.",
+			"openSource": "Código abierto (código fuente público)",
+			"openStandards": "Construido sobre estándares abiertos y neutrales para los proveedores",
+			"permissiveLicense": "Licencia permisiva o copyleft (forkable)",
+			"hasAudit": "Auditoría de seguridad disponible",
+			"matureProject": "Proyecto maduro (graduado/estable)",
+			"noTelemetryByDefault": "No se recopila telemetría de forma predeterminada",
+			"euHeadquartered": "Sede o registro de la UE",
+			"ownerType": "Modelo de propietario: {{owner}} (+{{points}})",
+			"ownerCountry": "País del propietario: {{country}}"
 		},
 		"ownerType": {
-			"independentConsortium": "Independent consortium",
-			"corporation": "Corporation",
-			"community": "Community",
-			"oneManShow": "One-man show",
-			"unknown": "Not maintained"
+			"independentConsortium": "Consorcio independiente",
+			"corporation": "Corporación",
+			"community": "Comunidad",
+			"oneManShow": "espectáculo unipersonal",
+			"unknown": "No mantenido"
 		},
 		"ownerCountry": {
-			"unknown": "Unknown"
+			"unknown": "Desconocido"
 		},
 		"scoreCategories": {
-			"insufficient": "Insufficient",
-			"insufficientDescription": "Not recommended – significant sovereignty risks",
-			"minimal": "Minimal",
-			"minimalDescription": "Only under specific conditions",
-			"adequate": "Adequate",
-			"adequateDescription": "Acceptable, but improvement needed",
-			"good": "Good",
-			"goodDescription": "Recommended for most cases",
-			"excellent": "Excellent",
-			"excellentDescription": "Highly recommended – excellent sovereignty",
-			"outstanding": "Outstanding",
-			"outstandingDescription": "Gold standard – optimal sovereignty"
+			"insufficient": "Insuficiente",
+			"insufficientDescription": "No recomendado: riesgos significativos para la soberanía",
+			"minimal": "Mínimo",
+			"minimalDescription": "Sólo bajo condiciones específicas",
+			"adequate": "Adecuado",
+			"adequateDescription": "Aceptable, pero es necesario mejorar",
+			"good": "Bien",
+			"goodDescription": "Recomendado para la mayoría de los casos.",
+			"excellent": "Excelente",
+			"excellentDescription": "Altamente recomendado – excelente soberanía",
+			"outstanding": "Pendiente",
+			"outstandingDescription": "Patrón oro: soberanía óptima"
 		},
 		"maintainerBoost": {
-			"title": "Maintainer sovereignty applied",
-			"explanation": "Within the active stack your organisation maintains this item. You control source code, hosting, data formats, protocols and telemetry directly – any lack of public access is a deliberate security posture rather than a sovereignty gap. Context score: {{effectiveScore}}/100 (public score: {{rawScore}}/100).",
-			"boostedCriteriaLabel": "Satisfied by maintainer context",
-			"criterionMarker": "satisfied as maintainer",
-			"criterionTitle": "This criterion is not publicly satisfied, but it counts as satisfied from the maintainer's perspective because the maintaining organisation controls it directly.",
-			"markerTitle": "Maintainer context boost",
-			"badgeTitle": "Maintainer context active – public score: {{rawScore}}/100",
-			"scoreAria": "Sovereignty score (maintainer context): {{score}} of 100 – public score: {{rawScore}} of 100",
-			"noteAria": "Note about the maintainer context"
+			"title": "Se aplica la soberanía del mantenedor",
+			"explanation": "Dentro de la pila activa, su organización mantiene este elemento. Usted controla directamente el código fuente, el alojamiento, los formatos de datos, los protocolos y la telemetría; cualquier falta de acceso público es una postura de seguridad deliberada y no una brecha de soberanía. Puntuación de contexto: {{effectiveScore}}/100 (puntuación pública: {{rawScore}}/100).",
+			"boostedCriteriaLabel": "Satisfecho por el contexto del mantenedor",
+			"criterionMarker": "satisfecho como mantenedor",
+			"criterionTitle": "Este criterio no se cumple públicamente, pero cuenta como satisfecho desde la perspectiva del mantenedor porque la organización mantenedora lo controla directamente.",
+			"markerTitle": "Impulso del contexto del mantenedor",
+			"badgeTitle": "Contexto de mantenedor activo – puntuación pública: {{rawScore}}/100",
+			"scoreAria": "Puntuación de soberanía (contexto de mantenimiento): {{score}} de 100 – puntuación pública: {{rawScore}} de 100",
+			"noteAria": "Nota sobre el contexto del mantenedor"
 		}
 	},
 	"pwa": {
-		"updateAvailable": "A new version of StackAtlas is available.",
-		"update": "Update now",
-		"dismiss": "Later"
+		"updateAvailable": "Está disponible una nueva versión de StackAtlas.",
+		"update": "Actualizar ahora",
+		"dismiss": "Más tarde"
 	},
 	"stack": {
-		"label": "Stack",
-		"all": "Without",
-		"selectorAria": "Select stack",
-		"rationale": "Rationale",
+		"label": "Pila",
+		"all": "Sin",
+		"selectorAria": "Seleccionar pila",
+		"rationale": "Razón fundamental",
 		"stats": {
 			"version": "v{{version}}",
-			"items": "{{count}} items",
-			"avgScore": "Avg. sovereignty score"
+			"items": "{{count}} artículos",
+			"avgScore": "Promedio puntuación de soberanía"
 		},
 		"roles": {
-			"maintainer": "Maintainer",
-			"contributor": "Contributor",
-			"funder": "Funder",
-			"consumer": "Consumer"
+			"maintainer": "mantenedor",
+			"contributor": "Contribuyente",
+			"funder": "Financiador",
+			"consumer": "Consumidor"
 		}
 	},
 	"stackGallery": {
-		"title": "Stack Gallery",
-		"subtitle": "All rated tech stacks ranked by digital sovereignty score – best to lowest.",
-		"listAria": "Tech stacks ranked by sovereignty score",
-		"bestStack": "Top-ranked stack – gold placement",
-		"rankAria": "Rank {{rank}}",
-		"avgScore": "Avg. sovereignty score",
-		"avgScoreAria": "Average sovereignty score: {{score}} out of 100",
-		"scoreDistribution": "Score distribution by category",
-		"keyMetrics": "Key metrics",
-		"sourcesTitle": "Sources",
-		"exploreStack": "Explore stack in catalogue →",
-		"itemCount": "{{count}} items",
-		"recommended": "Recommended",
-		"approved": "Approved",
-		"deprecated": "Deprecated",
+		"title": "Galería de pilas",
+		"subtitle": "Todas las pilas de tecnología clasificadas clasificadas según su puntuación de soberanía digital, de mejor a menor.",
+		"listAria": "Pilas de tecnología clasificadas por puntuación de soberanía",
+		"bestStack": "Pila mejor clasificada: ubicación en oro",
+		"rankAria": "Rango {{rank}}",
+		"avgScore": "Promedio puntuación de soberanía",
+		"avgScoreAria": "Puntuación media de soberanía: {{score}} sobre 100",
+		"scoreDistribution": "Distribución de puntuación por categoría",
+		"keyMetrics": "Métricas clave",
+		"sourcesTitle": "Fuentes",
+		"exploreStack": "Explorar pila en el catálogo →",
+		"itemCount": "{{count}} artículos",
+		"recommended": "Recomendado",
+		"approved": "Aprobado",
+		"deprecated": "En desuso",
 		"metrics": {
-			"selfHostable": "Self-hostable",
-			"openSource": "Open source",
-			"euHQ": "EU headquartered",
-			"permissiveLicense": "Permissive license",
-			"audit": "Audited",
-			"ownerCountry": "Owner country",
-			"unknown": "Unknown",
-			"layerBreakdown": "Layer breakdown",
+			"selfHostable": "Autohospedable",
+			"openSource": "Código abierto",
+			"euHQ": "Sede de la UE",
+			"permissiveLicense": "licencia permisiva",
+			"audit": "Auditado",
+			"ownerCountry": "País propietario",
+			"unknown": "Desconocido",
+			"layerBreakdown": "Desglose de capas",
 			"roles": "Roles"
 		}
 	},
 	"pages": {
 		"imprint": {
-			"description": "This page provides legal notices and provider information for StackAtlas.",
-			"title": "Imprint"
+			"description": "Esta página proporciona avisos legales e información del proveedor de StackAtlas.",
+			"title": "Imprimir"
 		},
 		"settings": {
-			"description": "Manage application settings and preferences for StackAtlas here.",
-			"title": "Settings"
+			"description": "Administre la configuración y las preferencias de la aplicación StackAtlas aquí.",
+			"title": "Ajustes"
 		},
 		"news": {
-			"title": "Rating Reports & Community News",
-			"description": "Add new dated MD/MDX files to `src/content/news/`. News posts can directly import additional report markdown files.",
-			"sectionAria": "List of published news posts",
-			"pushHint": "As soon as a new score is available, we publish an MDX post and can trigger push notifications from it.",
-			"metaDate": "Published on {{date}}",
-			"empty": "No news posts published yet.",
+			"title": "Informes de calificación y noticias de la comunidad",
+			"description": "Agregue nuevos archivos MD/MDX con fecha a `src/content/news/`. Las publicaciones de noticias pueden importar directamente archivos de rebajas de informes adicionales.",
+			"sectionAria": "Lista de publicaciones de noticias publicadas",
+			"pushHint": "Tan pronto como haya una nueva puntuación disponible, publicamos una publicación MDX y podemos activar notificaciones automáticas a partir de ella.",
+			"metaDate": "Publicado el {{date}}",
+			"empty": "Aún no hay publicaciones de noticias publicadas.",
 			"focus": {
-				"openDataGovernance": "Focus: Open Data Governance",
-				"identityWalletInteroperability": "Focus: Identity Wallet Interoperability",
-				"reportTemplate": "Focus: Report Template"
+				"openDataGovernance": "Enfoque: Gobernanza de datos abiertos",
+				"identityWalletInteroperability": "Enfoque: Interoperabilidad de Identity Wallet",
+				"reportTemplate": "Enfoque: Plantilla de informe"
 			}
 		}
 	}
