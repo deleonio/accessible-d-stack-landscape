@@ -56,7 +56,7 @@ export default defineConfig({
 				],
 			},
 			workbox: {
-				cacheId: `stackatlas-${appVersion}`,
+				cacheId: 'stackatlas',
 				maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
 				globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,woff}'],
 				cleanupOutdatedCaches: true,
