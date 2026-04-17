@@ -22,6 +22,7 @@ interface FilterBarProps {
 	onSortDirToggle: () => void;
 	viewMode: ViewMode;
 	onViewModeChange: (mode: ViewMode) => void;
+	showDependencyControls?: boolean;
 }
 
 export function FilterBar({
@@ -38,6 +39,7 @@ export function FilterBar({
 	onSortDirToggle,
 	viewMode,
 	onViewModeChange,
+	showDependencyControls = false,
 }: FilterBarProps) {
 	const { i18n, t } = useTranslation();
 
@@ -157,47 +159,51 @@ export function FilterBar({
 						}}
 					/>
 				)}
-				<KolSingleSelect
-					className="filter-bar__select filter-bar__select--dependency-depth sort-select"
-					_label={t('search.dependencies.depthLabel')}
-					_hideLabel
-					_options={[
-						{ label: t('search.dependencies.allDepths'), value: '' },
-						{ label: t('search.dependencies.depth.1'), value: '1' },
-						{ label: t('search.dependencies.depth.2'), value: '2' },
-						{ label: t('search.dependencies.depth.3'), value: '3' },
-					]}
-					_value={filters.dependencyDepth ? String(filters.dependencyDepth) : ''}
-					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) => {
-							const parsedDepth = value ? Number(value) : null;
-							onFilterChange({
-								...filters,
-								dependencyDepth: parsedDepth && [1, 2, 3].includes(parsedDepth) ? (parsedDepth as 1 | 2 | 3) : null,
-							});
-						},
-					}}
-				/>
-				<KolSingleSelect
-					className="filter-bar__select filter-bar__select--dependency-type sort-select"
-					_label={t('search.dependencies.typeLabel')}
-					_hideLabel
-					_options={dependencyTypeOptions}
-					_value={filters.selectedDependencyType ?? ''}
-					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) =>
-							onFilterChange({ ...filters, selectedDependencyType: value ? (value as FilterState['selectedDependencyType']) : null }),
-					}}
-				/>
-				<KolInputCheckbox
-					className="filter-bar__direct-toggle"
-					_label={t('search.dependencies.directOnlyLabel')}
-					_variant="switch"
-					_checked={filters.onlyDirectDependencies}
-					_on={{
-						onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, onlyDirectDependencies: Boolean(value) }),
-					}}
-				/>
+				{showDependencyControls && (
+					<>
+						<KolSingleSelect
+							className="filter-bar__select filter-bar__select--dependency-depth sort-select"
+							_label={t('search.dependencies.depthLabel')}
+							_hideLabel
+							_options={[
+								{ label: t('search.dependencies.allDepths'), value: '' },
+								{ label: t('search.dependencies.depth.1'), value: '1' },
+								{ label: t('search.dependencies.depth.2'), value: '2' },
+								{ label: t('search.dependencies.depth.3'), value: '3' },
+							]}
+							_value={filters.dependencyDepth ? String(filters.dependencyDepth) : ''}
+							_on={{
+								onChange: (_e: globalThis.Event, value: unknown) => {
+									const parsedDepth = value ? Number(value) : null;
+									onFilterChange({
+										...filters,
+										dependencyDepth: parsedDepth && [1, 2, 3].includes(parsedDepth) ? (parsedDepth as 1 | 2 | 3) : null,
+									});
+								},
+							}}
+						/>
+						<KolSingleSelect
+							className="filter-bar__select filter-bar__select--dependency-type sort-select"
+							_label={t('search.dependencies.typeLabel')}
+							_hideLabel
+							_options={dependencyTypeOptions}
+							_value={filters.selectedDependencyType ?? ''}
+							_on={{
+								onChange: (_e: globalThis.Event, value: unknown) =>
+									onFilterChange({ ...filters, selectedDependencyType: value ? (value as FilterState['selectedDependencyType']) : null }),
+							}}
+						/>
+						<KolInputCheckbox
+							className="filter-bar__direct-toggle"
+							_label={t('search.dependencies.directOnlyLabel')}
+							_variant="switch"
+							_checked={filters.onlyDirectDependencies}
+							_on={{
+								onChange: (_e: globalThis.Event, value: unknown) => onFilterChange({ ...filters, onlyDirectDependencies: Boolean(value) }),
+							}}
+						/>
+					</>
+				)}
 				<div className="filter-bar__sort">
 					<KolSingleSelect
 						className="sort-select"

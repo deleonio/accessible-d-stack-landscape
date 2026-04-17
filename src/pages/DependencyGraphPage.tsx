@@ -58,6 +58,7 @@ export function DependencyGraphPage() {
 				onSortDirToggle={() => setSortDir((direction) => (direction === 'asc' ? 'desc' : 'asc'))}
 				viewMode={viewMode}
 				onViewModeChange={setViewMode}
+				showDependencyControls
 			/>
 			<div className="px-3 md:px-4 lg:px-5 py-3">
 				<KolSingleSelect
