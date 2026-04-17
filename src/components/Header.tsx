@@ -1,4 +1,4 @@
-import { KolButton, KolDrawer, KolLink } from '@public-ui/preact';
+import { KolButton, KolDrawer, KolLink, KolLinkButton } from '@public-ui/preact';
 import { useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { getAppVersion, getCommitDisplay } from '../utils';
@@ -48,26 +48,29 @@ export function Header({ currentUrl }: HeaderProps) {
 				<div className="header__inner flex flex-col max-w-6xl mx-auto px-4 md:px-6 w-full">
 					{/* Brand bar */}
 					<div className="header__brand-bar flex items-center justify-between gap-3 py-2">
-						<KolLink
+						<KolLinkButton
 							_href={brandUrl}
 							className="header__brand-link flex items-center gap-2 no-underline font-bold text-base hover:opacity-90"
 							_target={brandUrl.startsWith('http') ? '_blank' : undefined}
 							_label="StackAtlas"
+							_variant="ghost"
 							_icons={{ left: 'kolicon kolicon-house' }}
 						/>
 						<nav className="header__main-nav" aria-label={t('header.mainNavigationAria')}>
-							<KolLink
+							<KolLinkButton
 								_href="#/"
 								className={`header__nav-link${isStacksActive ? ' header__nav-link--active' : ''}`}
 								aria-current={isStacksActive ? 'page' : undefined}
 								_label={t('header.nav.stacks')}
+								_variant="ghost"
 								_icons={{ left: 'kolicon kolicon-layers' }}
 							/>
-							<KolLink
+							<KolLinkButton
 								_href="#/deps"
 								className={`header__nav-link${isDepsActive ? ' header__nav-link--active' : ''}`}
 								aria-current={isDepsActive ? 'page' : undefined}
 								_label={t('header.nav.deps')}
+								_variant="ghost"
 								_icons={{ left: 'kolicon kolicon-code' }}
 							/>
 						</nav>

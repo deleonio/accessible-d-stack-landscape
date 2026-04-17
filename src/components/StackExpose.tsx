@@ -1,4 +1,4 @@
-import { KolButton, KolLink } from '@public-ui/preact';
+import { KolButton, KolLinkButton } from '@public-ui/preact';
 import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { StackMetrics } from '../hooks/useStackMetrics';
@@ -118,11 +118,12 @@ export function StackExpose({ stack, metrics, allLayers, isTop, rank }: StackExp
 								const sourceLabel = source.label ? getLocalizedText(source.label, i18n.language) : source.url;
 								return (
 									<li key={`${stack.id}-${source.url}`} className="stack-expose__sources-item">
-										<KolLink
+										<KolLinkButton
 											_href={source.url}
 											_target="_blank"
 											className="stack-expose__source-link"
 											_label={sourceLabel}
+											_variant="ghost"
 											_icons={{ right: 'kolicon kolicon-external-link' }}
 										/>
 									</li>

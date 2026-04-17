@@ -1,4 +1,4 @@
-import { KolButton, KolCard, KolDrawer, KolImage, KolLink } from '@public-ui/preact';
+import { KolButton, KolCard, KolDrawer, KolImage, KolLinkButton } from '@public-ui/preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
@@ -211,20 +211,22 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 									<p className="drawer-category">{t('article.categoryLabel', { category: categoryName })}</p>
 									<div className="drawer-links">
 										{selectedArticle.homepage && (
-											<KolLink
+											<KolLinkButton
 												_href={selectedArticle.homepage}
 												_target="_blank"
 												className="drawer-link"
 												_label={t('article.website')}
+												_variant="ghost"
 												_icons={{ right: 'kolicon kolicon-external-link' }}
 											/>
 										)}
 										{selectedArticle.github?.repo && (
-											<KolLink
+											<KolLinkButton
 												_href={selectedArticle.github.repo}
 												_target="_blank"
 												className="drawer-link drawer-link--github"
 												_label={t('article.repository')}
+												_variant="ghost"
 												_icons={{ right: 'kolicon kolicon-external-link' }}
 											/>
 										)}
@@ -316,10 +318,11 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 										<ul className="drawer-stacks__list">
 											{stacksContainingItem.map((stack) => (
 												<li key={stack.id} className="drawer-stacks__item">
-													<KolLink
+													<KolLinkButton
 														_href={`#/stacks?stack=${stack.id}`}
 														className="drawer-related__link"
 														_label={getLocalizedText(stack.name, i18n.language)}
+														_variant="ghost"
 														_icons={{ right: 'kolicon kolicon-chevron-right' }}
 														_on={{ onClick: () => setIsDrawerOpen(false) }}
 													/>
