@@ -71,6 +71,7 @@ export function hasDependencyWithinDepth(
 ): boolean {
 	const queue: Array<{ id: string; depth: number }> = [{ id: itemId, depth: 0 }];
 	const seen = new Set<string>([itemId]);
+	let hasMatch = false;
 
 	while (queue.length > 0) {
 		const current = queue.shift();
@@ -81,12 +82,14 @@ export function hasDependencyWithinDepth(
 		for (const edge of graph.outgoingById.get(current.id) ?? []) {
 			if (selectedDependencyType && edge.dependency.type !== selectedDependencyType) continue;
 			if (!seen.has(edge.target.id)) {
-				if (current.depth + 1 <= maxDepth) return true;
+				if (current.depth + 1 === maxDepth) {
+					hasMatch = true;
+				}
 				seen.add(edge.target.id);
 				queue.push({ id: edge.target.id, depth: current.depth + 1 });
 			}
 		}
 	}
 
-	return false;
+	return hasMatch;
 }
