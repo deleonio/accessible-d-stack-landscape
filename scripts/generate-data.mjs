@@ -96,10 +96,8 @@ function buildDependencyIndexes(rawItems) {
 		}
 	}
 
-	for (const item of rawItems) {
-		if (!reverseDependencies[item.id]) {
-			reverseDependencies[item.id] = [];
-		}
+	for (const targetId of Object.keys(reverseDependencies)) {
+		reverseDependencies[targetId].sort((left, right) => left.sourceItemId.localeCompare(right.sourceItemId));
 	}
 
 	return {

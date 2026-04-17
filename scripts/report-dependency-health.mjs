@@ -8,7 +8,7 @@
  *   node scripts/report-dependency-health.mjs --out reports/dependency-health.json
  */
 
-import { readFileSync, readdirSync, writeFileSync } from 'fs';
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import path from 'path';
 import url from 'url';
 
@@ -24,11 +24,20 @@ const itemFiles = readdirSync(itemsDir)
 	.filter((file) => file.endsWith('.json') && file !== '.gitkeep.json')
 	.sort();
 
-const itemRecords = itemFiles.map((file) => {
-	const raw = readFileSync(path.join(itemsDir, file), 'utf8');
-	const item = JSON.parse(raw);
-	return { file, item };
-});
+const parseErrors = [];
+const itemRecords = itemFiles
+	.map((file) => {
+		const filePath = path.join(itemsDir, file);
+		try {
+			const raw = readFileSync(filePath, 'utf8');
+			const item = JSON.parse(raw);
+			return { file, item };
+		} catch (error) {
+			parseErrors.push({ file, message: error.message });
+			return null;
+		}
+	})
+	.filter(Boolean);
 
 const itemIds = new Set(itemRecords.map(({ item }) => item.id));
 const itemsWithoutDependencies = [];
@@ -69,16 +78,19 @@ const report = {
 		items: itemRecords.length,
 		itemsWithoutDependencies: itemsWithoutDependencies.length,
 		orphanedReferences: orphanedReferences.length,
+		parseErrors: parseErrors.length,
 	},
 	itemsWithoutDependencies,
 	mostReferencedBaseTechnologies,
 	orphanedReferences,
+	parseErrors,
 };
 
 const output = format === 'json' ? JSON.stringify(report, null, 2) : toMarkdown(report);
 
 if (outFile) {
 	const absoluteOutFile = path.isAbsolute(outFile) ? outFile : path.join(projectRoot, outFile);
+	mkdirSync(path.dirname(absoluteOutFile), { recursive: true });
 	writeFileSync(absoluteOutFile, output + '\n', 'utf8');
 	console.log(`✅ Dependency health report written to ${path.relative(projectRoot, absoluteOutFile)}`);
 } else {
@@ -99,6 +111,7 @@ function toMarkdown(data) {
 	lines.push(`- Total items: ${data.totals.items}`);
 	lines.push(`- Items ohne Dependencies: ${data.totals.itemsWithoutDependencies}`);
 	lines.push(`- Verwaiste Referenzen: ${data.totals.orphanedReferences}`);
+	lines.push(`- Parse-Fehler: ${data.totals.parseErrors}`);
 	lines.push('');
 	lines.push('## Items ohne Dependencies');
 	if (data.itemsWithoutDependencies.length === 0) {
@@ -108,6 +121,7 @@ function toMarkdown(data) {
 			lines.push(`- ${itemId}`);
 		}
 	}
+
 	lines.push('');
 	lines.push('## Häufigste Basistechnologien (Top 10 nach Eingangs-Referenzen)');
 	if (data.mostReferencedBaseTechnologies.length === 0) {
@@ -117,6 +131,7 @@ function toMarkdown(data) {
 			lines.push(`- ${entry.itemId}: ${entry.incomingCount}`);
 		}
 	}
+
 	lines.push('');
 	lines.push('## Verwaiste Referenzen');
 	if (data.orphanedReferences.length === 0) {
@@ -126,5 +141,16 @@ function toMarkdown(data) {
 			lines.push(`- ${entry.sourceItemId} -> ${entry.targetItemId} (type=${entry.type}, scope=${entry.scope}, file=${entry.file})`);
 		}
 	}
+
+	lines.push('');
+	lines.push('## Parse-Fehler');
+	if (data.parseErrors.length === 0) {
+		lines.push('- Keine');
+	} else {
+		for (const entry of data.parseErrors) {
+			lines.push(`- ${entry.file}: ${entry.message}`);
+		}
+	}
+
 	return lines.join('\n');
 }
