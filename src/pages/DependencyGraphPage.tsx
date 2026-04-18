@@ -5,10 +5,12 @@ import { DependencyGraph } from '../components/DependencyGraph';
 import { FilterBar, SortDir, SortField, ViewMode } from '../components/FilterBar';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { useFilters } from '../hooks/useFilters';
+import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 import { buildDependencyGraph, getLocalizedText } from '../utils';
 
 export function DependencyGraphPage() {
 	const { i18n, t } = useTranslation();
+	useRouteAnnouncement({ pageTitle: t('dependencies.graph.title') || 'Dependency Graph' });
 	const [activeStackId, setActiveStackId] = useState<string | null>(null);
 	const [selectedRootItemId, setSelectedRootItemId] = useState<string | null>(null);
 	const [sortField, setSortField] = useState<SortField>('overall');

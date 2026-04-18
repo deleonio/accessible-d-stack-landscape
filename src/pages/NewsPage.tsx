@@ -2,6 +2,7 @@ import { KolCard } from '@public-ui/preact';
 import { ComponentType } from 'preact';
 import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
+import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 
 type NewsModule = {
 	default: ComponentType;
@@ -62,6 +63,7 @@ function normalizeEntries(): NewsEntry[] {
 
 export function NewsPage() {
 	const { i18n, t } = useTranslation();
+	useRouteAnnouncement({ pageTitle: t('pages.news.title') || 'News' });
 	const dateFormatter = useMemo(() => new Intl.DateTimeFormat(i18n.language, { dateStyle: 'long' }), [i18n.language]);
 	const entries = useMemo(() => normalizeEntries(), []);
 

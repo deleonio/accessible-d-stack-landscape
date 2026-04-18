@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { SettingsForm } from '../components/SettingsForm';
+import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 
 export function SettingsPage() {
 	const { t } = useTranslation();
+	useRouteAnnouncement({ pageTitle: t('pages.settings.title') || 'Settings' });
 
 	return (
 		<main id="main-content" className="content-page max-w-2xl mx-auto px-4 md:px-6 py-8 md:py-12" aria-labelledby="settings-page-title">

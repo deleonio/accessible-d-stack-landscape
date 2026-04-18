@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StackExpose } from '../components/StackExpose';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { computeStackAvgScore, useStackMetrics } from '../hooks/useStackMetrics';
+import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 import { Stack } from '../types';
 
 interface StackExposeWithMetricsProps {
@@ -25,6 +26,7 @@ export function StackGalleryPage() {
 	const { t } = useTranslation();
 	const location = useLocation();
 	const selectedStackId = location.query.stack;
+	useRouteAnnouncement({ pageTitle: t('stackGallery.title') || 'Stack Gallery' });
 
 	const stacksWithScores = useMemo(() => STACKS.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })), []);
 
