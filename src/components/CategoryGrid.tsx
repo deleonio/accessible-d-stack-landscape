@@ -40,7 +40,6 @@ export function CategoryGrid({
 }: CategoryGridProps) {
 	const { i18n, t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
-	const [announcementMessage, setAnnouncementMessage] = useState('');
 
 	const sortedArticles = useMemo(
 		() =>

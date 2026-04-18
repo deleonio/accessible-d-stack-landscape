@@ -8,7 +8,7 @@ interface A11yAnnouncerProps {
 }
 
 export function A11yAnnouncer({ message, priority = 'polite', atomic = true, debounceMs = 750 }: A11yAnnouncerProps) {
-	const debounceTimerRef = useRef<number>();
+	const debounceTimerRef = useRef<ReturnType<typeof setTimeout>>();
 	const liveRegionRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ export function A11yAnnouncer({ message, priority = 'polite', atomic = true, deb
 			clearTimeout(debounceTimerRef.current);
 		}
 
-		debounceTimerRef.current = window.setTimeout(() => {
+		debounceTimerRef.current = setTimeout(() => {
 			if (liveRegionRef.current) {
 				liveRegionRef.current.textContent = message;
 			}

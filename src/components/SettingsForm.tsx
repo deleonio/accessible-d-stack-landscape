@@ -14,6 +14,11 @@ export function SettingsForm() {
 		{ value: 'high-contrast', label: t('pages.settings.theme.highContrast') },
 	];
 
+	const handleThemeChange = (event: Event) => {
+		const target = event.target as HTMLSelectElement;
+		setTheme(target.value as ThemeValue);
+	};
+
 	return (
 		<div className="settings-form space-y-6">
 			<p className="text-sm text-gray-600">{t('pages.settings.description')}</p>
@@ -26,10 +31,7 @@ export function SettingsForm() {
 					_options={themeOptions}
 					_value={theme}
 					_on={{
-						onChange: (event: Event) => {
-							const target = event.target as HTMLSelectElement;
-							setTheme(target.value as ThemeValue);
-						},
+						onChange: handleThemeChange,
 					}}
 				/>
 			</fieldset>
