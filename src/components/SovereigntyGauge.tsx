@@ -106,8 +106,11 @@ export function SovereigntyGauge({ score, category, size = 200 }: SovereigntyGau
 			height={size}
 			viewBox={`0 0 ${size} ${size}`}
 			className="sovereignty-gauge"
-			role="img"
+			role="progressbar"
 			aria-label={t('article.sovereigntyGaugeAria', { score, category: t(`article.scoreCategories.${category}`) })}
+			aria-valuenow={score}
+			aria-valuemin={0}
+			aria-valuemax={100}
 		>
 			{/* Hintergrund-Segmente inkl. runder Kappen */}
 			<g opacity="0.2">
