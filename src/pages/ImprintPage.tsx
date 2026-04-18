@@ -7,7 +7,7 @@ export function ImprintPage() {
 
 	return (
 		<main id="main-content" className="content-page" aria-labelledby="imprint-page-title">
-			<h2 id="imprint-page-title">{t('pages.imprint.title')}</h2>
+			<h1 id="imprint-page-title">{t('pages.imprint.title')}</h1>
 			<p>{t('pages.imprint.description')}</p>
 		</main>
 	);

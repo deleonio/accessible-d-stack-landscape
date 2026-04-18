@@ -56,7 +56,10 @@ export function DependencyGraphPage() {
 	const graphItems = selectedRootItemId ? baseItems : filtered;
 
 	return (
-		<main id="main-content">
+		<main id="main-content" aria-labelledby="graph-page-title">
+			<h1 id="graph-page-title" className="sr-only">
+				{t('dependencies.graph.title') || 'Dependency Graph'}
+			</h1>
 			<FilterBar
 				filters={filters}
 				onFilterChange={setFilters}

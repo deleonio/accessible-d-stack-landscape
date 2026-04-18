@@ -49,7 +49,10 @@ export function HomePage() {
 	}, [activeStackId, setFilters]);
 
 	return (
-		<main id="main-content">
+		<main id="main-content" aria-labelledby="home-page-title">
+			<h1 id="home-page-title" className="sr-only">
+				{t('pages.home.title') || 'Categories'}
+			</h1>
 			<FilterBar
 				filters={filters}
 				onFilterChange={setFilters}

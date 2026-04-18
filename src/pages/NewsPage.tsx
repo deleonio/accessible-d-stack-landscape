@@ -69,7 +69,7 @@ export function NewsPage() {
 
 	return (
 		<main id="main-content" className="content-page" aria-labelledby="news-page-title">
-			<h2 id="news-page-title">{t('pages.news.title')}</h2>
+			<h1 id="news-page-title">{t('pages.news.title')}</h1>
 			<p>{t('pages.news.description')}</p>
 
 			<section className="news-page" aria-label={t('pages.news.sectionAria')}>
