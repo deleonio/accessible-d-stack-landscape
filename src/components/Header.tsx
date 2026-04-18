@@ -1,5 +1,5 @@
 import { KolAlert, KolButton, KolDrawer } from '@public-ui/preact';
-import { useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { getAppVersion, getCommitDisplay } from '../utils';
 import { SettingsForm } from './SettingsForm';
@@ -11,11 +11,40 @@ interface HeaderProps {
 export function Header({ currentUrl }: HeaderProps) {
 	const { t } = useTranslation();
 	const [settingsDrawerOpen, setSettingsDrawerOpen] = useState(false);
+	const settingsTriggerRef = useRef<HTMLButtonElement>(null);
+	const drawerContentRef = useRef<HTMLDivElement>(null);
 
 	const baseUrl = import.meta.env.BASE_URL;
 	const brandUrl = import.meta.env.VITE_BRAND_URL ?? baseUrl;
 	const commitDisplay = getCommitDisplay();
 	const appVersion = getAppVersion();
+
+	useEffect(() => {
+		if (settingsDrawerOpen) {
+			const drawerContent = drawerContentRef.current;
+			if (drawerContent) {
+				const focusableElements = drawerContent.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+				if (focusableElements.length > 0) {
+					(focusableElements[0] as HTMLElement).focus();
+				}
+			}
+
+			const mainContent = document.getElementById('main-content');
+			if (mainContent) {
+				mainContent.setAttribute('inert', '');
+			}
+		} else {
+			const mainContent = document.getElementById('main-content');
+			if (mainContent) {
+				mainContent.removeAttribute('inert');
+			}
+
+			const trigger = settingsTriggerRef.current;
+			if (trigger) {
+				trigger.focus();
+			}
+		}
+	}, [settingsDrawerOpen]);
 
 	const isStacksActive = currentUrl === '/' || currentUrl.startsWith('/stacks');
 	const isDepsActive = currentUrl.startsWith('/deps');
@@ -81,6 +110,7 @@ export function Header({ currentUrl }: HeaderProps) {
 						</nav>
 						<div className="header__controls flex items-center gap-2 ml-auto">
 							<KolButton
+								ref={settingsTriggerRef}
 								className="header__lang-trigger"
 								_label={t('header.languageSwitcher.label')}
 								_hideLabel
@@ -99,7 +129,7 @@ export function Header({ currentUrl }: HeaderProps) {
 						_open={settingsDrawerOpen}
 						_on={{ onClose: () => setSettingsDrawerOpen(false) }}
 					>
-						<div className="header__settings-drawer-content p-4">
+						<div ref={drawerContentRef} className="header__settings-drawer-content p-4">
 							<SettingsForm />
 						</div>
 					</KolDrawer>

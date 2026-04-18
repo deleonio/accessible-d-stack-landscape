@@ -19,6 +19,7 @@ export default [
 				console: 'readonly',
 				HTMLElement: 'readonly',
 				HTMLDivElement: 'readonly',
+				HTMLButtonElement: 'readonly',
 				HTMLSelectElement: 'readonly',
 				CustomEvent: 'readonly',
 				Event: 'readonly',
