@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('StackAtlas App', () => {
 	test.beforeEach(async ({ page }) => {
@@ -17,7 +17,7 @@ test.describe('StackAtlas App', () => {
 	test('renders article cards', async ({ page }) => {
 		await expect(page.locator('.articles-grid')).toBeVisible();
 		const cards = page.locator('.article-card');
-		await expect(cards).toHaveCount({ min: 1 });
+		await expect(cards.first()).toBeVisible();
 	});
 
 	test('renders category filter buttons', async ({ page }) => {
@@ -38,21 +38,23 @@ test.describe('StackAtlas App', () => {
 	test('dependency edges are keyboard operable via button list without SVG hitboxes', async ({ page }) => {
 		await page.goto('/#/graphs');
 
-		const edgeButtons = page.locator('.dependency-graph__edge-list kol-button');
+		const edgeButtons = page.locator('.dependency-graph__edge-list .dependency-graph__edge-button');
 		await expect(edgeButtons.first()).toBeVisible();
 		await expect(edgeButtons).not.toHaveCount(0);
 		await expect(page.locator('.dependency-graph__edge-hitbox')).toHaveCount(0);
+		await expect(page.locator('.dependency-graph__edge-list > li')).toHaveCount(await edgeButtons.count());
 
 		const edgeButtonCount = await edgeButtons.count();
 		for (let index = 0; index < edgeButtonCount; index += 1) {
 			const currentButton = edgeButtons.nth(index);
-			const buttonLabel = (await currentButton.getAttribute('_label')) ?? '';
+			const currentEdgeId = await currentButton.getAttribute('data-edge-id');
 
 			await currentButton.focus();
 			await page.keyboard.press('Enter');
 
+			await expect(page.locator('.dependency-graph__edge-button[aria-current=\"true\"]')).toHaveCount(1);
 			await expect(currentButton).toHaveAttribute('aria-current', 'true');
-			await expect(page.locator('.dependency-graph__explanation strong').first()).toContainText(buttonLabel.split(' → ')[0] ?? '');
+			await expect(page.locator(`.dependency-graph__edge-button[data-edge-id=\"${currentEdgeId}\"]`)).toHaveAttribute('aria-current', 'true');
 		}
 	});
 

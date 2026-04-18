@@ -2119,6 +2119,16 @@ kol-select {
 	font-style: italic;
 }
 
+.dependency-graph__edge-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.dependency-graph__edge-list-item {
+	margin: 0;
+}
+
 .dependency-graph__status {
 	border: 0;
 	clip-path: inset(50%);

@@ -195,28 +195,30 @@ export function DependencyGraph({ items, layers, filters, selectedRootItemId }: 
 							</div>
 
 							{scopedEdges.length > 0 ? (
-								<div className="dependency-graph__edge-list flex flex-col gap-2">
+								<ul className="dependency-graph__edge-list flex flex-col gap-2">
 									{scopedEdges.map((edge) => (
-										<KolButton
-											key={edge.id}
-											className="dependency-graph__edge-button"
-											_label={`${getLocalizedText(edge.source.name, i18n.language)} → ${getLocalizedText(edge.target.name, i18n.language)}`}
-											_variant={selectedEdge?.id === edge.id ? 'primary' : 'ghost'}
-											aria-current={selectedEdge?.id === edge.id ? 'true' : undefined}
-											_on={{
-												onBlur: () => setFocusedEdgeId((currentFocusedId) => (currentFocusedId === edge.id ? null : currentFocusedId)),
-												onClick: () => setSelectedEdgeId(edge.id),
-												onFocus: () => setFocusedEdgeId(edge.id),
-												onMouseEnter: () => setFocusedEdgeId(edge.id),
-												onMouseLeave: () => setFocusedEdgeId((currentFocusedId) => (currentFocusedId === edge.id ? null : currentFocusedId)),
-											}}
-										/>
+										<li key={edge.id} className="dependency-graph__edge-list-item">
+											<KolButton
+												className="dependency-graph__edge-button"
+												data-edge-id={edge.id}
+												_label={`${getLocalizedText(edge.source.name, i18n.language)} → ${getLocalizedText(edge.target.name, i18n.language)}`}
+												_variant={selectedEdge?.id === edge.id ? 'primary' : 'ghost'}
+												aria-current={selectedEdge?.id === edge.id ? 'true' : undefined}
+												_on={{
+													onBlur: () => setFocusedEdgeId((currentFocusedId) => (currentFocusedId === edge.id ? null : currentFocusedId)),
+													onClick: () => setSelectedEdgeId(edge.id),
+													onFocus: () => setFocusedEdgeId(edge.id),
+													onMouseEnter: () => setFocusedEdgeId(edge.id),
+													onMouseLeave: () => setFocusedEdgeId((currentFocusedId) => (currentFocusedId === edge.id ? null : currentFocusedId)),
+												}}
+											/>
+										</li>
 									))}
-								</div>
+								</ul>
 							) : (
 								<p className="dependency-graph__empty">{t('dependencies.graph.noEdgesForSelection')}</p>
 							)}
-							<p className="dependency-graph__status" aria-live="polite" aria-atomic="true">
+							<p className="dependency-graph__status" role="status" aria-live="polite" aria-atomic="true">
 								{selectedEdgeStatus}
 							</p>
 
