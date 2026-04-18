@@ -17,7 +17,7 @@ test.describe('StackAtlas App', () => {
 	test('renders article cards', async ({ page }) => {
 		await expect(page.locator('.articles-grid')).toBeVisible();
 		const cards = page.locator('.article-card');
-await expect(cards).toHaveCount({ min: 1 });
+		await expect(cards).toHaveCount({ min: 1 });
 	});
 
 	test('renders category filter buttons', async ({ page }) => {
@@ -31,8 +31,29 @@ await expect(cards).toHaveCount({ min: 1 });
 	});
 
 	test('screenshot – full page on load', async ({ page }) => {
-await expect(page.locator('.article-card').first()).toBeVisible();
+		await expect(page.locator('.article-card').first()).toBeVisible();
 		await expect(page).toHaveScreenshot('full-page.png', { fullPage: true });
+	});
+
+	test('dependency edges are keyboard operable via button list without SVG hitboxes', async ({ page }) => {
+		await page.goto('/#/graphs');
+
+		const edgeButtons = page.locator('.dependency-graph__edge-list kol-button');
+		await expect(edgeButtons.first()).toBeVisible();
+		await expect(edgeButtons).not.toHaveCount(0);
+		await expect(page.locator('.dependency-graph__edge-hitbox')).toHaveCount(0);
+
+		const edgeButtonCount = await edgeButtons.count();
+		for (let index = 0; index < edgeButtonCount; index += 1) {
+			const currentButton = edgeButtons.nth(index);
+			const buttonLabel = (await currentButton.getAttribute('_label')) ?? '';
+
+			await currentButton.focus();
+			await page.keyboard.press('Enter');
+
+			await expect(currentButton).toHaveAttribute('aria-current', 'true');
+			await expect(page.locator('.dependency-graph__explanation strong').first()).toContainText(buttonLabel.split(' → ')[0] ?? '');
+		}
 	});
 
 	test('screenshot – header', async ({ page }) => {
