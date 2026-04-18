@@ -538,7 +538,7 @@ kol-select,
 	margin: 0 auto;
 	width: 100%;
 	display: grid;
-	gap: var(--ds-space-2);
+	gap: var(--ds-space-3);
 	grid-template-columns: 1fr;
 }
 
@@ -639,8 +639,9 @@ kol-select,
 .filter-bar__sort {
 	grid-area: sort;
 	display: flex;
-	align-items: flex-end;
+	align-items: flex-start;
 	gap: var(--ds-space-2);
+	flex-wrap: wrap;
 	flex-shrink: 0;
 }
 
@@ -650,7 +651,18 @@ kol-select,
 
 .filter-bar__view-toggle {
 	grid-area: toggle;
-	place-self: end;
+	place-self: start;
+}
+
+@media (width >= 600px) {
+	.filter-bar__sort {
+		align-items: flex-end;
+		flex-wrap: nowrap;
+	}
+
+	.filter-bar__view-toggle {
+		place-self: end;
+	}
 }
 
 @media (width < 480px) {

@@ -102,7 +102,6 @@ export function FilterBar({
 				<KolInputText
 					className="filter-bar__search"
 					_label={t('search.inputLabel')}
-					_hideLabel
 					_type="search"
 					_value={filters.searchQuery}
 					_placeholder={t('search.placeholder')}
@@ -113,7 +112,6 @@ export function FilterBar({
 				<KolSingleSelect
 					className="filter-bar__select filter-bar__select--stack sort-select"
 					_label={t('stack.label')}
-					_hideLabel
 					_options={stackOptions}
 					_value={activeStackId ?? ''}
 					_on={{
@@ -126,7 +124,6 @@ export function FilterBar({
 				<KolSingleSelect
 					className="filter-bar__select filter-bar__select--layer sort-select"
 					_label={t('search.categoryLabel')}
-					_hideLabel
 					_options={layerOptions}
 					_value={filters.selectedLayer ?? ''}
 					_on={{
@@ -138,7 +135,6 @@ export function FilterBar({
 					<KolSingleSelect
 						className="filter-bar__select filter-bar__select--sublayer sort-select"
 						_label="Sublayer"
-						_hideLabel
 						_options={[{ label: 'All Sublayers', value: '' }, ...sublayerOptions.map((sublayer) => ({ label: sublayer, value: sublayer }))]}
 						_value={filters.selectedSublayer ?? ''}
 						_disabled={sublayerOptions.length === 0}
@@ -151,7 +147,6 @@ export function FilterBar({
 					<KolSingleSelect
 						className="filter-bar__select filter-bar__select--relation sort-select"
 						_label={t('search.relationLabel')}
-						_hideLabel
 						_options={[{ label: t('search.allRelations'), value: '' }, ...relationOptions]}
 						_value={filters.selectedRelation ?? ''}
 						_on={{
@@ -208,7 +203,6 @@ export function FilterBar({
 					<KolSingleSelect
 						className="sort-select"
 						_label={t('view.sort.label')}
-						_hideLabel
 						_options={[
 							{ label: t('view.sort.name'), value: 'name' },
 							{ label: t('view.sort.score'), value: 'score' },
@@ -220,7 +214,6 @@ export function FilterBar({
 					/>
 					<KolButton
 						_label={sortDir === 'asc' ? t('view.sort.asc') : t('view.sort.desc')}
-						_hideLabel
 						_icons={{ left: sortDir === 'asc' ? 'kolicon kolicon-sort-asc' : 'kolicon kolicon-sort-desc' }}
 						_variant="secondary"
 						_on={{ onClick: onSortDirToggle }}
@@ -229,7 +222,6 @@ export function FilterBar({
 				<KolInputCheckbox
 					className="filter-bar__view-toggle"
 					_label={t('view.viewToggle')}
-					_hideLabel
 					_variant="switch"
 					_checked={viewMode === 'list'}
 					_on={{
