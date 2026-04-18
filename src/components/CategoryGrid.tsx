@@ -5,6 +5,7 @@ import { FilterState, Item, Layer, Stack, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
 import { computeEffectiveSovereigntyScore } from '../utils/sovereigntyScore';
 import { ArticleCard } from './ArticleCard';
+import { A11yAnnouncer } from './A11yAnnouncer';
 import { SortDir, SortField, ViewMode } from './FilterBar';
 import { StackStats } from './StackStats';
 
@@ -39,6 +40,7 @@ export function CategoryGrid({
 }: CategoryGridProps) {
 	const { i18n, t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
+	const [announcementMessage, setAnnouncementMessage] = useState('');
 
 	const sortedArticles = useMemo(
 		() =>
@@ -68,15 +70,32 @@ export function CategoryGrid({
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
 	const paginatedArticles = sortedArticles.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
-	// Reset to page 1 when filters change
+	// Reset to page 1 when filters change and announce new count
 	const handleFilterChange = (newFilters: FilterState) => {
 		onFilterChange(newFilters);
 		setCurrentPage(1);
 	};
 	void handleFilterChange;
 
+	// Update accessibility announcement when article count changes (debounced via A11yAnnouncer)
+	const filterResultsMessage = useMemo(() => {
+		if (articles.length === 0) {
+			return t('results.noneFound');
+		}
+
+		const activeCount = articles.length;
+		if (filters.searchQuery || filters.selectedLayer || filters.selectedRelation || filters.onlyDirectDependencies || filters.dependencyDepth || filters.selectedDependencyType) {
+			return t('category.results.filteredPrefix', {
+				count: activeCount,
+				total: totalCount,
+			});
+		}
+		return '';
+	}, [articles.length, filters, totalCount, t]);
+
 	return (
 		<div id="category-results" className="category-container px-3 md:px-4 lg:px-5">
+			<A11yAnnouncer message={filterResultsMessage} priority="polite" debounceMs={750} />
 			{activeStack && stackItemMap && <StackStats stack={activeStack} items={stackScoreItems ?? articles} stackItemMap={stackItemMap} />}
 
 			<p className="results-info" aria-live="polite" aria-atomic="true">
