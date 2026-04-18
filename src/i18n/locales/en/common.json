@@ -71,7 +71,9 @@
 				"protocol": "Protocol",
 				"runtime": "Runtime"
 			}
-		}
+		},
+		"sublayerLabel": "Sublayer",
+		"allSublayers": "All sublayers"
 	},
 	"category": {
 		"toolbarAria": "Filter layers",
@@ -166,7 +168,8 @@
 			"badgeTitle": "Maintainer context active – public score: {{rawScore}}/100",
 			"scoreAria": "Sovereignty score (maintainer context): {{score}} of 100 – public score: {{rawScore}} of 100",
 			"noteAria": "Note about the maintainer context"
-		}
+		},
+		"sovereigntyGaugeAria": "Sovereignty score gauge: {{score}} of 100 ({{category}})"
 	},
 	"pwa": {
 		"updateAvailable": "A new version of StackAtlas is available.",
