@@ -157,9 +157,11 @@ export function DependencyGraph({ items, layers, filters, selectedRootItemId }: 
 									viewBox={`0 0 ${canvasSize.width} ${canvasSize.height}`}
 									width="100%"
 									height="100%"
-									role="img"
+									role="graphics-document"
 									aria-label={t('dependencies.graph.canvasAria', { count: scopedEdges.length })}
 								>
+					<title>{t('dependencies.graph.title')}</title>
+					<desc>{t('dependencies.graph.canvasAria', { count: scopedEdges.length })}</desc>
 									{scopedEdges.map((edge) => {
 										const source = positionedNodes.get(edge.source.id);
 										const target = positionedNodes.get(edge.target.id);
@@ -182,7 +184,7 @@ export function DependencyGraph({ items, layers, filters, selectedRootItemId }: 
 										const layerColor = layers.find((layer) => layer.id === item.layer)?.color ?? '#003d82';
 										const fullName = getLocalizedText(item.name, i18n.language);
 										return (
-											<g key={item.id}>
+											<g key={item.id} role="graphics-symbol" aria-label={fullName}>
 												<title>{fullName}</title>
 												<rect x={x} y={y} rx={8} ry={8} width={NODE_WIDTH} height={NODE_HEIGHT} fill="white" stroke={layerColor} strokeWidth={2} />
 												<text x={x + 10} y={y + 32} fontSize={13} fill="#1b1f23">
