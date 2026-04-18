@@ -5,6 +5,7 @@ type LanguageExpectations = {
 	headerSubtitle: string;
 	searchRegionAria: string;
 	sovereigntyGaugeAriaPrefix: string;
+	allSublayersOption: string;
 	emptyStateTitle: string;
 	missingKeyFallback: string;
 };
@@ -15,6 +16,7 @@ const EXPECTED: Record<'de' | 'en' | 'fr', LanguageExpectations> = {
 		headerSubtitle: 'Interaktive Übersicht von Technologien, Standards und Komponenten für die digitale Verwaltung.',
 		searchRegionAria: 'Suche und Filter',
 		sovereigntyGaugeAriaPrefix: 'Souveränitäts-Score-Anzeige:',
+		allSublayersOption: 'Alle Unterschichten',
 		emptyStateTitle: 'Keine Einträge gefunden',
 		missingKeyFallback: 'Übersetzung nicht verfügbar',
 	},
@@ -23,6 +25,7 @@ const EXPECTED: Record<'de' | 'en' | 'fr', LanguageExpectations> = {
 		headerSubtitle: 'Interactive overview of technologies, standards and components for digital public administration.',
 		searchRegionAria: 'Search and filter',
 		sovereigntyGaugeAriaPrefix: 'Sovereignty score gauge:',
+		allSublayersOption: 'All Sublayers',
 		emptyStateTitle: 'No entries found',
 		missingKeyFallback: 'Übersetzung nicht verfügbar',
 	},
@@ -31,18 +34,36 @@ const EXPECTED: Record<'de' | 'en' | 'fr', LanguageExpectations> = {
 		headerSubtitle: 'Vue d’ensemble interactive des technologies, standards et composants pour l’administration numérique.',
 		searchRegionAria: 'Recherche et filtres',
 		sovereigntyGaugeAriaPrefix: 'Jauge du score de souveraineté :',
+		allSublayersOption: 'Toutes les sous-couches',
 		emptyStateTitle: 'Aucune entrée trouvée',
 		missingKeyFallback: 'Übersetzung nicht verfügbar',
 	},
 };
+
+async function expectLocalizedSublayerOption(page: Page, locale: 'de' | 'en' | 'fr') {
+	const expected = EXPECTED[locale];
+	const layerSelect = page.locator('kol-single-select.filter-bar__select--layer select').first();
+	await expect(layerSelect).toBeVisible();
+
+	// Trigger selected layer so sublayer select is rendered.
+	await layerSelect.selectOption({ index: 1 });
+
+	const sublayerAllOption = page.locator('kol-single-select.filter-bar__select--sublayer select option').first();
+	await expect(sublayerAllOption).toHaveText(expected.allSublayersOption);
+
+	if (locale !== 'en') {
+		await expect(sublayerAllOption).not.toHaveText('All Sublayers');
+	}
+}
 
 async function expectCoreTranslations(page: Page, locale: 'de' | 'en' | 'fr') {
 	const expected = EXPECTED[locale];
 
 	await expect(page.locator('html')).toHaveAttribute('lang', expected.htmlLang);
 	await expect(page.locator('.header__subtitle')).toHaveText(expected.headerSubtitle);
-	await expect(page.locator('.search-bar')).toHaveAttribute('aria-label', expected.searchRegionAria);
+	await expect(page.locator('.filter-bar')).toHaveAttribute('aria-label', expected.searchRegionAria);
 	await expect(page.locator('.sovereignty-gauge').first()).toHaveAttribute('aria-label', new RegExp(`^${expected.sovereigntyGaugeAriaPrefix}`));
+	await expectLocalizedSublayerOption(page, locale);
 
 	await page.locator('kol-input-text input').fill('zzzzzzzzzzzzzzzzzz');
 	await expect(page.locator('.empty-state__title')).toHaveText(expected.emptyStateTitle);
@@ -59,38 +80,6 @@ async function changeLanguage(page: Page, language: 'de' | 'en' | 'fr') {
 }
 
 test.describe('i18n language detection and fallbacks', () => {
-	test('provides translated keys for sublayer filter labels in DE/EN/FR', async ({ page }) => {
-		await page.goto('/');
-
-		const sublayerTranslations = await page.evaluate(() => {
-			const i18n = (window as typeof window & {
-				__STACKATLAS_I18N__?: { getFixedT: (lng: string) => (key: string) => string };
-			}).__STACKATLAS_I18N__;
-			if (!i18n) {
-				throw new Error('i18n instance is not exposed on window');
-			}
-
-			return {
-				de: {
-					sublayerLabel: i18n.getFixedT('de')('search.sublayerLabel'),
-					allSublayers: i18n.getFixedT('de')('search.allSublayers'),
-				},
-				en: {
-					sublayerLabel: i18n.getFixedT('en')('search.sublayerLabel'),
-					allSublayers: i18n.getFixedT('en')('search.allSublayers'),
-				},
-				fr: {
-					sublayerLabel: i18n.getFixedT('fr')('search.sublayerLabel'),
-					allSublayers: i18n.getFixedT('fr')('search.allSublayers'),
-				},
-			};
-		});
-
-		expect(sublayerTranslations.en).toEqual({ sublayerLabel: 'Sublayer', allSublayers: 'All sublayers' });
-		expect(sublayerTranslations.de).toEqual({ sublayerLabel: 'Unterschicht', allSublayers: 'Alle Unterschichten' });
-		expect(sublayerTranslations.fr).toEqual({ sublayerLabel: 'Sous-couche', allSublayers: 'Toutes les sous-couches' });
-	});
-
 	test.describe('browser locale detection', () => {
 		test.use({ locale: 'en-US' });
 		test('starts in English for en-US', async ({ page }) => {
