@@ -27,11 +27,8 @@
 		"subtitle": "Bedøm og sammenlign teknologistakke over hele verden efter digital suverænitet",
 		"navigationAria": "Footer navigation",
 		"links": {
-			"github": "GitHub",
-			"community": "Fællesskab",
 			"documentation": "Dokumentation",
-			"settings": "Indstillinger",
-			"news": "Nyheder"
+			"settings": "Indstillinger"
 		},
 		"license": "Licens: EUPL-1.2",
 		"builtWith": "Bygget med",

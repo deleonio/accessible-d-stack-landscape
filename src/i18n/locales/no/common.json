@@ -27,11 +27,8 @@
 		"subtitle": "Vurder og sammenlign teknologistabler over hele verden etter digital suverenitet",
 		"navigationAria": "Bunntekstnavigering",
 		"links": {
-			"github": "GitHub",
-			"community": "Fellesskap",
 			"documentation": "Dokumentasjon",
-			"settings": "Innstillinger",
-			"news": "Nyheter"
+			"settings": "Innstillinger"
 		},
 		"license": "Lisens: EUPL-1.2",
 		"builtWith": "Bygget med",

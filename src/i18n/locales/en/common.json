@@ -27,11 +27,8 @@
 		"subtitle": "Rate and compare tech stacks worldwide by digital sovereignty",
 		"navigationAria": "Footer navigation",
 		"links": {
-			"github": "GitHub",
-			"community": "Community",
 			"documentation": "Documentation",
-			"settings": "Settings",
-			"news": "News"
+			"settings": "Settings"
 		},
 		"license": "License: EUPL-1.2",
 		"builtWith": "Built with",

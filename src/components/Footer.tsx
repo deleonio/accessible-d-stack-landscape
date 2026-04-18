@@ -24,7 +24,7 @@ export function Footer() {
 							{t('footer.links.documentation')}
 						</a>
 						<a href="#/news" className="footer__link">
-							{t('footer.links.news')}
+							News
 						</a>
 						<a href="#/stacks" className="footer__link">
 							Stacks
@@ -33,10 +33,10 @@ export function Footer() {
 							Graphs
 						</a>
 						<a href="https://github.com/deleonio/accessible-d-stack-landscape" rel="noopener noreferrer" className="footer__link">
-							{t('footer.links.github')}
+							GitHub
 						</a>
 						<a href="https://github.com/deleonio/accessible-d-stack-landscape/issues/new" rel="noopener noreferrer" className="footer__link">
-							{t('footer.links.community')}
+							Community
 						</a>
 						<a href="#/settings" className="footer__link">
 							{t('footer.links.settings')}

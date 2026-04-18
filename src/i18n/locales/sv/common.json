@@ -27,11 +27,8 @@
 		"subtitle": "Betygsätt och jämför teknikstackar över hela världen efter digital suveränitet",
 		"navigationAria": "Sidfotsnavigering",
 		"links": {
-			"github": "GitHub",
-			"community": "Gemenskap",
 			"documentation": "Dokumentation",
-			"settings": "Inställningar",
-			"news": "Nyheter"
+			"settings": "Inställningar"
 		},
 		"license": "Licens: EUPL-1.2",
 		"builtWith": "Byggd med",

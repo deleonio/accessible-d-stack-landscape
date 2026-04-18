@@ -27,11 +27,8 @@
 		"subtitle": "Califique y compare pilas de tecnología en todo el mundo según la soberanía digital",
 		"navigationAria": "Navegación de pie de página",
 		"links": {
-			"github": "GitHub",
-			"community": "Comunidad",
 			"documentation": "Documentación",
-			"settings": "Ajustes",
-			"news": "Noticias"
+			"settings": "Ajustes"
 		},
 		"license": "Licencia: EUPL-1.2",
 		"builtWith": "Construido con",

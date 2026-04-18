@@ -27,11 +27,8 @@
 		"subtitle": "Tech-Stacks weltweit nach digitaler Souveränität bewerten und vergleichen",
 		"navigationAria": "Footer-Navigation",
 		"links": {
-			"github": "GitHub",
-			"community": "Community",
 			"documentation": "Dokumentation",
-			"settings": "Einstellungen",
-			"news": "News"
+			"settings": "Einstellungen"
 		},
 		"license": "Lizenz: EUPL-1.2",
 		"builtWith": "Built with",

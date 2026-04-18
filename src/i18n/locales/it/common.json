@@ -27,11 +27,8 @@
 		"subtitle": "Valuta e confronta gli stack tecnologici in tutto il mondo in base alla sovranità digitale",
 		"navigationAria": "Navigazione nel piè di pagina",
 		"links": {
-			"github": "GitHub",
-			"community": "Comunità",
 			"documentation": "Documentazione",
-			"settings": "Impostazioni",
-			"news": "Notizia"
+			"settings": "Impostazioni"
 		},
 		"license": "Licenza: EUPL-1.2",
 		"builtWith": "Costruito con",

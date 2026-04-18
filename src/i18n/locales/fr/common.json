@@ -27,11 +27,8 @@
 		"subtitle": "Évaluer et comparer les stacks technologiques mondiaux selon leur souveraineté numérique",
 		"navigationAria": "Navigation du pied de page",
 		"links": {
-			"github": "GitHub",
-			"community": "Communauté",
 			"documentation": "Documentation",
-			"settings": "Paramètres",
-			"news": "Actualités"
+			"settings": "Paramètres"
 		},
 		"license": "Licence : EUPL-1.2",
 		"builtWith": "Built with",
