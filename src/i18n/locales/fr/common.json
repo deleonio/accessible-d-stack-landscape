@@ -11,9 +11,7 @@
 			"categories": "Catégories",
 			"docs": "Docs",
 			"imprint": "Mentions légales",
-			"settings": "Paramètres",
-			"stacks": "Stacks",
-			"deps": "Deps"
+			"settings": "Paramètres"
 		},
 		"eyebrow": "Mesurer & comparer la souveraineté numérique",
 		"subtitle": "Votre stack technologique est-il souverain ? StackAtlas évalue technologies et standards mondiaux avec un score de souveraineté transparent de 0 à 100 – et révèle les dépendances qui menacent votre indépendance numérique.",
@@ -33,9 +31,7 @@
 			"community": "Communauté",
 			"documentation": "Documentation",
 			"settings": "Paramètres",
-			"news": "Actualités",
-			"stacks": "Stacks",
-			"graphsBeta": "Graphs (Beta)"
+			"news": "Actualités"
 		},
 		"license": "Licence : EUPL-1.2",
 		"builtWith": "Built with",

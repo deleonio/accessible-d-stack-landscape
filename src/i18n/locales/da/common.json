@@ -11,9 +11,7 @@
 			"categories": "Kategorier",
 			"docs": "Dokumenter",
 			"imprint": "Aftryk",
-			"settings": "Indstillinger",
-			"stacks": "Stacks",
-			"deps": "Deps"
+			"settings": "Indstillinger"
 		},
 		"eyebrow": "Mål og sammenlign digital suverænitet",
 		"subtitle": "Hvor suveræn er din tech-stack? StackAtlas scorer teknologier og standarder verden over med en gennemsigtig suverænitetsscore fra 0-100 – og afslører, hvilke afhængigheder der truer din digitale uafhængighed.",
@@ -33,9 +31,7 @@
 			"community": "Fællesskab",
 			"documentation": "Dokumentation",
 			"settings": "Indstillinger",
-			"news": "Nyheder",
-			"stacks": "Stacks",
-			"graphsBeta": "Graphs (Beta)"
+			"news": "Nyheder"
 		},
 		"license": "Licens: EUPL-1.2",
 		"builtWith": "Bygget med",
