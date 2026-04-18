@@ -50,4 +50,13 @@ test.describe('Accessibility – axe-core', () => {
 
 		expect(results.violations).toEqual([]);
 	});
+
+	test('each route contains exactly one #main-content landmark target', async ({ page }) => {
+		const routes = ['#/', '#/deps', '#/graphs', '#/news', '#/settings', '#/imprint'];
+
+		for (const route of routes) {
+			await page.goto(`/${route}`);
+			await expect(page.locator('#main-content')).toHaveCount(1);
+		}
+	});
 });
