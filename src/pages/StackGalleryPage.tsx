@@ -3,8 +3,8 @@ import { useEffect, useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { StackExpose } from '../components/StackExpose';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
-import { computeStackAvgScore, useStackMetrics } from '../hooks/useStackMetrics';
 import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
+import { computeStackAvgScore, useStackMetrics } from '../hooks/useStackMetrics';
 import { Stack } from '../types';
 
 interface StackExposeWithMetricsProps {

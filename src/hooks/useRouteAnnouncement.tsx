@@ -53,14 +53,5 @@ export function useRouteAnnouncement({ pageTitle, skipHeadingFocus = false }: Ro
  * Render this in your app layout to support route announcements
  */
 export function RouteAnnouncementRegion() {
-	return (
-		<div
-			role="status"
-			aria-live="polite"
-			aria-atomic="true"
-			className="sr-only"
-			id="route-announcer"
-			aria-label="Page change announcements"
-		/>
-	);
+	return <div role="status" aria-live="polite" aria-atomic="true" className="sr-only" id="route-announcer" aria-label="Page change announcements" />;
 }

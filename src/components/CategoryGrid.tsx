@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { FilterState, Item, Layer, Stack, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
 import { computeEffectiveSovereigntyScore } from '../utils/sovereigntyScore';
-import { ArticleCard } from './ArticleCard';
 import { A11yAnnouncer } from './A11yAnnouncer';
+import { ArticleCard } from './ArticleCard';
 import { SortDir, SortField, ViewMode } from './FilterBar';
 import { StackStats } from './StackStats';
 
@@ -83,7 +83,14 @@ export function CategoryGrid({
 		}
 
 		const activeCount = articles.length;
-		if (filters.searchQuery || filters.selectedLayer || filters.selectedRelation || filters.onlyDirectDependencies || filters.dependencyDepth || filters.selectedDependencyType) {
+		if (
+			filters.searchQuery ||
+			filters.selectedLayer ||
+			filters.selectedRelation ||
+			filters.onlyDirectDependencies ||
+			filters.dependencyDepth ||
+			filters.selectedDependencyType
+		) {
 			return t('category.results.filteredPrefix', {
 				count: activeCount,
 				total: totalCount,
