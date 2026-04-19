@@ -31,5 +31,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://developer.chrome.com/docs/web-platform/blink?hl=de"
-	}
+	},
+	"license": "BSD-3-Clause"
 }

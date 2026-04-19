@@ -29,5 +29,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://www.w3.org/TR/xml11/"
-	}
+	},
+	"license": "public-domain"
 }

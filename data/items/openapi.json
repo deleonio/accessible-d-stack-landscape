@@ -32,5 +32,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://github.com/OAI/OpenAPI-Specification"
-	}
+	},
+	"license": "Apache-2.0"
 }

@@ -50,5 +50,6 @@
 				"en": "Angular projects are typically developed in TypeScript."
 			}
 		}
-	]
+	],
+	"license": "MIT"
 }

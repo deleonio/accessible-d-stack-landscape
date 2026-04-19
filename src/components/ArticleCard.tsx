@@ -225,6 +225,11 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 												{t('article.repository')}
 											</a>
 										)}
+										{selectedArticle.license && (
+											<span className="drawer-license-badge" title={`License: ${selectedArticle.license}`}>
+												{selectedArticle.license}
+											</span>
+										)}
 									</div>
 								</div>
 							</div>

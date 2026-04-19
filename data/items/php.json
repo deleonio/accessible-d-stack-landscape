@@ -30,5 +30,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://www.php.net/docs.php"
-	}
+	},
+	"license": "PHP-3.01"
 }

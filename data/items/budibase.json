@@ -32,5 +32,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://docs.budibase.com/docs/what-is-budibase"
-	}
+	},
+	"license": "AGPL-3.0"
 }

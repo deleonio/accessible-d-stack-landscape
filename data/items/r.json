@@ -26,5 +26,6 @@
 		"openStandards": true,
 		"noTelemetryByDefault": true,
 		"ownerType": "independentConsortium"
-	}
+	},
+	"license": "GPL-2.0-or-later"
 }

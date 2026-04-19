@@ -30,5 +30,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://docs.trychroma.com/docs/overview/introduction"
-	}
+	},
+	"license": "Apache-2.0"
 }
