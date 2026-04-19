@@ -5,7 +5,7 @@ import type { Item, Stack } from '../types/index.js';
  */
 export function computeStackMetrics(
 	stack: Stack,
-	itemMap: Map<string, Item>
+	itemMap: Map<string, Item>,
 ): {
 	avgSovereigntyScore: number;
 	avgAdoptionScore: number;
