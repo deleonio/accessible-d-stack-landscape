@@ -21,7 +21,8 @@
 			"hint": "Select display language",
 			"accessKey": "l"
 		},
-		"version": "Version"
+		"version": "Version",
+		"betaBanner": "Beta version – content may still change."
 	},
 	"footer": {
 		"subtitle": "Rate and compare tech stacks worldwide by digital sovereignty",
