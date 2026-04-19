@@ -15,20 +15,6 @@ export {
 
 export { buildDependencyGraph, collectDependencyNeighborhood, getDependencyTypes, getFilteredEdges, hasDependencyWithinDepth } from './dependencies';
 
-export {
-	DIVERSITY_BASE,
-	DIVERSITY_WEIGHT,
-	GAMMA,
-	ROLE_W,
-	SOVEREIGN_THRESHOLD,
-	STATUS_W,
-	computeAdoptionScores,
-	sizeDamp,
-} from './adoptionScore';
+export { DIVERSITY_BASE, DIVERSITY_WEIGHT, GAMMA, ROLE_W, SOVEREIGN_THRESHOLD, STATUS_W, computeAdoptionScores, sizeDamp } from './adoptionScore';
 
-export {
-	OVERALL_WEIGHT_ADOPTION,
-	OVERALL_WEIGHT_SOVEREIGN_ADOPTION,
-	OVERALL_WEIGHT_SOVEREIGNTY,
-	computeOverallScore,
-} from './overallScore';
+export { OVERALL_WEIGHT_ADOPTION, OVERALL_WEIGHT_SOVEREIGNTY, OVERALL_WEIGHT_SOVEREIGN_ADOPTION, computeOverallScore } from './overallScore';

@@ -27,9 +27,5 @@ export function computeOverallScore({
 	sovereignAdoption: number;
 	adoption: number;
 }): number {
-	return Math.round(
-		OVERALL_WEIGHT_SOVEREIGNTY * sovereignty +
-			OVERALL_WEIGHT_SOVEREIGN_ADOPTION * sovereignAdoption +
-			OVERALL_WEIGHT_ADOPTION * adoption,
-	);
+	return Math.round(OVERALL_WEIGHT_SOVEREIGNTY * sovereignty + OVERALL_WEIGHT_SOVEREIGN_ADOPTION * sovereignAdoption + OVERALL_WEIGHT_ADOPTION * adoption);
 }

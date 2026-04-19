@@ -121,11 +121,7 @@ export type ReverseDependencyEntry = {
  * @param reverseDeps  Reverse-dependency index: reverseDeps[itemId] = items that depend on itemId
  * @returns        Map from itemId to AdoptionResult (score 0–100, normalized across all items)
  */
-export function computeAdoptionScores(
-	items: Item[],
-	stacks: Stack[],
-	reverseDeps: Record<string, ReverseDependencyEntry[]>,
-): Map<string, AdoptionResult> {
+export function computeAdoptionScores(items: Item[], stacks: Stack[], reverseDeps: Record<string, ReverseDependencyEntry[]>): Map<string, AdoptionResult> {
 	const itemById = new Map<string, Item>(items.map((i) => [i.id, i]));
 
 	// Precompute average sovereignty score per stack
@@ -237,10 +233,7 @@ export function computeAdoptionScores(
 	// Sovereign raw adoption
 	const sovRawMap = new Map<string, number>();
 	for (const item of items) {
-		sovRawMap.set(
-			item.id,
-			rawAdoption(sovDcMap.get(item.id) ?? 0, sovTcMap.get(item.id) ?? 0, sovDivMap.get(item.id) ?? 0),
-		);
+		sovRawMap.set(item.id, rawAdoption(sovDcMap.get(item.id) ?? 0, sovTcMap.get(item.id) ?? 0, sovDivMap.get(item.id) ?? 0));
 	}
 	const maxSovRaw = Math.max(0, ...(sovRawMap.values() as Iterable<number>));
 

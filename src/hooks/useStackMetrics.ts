@@ -104,8 +104,7 @@ export function useStackMetrics(stack: Stack, allItems: Item[], allLayers?: Laye
 
 		// Adoption / Overall scores (read pre-computed values — no runtime recalculation)
 		const avgAdoption = total > 0 ? Math.round(items.reduce((a, i) => a + (i.adoption?.score ?? 0), 0) / total) : 0;
-		const avgSovereignAdoption =
-			total > 0 ? Math.round(items.reduce((a, i) => a + (i.adoption?.sovereignScore ?? 0), 0) / total) : 0;
+		const avgSovereignAdoption = total > 0 ? Math.round(items.reduce((a, i) => a + (i.adoption?.sovereignScore ?? 0), 0) / total) : 0;
 		const avgOverall = total > 0 ? Math.round(items.reduce((a, i) => a + (i.overallScore ?? 0), 0) / total) : 0;
 
 		return {

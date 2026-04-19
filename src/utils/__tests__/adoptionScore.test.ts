@@ -109,9 +109,7 @@ describe('computeAdoptionScores', () => {
 
 	it('transitive coverage: item used as dependency of popular items gets credit', () => {
 		const items = [makeItem('base'), makeItem('popular')];
-		const stacks = Array.from({ length: 8 }, (_, i) =>
-			makeStack(`s${i}`, `C${i}`, [{ itemId: 'popular', status: 'recommended', role: 'maintainer' }]),
-		);
+		const stacks = Array.from({ length: 8 }, (_, i) => makeStack(`s${i}`, `C${i}`, [{ itemId: 'popular', status: 'recommended', role: 'maintainer' }]));
 		// base has no direct stack presence but is a dependency of popular
 		const reverseDeps = {
 			base: [{ sourceItemId: 'popular', type: 'runtime' }],
@@ -160,12 +158,8 @@ describe('computeAdoptionScores', () => {
 		const countries = ['DE', 'FR', 'AT', 'NL', 'BE'];
 		const items = [makeItem('diverse'), makeItem('homogeneous')];
 
-		const diverseStacks = countries.map((c) =>
-			makeStack(`s_${c}`, c, [{ itemId: 'diverse', status: 'recommended', role: 'maintainer' }]),
-		);
-		const homogeneousStacks = countries.map((_, i) =>
-			makeStack(`sh_${i}`, 'DE', [{ itemId: 'homogeneous', status: 'recommended', role: 'maintainer' }]),
-		);
+		const diverseStacks = countries.map((c) => makeStack(`s_${c}`, c, [{ itemId: 'diverse', status: 'recommended', role: 'maintainer' }]));
+		const homogeneousStacks = countries.map((_, i) => makeStack(`sh_${i}`, 'DE', [{ itemId: 'homogeneous', status: 'recommended', role: 'maintainer' }]));
 
 		const resultDiverse = computeAdoptionScores(items, [...diverseStacks], {});
 		const resultHomogeneous = computeAdoptionScores(items, [...homogeneousStacks], {});

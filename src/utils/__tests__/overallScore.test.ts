@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-	OVERALL_WEIGHT_ADOPTION,
-	OVERALL_WEIGHT_SOVEREIGN_ADOPTION,
-	OVERALL_WEIGHT_SOVEREIGNTY,
-	computeOverallScore,
-} from '../overallScore';
+import { computeOverallScore, OVERALL_WEIGHT_ADOPTION, OVERALL_WEIGHT_SOVEREIGN_ADOPTION, OVERALL_WEIGHT_SOVEREIGNTY } from '../overallScore';
 
 describe('computeOverallScore', () => {
 	it('weights sum to 1.0', () => {
