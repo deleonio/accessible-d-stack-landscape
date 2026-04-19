@@ -231,6 +231,31 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 									({t(`article.scoreCategories.${overallScoreCategory}`)})
 								</p>
 								<p className="drawer-score-description">{t(`article.scoreCategories.${overallScoreCategory}Description`)}</p>
+								{(() => {
+									const usedIn = selectedArticle.adoption?.usedInStacks ?? [];
+									return usedIn.length > 0 ? (
+										<div className="drawer-stacks">
+											<p className="drawer-stacks__title">{t('article.overallScoreUsedIn', { count: usedIn.length })}</p>
+											<ul className="drawer-stacks__list">
+												{usedIn.map((stackId) => {
+													const stack = STACKS.find((s) => s.id === stackId);
+													return (
+														<li key={stackId} className="drawer-stacks__item">
+															<a href={`#/stacks?stack=${stackId}`} className="drawer-related__link" onClick={() => setIsDrawerOpen(false)}>
+																<span className="drawer-related__link-text">{stack ? getLocalizedText(stack.name, i18n.language) : stackId}</span>
+																<span className="drawer-related__link-icon" aria-hidden="true">
+																	›
+																</span>
+															</a>
+														</li>
+													);
+												})}
+											</ul>
+										</div>
+									) : (
+										<p className="drawer-score-description">{t('article.overallScoreNotUsed')}</p>
+									);
+								})()}
 								<hr style={{ margin: '1.5rem 0', border: 'none', borderTop: '1px solid #ddd' }} />
 								<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
 								<div className="drawer-gauge-container">

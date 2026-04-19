@@ -95,7 +95,10 @@
 		"repository": "Depot ↗",
 		"scoreTitle": "Suverænitetsscore",
 		"scoreAria": "Suverænitetsscore: {{score}} på 100",
-		"sovereigntyScore": "Suverænitetsscore (0-100)",
+		"overallScore": "Digital Sovereignty Score (0–100)",
+		"overallScoreUsedIn": "Brugt i {{count}} stack(s)",
+		"overallScoreNotUsed": "Endnu ikke brugt i nogen stack",
+		"sovereigntyScore": "Suverænitetsscore (mellemværdi, 0-100)",
 		"criteria": {
 			"selfHostable": "Selvhostbar (ingen tredjepartsinfrastruktur påkrævet)",
 			"dataPortability": "Data kan eksporteres i åbne, ikke-proprietære formater",

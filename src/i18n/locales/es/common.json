@@ -95,7 +95,10 @@
 		"repository": "Repositorio ↗",
 		"scoreTitle": "Puntuación de soberanía",
 		"scoreAria": "Puntuación de soberanía: {{score}} de 100",
-		"sovereigntyScore": "Puntuación de soberanía (0–100)",
+		"overallScore": "Digital Sovereignty Score (0–100)",
+		"overallScoreUsedIn": "Utilizado en {{count}} stack(s)",
+		"overallScoreNotUsed": "Aún no utilizado en ningún stack",
+		"sovereigntyScore": "Puntuación de soberanía (valor intermedio, 0–100)",
 		"criteria": {
 			"selfHostable": "Autohospedable (no se requiere infraestructura de terceros)",
 			"dataPortability": "Datos exportables en formatos abiertos y no propietarios.",
