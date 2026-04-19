@@ -21,6 +21,12 @@ export interface StackMetrics {
 	/** Items je Layer, sortiert nach Layer-Order */
 	layerBreakdown: Array<{ layerId: string; count: number }>;
 	totalItems: number;
+	/** Durchschnittlicher Adoption Score (0–100) der Stack-Items */
+	avgAdoption: number;
+	/** Durchschnittlicher Sovereign Adoption Score (0–100) der Stack-Items */
+	avgSovereignAdoption: number;
+	/** Durchschnittlicher Overall Score (0–100) der Stack-Items */
+	avgOverall: number;
 }
 
 /**
@@ -96,6 +102,12 @@ export function useStackMetrics(stack: Stack, allItems: Item[], allLayers?: Laye
 				return orderA - orderB;
 			});
 
+		// Adoption / Overall scores (read pre-computed values — no runtime recalculation)
+		const avgAdoption = total > 0 ? Math.round(items.reduce((a, i) => a + (i.adoption?.score ?? 0), 0) / total) : 0;
+		const avgSovereignAdoption =
+			total > 0 ? Math.round(items.reduce((a, i) => a + (i.adoption?.sovereignScore ?? 0), 0) / total) : 0;
+		const avgOverall = total > 0 ? Math.round(items.reduce((a, i) => a + (i.overallScore ?? 0), 0) / total) : 0;
+
 		return {
 			avgScore,
 			avgColor: getScoreCategoryColor(avgScore),
@@ -110,6 +122,9 @@ export function useStackMetrics(stack: Stack, allItems: Item[], allLayers?: Laye
 			statusCounts,
 			layerBreakdown,
 			totalItems: total,
+			avgAdoption,
+			avgSovereignAdoption,
+			avgOverall,
 		};
 	}, [stack, allItems, allLayers]);
 }

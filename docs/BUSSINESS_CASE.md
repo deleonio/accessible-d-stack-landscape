@@ -72,6 +72,22 @@ StackAtlas macht digitale Souveraenitaet von Technologie-Stacks sichtbar, vergle
 
 Das Scoring ist Teil des fachlichen Produkts und nicht nur Implementierungsdetail.
 
+## Ökosystem-Konvergenz als Sichtbarkeitssignal
+
+Ab Version 0.0.19 macht StackAtlas nicht nur intrinsische Souveränität sichtbar,
+sondern auch **Ökosystem-Konvergenz**: Technologien, die von vielen unabhängigen
+Stacks aus verschiedenen Ländern gewählt werden, sind de-facto Teil einer gemeinsamen
+souveränen Grundinfrastruktur.
+
+Der **Adoption Score** quantifiziert diese Konvergenz — gewichtet nach
+Verantwortungsrolle, Status, Stack-Größe und geografischer Diversität.
+Der **Sovereign Adoption Score** schärft das Signal weiter: Er zählt nur Beiträge
+aus souveränen Stacks und souveränen Items (Sovereignty ≥ 61).
+
+Der **Overall Score** kombiniert beide Sichten zu einer transparenten Standardsortierung:
+60 % intrinsische Souveränität + 25 % souveräner Netzwerkeffekt + 15 % allgemeiner
+Netzwerkeffekt. Einzelscores bleiben stets sichtbar und als Sortieroptionen verfügbar.
+
 ## Differenzierung
 
 - Fokus auf digitale Souveraenitaet statt reinem Featurevergleich

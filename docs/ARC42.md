@@ -136,6 +136,34 @@ Ein Stack ist eine Verantwortungserklärung: Durch die Auswahl einer Rolle für 
 
 ## 6. Querschnittliche Konzepte
 
+### Netzwerkeffekte / Stack-Konvergenz (Adoption Score, 2026-04)
+
+Neben dem intrinsischen Sovereignty Score wird für jedes Item ein **Adoption Score**
+(0–100) und ein **Sovereign Adoption Score** (0–100) berechnet, die abbilden, wie
+häufig und in welchem Kontext ein Item in den kuratierten Stacks auftaucht.
+
+**Prinzipien:**
+- Berechnung ausschließlich zum Build-Zeitpunkt in `scripts/generate-data.mjs`
+  (Single Source of Truth); Ergebnisse werden in `src/data/items.generated.ts` eingefroren.
+- Runtime-Neuberechnung findet nicht statt.
+- Der Sovereignty Score bleibt **unverändert** (bewusste Entscheidung).
+
+**Formelelemente:**
+| Konzept | Zweck |
+|---|---|
+| Rollen-Gewicht `ROLE_W` | maintainer 1.0 › contributor 0.8 › consumer 0.5 › funder 0.4 |
+| Status-Gewicht `STATUS_W` | recommended 1.0 › approved 0.7 › deprecated 0.1 |
+| Größen-Dämpfung `SIZE_DAMP` | `1 / (1 + log10(max(1, n/20)))` — verhindert Dominanz großer Stacks |
+| Transitive Coverage (γ=0.3) | Basis-Technologien erben anteilig den Adoption Score ihrer Nutzer |
+| Diversitäts-Multiplikator | Simpson-Index über `stack.country`; fehlendes Land → Bucket `_unknown` |
+| Sovereign Gate (Schwelle 61) | `sovereignAdoptionScore` zählt nur Stacks/Items mit Sovereignty ≥ 61 |
+
+**Kombinierter Overall Score:**
+`overallScore = round(0.60 × sovereignty + 0.25 × sovereignAdoption + 0.15 × adoption)`
+
+Alle Gewichte und Schwellenwerte sind als benannte Konstanten in
+`src/utils/adoptionScore.ts` und `src/utils/overallScore.ts` dokumentiert.
+
 ### Design
 
 - Branding bleibt 3-layerig fuer kompakte Brand-Assets.

@@ -67,6 +67,21 @@ Score-Ranges unterschiedlich groß sind. Die Nadel berechnet sich korrekt mit `(
 
 ---
 
+## Adoption Score — Single Source of Truth (2026-04)
+
+Die Einführung des Adoption Scores (siehe `docs/plans/DEPENDENCY_FREQUENCY_SCORING_PLAN.md`)
+folgt demselben Prinzip wie der Sovereignty Score: **eine kanonische Implementierung,
+keine Laufzeit-Neuberechnung.**
+
+- Kanonische Logik: `src/utils/adoptionScore.ts` (TypeScript, für Frontend-Konsum)
+- Build-Zeit-Spiegelung: JavaScript-Äquivalent in `scripts/generate-data.mjs`
+  (mit "keep in sync"-Kommentar, analog zu `SOVEREIGNTY_WEIGHTS`)
+- Ergebnisse (`adoptionScore`, `sovereignAdoptionScore`, `overallScore`) werden
+  in `items.generated.ts` eingefroren.
+
+Ein Snapshot-Test (`src/utils/__tests__/adoptionScore.test.ts`) sichert, dass
+unbeabsichtigte Änderungen an der Formel erkannt werden.
+
 ## Betroffene Dateien
 
 1. **`src/utils/sovereigntyScore.ts`** – Gewichte neu, Caps entfernen, WEIGHTS vereinfachen

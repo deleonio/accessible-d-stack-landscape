@@ -226,6 +226,77 @@ Score: 60/100 (gedeckelt!)
 
 ---
 
+---
+
+## Adoption Score (Netzwerkeffekt-Metrik)
+
+Der **Adoption Score** (0–100) misst, wie stark ein Item im Ökosystem der
+kuratierten Stacks verankert ist — unabhängig vom Sovereignty Score.
+
+### Felder (AdoptionResult)
+
+| Feld | Typ | Beschreibung |
+|---|---|---|
+| `score` | 0–100 | Adoption Score (normiert über alle Items) |
+| `sovereignScore` | 0–100 | Adoption nur aus souveränen Stacks/Items (Schwelle 61) |
+| `directCoverage` | float | Gewichtete Summe der Stack-Beiträge (vor log/diversity) |
+| `transitiveCoverage` | float | Anteil aus reverser Abhängigkeit (1-Hop, γ=0.3) |
+| `diversity` | 0–1 | Simpson-Index über `stack.country` |
+| `usedInStacks` | string[] | IDs der Stacks, in denen das Item vorkommt |
+
+### Formel
+
+```
+ROLE_W   = { maintainer: 1.0, contributor: 0.8, consumer: 0.5, funder: 0.4 }
+STATUS_W = { recommended: 1.0, approved: 0.7, deprecated: 0.1 }
+SIZE_DAMP(stack) = 1 / (1 + log10(max(1, stack.items.length / 20)))
+
+directCoverage   = Σ_stacks ROLE_W[role] × STATUS_W[status] × SIZE_DAMP(stack)
+transitiveCoverage = Σ_revDeps  0.3 × directCoverage(depOnItem)
+diversity        = 1 − Σ p_c²  (Simpson-Index; fehlendes country → '_unknown')
+
+rawAdoption      = log1p(directCoverage + transitiveCoverage) × (0.6 + 0.4 × diversity)
+adoptionScore    = round(100 × rawAdoption / max(rawAdoption alle Items))
+```
+
+### Sovereign Adoption Score
+
+Gleiche Formel, aber:
+- Nur Stacks mit `avgSovereignty(S) ≥ 61` werden berücksichtigt
+- Nur Items mit `sovereigntyScore ≥ 61` erhalten einen Wert > 0
+
+### Wertebereich und Beziehung zum Sovereignty Score
+
+- Adoption Score ist **orthogonal** zum Sovereignty Score
+- Ein Item kann hohe Adoption, aber niedrige Sovereignty haben (ubiquitäre proprietäre Tools)
+- Die 6-Kategorien-Hybrid-Skala gilt für Adoption Score analog
+
+---
+
+## Overall Score (Default-Ranking)
+
+Der **Overall Score** (0–100) kombiniert Sovereignty und Adoption zu einem
+einzigen Ranking-Signal für Default-Sortierung und Anzeige.
+
+### Formel
+
+```
+overallScore = round(
+    0.60 × sovereigntyScore
+  + 0.25 × sovereignAdoptionScore
+  + 0.15 × adoptionScore
+)
+```
+
+### Eigenschaften
+
+- Gewichte summieren zu 1.0 → Ergebnis bleibt in [0, 100]
+- Die 6-Kategorien-Hybrid-Skala bleibt gültig (alle Summanden sind 0–100 normiert)
+- Sovereignty Score bleibt intrinsisch **unverändert**
+- Berechnung ausschließlich zum Build-Zeitpunkt (Single Source of Truth)
+
+---
+
 ## Sublayer-Metriken (Proposed)
 
 Sublayer aggregieren nicht nur die Item-Scores, sondern haben auch **eigene Criteria**, die die Gesamtqualität der Kategorie beschreiben.

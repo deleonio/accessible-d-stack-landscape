@@ -26,6 +26,17 @@ Dieses Dokument ist das Rahmendokument fuer die aktive Projektdokumentation.
 3. Repo- und Verzeichnis-Kontext: `README.md` im Root und `data/README.md`
 4. Exemplarische Erklärung des Dependency-Modells: `docs/examples/items-as-dependencies.md`
 
+## Metriken-Überblick
+
+| Metrik | Bereich | Beschreibung |
+|---|---|---|
+| `sovereigntyScore` | 0–100 | Intrinsische Qualität (9 Kriterien + Owner-Bonus) |
+| `adoptionScore` | 0–100 | Netzwerkeffekt: wie oft taucht das Item in kuratierten Stacks auf |
+| `sovereignAdoptionScore` | 0–100 | Wie `adoptionScore`, aber nur in Stacks/Items mit Sovereignty ≥ 61 |
+| `overallScore` | 0–100 | Default-Ranking: 60 % Sovereignty + 25 % SovAdoption + 15 % Adoption |
+
+Alle vier Werte nutzen dieselbe 6-Kategorien-Hybrid-Skala (siehe `docs/SCORING_SCALE_DESIGN.md`).
+
 ## Konzeptueller Überblick: Items → Dependencies → Sovereign Standards → Stack Commitments
 
 Das System folgt einem konsistenten Modell:

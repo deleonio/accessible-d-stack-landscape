@@ -83,6 +83,28 @@ export type SovereigntyCriteria = {
 };
 
 /**
+ * AdoptionResult: Network-effect metrics computed at build time.
+ *
+ * Captures how widely an item is used across the curated stacks,
+ * weighted by role, status, stack size, and geographic diversity.
+ * Computed once in generate-data.mjs; never recalculated at runtime.
+ */
+export type AdoptionResult = {
+	/** Adoption score normalized to 0–100 across all stacks */
+	score: number;
+	/** Same formula restricted to sovereign stacks (avgSovereignty ≥ 61) and sovereign items (≥ 61) */
+	sovereignScore: number;
+	/** Weighted direct stack-coverage sum (before log/diversity) */
+	directCoverage: number;
+	/** Weighted transitive coverage (1-hop reverse-dependency contribution) */
+	transitiveCoverage: number;
+	/** Simpson diversity index over stack countries (0 = one country, 1 = fully diverse) */
+	diversity: number;
+	/** IDs of stacks where this item appears */
+	usedInStacks: string[];
+};
+
+/**
  * Item: A technology, standard, or tool — essentially a dependency.
  *
  * All Items are dependencies organized by layer. Items in the "sovereign-standards"
@@ -110,6 +132,10 @@ export type Item = {
 	sovereigntyScore?: number;
 	/** Computed from sovereigntyCriteria: category, color, percentile */
 	sovereigntyScoreResult?: SovereigntyScoreResult;
+	/** Stack-adoption metrics (network-effect signal). Computed at build time. */
+	adoption?: AdoptionResult;
+	/** Combined ranking score: 0.60 × sovereignty + 0.25 × sovereignAdoption + 0.15 × adoption */
+	overallScore?: number;
 	github?: {
 		repo?: string;
 		stars?: number;

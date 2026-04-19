@@ -547,6 +547,51 @@ in der Praxis 95–100 Punkte. Damit bleibt der Score **erklärbar** und
 
 ---
 
+---
+
+## Adoption Score (unabhängige Metrik, 2026-04)
+
+Der **Adoption Score** (0–100) misst, wie oft ein Item in den kuratierten Stacks
+auftaucht — gewichtet nach Rolle, Status, Stack-Größe und geografischer Diversität.
+Er ist **orthogonal** zum Sovereignty Score: ein weit verbreitetes, aber proprietäres
+Tool kann hohe Adoption, aber niedrige Sovereignty haben.
+
+**Formel:**
+```
+directCoverage = Σ_stacks (ROLE_W[role] × STATUS_W[status] × SIZE_DAMP(stack))
+transitiveCoverage = Σ_revDeps (γ × directCoverage(reverseDepItem))
+diversity = 1 − Σ p_c²   (Simpson-Index über stack.country)
+
+rawAdoption = log1p(directCoverage + transitiveCoverage) × (0.6 + 0.4 × diversity)
+adoptionScore = round(100 × rawAdoption / max(rawAdoption))
+```
+
+**Sovereign Adoption Score:** gleiche Formel, nur Stacks mit `avgSovereignty ≥ 61`
+und Items mit `sovereigntyScore ≥ 61`.
+
+Die 6-Kategorien-Skala (`getScoreCategory`) ist für Adoption Score und Overall Score
+**unverändert gültig**, da alle Summanden auf 0–100 normiert sind.
+
+---
+
+## Overall Score (Default-Ranking, 2026-04)
+
+Der **Overall Score** kombiniert beide Metriken zu einem einzigen Ranking-Signal:
+
+```
+overallScore = round(0.60 × sovereignty + 0.25 × sovereignAdoption + 0.15 × adoption)
+```
+
+**Nachweis der Kategorie-Kompatibilität:**
+- `sovereignty ∈ [0, 100]`, `sovereignAdoption ∈ [0, 100]`, `adoption ∈ [0, 100]`
+- `0.60 + 0.25 + 0.15 = 1.00` → Linearkombination bleibt in `[0, 100]`
+- Die 6 Kategorien der Hybrid-Skala gelten daher unverändert für `overallScore`
+
+Der Sovereignty Score **bleibt intrinsisch unverändert**; `overallScore` ist eine
+separate Größe für Default-Sortierung und Anzeige.
+
+---
+
 ## Anhang: Vergleich mit Standard-Systemen
 
 ### CVSS (Vulnerability Scoring System)
