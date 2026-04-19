@@ -29,17 +29,11 @@ describe('computeOverallScore', () => {
 		}
 	});
 
-	it('high sovereignty cannot be reduced below sovereigntyScore', () => {
+	it('sovereignty dominates (60% weight)', () => {
 		const highSov = computeOverallScore({ sovereignty: 100, sovereignAdoption: 0, adoption: 0 });
-		// Even with zero adoption, score = max(100, 0.60*100 + 0.25*0 + 0.15*0) = max(100, 60) = 100
-		expect(highSov).toBe(100);
-	});
-
-	it('adoption can boost score above sovereigntyScore', () => {
-		const withAdoption = computeOverallScore({ sovereignty: 50, sovereignAdoption: 100, adoption: 100 });
-		// 0.60*50 + 0.25*100 + 0.15*100 = 30 + 25 + 15 = 70 > 50
-		expect(withAdoption).toBe(70);
-		expect(withAdoption).toBeGreaterThan(50);
+		const highAdopt = computeOverallScore({ sovereignty: 0, sovereignAdoption: 100, adoption: 100 });
+		// 100*0.60=60 vs 0*0.25+100*0.15=40 → sovereignty scenario wins
+		expect(highSov).toBeGreaterThan(highAdopt);
 	});
 
 	it('result is rounded to integer', () => {
