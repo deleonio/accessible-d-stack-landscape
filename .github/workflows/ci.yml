@@ -36,11 +36,10 @@ jobs:
       - name: Stylelint
         run: pnpm lint:stylelint
 
-
       - name: Prettier
         run: pnpm format
 
-      - name: Knip
+      - name: Check unused
         run: pnpm check-unused
 
       - name: Validate JSON Schemas
