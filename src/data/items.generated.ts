@@ -1,7 +1,7 @@
 // GENERATED FILE - DO NOT EDIT MANUALLY
 // Generated from: data/layers/ + data/items/ + data/stacks/
 // Logo fallback via: src/data/logo-urls.json
-// Generated at: 2026-04-19T02:44:22.540Z
+// Generated at: 2026-04-19T02:59:53.128Z
 
 import type { Item, Layer, Stack } from '../types';
 
@@ -5705,11 +5705,12 @@ const RAW_ITEMS: Item[] = [
 			"layer": "platform",
 			"sublayer": "inbetriebnahme",
 			"description": {
-				"de": "Terraform ist ein Open-Source-Werkzeug für Infrastructure-as-Code. Es ermöglicht das deklarative Provisioning von Cloud- und On-Premise-Ressourcen über Provider und sorgt für reproduzierbare, versionierte Infrastruktur-Setups.",
-				"en": "Terraform is an open-source Infrastructure-as-Code tool. It enables declarative provisioning of cloud and on-premise resources via providers and produces reproducible, versioned infrastructure setups."
+				"de": "Terraform ist ein Infrastructure-as-Code-Werkzeug von HashiCorp (IBM). Es ermöglicht das deklarative Provisioning von Cloud- und On-Premise-Ressourcen über Provider und sorgt für reproduzierbare, versionierte Infrastruktur-Setups.",
+				"en": "Terraform is an Infrastructure-as-Code tool by HashiCorp (IBM). It enables declarative provisioning of cloud and on-premise resources via providers and produces reproducible, versioned infrastructure setups."
 			},
 			"homepage": "https://www.terraform.io/",
 			"license": "BUSL-1.1",
+			"ownerCountry": "US",
 			"tags": [
 				"iac",
 				"infrastructure",
