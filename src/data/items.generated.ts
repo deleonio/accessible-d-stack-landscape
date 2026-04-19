@@ -1,7 +1,7 @@
 // GENERATED FILE - DO NOT EDIT MANUALLY
 // Generated from: data/layers/ + data/items/ + data/stacks/
 // Logo fallback via: src/data/logo-urls.json
-// Generated at: 2026-04-19T02:36:24.487Z
+// Generated at: 2026-04-19T02:38:55.689Z
 
 import type { Item, Layer, Stack } from '../types';
 
@@ -7176,8 +7176,8 @@ export const STACKS: Stack[] = [
 		{
 			"id": "eu-cloud-sovereignty-framework-1-2-1",
 			"name": {
-				"de": "EU Cloud Sovereignty Framework 1.2.1",
-				"en": "EU Cloud Sovereignty Framework 1.2.1"
+				"de": "EU Cloud Sovereignty Framework",
+				"en": "EU Cloud Sovereignty Framework"
 			},
 			"description": {
 				"de": "Referenz-Stack fuer SEAL-4-orientierte Cloud-Architekturen auf Basis des EU Cloud Sovereignty Frameworks 1.2.1.",

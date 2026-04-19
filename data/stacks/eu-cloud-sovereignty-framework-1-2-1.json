@@ -1,8 +1,8 @@
 {
 	"id": "eu-cloud-sovereignty-framework-1-2-1",
 	"name": {
-		"de": "EU Cloud Sovereignty Framework 1.2.1",
-		"en": "EU Cloud Sovereignty Framework 1.2.1"
+		"de": "EU Cloud Sovereignty Framework",
+		"en": "EU Cloud Sovereignty Framework"
 	},
 	"description": {
 		"de": "Referenz-Stack fuer SEAL-4-orientierte Cloud-Architekturen auf Basis des EU Cloud Sovereignty Frameworks 1.2.1.",
