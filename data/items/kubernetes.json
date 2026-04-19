@@ -50,5 +50,6 @@
 				"en": "Kubernetes API and control-plane communication rely on TLS."
 			}
 		}
-	]
+	],
+	"license": "Apache-2.0"
 }

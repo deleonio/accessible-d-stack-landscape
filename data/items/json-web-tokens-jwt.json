@@ -30,5 +30,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://datatracker.ietf.org/doc/html/rfc8725"
-	}
+	},
+	"license": "public-domain"
 }

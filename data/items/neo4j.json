@@ -31,5 +31,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://neo4j.com/docs/"
-	}
+	},
+	"license": "SSPL-1.0"
 }

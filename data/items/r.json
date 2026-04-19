@@ -26,5 +26,6 @@
 		"openStandards": true,
 		"noTelemetryByDefault": true,
 		"ownerType": "independentConsortium"
-	}
+	},
+	"license": "MIT"
 }

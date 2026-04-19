@@ -28,5 +28,6 @@
 		"openStandards": true,
 		"noTelemetryByDefault": true,
 		"ownerType": "independentConsortium"
-	}
+	},
+	"license": "PostgreSQL"
 }

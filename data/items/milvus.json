@@ -30,5 +30,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://milvus.io/docs/de"
-	}
+	},
+	"license": "AGPL-3.0"
 }

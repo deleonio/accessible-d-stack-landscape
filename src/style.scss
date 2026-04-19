@@ -1531,6 +1531,18 @@ kol-select {
 	color: #fff;
 }
 
+.drawer-link--license {
+	border-color: var(--ds-color-text-muted);
+	color: var(--ds-color-text-muted);
+	cursor: default;
+}
+
+.drawer-link--license:hover,
+.drawer-link--license:focus-visible {
+	background: var(--ds-color-text-muted);
+	color: #fff;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    Static Content Pages & News/Reports
    ───────────────────────────────────────────────────────────────────────────── */

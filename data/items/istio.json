@@ -31,5 +31,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://github.com/istio/istio"
-	}
+	},
+	"license": "Apache-2.0"
 }

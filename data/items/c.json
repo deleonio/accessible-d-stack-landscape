@@ -30,5 +30,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://isocpp.org/std/standing-documents"
-	}
+	},
+	"license": "MIT"
 }

@@ -31,5 +31,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://mariadb.org/documentation/"
-	}
+	},
+	"license": "GPL-2.0"
 }

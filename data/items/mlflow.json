@@ -30,5 +30,6 @@
 	"audit": {
 		"lastDate": "2025-11-11",
 		"url": "https://mlflow.org/docs/latest/"
-	}
+	},
+	"license": "Apache-2.0"
 }
