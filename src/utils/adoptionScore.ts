@@ -162,7 +162,6 @@ export function computeAdoptionScores(
 	stacks: Stack[],
 	reverseDeps?: Map<string, string[]>
 ): Map<string, AdoptionResult> {
-	const itemMap = new Map(items.map((item) => [item.id, item]));
 	const reverseMap = reverseDeps || buildReverseDependencyMap(items);
 
 	// Pre-pass: compute direct coverage and geographic diversity for every item

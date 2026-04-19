@@ -77,7 +77,6 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const selectedStackItem = stackItemMap?.get(selectedArticle.id) ?? (selectedArticle.id === article.id ? stackItem : undefined);
 	const selectedScoreResult = computeEffectiveSovereigntyScoreResult(selectedArticle.sovereigntyCriteria, selectedStackItem);
 	const selectedScore = selectedScoreResult.score;
-	const selectedScoreCategory = selectedScoreResult.category;
 	const selectedMaintainerBoosted = selectedScoreResult.maintainerBoosted;
 	const selectedOwnerCountry = selectedArticle.ownerCountry?.toUpperCase();
 	const selectedOwnerCountryFlag = countryToFlagEmoji(selectedOwnerCountry);
