@@ -170,22 +170,6 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 				<span className="card-score-number">{overallScore}</span>
 				<span className="card-score-category">{t(`article.scoreCategories.${overallScoreCategory}`)}</span>
 			</span>
-			<span
-				className={`card-score-badge${cardMaintainerBoosted ? ' card-score-badge--maintainer-boosted' : ''}`}
-				style={{ background: scoreColor, color: '#fff', fontSize: '0.75em' }}
-				title={cardScoreTitle}
-				aria-label={
-					cardMaintainerBoosted ? t('article.maintainerBoost.scoreAria', { score, rawScore: scoreResult.rawScore }) : t('article.scoreAria', { score })
-				}
-			>
-				<span className="card-score-number">{score}</span>
-				<span className="card-score-category">{t(`article.scoreCategories.${scoreResult.category}`)}</span>
-				{cardMaintainerBoosted && (
-					<span className="card-score-boost-marker" aria-hidden="true" title={t('article.maintainerBoost.markerTitle')}>
-						⇪
-					</span>
-				)}
-			</span>
 			{stackItem && (
 				<span className="card-role-badge" style={{ background: ROLE_COLORS[stackItem.role], color: '#fff' }} title={t(`stack.roles.${stackItem.role}`)}>
 					{t(`stack.roles.${stackItem.role}`)}
