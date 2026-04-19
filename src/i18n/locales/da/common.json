@@ -21,7 +21,8 @@
 			"hint": "Vælg displaysprog",
 			"accessKey": "l"
 		},
-		"version": "Version"
+		"version": "Version",
+		"betaBanner": "Betaversion – indhold kan stadig ændre sig."
 	},
 	"footer": {
 		"subtitle": "Bedøm og sammenlign teknologistakke over hele verden efter digital suverænitet",

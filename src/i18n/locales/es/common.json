@@ -21,7 +21,8 @@
 			"hint": "Seleccionar idioma de visualización",
 			"accessKey": "l"
 		},
-		"version": "Versión"
+		"version": "Versión",
+		"betaBanner": "Versión beta: el contenido aún puede cambiar."
 	},
 	"footer": {
 		"subtitle": "Califique y compare pilas de tecnología en todo el mundo según la soberanía digital",

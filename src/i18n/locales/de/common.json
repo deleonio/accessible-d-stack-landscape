@@ -21,7 +21,8 @@
 			"hint": "Anzeigesprache auswählen",
 			"accessKey": "l"
 		},
-		"version": "Version"
+		"version": "Version",
+		"betaBanner": "Beta-Version – Inhalte können sich noch ändern."
 	},
 	"footer": {
 		"subtitle": "Tech-Stacks weltweit nach digitaler Souveränität bewerten und vergleichen",

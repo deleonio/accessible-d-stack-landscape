@@ -25,6 +25,9 @@ export function Header({ currentUrl }: HeaderProps) {
 			<a href="#main-content" className="skip-nav">
 				{t('header.skipToContent')}
 			</a>
+			<div className="header__beta-banner px-4 md:px-6 py-1.5 text-xs text-center" role="note" aria-live="polite">
+				{t('header.betaBanner')}
+			</div>
 			<header className="header w-full">
 				{/* Instance info strip – hidden on mobile */}
 				<div

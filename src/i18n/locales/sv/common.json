@@ -21,7 +21,8 @@
 			"hint": "Välj visningsspråk",
 			"accessKey": "l"
 		},
-		"version": "Version"
+		"version": "Version",
+		"betaBanner": "Betaversion – innehållet kan fortfarande ändras."
 	},
 	"footer": {
 		"subtitle": "Betygsätt och jämför teknikstackar över hela världen efter digital suveränitet",

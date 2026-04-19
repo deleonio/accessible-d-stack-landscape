@@ -21,7 +21,8 @@
 			"hint": "Velg visningsspråk",
 			"accessKey": "l"
 		},
-		"version": "Versjon"
+		"version": "Versjon",
+		"betaBanner": "Betaversjon – innholdet kan fortsatt endres."
 	},
 	"footer": {
 		"subtitle": "Vurder og sammenlign teknologistabler over hele verden etter digital suverenitet",
