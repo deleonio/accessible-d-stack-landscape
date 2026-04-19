@@ -56,7 +56,7 @@ und Anzeige.
 ```
 ROLE_W   = { maintainer: 1.0, contributor: 0.8, funder: 0.4, consumer: 0.5 }
 STATUS_W = { recommended: 1.0, approved: 0.7, deprecated: 0.1 }
-SIZE_DAMP(stack) = 1 / (1 + log10(stack.items.length / 20))
+SIZE_DAMP(stack) = 1 / (1 + log10(max(1, stack.items.length / 20)))
 
 directCoverage(item) =
   Σ über Stacks S, die item enthalten:
