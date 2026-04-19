@@ -17,6 +17,7 @@ export const OVERALL_WEIGHT_ADOPTION = 0.15;
 /**
  * Compute the overall ranking score from its three components.
  * Result is in [0, 100].
+ * Minimum score equals sovereigntyScore to avoid penalizing high-quality items with zero adoption.
  */
 export function computeOverallScore({
 	sovereignty,
@@ -27,5 +28,6 @@ export function computeOverallScore({
 	sovereignAdoption: number;
 	adoption: number;
 }): number {
-	return Math.round(OVERALL_WEIGHT_SOVEREIGNTY * sovereignty + OVERALL_WEIGHT_SOVEREIGN_ADOPTION * sovereignAdoption + OVERALL_WEIGHT_ADOPTION * adoption);
+	const weighted = OVERALL_WEIGHT_SOVEREIGNTY * sovereignty + OVERALL_WEIGHT_SOVEREIGN_ADOPTION * sovereignAdoption + OVERALL_WEIGHT_ADOPTION * adoption;
+	return Math.round(Math.max(sovereignty, weighted));
 }
