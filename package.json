@@ -109,6 +109,9 @@
 		"ignoreIssues": {
 			"src/data/*.generated.ts": [
 				"exports"
+			],
+			"src/**/__tests__/**": [
+				"files"
 			]
 		}
 	},

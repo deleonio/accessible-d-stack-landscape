@@ -68,7 +68,6 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const incomingDependencies = CATALOG_DEPENDENCY_GRAPH.incomingById.get(selectedArticle.id) ?? [];
 	const selectedDependency = [...outgoingDependencies, ...incomingDependencies].find((edge) => edge.id === selectedDependencyId) ?? null;
 
-	const scoreResult = computeEffectiveSovereigntyScoreResult(article.sovereigntyCriteria, stackItem);
 	const overallScore = article.overallScore ?? 0;
 	const overallScoreCategory = getScoreCategory(overallScore);
 	const overallScoreColor = getScoreCategoryColor(overallScore);
