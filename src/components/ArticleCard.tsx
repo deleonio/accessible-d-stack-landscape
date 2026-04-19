@@ -3,7 +3,7 @@ import { useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { Item, ParticipantRole, SovereigntyCriteria, StackItem } from '../types';
-import { buildDependencyGraph, getLocalizedText } from '../utils';
+import { buildDependencyGraph, getLocalizedText, getScoreCategory, getScoreCategoryColor } from '../utils';
 import { computeEffectiveSovereigntyScoreResult, computeOwnerScore } from '../utils/sovereigntyScore';
 import { SovereigntyGauge } from './SovereigntyGauge';
 
@@ -69,8 +69,9 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const selectedDependency = [...outgoingDependencies, ...incomingDependencies].find((edge) => edge.id === selectedDependencyId) ?? null;
 
 	const scoreResult = computeEffectiveSovereigntyScoreResult(article.sovereigntyCriteria, stackItem);
-	const score = scoreResult.score;
-	const scoreColor = scoreResult.color;
+	const overallScore = article.overallScore ?? 0;
+	const overallScoreCategory = getScoreCategory(overallScore);
+	const overallScoreColor = getScoreCategoryColor(overallScore);
 	// When the drawer is open and the active stack defines a role for the selected
 	// (drill-down) article, honour that role too; otherwise fall back to the
 	// outer stackItem context so navigation between related items keeps the
@@ -128,28 +129,17 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 		/>
 	);
 
-	const cardMaintainerBoosted = scoreResult.maintainerBoosted;
-	const cardScoreTitleBase = `${t('article.scoreTitle')}: ${score}/100 (${t(`article.scoreCategories.${scoreResult.category}`)} - ${scoreResult.percentileInCategory}%)`;
-	const cardScoreTitle = cardMaintainerBoosted
-		? `${cardScoreTitleBase} — ${t('article.maintainerBoost.badgeTitle', { rawScore: scoreResult.rawScore })}`
-		: cardScoreTitleBase;
+	const cardScoreTitle = `${t('article.overallScore')}: ${overallScore}/100 (${t(`article.scoreCategories.${overallScoreCategory}`)})`;
 	const badges = (
 		<>
 			<span
-				className={`card-score-badge${cardMaintainerBoosted ? ' card-score-badge--maintainer-boosted' : ''}`}
-				style={{ background: scoreColor, color: '#fff' }}
+				className="card-score-badge"
+				style={{ background: overallScoreColor, color: '#fff' }}
 				title={cardScoreTitle}
-				aria-label={
-					cardMaintainerBoosted ? t('article.maintainerBoost.scoreAria', { score, rawScore: scoreResult.rawScore }) : t('article.scoreAria', { score })
-				}
+				aria-label={t('article.scoreAria', { score: overallScore })}
 			>
-				<span className="card-score-number">{score}</span>
-				<span className="card-score-category">{t(`article.scoreCategories.${scoreResult.category}`)}</span>
-				{cardMaintainerBoosted && (
-					<span className="card-score-boost-marker" aria-hidden="true" title={t('article.maintainerBoost.markerTitle')}>
-						⇪
-					</span>
-				)}
+				<span className="card-score-number">{overallScore}</span>
+				<span className="card-score-category">{t(`article.scoreCategories.${overallScoreCategory}`)}</span>
 			</span>
 			{stackItem && (
 				<span className="card-role-badge" style={{ background: ROLE_COLORS[stackItem.role], color: '#fff' }} title={t(`stack.roles.${stackItem.role}`)}>
@@ -234,6 +224,15 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 								</div>
 							</div>
 							<div className="drawer-score-section">
+								<p className="drawer-score-title">{t('article.overallScore')}</p>
+								<div className="drawer-gauge-container">
+									<SovereigntyGauge score={overallScore} category={overallScoreCategory} size={200} />
+								</div>
+								<p className={`drawer-score-category-label drawer-score-category-label--${overallScoreCategory}`}>
+									({t(`article.scoreCategories.${overallScoreCategory}`)})
+								</p>
+								<p className="drawer-score-description">{t(`article.scoreCategories.${overallScoreCategory}Description`)}</p>
+								<hr style={{ margin: '1.5rem 0', border: 'none', borderTop: '1px solid #ddd' }} />
 								<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
 								<div className="drawer-gauge-container">
 									<SovereigntyGauge score={selectedScore} category={selectedScoreCategory} size={200} />
