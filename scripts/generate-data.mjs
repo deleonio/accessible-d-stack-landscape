@@ -71,6 +71,8 @@ function computeSovereigntyScore(criteria = {}) {
 
 // ---------------------------------------------------------------------------
 // Adoption Score Calculation (Stack Frequency)
+// IMPORTANT: keep these constants in sync with src/utils/adoptionScore.ts
+// (Cannot import .ts directly from this Node.js build script.)
 // ---------------------------------------------------------------------------
 
 const ROLE_WEIGHTS = {

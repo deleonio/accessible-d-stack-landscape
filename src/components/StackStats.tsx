@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Item, ParticipantRole, Stack, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
+import { getScoreCategory, getScoreCategoryColor } from '../utils/sovereigntyScore';
 
 interface StackStatsProps {
 	stack: Stack;
@@ -15,32 +16,13 @@ const ROLE_COLORS: Record<ParticipantRole, string> = {
 	consumer: '#546e7a',
 };
 
-// Get score color based on category ranges
-function getOverallScoreColor(scoreValue: number): string {
-	if (scoreValue <= 30) return '#D32F2F';   // Rot
-	if (scoreValue <= 45) return '#F57C00';   // Orange
-	if (scoreValue <= 60) return '#F9A825';   // Gelb
-	if (scoreValue <= 75) return '#7CB342';   // Hellgrün
-	if (scoreValue <= 90) return '#388E3C';   // Grün
-	return '#1B5E20';                         // Dunkelgrün
-}
-
-function getScoreCategory(scoreValue: number): string {
-	if (scoreValue <= 30) return 'insufficient';
-	if (scoreValue <= 45) return 'minimal';
-	if (scoreValue <= 60) return 'adequate';
-	if (scoreValue <= 75) return 'good';
-	if (scoreValue <= 90) return 'excellent';
-	return 'outstanding';
-}
-
 export function StackStats({ stack, items, stackItemMap }: StackStatsProps) {
 	const { i18n, t } = useTranslation();
 
 	// Calculate average Overall Score from all items in this stack
 	const scores = items.map((item) => item.adoption?.overallScore ?? 0);
 	const avgScore = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
-	const avgColor = getOverallScoreColor(avgScore);
+	const avgColor = getScoreCategoryColor(avgScore);
 	const avgCategory = getScoreCategory(avgScore);
 
 	const roleCounts = Array.from(stackItemMap.values()).reduce(

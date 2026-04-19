@@ -2,9 +2,10 @@ import { KolButton, KolCard, KolDrawer, KolImage } from '@public-ui/preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
-import { Item, ParticipantRole, SovereigntyCriteria, SovereigntyScoreCategory, StackItem } from '../types';
+import { Item, ParticipantRole, SovereigntyCriteria, StackItem } from '../types';
+import { ADOPTION_WEIGHT, SOVEREIGN_ADOPTION_WEIGHT, SOVEREIGNTY_WEIGHT } from '../utils/overallScore';
 import { buildDependencyGraph, getLocalizedText } from '../utils';
-import { computeEffectiveSovereigntyScoreResult, computeOwnerScore } from '../utils/sovereigntyScore';
+import { computeEffectiveSovereigntyScoreResult, getScoreCategory, getScoreCategoryColor } from '../utils/sovereigntyScore';
 import { SovereigntyGauge } from './SovereigntyGauge';
 
 type ViewMode = 'tile' | 'list';
@@ -68,12 +69,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const incomingDependencies = CATALOG_DEPENDENCY_GRAPH.incomingById.get(selectedArticle.id) ?? [];
 	const selectedDependency = [...outgoingDependencies, ...incomingDependencies].find((edge) => edge.id === selectedDependencyId) ?? null;
 
-	const scoreResult = computeEffectiveSovereigntyScoreResult(article.sovereigntyCriteria, stackItem);
-	const score = scoreResult.score;
-	const scoreColor = scoreResult.color;
 	const overallScore = article.adoption?.overallScore ?? 0;
-	const adoptionScore = article.adoption?.adoptionScore ?? 0;
-	const sovereignAdoptionScore = article.adoption?.sovereignAdoptionScore ?? 0;
 	// When the drawer is open and the active stack defines a role for the selected
 	// (drill-down) article, honour that role too; otherwise fall back to the
 	// outer stackItem context so navigation between related items keeps the
@@ -86,7 +82,9 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const selectedOwnerCountry = selectedArticle.ownerCountry?.toUpperCase();
 	const selectedOwnerCountryFlag = countryToFlagEmoji(selectedOwnerCountry);
 	const selectedBoostedCriteria = new Set<keyof Omit<SovereigntyCriteria, 'ownerType'>>(selectedScoreResult.boostedCriteria);
-	const criteriaKeys = (Object.keys(article.sovereigntyCriteria) as Array<keyof typeof article.sovereigntyCriteria>).filter((key) => key !== 'ownerType');
+	const criteriaKeys = (Object.keys(article.sovereigntyCriteria) as Array<keyof typeof article.sovereigntyCriteria>).filter(
+		(key) => key !== 'ownerType',
+	);
 
 	const renderArticleLogo = (logo: string | undefined, localizedName: string, large = false) => {
 		if (!logo) {
@@ -131,32 +129,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 		/>
 	);
 
-	const cardMaintainerBoosted = scoreResult.maintainerBoosted;
-	const cardScoreTitleBase = `${t('article.scoreTitle')}: ${score}/100 (${t(`article.scoreCategories.${scoreResult.category}`)} - ${scoreResult.percentileInCategory}%)`;
-	const cardScoreTitle = cardMaintainerBoosted
-		? `${cardScoreTitleBase} — ${t('article.maintainerBoost.badgeTitle', { rawScore: scoreResult.rawScore })}`
-		: cardScoreTitleBase;
-
-	// Determine category color for overall score
-	const getScoreColor = (scoreValue: number): string => {
-		if (scoreValue <= 30) return '#D32F2F';   // Rot
-		if (scoreValue <= 45) return '#F57C00';   // Orange
-		if (scoreValue <= 60) return '#F9A825';   // Gelb
-		if (scoreValue <= 75) return '#7CB342';   // Hellgrün
-		if (scoreValue <= 90) return '#388E3C';   // Grün
-		return '#1B5E20';                         // Dunkelgrün
-	};
-
-	const getScoreCategory = (scoreValue: number): SovereigntyScoreCategory => {
-		if (scoreValue <= 30) return 'insufficient';
-		if (scoreValue <= 45) return 'minimal';
-		if (scoreValue <= 60) return 'adequate';
-		if (scoreValue <= 75) return 'good';
-		if (scoreValue <= 90) return 'excellent';
-		return 'outstanding';
-	};
-
-	const overallScoreColor = getScoreColor(overallScore);
+	const overallScoreColor = getScoreCategoryColor(overallScore);
 	const overallScoreCategory = getScoreCategory(overallScore);
 
 	const badges = (
@@ -164,8 +137,8 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 			<span
 				className="card-score-badge"
 				style={{ background: overallScoreColor, color: '#fff' }}
-				title={`Overall Score: ${overallScore}/100`}
-				aria-label={`Overall Score: ${overallScore}/100`}
+				title={`${t('article.scoreOverview.total')}: ${overallScore}/100`}
+				aria-label={`${t('article.scoreOverview.total')}: ${overallScore}/100`}
 			>
 				<span className="card-score-number">{overallScore}</span>
 				<span className="card-score-category">{t(`article.scoreCategories.${overallScoreCategory}`)}</span>
@@ -269,31 +242,31 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 											<div className="score-breakdown__rows">
 												<div className="score-breakdown__row">
 													<span className="score-breakdown__label">{t('article.scoreOverview.sovereignty')}</span>
-													<span className="score-breakdown__score" style={{ color: getScoreColor(selectedScoreResult.rawScore) }}>
+													<span className="score-breakdown__score" style={{ color: getScoreCategoryColor(selectedScoreResult.rawScore) }}>
 														{selectedScoreResult.rawScore}/100
 													</span>
-													<span className="score-breakdown__weight">× 60%</span>
-													<span className="score-breakdown__pts">{(selectedScoreResult.rawScore * 0.6).toFixed(1)}</span>
+													<span className="score-breakdown__weight">× {(SOVEREIGNTY_WEIGHT * 100).toFixed(0)}%</span>
+													<span className="score-breakdown__pts">{(selectedScoreResult.rawScore * SOVEREIGNTY_WEIGHT).toFixed(1)}</span>
 												</div>
 												<div className="score-breakdown__row">
 													<span className="score-breakdown__label">{t('article.scoreOverview.sovereignAdoption')}</span>
-													<span className="score-breakdown__score" style={{ color: getScoreColor(selectedArticle.adoption.sovereignAdoptionScore) }}>
+													<span className="score-breakdown__score" style={{ color: getScoreCategoryColor(selectedArticle.adoption.sovereignAdoptionScore) }}>
 														{selectedArticle.adoption.sovereignAdoptionScore}/100
 													</span>
-													<span className="score-breakdown__weight">× 25%</span>
-													<span className="score-breakdown__pts">{(selectedArticle.adoption.sovereignAdoptionScore * 0.25).toFixed(1)}</span>
+													<span className="score-breakdown__weight">× {(SOVEREIGN_ADOPTION_WEIGHT * 100).toFixed(0)}%</span>
+													<span className="score-breakdown__pts">{(selectedArticle.adoption.sovereignAdoptionScore * SOVEREIGN_ADOPTION_WEIGHT).toFixed(1)}</span>
 												</div>
 												<div className="score-breakdown__row">
 													<span className="score-breakdown__label">{t('article.scoreOverview.adoption')}</span>
-													<span className="score-breakdown__score" style={{ color: getScoreColor(selectedArticle.adoption.adoptionScore) }}>
+													<span className="score-breakdown__score" style={{ color: getScoreCategoryColor(selectedArticle.adoption.adoptionScore) }}>
 														{selectedArticle.adoption.adoptionScore}/100
 													</span>
-													<span className="score-breakdown__weight">× 15%</span>
-													<span className="score-breakdown__pts">{(selectedArticle.adoption.adoptionScore * 0.15).toFixed(1)}</span>
+													<span className="score-breakdown__weight">× {(ADOPTION_WEIGHT * 100).toFixed(0)}%</span>
+													<span className="score-breakdown__pts">{(selectedArticle.adoption.adoptionScore * ADOPTION_WEIGHT).toFixed(1)}</span>
 												</div>
 												<div className="score-breakdown__row score-breakdown__row--total">
 													<span className="score-breakdown__label">{t('article.scoreOverview.total')}</span>
-													<span className="score-breakdown__score score-breakdown__score--total" style={{ color: getScoreColor(selectedArticle.adoption.overallScore) }}>
+													<span className="score-breakdown__score score-breakdown__score--total" style={{ color: getScoreCategoryColor(selectedArticle.adoption.overallScore) }}>
 														{selectedArticle.adoption.overallScore}/100
 													</span>
 												</div>

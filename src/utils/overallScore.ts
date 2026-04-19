@@ -1,9 +1,9 @@
 import type { AdoptionResult } from '../types/index.js';
 
-// Overall score weights
-const SOVEREIGNTY_WEIGHT = 0.6;
-const SOVEREIGN_ADOPTION_WEIGHT = 0.25;
-const ADOPTION_WEIGHT = 0.15;
+// Overall score weights (exported so UI can display the derivation without hardcoding)
+export const SOVEREIGNTY_WEIGHT = 0.6;
+export const SOVEREIGN_ADOPTION_WEIGHT = 0.25;
+export const ADOPTION_WEIGHT = 0.15;
 
 /**
  * Compute overall score as a weighted combination of:
