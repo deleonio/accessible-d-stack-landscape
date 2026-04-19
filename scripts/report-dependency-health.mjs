@@ -3,14 +3,17 @@
  * Dependency QA report for data/items
  *
  * Usage:
- *   node scripts/report-dependency-health.mjs
- *   node scripts/report-dependency-health.mjs --format json
- *   node scripts/report-dependency-health.mjs --out reports/dependency-health.json
+ *   node --import tsx/esm scripts/report-dependency-health.mjs
+ *   node --import tsx/esm scripts/report-dependency-health.mjs --format json
+ *   node --import tsx/esm scripts/report-dependency-health.mjs --out reports/dependency-health.json
  */
 
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import path from 'path';
 import url from 'url';
+
+import { computeAdoptionScores } from '../src/utils/adoptionScore.ts';
+import { computeSovereigntyScore } from '../src/utils/sovereigntyScore.ts';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
@@ -40,17 +43,25 @@ const itemRecords = itemFiles
 	})
 	.filter(Boolean);
 
-// Load stacks for adoption calculation
+// Load stacks
 const stackFiles = readdirSync(stacksDir).filter((f) => f.endsWith('.json') && !f.startsWith('_'));
-const stacks = stackFiles.map((f) => {
-	try { return JSON.parse(readFileSync(path.join(stacksDir, f), 'utf8')); }
-	catch { return null; }
-}).filter(Boolean);
+const stacks = stackFiles
+	.map((f) => {
+		try {
+			return JSON.parse(readFileSync(path.join(stacksDir, f), 'utf8'));
+		} catch {
+			return null;
+		}
+	})
+	.filter(Boolean);
 
 const itemIds = new Set(itemRecords.map(({ item }) => item.id));
 const itemsWithoutDependencies = [];
 const incomingCountByTarget = new Map();
 const orphanedReferences = [];
+
+// Build reverse deps index for the report (and for computeAdoptionScores)
+const reverseDepsForReport = {};
 
 for (const { file, item } of itemRecords) {
 	const dependencies = Array.isArray(item.dependencies) ? item.dependencies : [];
@@ -71,6 +82,9 @@ for (const { file, item } of itemRecords) {
 				scope: dependency.scope ?? 'required',
 			});
 		}
+
+		if (!reverseDepsForReport[targetId]) reverseDepsForReport[targetId] = [];
+		reverseDepsForReport[targetId].push({ sourceItemId: item.id, type: dependency.type, scope: dependency.scope });
 	}
 }
 
@@ -81,117 +95,37 @@ const mostReferencedBaseTechnologies = [...incomingCountByTarget.entries()]
 	.map(([itemId, incomingCount]) => ({ itemId, incomingCount }));
 
 // ---------------------------------------------------------------------------
-// Adoption scoring (mirrors src/utils/adoptionScore.ts)
+// Adoption scoring — delegates entirely to src/utils/adoptionScore.ts
 // ---------------------------------------------------------------------------
-const ROLE_W = { maintainer: 1.0, contributor: 0.8, consumer: 0.5, funder: 0.4 };
-const STATUS_W = { recommended: 1.0, approved: 0.7, deprecated: 0.1 };
-const GAMMA = 0.3;
-const SOVEREIGN_THRESHOLD = 61;
 
-const SOVEREIGNTY_WEIGHTS = { selfHostable: 20, dataPortability: 15, openSource: 15, openStandards: 10, permissiveLicense: 10, hasAudit: 5, matureProject: 5, noTelemetryByDefault: 5, euHeadquartered: 5 };
-const OWNER_WEIGHTS = { independentConsortium: 10, community: 7, corporation: 3, oneManShow: 0 };
-function computeSovScore(c = {}) {
-	const base = Object.entries(SOVEREIGNTY_WEIGHTS).reduce((s, [k, w]) => s + (c[k] ? w : 0), 0);
-	return base + (c.ownerType ? (OWNER_WEIGHTS[c.ownerType] ?? 0) : 0);
-}
-function sizeDamp(n) { return 1 / (1 + Math.log10(Math.max(1, n / 20))); }
-function simpsonDiv(presences) {
-	if (!presences.length) return 0;
-	const counts = new Map();
-	for (const p of presences) counts.set(p.country, (counts.get(p.country) ?? 0) + 1);
-	let sq = 0; for (const c of counts.values()) sq += (c / presences.length) ** 2;
-	return 1 - sq;
-}
-
-const itemsForAdoption = itemRecords.map(({ item }) => ({ ...item, sovereigntyScore: computeSovScore(item.sovereigntyCriteria) }));
-const itemById = new Map(itemsForAdoption.map((i) => [i.id, i]));
-
-// Stack avg sovereignty
-const stackSovMap = new Map();
-for (const stack of stacks) {
-	let sum = 0, count = 0;
-	for (const si of stack.items ?? []) { const it = itemById.get(si.itemId); if (it) { sum += it.sovereigntyScore; count++; } }
-	stackSovMap.set(stack.id, count > 0 ? sum / count : 0);
-}
-
-// Presences
-const presenceMap = new Map(itemsForAdoption.map((i) => [i.id, []]));
-for (const stack of stacks) {
-	const sz = (stack.items ?? []).length;
-	const avgSov = stackSovMap.get(stack.id) ?? 0;
-	const country = stack.country ?? '_unknown';
-	for (const si of stack.items ?? []) {
-		const list = presenceMap.get(si.itemId);
-		if (list) list.push({ stackId: stack.id, role: si.role, status: si.status, sz, country, avgSov });
-	}
-}
-
-// Direct coverage
-const dcMap = new Map(itemsForAdoption.map((i) => {
-	const ps = presenceMap.get(i.id) ?? [];
-	return [i.id, ps.reduce((s, p) => s + (ROLE_W[p.role] ?? 0) * (STATUS_W[p.status] ?? 0) * sizeDamp(p.sz), 0)];
+const itemsWithSov = itemRecords.map(({ item }) => ({
+	...item,
+	sovereigntyScore: computeSovereigntyScore(item.sovereigntyCriteria),
 }));
 
-// Reverse deps
-const reverseDepsForReport = {};
-for (const { item } of itemRecords) {
-	for (const dep of item.dependencies ?? []) {
-		if (!reverseDepsForReport[dep.targetItemId]) reverseDepsForReport[dep.targetItemId] = [];
-		reverseDepsForReport[dep.targetItemId].push({ sourceItemId: item.id });
-	}
-}
+const adoptionResults = computeAdoptionScores(itemsWithSov, stacks, reverseDepsForReport);
 
-// Transitive coverage
-const tcMap = new Map(itemsForAdoption.map((i) => {
-	const revDeps = reverseDepsForReport[i.id] ?? [];
-	return [i.id, revDeps.reduce((s, r) => s + GAMMA * (dcMap.get(r.sourceItemId) ?? 0), 0)];
-}));
-
-// Diversity
-const divMap = new Map(itemsForAdoption.map((i) => [i.id, simpsonDiv(presenceMap.get(i.id) ?? [])]));
-
-// Raw adoption
-const rawMap = new Map(itemsForAdoption.map((i) => {
-	const dc = dcMap.get(i.id) ?? 0, tc = tcMap.get(i.id) ?? 0, div = divMap.get(i.id) ?? 0;
-	return [i.id, Math.log1p(dc + tc) * (0.6 + 0.4 * div)];
-}));
-const maxRaw = Math.max(0, ...rawMap.values());
-
-// Sovereign adoption
-const sovPresenceMap = new Map(itemsForAdoption.map((i) => {
-	const all = presenceMap.get(i.id) ?? [];
-	return [i.id, i.sovereigntyScore < SOVEREIGN_THRESHOLD ? [] : all.filter((p) => p.avgSov >= SOVEREIGN_THRESHOLD)];
-}));
-const sovDcMap = new Map(itemsForAdoption.map((i) => {
-	const ps = sovPresenceMap.get(i.id) ?? [];
-	return [i.id, ps.reduce((s, p) => s + (ROLE_W[p.role] ?? 0) * (STATUS_W[p.status] ?? 0) * sizeDamp(p.sz), 0)];
-}));
-const sovTcMap = new Map(itemsForAdoption.map((i) => {
-	if (i.sovereigntyScore < SOVEREIGN_THRESHOLD) return [i.id, 0];
-	const revDeps = reverseDepsForReport[i.id] ?? [];
-	let tc = 0;
-	for (const r of revDeps) { const src = itemById.get(r.sourceItemId); if (src?.sovereigntyScore >= SOVEREIGN_THRESHOLD) tc += GAMMA * (sovDcMap.get(r.sourceItemId) ?? 0); }
-	return [i.id, tc];
-}));
-const sovDivMap = new Map(itemsForAdoption.map((i) => [i.id, simpsonDiv(sovPresenceMap.get(i.id) ?? [])]));
-const sovRawMap = new Map(itemsForAdoption.map((i) => {
-	const dc = sovDcMap.get(i.id) ?? 0, tc = sovTcMap.get(i.id) ?? 0, div = sovDivMap.get(i.id) ?? 0;
-	return [i.id, Math.log1p(dc + tc) * (0.6 + 0.4 * div)];
-}));
-const maxSovRaw = Math.max(0, ...sovRawMap.values());
-
-function adoptionScore(id) { return maxRaw > 0 ? Math.round(100 * (rawMap.get(id) ?? 0) / maxRaw) : 0; }
-function sovAdoptionScore(id) { return maxSovRaw > 0 ? Math.round(100 * (sovRawMap.get(id) ?? 0) / maxSovRaw) : 0; }
-
-const topAdoption = [...itemsForAdoption]
-	.sort((a, b) => adoptionScore(b.id) - adoptionScore(a.id))
+const topAdoption = [...itemsWithSov]
+	.sort((a, b) => (adoptionResults.get(b.id)?.score ?? 0) - (adoptionResults.get(a.id)?.score ?? 0))
 	.slice(0, 10)
-	.map((i) => ({ itemId: i.id, adoptionScore: adoptionScore(i.id), usedInStacks: (presenceMap.get(i.id) ?? []).length }));
+	.map((i) => ({
+		itemId: i.id,
+		adoptionScore: adoptionResults.get(i.id)?.score ?? 0,
+		usedInStacks: adoptionResults.get(i.id)?.usedInStacks.length ?? 0,
+	}));
 
-const topSovAdoption = [...itemsForAdoption]
-	.sort((a, b) => sovAdoptionScore(b.id) - sovAdoptionScore(a.id))
+const topSovAdoption = [...itemsWithSov]
+	.sort((a, b) => (adoptionResults.get(b.id)?.sovereignScore ?? 0) - (adoptionResults.get(a.id)?.sovereignScore ?? 0))
 	.slice(0, 10)
-	.map((i) => ({ itemId: i.id, sovereignAdoptionScore: sovAdoptionScore(i.id), sovereigntyScore: i.sovereigntyScore }));
+	.map((i) => ({
+		itemId: i.id,
+		sovereignAdoptionScore: adoptionResults.get(i.id)?.sovereignScore ?? 0,
+		sovereigntyScore: i.sovereigntyScore,
+	}));
+
+// ---------------------------------------------------------------------------
+// Report assembly
+// ---------------------------------------------------------------------------
 
 const report = {
 	timestamp: new Date().toISOString(),
