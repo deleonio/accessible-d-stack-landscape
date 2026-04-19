@@ -108,7 +108,12 @@ function computeDirectCoverage(
 	return { coverage: directCoverage, sovereignCoverage, stackIds };
 }
 
-type DirectCoverageResult = { coverage: number; sovereignCoverage: number; stackIds: string[] };
+type ItemCacheEntry = {
+	coverage: number;
+	sovereignCoverage: number;
+	stackIds: string[];
+	diversity: number;
+};
 
 /**
  * Compute transitive coverage using a pre-built cache of direct coverages.
@@ -117,14 +122,14 @@ type DirectCoverageResult = { coverage: number; sovereignCoverage: number; stack
 function computeTransitiveCoverage(
 	itemId: string,
 	reverseDeps: Map<string, string[]>,
-	directCache: Map<string, DirectCoverageResult>,
+	itemCache: Map<string, ItemCacheEntry>,
 ): { coverage: number; sovereignCoverage: number } {
 	let transitiveCoverage = 0;
 	let sovereignTransitiveCoverage = 0;
 
 	const dependents = reverseDeps.get(itemId) || [];
 	for (const dependentId of dependents) {
-		const cached = directCache.get(dependentId);
+		const cached = itemCache.get(dependentId);
 		if (!cached) continue;
 
 		transitiveCoverage += TRANSITIVE_WEIGHT * cached.coverage;
@@ -160,12 +165,15 @@ export function computeAdoptionScores(
 	const itemMap = new Map(items.map((item) => [item.id, item]));
 	const reverseMap = reverseDeps || buildReverseDependencyMap(items);
 
-	// Pre-pass: compute direct coverage for every item once and cache the results.
-	// The transitive pass would otherwise re-invoke computeDirectCoverage for each
-	// dependent, causing O(items × avg-dependents) redundant stack traversals.
-	const directCache = new Map<string, DirectCoverageResult>();
+	// Pre-pass: compute direct coverage and geographic diversity for every item
+	// once and store in a cache. This avoids redundant stack traversals both in
+	// the scoring loop and in computeTransitiveCoverage (which looks up dependents
+	// from the same cache instead of re-running computeDirectCoverage).
+	const itemCache = new Map<string, ItemCacheEntry>();
 	for (const item of items) {
-		directCache.set(item.id, computeDirectCoverage(item.id, stacks, item.sovereigntyScore));
+		const { coverage, sovereignCoverage, stackIds } = computeDirectCoverage(item.id, stacks, item.sovereigntyScore);
+		const diversity = computeDiversity(stacks, item.id);
+		itemCache.set(item.id, { coverage, sovereignCoverage, stackIds, diversity });
 	}
 
 	// First pass: compute all raw scores using the cache
@@ -182,10 +190,9 @@ export function computeAdoptionScores(
 	>();
 
 	for (const item of items) {
-		const { coverage: directCov, sovereignCoverage: directSovCov, stackIds } = directCache.get(item.id)!;
-		const diversity = computeDiversity(stacks, item.id);
+		const { coverage: directCov, sovereignCoverage: directSovCov, stackIds, diversity } = itemCache.get(item.id)!;
 		const { coverage: transitiveCov, sovereignCoverage: transitiveSovCov } =
-			computeTransitiveCoverage(item.id, reverseMap, directCache);
+			computeTransitiveCoverage(item.id, reverseMap, itemCache);
 
 		const adoption = computeRawAdoptionScore(directCov, transitiveCov, diversity);
 		const sovereignAdoption = computeRawAdoptionScore(
