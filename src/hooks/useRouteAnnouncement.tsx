@@ -6,14 +6,11 @@ interface RouteAnnouncementOptions {
 }
 
 export function useRouteAnnouncement({ pageTitle, skipHeadingFocus = false }: RouteAnnouncementOptions) {
-	const prevTitleRef = useRef<string>();
 	const liveRegionRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		// Update document title
-		const oldTitle = document.title;
 		document.title = pageTitle;
-		prevTitleRef.current = oldTitle;
 
 		// Announce page change to screenreaders
 		if (liveRegionRef.current) {
@@ -37,13 +34,6 @@ export function useRouteAnnouncement({ pageTitle, skipHeadingFocus = false }: Ro
 				}
 			}, 0);
 		}
-
-		return () => {
-			// Clean up: restore previous title on unmount
-			if (prevTitleRef.current) {
-				document.title = prevTitleRef.current;
-			}
-		};
 	}, [pageTitle, skipHeadingFocus]);
 
 	return liveRegionRef;
