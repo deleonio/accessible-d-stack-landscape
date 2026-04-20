@@ -52,14 +52,14 @@
 		"@hookform/resolvers": "5.2.2",
 		"@public-ui/components": "4.1.2",
 		"@public-ui/preact": "4.1.2",
-		"@public-ui/react": "^4.1.2",
+		"@public-ui/react": "4.1.2",
 		"@public-ui/theme-default": "4.1.2",
 		"@public-ui/theme-kern": "4.1.2",
 		"i18next": "26.0.6",
 		"i18next-browser-languagedetector": "8.2.1",
 		"preact": "10.29.1",
 		"preact-iso": "2.11.1",
-		"preact-render-to-string": "^6.6.7",
+		"preact-render-to-string": "6.6.7",
 		"react-hook-form": "7.72.1",
 		"react-i18next": "17.0.4",
 		"zod": "4.3.6"
@@ -98,7 +98,7 @@
 		"unocss": "66.6.8",
 		"vite": "8.0.8",
 		"vite-plugin-pwa": "1.2.0",
-		"vitest": "^4.1.4",
+		"vitest": "4.1.4",
 		"workbox-window": "7.4.0"
 	},
 	"pnpm": {
