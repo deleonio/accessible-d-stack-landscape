@@ -16,6 +16,12 @@ import { fileURLToPath } from 'url';
 import {
 	DIVERSITY_MAX_FACTOR,
 	DIVERSITY_MIN_FACTOR,
+	POPULARITY_ADOPTION_BLEND,
+	POPULARITY_ADOPTION_WEIGHT,
+	POPULARITY_REF_DOCKER_WEEKLY,
+	POPULARITY_REF_GITHUB_STARS,
+	POPULARITY_REF_NPM_WEEKLY,
+	POPULARITY_REF_PYPI_WEEKLY,
 	ROLE_WEIGHTS,
 	SIZE_DAMP_REFERENCE,
 	SOVEREIGNTY_THRESHOLD,
@@ -172,6 +178,59 @@ function computeRawAdoptionScore(directCoverage, transitiveCoverage, diversity) 
 	return withDiversity;
 }
 
+// ---------------------------------------------------------------------------
+// Popularity Score Calculation
+// ---------------------------------------------------------------------------
+
+function normalizePopularitySignal(value, ref) {
+	return Math.min(1.0, Math.log1p(value) / Math.log1p(ref));
+}
+
+function computeRawPopularityScore(metrics) {
+	const signals = [];
+
+	if (metrics.githubStars !== undefined) {
+		signals.push(normalizePopularitySignal(metrics.githubStars, POPULARITY_REF_GITHUB_STARS));
+	}
+	if (metrics.npmWeeklyDownloads !== undefined) {
+		signals.push(normalizePopularitySignal(metrics.npmWeeklyDownloads, POPULARITY_REF_NPM_WEEKLY));
+	}
+	if (metrics.dockerWeeklyPulls !== undefined) {
+		signals.push(normalizePopularitySignal(metrics.dockerWeeklyPulls, POPULARITY_REF_DOCKER_WEEKLY));
+	}
+	if (metrics.pypiWeeklyDownloads !== undefined) {
+		signals.push(normalizePopularitySignal(metrics.pypiWeeklyDownloads, POPULARITY_REF_PYPI_WEEKLY));
+	}
+
+	if (signals.length === 0) return 0;
+
+	const maxSignal = Math.max(...signals);
+	const multiPlatformBonus = Math.max(0, Math.min(0.1, (signals.filter((s) => s > 0).length - 1) * 0.05));
+
+	return Math.min(1.0, maxSignal + multiPlatformBonus);
+}
+
+function ageFactor(updatedAt) {
+	if (!updatedAt) return 0.8;
+
+	const updated = new Date(updatedAt);
+	const now = new Date();
+	const ageMs = now.getTime() - updated.getTime();
+	const ageMonths = ageMs / (1000 * 60 * 60 * 24 * 30.44);
+
+	if (ageMonths <= 6) return 1.0;
+	if (ageMonths <= 12) return 0.9;
+	if (ageMonths <= 24) return 0.7;
+	return 0.5;
+}
+
+function computePopularityScore(metrics) {
+	if (!metrics) return undefined;
+	const raw = computeRawPopularityScore(metrics);
+	const age = ageFactor(metrics.updatedAt);
+	return Math.round(raw * age * 100);
+}
+
 function computeAdoptionScores(items, stacks, reverseDeps) {
 	const itemMap = {};
 	for (const item of items) {
@@ -247,10 +306,19 @@ function computeOverallScore(sovereigntyScore, adoption) {
 	const SOVEREIGN_ADOPTION_WEIGHT = 0.25;
 	const ADOPTION_WEIGHT = 0.15;
 
+	let adoptionScoreToUse = adoption.adoptionScore;
+
+	// If popularity score is available, blend it with adoption score
+	if (adoption.popularityScore !== undefined) {
+		adoptionScoreToUse =
+			POPULARITY_ADOPTION_WEIGHT * adoption.adoptionScore +
+			POPULARITY_ADOPTION_BLEND * adoption.popularityScore;
+	}
+
 	const combined =
 		SOVEREIGNTY_WEIGHT * sovereigntyScore +
 		SOVEREIGN_ADOPTION_WEIGHT * adoption.sovereignAdoptionScore +
-		ADOPTION_WEIGHT * adoption.adoptionScore;
+		ADOPTION_WEIGHT * adoptionScoreToUse;
 
 	return Math.round(Math.max(0, Math.min(100, combined)));
 }
@@ -339,6 +407,11 @@ const adoptionScores = computeAdoptionScores(items, stacks, reverseDependencies)
 for (const item of items) {
 	const adoption = adoptionScores[item.id];
 	if (adoption) {
+		// Compute popularity score if metrics are available
+		if (item.popularityMetrics) {
+			adoption.popularityScore = computePopularityScore(item.popularityMetrics);
+		}
+
 		item.adoption = adoption;
 		item.adoption.overallScore = computeOverallScore(item.sovereigntyScore, adoption);
 	}
