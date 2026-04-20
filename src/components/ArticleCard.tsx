@@ -85,10 +85,26 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const selectedBoostedCriteria = new Set<keyof Omit<SovereigntyCriteria, 'ownerType'>>(selectedScoreResult.boostedCriteria);
 	const criteriaKeys = (Object.keys(article.sovereigntyCriteria) as Array<keyof typeof article.sovereigntyCriteria>).filter((key) => key !== 'ownerType');
 
-	const renderArticleLogo = (logo: string | undefined, localizedName: string, large = false) => {
-		if (!logo) {
-			return null;
+	const getLogoFallbackLabel = (name: string) => {
+		const sanitized = name.trim();
+		if (!sanitized) return '?';
+		const words = sanitized.split(/\s+/).filter(Boolean);
+		if (words.length >= 2) {
+			return `${words[0][0] ?? ''}${words[1][0] ?? ''}`.toUpperCase();
 		}
+		return sanitized.slice(0, 2).toUpperCase();
+	};
+
+	const renderArticleLogo = (logo: string | undefined, localizedName: string, large = false) => {
+		const fallbackLabel = getLogoFallbackLabel(localizedName);
+		const fallbackClassName = large ? 'article-logo-placeholder article-logo-placeholder--drawer' : 'article-logo-placeholder';
+		const fallback = (
+			<div className={fallbackClassName} aria-label={localizedName} role="img">
+				{fallbackLabel}
+			</div>
+		);
+
+		if (!logo) return fallback;
 
 		const src = failedLogos.has(logo) ? 'assets/broken-logo.svg' : logo;
 		const handleImageError = () => {
@@ -96,8 +112,11 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 		};
 
 		if (large) {
+			if (failedLogos.has(logo)) return fallback;
 			return <img src={src} alt={localizedName} loading="lazy" className="article-logo--drawer" onError={() => handleImageError()} />;
 		}
+
+		if (failedLogos.has(logo)) return fallback;
 
 		return (
 			<KolImage
