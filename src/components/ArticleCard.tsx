@@ -226,7 +226,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 					onClose: () => setIsDrawerOpen(false),
 				}}
 			>
-				<div className="drawer-content">
+				<div className="article-drawer-content">
 					<KolCard _label={localizedSelectedArticleName} className="drawer-card">
 						<div className="drawer-details">
 							<div className="drawer-headline">

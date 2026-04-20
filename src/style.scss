@@ -854,7 +854,7 @@ kol-card.article-card,
 	text-transform: capitalize;
 }
 
-.drawer-content {
+.article-drawer-content {
 	width: min(600px, 100vw);
 	max-width: 100%;
 	overflow: hidden;
@@ -862,7 +862,7 @@ kol-card.article-card,
 	padding: 0;
 }
 
-.drawer-content > * {
+.article-drawer-content > * {
 	box-sizing: border-box;
 	overflow-x: hidden;
 	max-width: 100%;
@@ -870,7 +870,7 @@ kol-card.article-card,
 }
 
 /* Stelle sicher, dass KolCard und alle inneren Elemente responsive sind */
-.drawer-content kol-card,
+.article-drawer-content kol-card,
 .drawer-card {
 	width: 100% !important;
 	max-width: 100% !important;
@@ -895,9 +895,9 @@ kol-card.article-card,
 }
 
 /* Text und Elemente sollen nicht über den Container hinausgehen */
-.drawer-content p,
-.drawer-content span,
-.drawer-content a {
+.article-drawer-content p,
+.article-drawer-content span,
+.article-drawer-content a {
 	overflow-wrap: break-word;
 }
 
