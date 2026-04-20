@@ -294,13 +294,13 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 
 									{/* ── Souveränitäts-Kriterien ───────────────────────────── */}
 									<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
-									<div className="drawer-criteria">
+									<ul className="drawer-criteria">
 										{criteriaKeys.map((key) => {
 											const isSatisfied = selectedArticle.sovereigntyCriteria[key];
 											const isBoosted = selectedBoostedCriteria.has(key);
 											const iconClass = isSatisfied ? 'criteria-icon criteria-icon--satisfied' : 'criteria-icon criteria-icon--unsatisfied';
 											return (
-												<div key={key} className={`drawer-criteria__item${isSatisfied ? ' drawer-criteria__item--satisfied' : ''}`}>
+												<li key={key} className={`drawer-criteria__item${isSatisfied ? ' drawer-criteria__item--satisfied' : ''}`}>
 													<span className={iconClass} aria-hidden="true">
 														{isSatisfied ? '✓' : '○'}
 													</span>
@@ -312,10 +312,10 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 															</span>
 														)}
 													</span>
-												</div>
+												</li>
 											);
 										})}
-									</div>
+									</ul>
 									{selectedOwnerCountry && (
 										<div className="drawer-owner-info">
 											<span className="drawer-owner-flag">{selectedOwnerCountryFlag}</span>
