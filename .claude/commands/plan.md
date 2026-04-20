@@ -18,6 +18,7 @@ Erstelle einen detaillierten Umsetzungsplan für das folgende Feature oder die f
 - **Datenmodell-Änderungen** — Neue/geänderte Typen, Schemata, JSON-Felder
 - **Algorithmus / Scoring-Konzept** — Formeln, Gewichte, Normalisierung
 - **Implementierungsschritte** — Nummerierte, atomare Aufgaben (von Daten bis UI)
+  - **Letzter Schritt:** Nach erfolgreicher Implementierung und Merge: Diese Plan-Datei aus `docs/plans/` löschen
 - **Dokumentations-Updates** — Welche Docs müssen angepasst werden?
 - **Risiken & Mitigationen** — Potenzielle Probleme und Lösungsansätze
 - **Offene Fragen** — Was muss noch entschieden werden?
