@@ -3,6 +3,7 @@ import { Footer } from './components/Footer';
 import { HashLocationProvider } from './components/HashLocationProvider';
 import { Header } from './components/Header';
 import { PwaWrapper } from './components/PwaWrapper';
+import { RouteAnnouncementRegion } from './hooks/useRouteAnnouncement';
 import { DependencyGraphPage } from './pages/DependencyGraphPage';
 import { HomePage } from './pages/HomePage';
 import { ImprintPage } from './pages/ImprintPage';
@@ -15,6 +16,7 @@ function AppContent() {
 
 	return (
 		<div className="flex flex-col min-h-screen w-full">
+			<RouteAnnouncementRegion />
 			<Header currentUrl={path} />
 			<Router>
 				<Route path="/" component={StackGalleryPage} />

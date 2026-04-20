@@ -1,14 +1,18 @@
 import { useLocation } from 'preact-iso';
 import { useEffect, useMemo, useState } from 'preact/hooks';
+import { useTranslation } from 'react-i18next';
 import { CategoryGrid } from '../components/CategoryGrid';
 import { FilterBar, SortDir, SortField, ViewMode } from '../components/FilterBar';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { useFilters } from '../hooks/useFilters';
+import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 import { StackItem } from '../types';
 
 export function HomePage() {
+	const { t } = useTranslation();
 	const [activeStackId, setActiveStackId] = useState<string | null>(null);
 	const location = useLocation();
+	useRouteAnnouncement({ pageTitle: t('stack.label') || 'Stacks' });
 
 	// Bei jeder Änderung der URL-Query: ?stack=<id> lesen und Stack vorauswählen.
 	useEffect(() => {
@@ -45,7 +49,10 @@ export function HomePage() {
 	}, [activeStackId, setFilters]);
 
 	return (
-		<main id="main-content">
+		<main id="main-content" aria-labelledby="home-page-title">
+			<h1 id="home-page-title" className="sr-only">
+				{t('pages.home.title') || 'Categories'}
+			</h1>
 			<FilterBar
 				filters={filters}
 				onFilterChange={setFilters}

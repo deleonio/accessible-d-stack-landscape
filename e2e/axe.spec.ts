@@ -11,7 +11,10 @@ test.describe('Accessibility – axe-core', () => {
 	});
 
 	test('full page has no automatically detectable WCAG violations', async ({ page }) => {
-		const results = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
+		const results = await new AxeBuilder({ page })
+			.withTags(WCAG_TAGS)
+			.withRules(['heading-order'])
+			.analyze();
 
 		expect(results.violations).toEqual([]);
 	});

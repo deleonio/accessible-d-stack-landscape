@@ -5,10 +5,12 @@ import { DependencyGraph } from '../components/DependencyGraph';
 import { FilterBar, SortDir, SortField, ViewMode } from '../components/FilterBar';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { useFilters } from '../hooks/useFilters';
+import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 import { buildDependencyGraph, getLocalizedText } from '../utils';
 
 export function DependencyGraphPage() {
 	const { i18n, t } = useTranslation();
+	useRouteAnnouncement({ pageTitle: t('dependencies.graph.title') || 'Dependency Graph' });
 	const [activeStackId, setActiveStackId] = useState<string | null>(null);
 	const [selectedRootItemId, setSelectedRootItemId] = useState<string | null>(null);
 	const [sortField, setSortField] = useState<SortField>('overall');
@@ -54,7 +56,10 @@ export function DependencyGraphPage() {
 	const graphItems = selectedRootItemId ? baseItems : filtered;
 
 	return (
-		<main id="main-content">
+		<main id="main-content" aria-labelledby="graph-page-title">
+			<h1 id="graph-page-title" className="sr-only">
+				{t('dependencies.graph.title') || 'Dependency Graph'}
+			</h1>
 			<FilterBar
 				filters={filters}
 				onFilterChange={setFilters}

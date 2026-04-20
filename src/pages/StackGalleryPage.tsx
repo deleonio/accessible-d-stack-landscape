@@ -3,6 +3,7 @@ import { useEffect, useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { StackExpose } from '../components/StackExpose';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
+import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 import { computeStackAvgScore, useStackMetrics } from '../hooks/useStackMetrics';
 import { Stack } from '../types';
 
@@ -25,6 +26,7 @@ export function StackGalleryPage() {
 	const { t } = useTranslation();
 	const location = useLocation();
 	const selectedStackId = location.query.stack;
+	useRouteAnnouncement({ pageTitle: t('stackGallery.title') || 'Stack Gallery' });
 
 	const stacksWithScores = useMemo(() => STACKS.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })), []);
 

@@ -29,6 +29,7 @@ export function CategoryGrid({
 	articles,
 	stackScoreItems,
 	filters,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	onFilterChange,
 	totalCount,
 	activeStack,
@@ -67,13 +68,6 @@ export function CategoryGrid({
 	const activeCount = articles.length;
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
 	const paginatedArticles = sortedArticles.slice(startIdx, startIdx + ITEMS_PER_PAGE);
-
-	// Reset to page 1 when filters change
-	const handleFilterChange = (newFilters: FilterState) => {
-		onFilterChange(newFilters);
-		setCurrentPage(1);
-	};
-	void handleFilterChange;
 
 	return (
 		<div id="category-results" className="category-container px-3 md:px-4 lg:px-5">
