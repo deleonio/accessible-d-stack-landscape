@@ -160,8 +160,8 @@ export function DependencyGraph({ items, layers, filters, selectedRootItemId }: 
 									role="img"
 									aria-label={t('dependencies.graph.canvasAria', { count: scopedEdges.length })}
 								>
-					<title>{t('dependencies.graph.title')}</title>
-					<desc>{t('dependencies.graph.canvasAria', { count: scopedEdges.length })}</desc>
+									<title>{t('dependencies.graph.title')}</title>
+									<desc>{t('dependencies.graph.canvasAria', { count: scopedEdges.length })}</desc>
 									{scopedEdges.map((edge) => {
 										const source = positionedNodes.get(edge.source.id);
 										const target = positionedNodes.get(edge.target.id);

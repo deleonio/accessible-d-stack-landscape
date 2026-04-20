@@ -69,7 +69,6 @@ export function CategoryGrid({
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
 	const paginatedArticles = sortedArticles.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
-
 	return (
 		<div id="category-results" className="category-container px-3 md:px-4 lg:px-5">
 			{activeStack && stackItemMap && <StackStats stack={activeStack} items={stackScoreItems ?? articles} stackItemMap={stackItemMap} />}
