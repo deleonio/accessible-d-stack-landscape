@@ -24,6 +24,9 @@ importers:
       '@public-ui/preact':
         specifier: 4.1.2
         version: 4.1.2(@public-ui/react@4.1.2(@public-ui/components@4.1.2(adopted-style-sheets@1.1.9-rc.21))(react-dom@18.3.1(react@19.2.4))(react@19.2.4))(preact@10.29.1)
+      '@public-ui/react':
+        specifier: ^4.1.2
+        version: 4.1.2(@public-ui/components@4.1.2(adopted-style-sheets@1.1.9-rc.21))(react-dom@18.3.1(react@19.2.4))(react@19.2.4)
       '@public-ui/theme-default':
         specifier: 4.1.2
         version: 4.1.2(@public-ui/components@4.1.2(adopted-style-sheets@1.1.9-rc.21))
