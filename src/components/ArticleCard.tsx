@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { Item, ParticipantRole, SovereigntyCriteria, StackItem } from '../types';
 import { buildDependencyGraph, getLocalizedText } from '../utils';
-import { computeEffectiveSovereigntyScoreResult, computeOwnerScore } from '../utils/sovereigntyScore';
+import { ADOPTION_WEIGHT, SOVEREIGN_ADOPTION_WEIGHT, SOVEREIGNTY_WEIGHT } from '../utils/overallScore';
+import { computeEffectiveSovereigntyScoreResult, getScoreCategory, getScoreCategoryColor } from '../utils/sovereigntyScore';
 import { SovereigntyGauge } from './SovereigntyGauge';
 
 type ViewMode = 'tile' | 'list';
@@ -68,9 +69,7 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const incomingDependencies = CATALOG_DEPENDENCY_GRAPH.incomingById.get(selectedArticle.id) ?? [];
 	const selectedDependency = [...outgoingDependencies, ...incomingDependencies].find((edge) => edge.id === selectedDependencyId) ?? null;
 
-	const scoreResult = computeEffectiveSovereigntyScoreResult(article.sovereigntyCriteria, stackItem);
-	const score = scoreResult.score;
-	const scoreColor = scoreResult.color;
+	const overallScore = article.adoption?.overallScore ?? 0;
 	// When the drawer is open and the active stack defines a role for the selected
 	// (drill-down) article, honour that role too; otherwise fall back to the
 	// outer stackItem context so navigation between related items keeps the
@@ -78,7 +77,6 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 	const selectedStackItem = stackItemMap?.get(selectedArticle.id) ?? (selectedArticle.id === article.id ? stackItem : undefined);
 	const selectedScoreResult = computeEffectiveSovereigntyScoreResult(selectedArticle.sovereigntyCriteria, selectedStackItem);
 	const selectedScore = selectedScoreResult.score;
-	const selectedScoreCategory = selectedScoreResult.category;
 	const selectedMaintainerBoosted = selectedScoreResult.maintainerBoosted;
 	const selectedOwnerCountry = selectedArticle.ownerCountry?.toUpperCase();
 	const selectedOwnerCountryFlag = countryToFlagEmoji(selectedOwnerCountry);
@@ -128,28 +126,19 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 		/>
 	);
 
-	const cardMaintainerBoosted = scoreResult.maintainerBoosted;
-	const cardScoreTitleBase = `${t('article.scoreTitle')}: ${score}/100 (${t(`article.scoreCategories.${scoreResult.category}`)} - ${scoreResult.percentileInCategory}%)`;
-	const cardScoreTitle = cardMaintainerBoosted
-		? `${cardScoreTitleBase} — ${t('article.maintainerBoost.badgeTitle', { rawScore: scoreResult.rawScore })}`
-		: cardScoreTitleBase;
+	const overallScoreColor = getScoreCategoryColor(overallScore);
+	const overallScoreCategory = getScoreCategory(overallScore);
+
 	const badges = (
 		<>
 			<span
-				className={`card-score-badge${cardMaintainerBoosted ? ' card-score-badge--maintainer-boosted' : ''}`}
-				style={{ background: scoreColor, color: '#fff' }}
-				title={cardScoreTitle}
-				aria-label={
-					cardMaintainerBoosted ? t('article.maintainerBoost.scoreAria', { score, rawScore: scoreResult.rawScore }) : t('article.scoreAria', { score })
-				}
+				className="card-score-badge"
+				style={{ background: overallScoreColor, color: '#fff' }}
+				title={`${t('article.scoreOverview.total')}: ${overallScore}/100`}
+				aria-label={`${t('article.scoreOverview.total')}: ${overallScore}/100`}
 			>
-				<span className="card-score-number">{score}</span>
-				<span className="card-score-category">{t(`article.scoreCategories.${scoreResult.category}`)}</span>
-				{cardMaintainerBoosted && (
-					<span className="card-score-boost-marker" aria-hidden="true" title={t('article.maintainerBoost.markerTitle')}>
-						⇪
-					</span>
-				)}
+				<span className="card-score-number">{overallScore}</span>
+				<span className="card-score-category">{t(`article.scoreCategories.${overallScoreCategory}`)}</span>
 			</span>
 			{stackItem && (
 				<span className="card-role-badge" style={{ background: ROLE_COLORS[stackItem.role], color: '#fff' }} title={t(`stack.roles.${stackItem.role}`)}>
@@ -232,80 +221,108 @@ export function ArticleCard({ article, stackItem, stackItemMap, viewMode = 'tile
 										)}
 									</div>
 								</div>
-							</div>
-							<div className="drawer-score-section">
-								<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
-								<div className="drawer-gauge-container">
-									<SovereigntyGauge score={selectedScore} category={selectedScoreCategory} size={200} />
-								</div>
-								<p className={`drawer-score-category-label drawer-score-category-label--${selectedScoreCategory}`}>
-									({t(`article.scoreCategories.${selectedScoreCategory}`)})
-								</p>
-								{selectedMaintainerBoosted && (
-									<div className="drawer-maintainer-boost" role="note" aria-label={t('article.maintainerBoost.noteAria')}>
-										<p className="drawer-maintainer-boost__title">
-											<span aria-hidden="true">⇪ </span>
-											{t('article.maintainerBoost.title')}
-										</p>
-										<p className="drawer-maintainer-boost__text">
-											{t('article.maintainerBoost.explanation', {
-												rawScore: selectedScoreResult.rawScore,
-												effectiveScore: selectedScore,
-											})}
-										</p>
-										{selectedBoostedCriteria.size > 0 && (
-											<p className="drawer-maintainer-boost__criteria">
-												{t('article.maintainerBoost.boostedCriteriaLabel')}:{' '}
-												{Array.from(selectedBoostedCriteria)
-													.map((key) => t(`article.criteria.${key}`))
-													.join(', ')}
-											</p>
-										)}
+								<div className="drawer-score-section">
+									{/* ── Gesamt-Score (Gauge) ─────────────────────────────── */}
+									<p className="drawer-score-title">{t('article.scoreOverview.title')}</p>
+									<div className="drawer-gauge-container">
+										<SovereigntyGauge
+											score={selectedArticle.adoption?.overallScore ?? 0}
+											category={getScoreCategory(selectedArticle.adoption?.overallScore ?? 0)}
+											size={160}
+										/>
 									</div>
-								)}
-								<p className="drawer-score-description">{t(`article.scoreCategories.${selectedScoreCategory}Description`)}</p>
-								<ul className="drawer-criteria-list">
-									{criteriaKeys.map((key) => {
-										const factual = selectedArticle.sovereigntyCriteria[key];
-										const boosted = !factual && selectedBoostedCriteria.has(key);
-										const state = boosted ? 'boosted' : factual ? 'yes' : 'no';
-										const icon = boosted ? '⇪' : factual ? '✓' : '✗';
-										return (
-											<li
-												key={key}
-												className={`drawer-criteria-item drawer-criteria-item--${state}`}
-												title={boosted ? t('article.maintainerBoost.criterionTitle') : undefined}
-											>
-												<span className="drawer-criteria-icon" aria-hidden="true">
-													{icon}
-												</span>
-												{t(`article.criteria.${key}`)}
-												{boosted && <span className="drawer-criteria-boost-label"> ({t('article.maintainerBoost.criterionMarker')})</span>}
-											</li>
-										);
-									})}
-									<li
-										className={`drawer-criteria-item drawer-criteria-item--${computeOwnerScore(selectedArticle.sovereigntyCriteria.ownerType) > 0 ? 'yes' : 'no'}`}
-									>
-										<span className="drawer-criteria-icon" aria-hidden="true">
-											{computeOwnerScore(selectedArticle.sovereigntyCriteria.ownerType) > 0 ? '✓' : '✗'}
-										</span>
-										{t('article.criteria.ownerType', {
-											owner: selectedArticle.sovereigntyCriteria.ownerType
-												? t(`article.ownerType.${selectedArticle.sovereigntyCriteria.ownerType}`)
-												: t('article.ownerType.unknown'),
-											points: computeOwnerScore(selectedArticle.sovereigntyCriteria.ownerType),
+
+									{/* ── Score-Herleitung ──────────────────────────────────── */}
+									{selectedArticle.adoption && (
+										<div className="score-breakdown">
+											<p className="score-breakdown__title">{t('article.scoreOverview.calculation')}</p>
+											<div className="score-breakdown__rows">
+												<div className="score-breakdown__row">
+													<span className="score-breakdown__label">{t('article.scoreOverview.sovereignty')}</span>
+													<span className="score-breakdown__score" style={{ color: getScoreCategoryColor(selectedScoreResult.rawScore) }}>
+														{selectedScoreResult.rawScore}/100
+													</span>
+													<span className="score-breakdown__weight">× {(SOVEREIGNTY_WEIGHT * 100).toFixed(0)}%</span>
+													<span className="score-breakdown__pts">{(selectedScoreResult.rawScore * SOVEREIGNTY_WEIGHT).toFixed(1)}</span>
+												</div>
+												<div className="score-breakdown__row">
+													<span className="score-breakdown__label">{t('article.scoreOverview.sovereignAdoption')}</span>
+													<span className="score-breakdown__score" style={{ color: getScoreCategoryColor(selectedArticle.adoption.sovereignAdoptionScore) }}>
+														{selectedArticle.adoption.sovereignAdoptionScore}/100
+													</span>
+													<span className="score-breakdown__weight">× {(SOVEREIGN_ADOPTION_WEIGHT * 100).toFixed(0)}%</span>
+													<span className="score-breakdown__pts">
+														{(selectedArticle.adoption.sovereignAdoptionScore * SOVEREIGN_ADOPTION_WEIGHT).toFixed(1)}
+													</span>
+												</div>
+												<div className="score-breakdown__row">
+													<span className="score-breakdown__label">{t('article.scoreOverview.adoption')}</span>
+													<span className="score-breakdown__score" style={{ color: getScoreCategoryColor(selectedArticle.adoption.adoptionScore) }}>
+														{selectedArticle.adoption.adoptionScore}/100
+													</span>
+													<span className="score-breakdown__weight">× {(ADOPTION_WEIGHT * 100).toFixed(0)}%</span>
+													<span className="score-breakdown__pts">{(selectedArticle.adoption.adoptionScore * ADOPTION_WEIGHT).toFixed(1)}</span>
+												</div>
+												<div className="score-breakdown__row score-breakdown__row--total">
+													<span className="score-breakdown__label">{t('article.scoreOverview.total')}</span>
+													<span
+														className="score-breakdown__score score-breakdown__score--total"
+														style={{ color: getScoreCategoryColor(selectedArticle.adoption.overallScore) }}
+													>
+														{selectedArticle.adoption.overallScore}/100
+													</span>
+												</div>
+											</div>
+											<p className="score-breakdown__stacks">
+												{t('article.scoreOverview.usedInStacks', { count: selectedArticle.adoption.usedInStacks.length })}
+											</p>
+										</div>
+									)}
+
+									{/* ── Maintainer-Boost ──────────────────────────────────── */}
+									{selectedMaintainerBoosted && (
+										<div className="drawer-maintainer-boost">
+											<p className="drawer-maintainer-boost__title">{t('article.maintainerBoost.title')}</p>
+											<p className="drawer-maintainer-boost__explanation">
+												{t('article.maintainerBoost.explanation', {
+													effectiveScore: selectedScore,
+													rawScore: selectedScoreResult.rawScore,
+												})}
+											</p>
+										</div>
+									)}
+
+									{/* ── Souveränitäts-Kriterien ───────────────────────────── */}
+									<p className="drawer-score-title">{t('article.sovereigntyScore')}</p>
+									<div className="drawer-criteria">
+										{criteriaKeys.map((key) => {
+											const isSatisfied = selectedArticle.sovereigntyCriteria[key];
+											const isBoosted = selectedBoostedCriteria.has(key);
+											const iconClass = isSatisfied ? 'criteria-icon criteria-icon--satisfied' : 'criteria-icon criteria-icon--unsatisfied';
+											return (
+												<div key={key} className={`drawer-criteria__item${isSatisfied ? ' drawer-criteria__item--satisfied' : ''}`}>
+													<span className={iconClass} aria-hidden="true">
+														{isSatisfied ? '✓' : '○'}
+													</span>
+													<span className="drawer-criteria__label">
+														{t(`article.criteria.${key}`)}
+														{isBoosted && (
+															<span className="criteria-boosted-marker" title={t('article.maintainerBoost.criterionTitle')}>
+																[{t('article.maintainerBoost.criterionMarker')}]
+															</span>
+														)}
+													</span>
+												</div>
+											);
 										})}
-									</li>
-									<li className={`drawer-criteria-item drawer-criteria-item--${selectedOwnerCountry ? 'yes' : 'no'}`}>
-										<span className="drawer-criteria-icon" aria-hidden="true">
-											{selectedOwnerCountry ? '✓' : '✗'}
-										</span>
-										{t('article.criteria.ownerCountry', {
-											country: selectedOwnerCountry ? `${selectedOwnerCountryFlag} ${selectedOwnerCountry}` : t('article.ownerCountry.unknown'),
-										})}
-									</li>
-								</ul>
+									</div>
+									{selectedOwnerCountry && (
+										<div className="drawer-owner-info">
+											<span className="drawer-owner-flag">{selectedOwnerCountryFlag}</span>
+											<span className="drawer-owner-country">{selectedOwnerCountry}</span>
+										</div>
+									)}
+								</div>
 								{stackItem?.rationale && (
 									<div className="drawer-rationale">
 										<p className="drawer-rationale__title">{t('stack.rationale')}</p>

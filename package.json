@@ -36,6 +36,8 @@
 		"report-dependency-health": "node scripts/report-dependency-health.mjs",
 		"start": "pnpm run dev",
 		"stylelint": "stylelint \"src/**/*.scss\"",
+		"test": "vitest",
+		"test:coverage": "vitest --coverage",
 		"test:e2e": "playwright test",
 		"test:e2e:ui": "playwright test --ui",
 		"test:e2e:update-snapshots": "playwright test --update-snapshots",
@@ -50,6 +52,7 @@
 		"@hookform/resolvers": "5.2.2",
 		"@public-ui/components": "4.1.2",
 		"@public-ui/preact": "4.1.2",
+		"@public-ui/react": "^4.1.2",
 		"@public-ui/theme-default": "4.1.2",
 		"@public-ui/theme-kern": "4.1.2",
 		"i18next": "26.0.6",
@@ -94,6 +97,7 @@
 		"unocss": "66.6.8",
 		"vite": "8.0.8",
 		"vite-plugin-pwa": "1.2.0",
+		"vitest": "^4.1.4",
 		"workbox-window": "7.4.0"
 	},
 	"pnpm": {
