@@ -91,6 +91,32 @@ async function changeLanguage(page: Page, language: 'de' | 'en' | 'fr') {
 	}, language);
 }
 
+async function changeLanguageFromSettings(page: Page, languageLabel: 'Français' | 'Español') {
+	await page.getByRole('button', { name: /Einstellungen|Settings|Paramètres|Ajustes/ }).click();
+
+	const languageSelect = page
+		.locator('select')
+		.filter({
+			has: page.getByRole('option', { name: languageLabel }),
+		})
+		.first();
+
+	await expect(languageSelect).toBeVisible();
+	await languageSelect.selectOption({ label: languageLabel });
+}
+
+async function expectLocalizedRoutingWorks(page: Page, languageLabel: 'Français' | 'Español', filterRegionAria: string) {
+	await page.goto('/#/');
+	await changeLanguageFromSettings(page, languageLabel);
+
+	await page.goto('/#/graphs');
+	await expect(page.locator('#graph-page-title')).toBeVisible();
+	await expect(page.locator('.dependency-graph')).toBeVisible();
+
+	await page.goto('/#/deps');
+	await expect(page.getByRole('region', { name: filterRegionAria })).toBeVisible();
+}
+
 test.describe('i18n language detection and fallbacks', () => {
 	test.describe('browser locale detection', () => {
 		test.use({ locale: 'en-US' });
@@ -149,5 +175,13 @@ test.describe('i18n language detection and fallbacks', () => {
 
 		expect(missingKeyValue).toBe(EXPECTED.de.missingKeyFallback);
 		expect(missingKeyValue).not.toContain('this_key_does_not_exist_anywhere');
+	});
+
+	test('keeps routing to graph and deps pages stable after switching to French', async ({ page }) => {
+		await expectLocalizedRoutingWorks(page, 'Français', 'Recherche et filtres');
+	});
+
+	test('keeps routing to graph and deps pages stable after switching to Spanish', async ({ page }) => {
+		await expectLocalizedRoutingWorks(page, 'Español', 'Buscar y filtrar');
 	});
 });
