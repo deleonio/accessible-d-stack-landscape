@@ -16,12 +16,6 @@ export function Footer() {
 					<div className="footer__brand">
 						<p className="footer__title font-bold text-sm mb-2">StackAtlas</p>
 						<p className="footer__subtitle text-xs">{t('footer.subtitle')}</p>
-						<p className="footer__beta-note text-xs">
-							{t('footer.betaNote', {
-								defaultValue:
-									'Beta: Core functions are already available and are continuously optimized and expanded. The data basis is continuously improved as well. Everyone interested is welcome to contribute on GitHub.',
-							})}
-						</p>
 					</div>
 
 					{/* Links navigation */}

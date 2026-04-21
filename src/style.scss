@@ -286,6 +286,10 @@ main {
 	border-bottom: 4px solid var(--ds-color-accent);
 }
 
+.header__beta-banner {
+	border-bottom: 1px solid rgb(0 0 0 / 12%);
+}
+
 .header__inner {
 	display: flex;
 	flex-direction: column;
@@ -460,12 +464,6 @@ main {
 .footer__subtitle {
 	font-size: var(--ds-text-xs);
 	color: rgb(255 255 255 / 55%);
-	margin: 0;
-}
-
-.footer__beta-note {
-	font-size: var(--ds-text-xs);
-	color: rgb(255 255 255 / 75%);
 	margin: 0;
 }
 
