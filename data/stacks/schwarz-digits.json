@@ -28,7 +28,7 @@
 			"status": "recommended",
 			"role": "consumer",
 			"rationale": {
-				"de": "STACKIT Kubernetes Engine als kernbestandteil der Cloud-Plattform.",
+				"de": "STACKIT Kubernetes Engine als Kernbestandteil der Cloud-Plattform.",
 				"en": "STACKIT Kubernetes Engine as a core component of the cloud platform."
 			}
 		},
