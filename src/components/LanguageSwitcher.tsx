@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
+import { normalizeLanguage } from '../i18n/language';
 import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 
 const SUPPORTED_LANGUAGES = [
@@ -38,7 +39,7 @@ export function LanguageSwitcher() {
 					onChange: (_event: globalThis.Event, value: unknown) => {
 						const lang = typeof value === 'string' ? value : '';
 						setDisplayLanguage(lang);
-						if (lang) void i18n.changeLanguage(lang);
+						if (lang) void i18n.changeLanguage(normalizeLanguage(lang));
 					},
 				}}
 			/>
