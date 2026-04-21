@@ -1,11 +1,37 @@
-import mdx from '@mdx-js/rollup';
 import preact from '@preact/preset-vite';
 import UnoCSS from '@unocss/vite';
+import matter from 'gray-matter';
+import MarkdownIt from 'markdown-it';
+import taskLists from 'markdown-it-task-lists';
 import { readFileSync } from 'node:fs';
-import remarkFrontmatter from 'remark-frontmatter';
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+
+function markdownItPlugin(): Plugin {
+	// html: true passes through raw HTML tags in content (safe: content is git-managed, not user-input)
+	// Note: relative image paths (e.g. ./img.png) are not processed by Vite's asset pipeline.
+	// All images in this project must use absolute URLs or paths relative to the public/ directory.
+	const md = new MarkdownIt({ html: true }).use(taskLists);
+	return {
+		name: 'vite-markdown-it',
+		enforce: 'pre',
+		transform(code, id) {
+			const [path] = id.split('?');
+			if (!path.endsWith('.md') && !path.endsWith('.mdx')) return;
+			const { data: frontmatter, content } = matter(code);
+			const html = md.render(content);
+			return {
+				code: [
+					`import { h } from 'preact';`,
+					`export const metadata = ${JSON.stringify(frontmatter)};`,
+					`const __html = ${JSON.stringify(html)};`,
+					`export default function Content() { return h('div', { dangerouslySetInnerHTML: { __html } }); }`,
+				].join('\n'),
+				map: null,
+			};
+		},
+	};
+}
 
 const isPwaEnabled = process.env.VITE_ENABLE_PWA !== 'false';
 const { version: appVersion } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8')) as { version: string };
@@ -19,9 +45,7 @@ export default defineConfig({
 		emptyOutDir: true,
 	},
 	plugins: [
-		mdx({
-			remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-		}),
+		markdownItPlugin(),
 		preact(),
 		UnoCSS(),
 		VitePWA({
