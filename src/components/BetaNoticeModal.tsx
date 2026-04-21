@@ -45,12 +45,7 @@ export function BetaNoticeModal({ isOpen, onClose }: BetaNoticeModalProps) {
 				<div className="beta-modal-content">
 					<p className="beta-modal-description">{t('betaNotice.description')}</p>
 					<div className="beta-modal-actions">
-						<KolButton
-							ref={closeButtonRef}
-							_label={t('betaNotice.closeButton')}
-							_variant="primary"
-							_on={{ onClick: onClose }}
-						/>
+						<KolButton ref={closeButtonRef} _label={t('betaNotice.closeButton')} _variant="primary" _on={{ onClick: onClose }} />
 					</div>
 				</div>
 			</KolCard>
