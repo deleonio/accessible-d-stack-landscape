@@ -8,6 +8,7 @@ import { render } from 'preact';
 import App from './App';
 import { i18nReady } from './i18n';
 import { normalizeLanguage } from './i18n/language';
+import { LanguageCode } from './types';
 
 /**
  * Splash minimum display time (ms).
@@ -21,7 +22,7 @@ let splashDismissed = false;
 type KolibriLanguage = NonNullable<NonNullable<Parameters<typeof register>[2]>['translation']>['name'];
 
 const KOLIBRI_FALLBACK_LANGUAGE: KolibriLanguage = 'en';
-const APP_TO_KOLIBRI_LANGUAGE: Readonly<Record<string, KolibriLanguage>> = {
+const APP_TO_KOLIBRI_LANGUAGE: Readonly<Record<LanguageCode, KolibriLanguage>> = {
 	da: KOLIBRI_FALLBACK_LANGUAGE,
 	de: 'de',
 	en: KOLIBRI_FALLBACK_LANGUAGE,
@@ -34,9 +35,8 @@ const APP_TO_KOLIBRI_LANGUAGE: Readonly<Record<string, KolibriLanguage>> = {
 const warnedKolibriFallbackLanguages = new Set<string>();
 
 function mapAppLanguageToKolibriLanguage(language: string): KolibriLanguage {
-	const normalizedLanguage = normalizeLanguage(language);
-	const appLanguage = normalizedLanguage.split('-')[0];
-	const kolibriLanguage = APP_TO_KOLIBRI_LANGUAGE[appLanguage] ?? KOLIBRI_FALLBACK_LANGUAGE;
+	const appLanguage = normalizeLanguage(language);
+	const kolibriLanguage = APP_TO_KOLIBRI_LANGUAGE[appLanguage];
 
 	if (kolibriLanguage === KOLIBRI_FALLBACK_LANGUAGE && appLanguage !== KOLIBRI_FALLBACK_LANGUAGE) {
 		if (!warnedKolibriFallbackLanguages.has(appLanguage)) {
