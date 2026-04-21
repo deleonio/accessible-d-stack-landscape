@@ -3,7 +3,7 @@
 | Komponente                    | Gewicht | Beschreibung                                     |
 | :---------------------------- | ------: | :----------------------------------------------- |
 | Sovereignty Score             |    60 % | Wie souverän ist das Tool?                       |
-| Sovereign Adoption Score      |    25 % | In wie vielen souveränen Stacks wird es genutzt? |
+| Sovereign Adoption Score      |    25 % | Stack-Abdeckung — nur für Tools mit eigenem Sovereignty Score ≥ 61 |
 | Adoption Score (+ Popularity) |    15 % | Allgemeine Stack-Nutzung und externe Signale     |
 
 ---

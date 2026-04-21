@@ -52,5 +52,5 @@ Wer MySQL in seinem Stack nutzt, sollte es dort eintragen. Jede weitere Stack-Au
 
 - **Sovereignty Score:** Bewertet, wie stark Nutzer:innen und Betreiber unabhängig von Dritten bleiben können (0–100).
 - **Adoption Score:** Normalisierter Wert für die Stack-Abdeckung — wie viele dokumentierte Gov-Stacks nutzen dieses Tool?
-- **Sovereign Adoption Score:** Wie der Adoption Score, aber nur Stacks mit Sovereignty ≥ 61 werden gezählt.
+- **Sovereign Adoption Score:** Wie der Adoption Score, aber wird nur für Tools berechnet, deren eigener Sovereignty Score ≥ 61 ist. Souveränitätsschwache Tools erhalten hier immer 0.
 - **Overall Score:** Gewichtete Kombination aller drei Scores (60/25/15).
