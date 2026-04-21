@@ -26,6 +26,7 @@
 	},
 	"footer": {
 		"subtitle": "Tech-Stacks weltweit nach digitaler Souveränität bewerten und vergleichen",
+		"betaNote": "Beta: Die Grundfunktionen sind vorhanden und werden kontinuierlich optimiert und erweitert. Auch die Datenbasis wird laufend verbessert. Alle Interessierten sind eingeladen, über GitHub am Projekt mitzuarbeiten.",
 		"navigationAria": "Footer-Navigation",
 		"links": {
 			"documentation": "Dokumentation",

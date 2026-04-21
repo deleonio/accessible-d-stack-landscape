@@ -26,6 +26,7 @@
 	},
 	"footer": {
 		"subtitle": "Rate and compare tech stacks worldwide by digital sovereignty",
+		"betaNote": "Beta: Core functions are available and are continuously optimized and expanded. The data basis is continuously improved as well. Everyone interested is welcome to contribute on GitHub.",
 		"navigationAria": "Footer navigation",
 		"links": {
 			"documentation": "Documentation",
