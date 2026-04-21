@@ -1,5 +1,5 @@
 import { KolPagination } from '@public-ui/preact';
-import { useMemo, useState } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { FilterState, Item, Layer, Stack, StackItem } from '../types';
 import { getLocalizedText } from '../utils';
@@ -41,6 +41,18 @@ export function CategoryGrid({
 	const { i18n, t } = useTranslation();
 	const [currentPage, setCurrentPage] = useState(1);
 
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [
+		filters.searchQuery,
+		filters.selectedLayer,
+		filters.selectedSublayer,
+		filters.selectedRelation,
+		filters.onlyDirectDependencies,
+		filters.dependencyDepth,
+		filters.selectedDependencyType,
+	]);
+
 	const sortedArticles = useMemo(
 		() =>
 			[...articles].sort((a, b) => {
@@ -66,6 +78,14 @@ export function CategoryGrid({
 	);
 
 	const activeCount = articles.length;
+	const totalPages = Math.max(1, Math.ceil(activeCount / ITEMS_PER_PAGE));
+
+	useEffect(() => {
+		if (currentPage > totalPages) {
+			setCurrentPage(totalPages);
+		}
+	}, [currentPage, totalPages]);
+
 	const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
 	const paginatedArticles = sortedArticles.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
