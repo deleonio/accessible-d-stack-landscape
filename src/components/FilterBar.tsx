@@ -1,8 +1,9 @@
-import { KolButton, KolInputCheckbox, KolInputText, KolSingleSelect } from '@public-ui/preact';
+import { KolButton, KolInputCheckbox, KolInputText } from '@public-ui/preact';
 import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { FilterState, Item, Layer, ParticipantRole, Stack } from '../types';
 import { getDependencyTypes, getLocalizedText } from '../utils';
+import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 
 export type ViewMode = 'tile' | 'list';
 export type SortField = 'name' | 'overall' | 'sovereignty' | 'adoption' | 'sovereignAdoption';

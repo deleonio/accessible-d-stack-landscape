@@ -1,6 +1,6 @@
-import { KolSingleSelect } from '@public-ui/preact';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
+import { AutoSingleSelect as KolSingleSelect } from '../components/AutoSingleSelect';
 import { DependencyGraph } from '../components/DependencyGraph';
 import { FilterBar, SortDir, SortField, ViewMode } from '../components/FilterBar';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
