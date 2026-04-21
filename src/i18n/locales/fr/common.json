@@ -293,7 +293,18 @@
 					"kernstack": "Core stack",
 					"referenz": "Reference",
 					"sunset": "Sunset"
-				}
+				},
+				"stack": "Stack",
+				"item": "Item",
+				"saveSelection": "Save assessment for selected stack/item",
+				"saveHint": "Please select stack and item before saving.",
+				"saveSuccess": "Assessment saved locally for stack/item.",
+				"saveError": "Assessment could not be saved.",
+				"selectionContext": "Selection context",
+				"selectionContextFilled": "Stack and item selected",
+				"selectionContextEmpty": "No stack/item selected",
+				"stackRole": "Stack role",
+				"stackStatus": "Stack status"
 			}
 		},
 		"news": {

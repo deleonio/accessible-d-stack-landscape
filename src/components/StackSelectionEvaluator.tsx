@@ -1,8 +1,9 @@
 import { KolButton, KolCard, KolInputCheckbox, KolInputNumber, KolSingleSelect } from '@public-ui/preact';
-import { useMemo, useState } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
+import { ITEMS, STACKS } from '../data/catalog';
 import type { StackSelectionAssessmentInput, StackSelectionDimensionKey, StackSelectionHardExclusion } from '../types';
-import { computeStackSelectionAssessment } from '../utils';
+import { computeStackSelectionAssessment, getLocalizedText } from '../utils';
 
 const DIMENSION_KEYS: StackSelectionDimensionKey[] = [
 	'austauschbarkeit',
@@ -43,11 +44,100 @@ const DEFAULT_INPUT: StackSelectionAssessmentInput = {
 	lifecycleStatus: 'kandidat',
 };
 
+const EVALUATOR_STATE_STORAGE_KEY = 'stack-selection-evaluator-state-v1';
+const STACK_ITEM_ASSESSMENTS_STORAGE_KEY = 'stack-selection-assessments-v1';
+
+type LinkedAssessment = {
+	input: StackSelectionAssessmentInput;
+	itemId: string;
+	result: ReturnType<typeof computeStackSelectionAssessment>;
+	savedAt: string;
+	stackId: string;
+};
+
+type StoredEvaluatorState = {
+	input: StackSelectionAssessmentInput;
+	selectedItemId: string;
+	selectedStackId: string;
+};
+
 export function StackSelectionEvaluator() {
-	const { t } = useTranslation();
+	const { i18n, t } = useTranslation();
 	const [input, setInput] = useState<StackSelectionAssessmentInput>(DEFAULT_INPUT);
+	const [selectedStackId, setSelectedStackId] = useState<string>('');
+	const [selectedItemId, setSelectedItemId] = useState<string>('');
+	const [saveMessage, setSaveMessage] = useState<string>('');
 
 	const result = useMemo(() => computeStackSelectionAssessment(input), [input]);
+	const selectedStack = useMemo(() => STACKS.find((stack) => stack.id === selectedStackId), [selectedStackId]);
+	const availableItemIds = useMemo(() => new Set(selectedStack?.items.map((stackItem) => stackItem.itemId) ?? []), [selectedStack]);
+	const selectedStackItemRelation = useMemo(
+		() => selectedStack?.items.find((stackItem) => stackItem.itemId === selectedItemId),
+		[selectedItemId, selectedStack],
+	);
+
+	const stackOptions = useMemo(
+		() =>
+			STACKS.map((stack) => ({
+				label: getLocalizedText(stack.name, i18n.resolvedLanguage ?? i18n.language ?? 'de'),
+				value: stack.id,
+			})),
+		[i18n.language, i18n.resolvedLanguage],
+	);
+
+	const itemOptions = useMemo(() => {
+		const language = i18n.resolvedLanguage ?? i18n.language ?? 'de';
+		const filteredItems = selectedStackId ? ITEMS.filter((item) => availableItemIds.has(item.id)) : ITEMS;
+		return filteredItems.map((item) => ({
+			label: getLocalizedText(item.name, language),
+			value: item.id,
+		}));
+	}, [availableItemIds, i18n.language, i18n.resolvedLanguage, selectedStackId]);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return;
+		}
+
+		try {
+			const rawState = localStorage.getItem(EVALUATOR_STATE_STORAGE_KEY);
+			if (!rawState) {
+				return;
+			}
+
+			const parsed = JSON.parse(rawState) as Partial<StoredEvaluatorState>;
+			if (parsed.input) {
+				setInput(parsed.input);
+			}
+			if (typeof parsed.selectedStackId === 'string') {
+				setSelectedStackId(parsed.selectedStackId);
+			}
+			if (typeof parsed.selectedItemId === 'string') {
+				setSelectedItemId(parsed.selectedItemId);
+			}
+		} catch {
+			// ignore invalid persisted state
+		}
+	}, []);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return;
+		}
+
+		const stateToPersist: StoredEvaluatorState = {
+			input,
+			selectedItemId,
+			selectedStackId,
+		};
+		localStorage.setItem(EVALUATOR_STATE_STORAGE_KEY, JSON.stringify(stateToPersist));
+	}, [input, selectedItemId, selectedStackId]);
+
+	useEffect(() => {
+		if (selectedStackId && selectedItemId && !availableItemIds.has(selectedItemId)) {
+			setSelectedItemId('');
+		}
+	}, [availableItemIds, selectedItemId, selectedStackId]);
 
 	const updateDimension = (key: StackSelectionDimensionKey, rawValue: unknown) => {
 		const parsedValue = typeof rawValue === 'number' ? rawValue : Number(rawValue);
@@ -72,6 +162,40 @@ export function StackSelectionEvaluator() {
 				[key]: Boolean(rawValue),
 			},
 		}));
+	};
+
+	const resetAll = () => {
+		setInput(DEFAULT_INPUT);
+		setSaveMessage('');
+		setSelectedItemId('');
+		setSelectedStackId('');
+	};
+
+	const saveAssessmentForSelection = () => {
+		if (!selectedStackId || !selectedItemId || typeof window === 'undefined') {
+			setSaveMessage(t('pages.settings.stackSelection.saveHint', 'Bitte Stack und Item auswählen, um zu speichern.'));
+			return;
+		}
+
+		const payload: LinkedAssessment = {
+			input,
+			itemId: selectedItemId,
+			result,
+			savedAt: new Date().toISOString(),
+			stackId: selectedStackId,
+		};
+
+		const storageKey = `${selectedStackId}:${selectedItemId}`;
+
+		try {
+			const existingRaw = localStorage.getItem(STACK_ITEM_ASSESSMENTS_STORAGE_KEY);
+			const existing = existingRaw ? (JSON.parse(existingRaw) as Record<string, LinkedAssessment>) : {};
+			existing[storageKey] = payload;
+			localStorage.setItem(STACK_ITEM_ASSESSMENTS_STORAGE_KEY, JSON.stringify(existing));
+			setSaveMessage(t('pages.settings.stackSelection.saveSuccess', 'Assessment für Stack/Item lokal gespeichert.'));
+		} catch {
+			setSaveMessage(t('pages.settings.stackSelection.saveError', 'Assessment konnte nicht gespeichert werden.'));
+		}
 	};
 
 	return (
@@ -107,6 +231,31 @@ export function StackSelectionEvaluator() {
 
 				<KolCard _label={t('pages.settings.stackSelection.config', 'Konfiguration')}>
 					<div className="p-4 grid gap-3">
+						<KolSingleSelect
+							_label={t('pages.settings.stackSelection.stack', 'Stack')}
+							_options={stackOptions}
+							_value={selectedStackId}
+							_on={{
+								onChange: (_event: Event, value: unknown) => {
+									if (typeof value === 'string') {
+										setSelectedStackId(value);
+									}
+								},
+							}}
+						/>
+						<KolSingleSelect
+							_label={t('pages.settings.stackSelection.item', 'Item')}
+							_options={itemOptions}
+							_value={selectedItemId}
+							_on={{
+								onChange: (_event: Event, value: unknown) => {
+									if (typeof value === 'string') {
+										setSelectedItemId(value);
+									}
+								},
+							}}
+						/>
+
 						<KolSingleSelect
 							_label={t('pages.settings.stackSelection.itemClass', 'Item-Klasse')}
 							_options={[
@@ -160,11 +309,7 @@ export function StackSelectionEvaluator() {
 							}}
 						/>
 
-						<KolButton
-							_label={t('pages.settings.stackSelection.reset', 'Auf Standardwerte zurücksetzen')}
-							_variant="ghost"
-							_on={{ onClick: () => setInput(DEFAULT_INPUT) }}
-						/>
+						<KolButton _label={t('pages.settings.stackSelection.reset', 'Auf Standardwerte zurücksetzen')} _variant="ghost" _on={{ onClick: resetAll }} />
 					</div>
 				</KolCard>
 			</div>
@@ -187,6 +332,18 @@ export function StackSelectionEvaluator() {
 			<KolCard className="mt-6" _label={t('pages.settings.stackSelection.result', 'Ergebnis')}>
 				<div className="p-4">
 					<p className="stack-selection-evaluator__result-line">
+						<strong>{t('pages.settings.stackSelection.selectionContext', 'Auswahlkontext')}:</strong>{' '}
+						{selectedStackId && selectedItemId
+							? t('pages.settings.stackSelection.selectionContextFilled', 'Stack und Item ausgewählt')
+							: t('pages.settings.stackSelection.selectionContextEmpty', 'Kein Stack/Item ausgewählt')}
+					</p>
+					{selectedStackItemRelation && (
+						<p className="stack-selection-evaluator__result-line">
+							<strong>{t('pages.settings.stackSelection.stackRole', 'Stack-Rolle')}:</strong> {selectedStackItemRelation.role} ·{' '}
+							<strong>{t('pages.settings.stackSelection.stackStatus', 'Stack-Status')}:</strong> {selectedStackItemRelation.status}
+						</p>
+					)}
+					<p className="stack-selection-evaluator__result-line">
 						<strong>{t('pages.settings.stackSelection.resultDecision', 'Entscheidungsklasse')}:</strong> {result.decisionClass}
 					</p>
 					<p className="stack-selection-evaluator__result-line">
@@ -207,6 +364,15 @@ export function StackSelectionEvaluator() {
 						<strong>{t('pages.settings.stackSelection.resultCore', 'Für Kernstack geeignet')}:</strong>{' '}
 						{result.isEligibleForCore ? t('pages.settings.stackSelection.yes', 'Ja') : t('pages.settings.stackSelection.no', 'Nein')}
 					</p>
+
+					<div className="mt-4">
+						<KolButton
+							_label={t('pages.settings.stackSelection.saveSelection', 'Assessment für ausgewählten Stack/Item speichern')}
+							_variant="primary"
+							_on={{ onClick: saveAssessmentForSelection }}
+						/>
+					</div>
+					{saveMessage && <p className="stack-selection-evaluator__result-line mt-2">{saveMessage}</p>}
 				</div>
 			</KolCard>
 		</section>

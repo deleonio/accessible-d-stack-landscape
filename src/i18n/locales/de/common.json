@@ -310,7 +310,18 @@
 					"kernstack": "Kernstack",
 					"referenz": "Referenz",
 					"sunset": "Sunset"
-				}
+				},
+				"stack": "Stack",
+				"item": "Item",
+				"saveSelection": "Assessment für ausgewählten Stack/Item speichern",
+				"saveHint": "Bitte Stack und Item auswählen, um zu speichern.",
+				"saveSuccess": "Assessment für Stack/Item lokal gespeichert.",
+				"saveError": "Assessment konnte nicht gespeichert werden.",
+				"selectionContext": "Auswahlkontext",
+				"selectionContextFilled": "Stack und Item ausgewählt",
+				"selectionContextEmpty": "Kein Stack/Item ausgewählt",
+				"stackRole": "Stack-Rolle",
+				"stackStatus": "Stack-Status"
 			}
 		},
 		"news": {
