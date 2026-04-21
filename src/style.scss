@@ -680,6 +680,7 @@ main {
 .beta-modal-card {
 	max-width: 520px;
 	width: 100%;
+	border-radius: var(--ds-radius-lg);
 	animation: beta-modal-slide-up 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 
 	/* Override KolCard default styles */
@@ -700,7 +701,7 @@ main {
 	font-size: var(--ds-text-base);
 	line-height: 1.7;
 	margin: 0;
-	color: var(--ds-color-text-secondary);
+	color: var(--ds-color-text-muted);
 }
 
 .beta-modal-actions {
