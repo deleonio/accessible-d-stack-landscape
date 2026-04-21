@@ -1,9 +1,32 @@
-import mdx from '@mdx-js/rollup';
 import preact from '@preact/preset-vite';
 import UnoCSS from '@unocss/vite';
+import matter from 'gray-matter';
+import MarkdownIt from 'markdown-it';
 import { readFileSync } from 'node:fs';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+
+function markdownItPlugin(): Plugin {
+	const md = new MarkdownIt({ html: true });
+	return {
+		name: 'vite-markdown-it',
+		enforce: 'pre',
+		transform(code, id) {
+			if (!id.match(/\.(md|mdx)$/)) return;
+			const { data: frontmatter, content } = matter(code);
+			const html = md.render(content);
+			return {
+				code: [
+					`import { h } from 'preact';`,
+					`export const metadata = ${JSON.stringify(frontmatter)};`,
+					`const __html = ${JSON.stringify(html)};`,
+					`export default function Content() { return h('div', { dangerouslySetInnerHTML: { __html } }); }`,
+				].join('\n'),
+				map: null,
+			};
+		},
+	};
+}
 
 const isPwaEnabled = process.env.VITE_ENABLE_PWA !== 'false';
 const { version: appVersion } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8')) as { version: string };
@@ -17,7 +40,7 @@ export default defineConfig({
 		emptyOutDir: true,
 	},
 	plugins: [
-		mdx(),
+		markdownItPlugin(),
 		preact(),
 		UnoCSS(),
 		VitePWA({

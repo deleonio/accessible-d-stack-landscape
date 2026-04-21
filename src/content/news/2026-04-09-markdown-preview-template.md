@@ -1,10 +1,8 @@
-export const metadata = {
-	focus: 'news', // oder: 'reportTemplate', 'rating', etc.
-	title: 'News-Titel oder Report-Headline',
-	summary: 'Kurze Zusammenfassung (1–2 Sätze) für die News-Übersicht und Suchmaschinen.',
-};
-
-import NewsTable from '../reports/news-template-table.md';
+---
+focus: news
+title: News-Titel oder Report-Headline
+summary: Kurze Zusammenfassung (1–2 Sätze) für die News-Übersicht und Suchmaschinen.
+---
 
 # News-Headline oder Report-Titel
 
@@ -86,7 +84,35 @@ Wie wurde diese News/dieser Report erstellt?
 
 Detaillierte Metriken in tabellarischer Form:
 
-<NewsTable />
+## Beispiel: Bewertungs- oder Kennzahlen-Tabelle
+
+| Kriterium         | Score | Trend | Kommentar                         |
+| :---------------- | ----: | :---: | :-------------------------------- |
+| Interoperabilität |    78 |   ↗   | Offene APIs und Schnittstellen    |
+| Transparenz       |    70 |   →   | Audit-Prozess etabliert           |
+| Exit-Fähigkeit    |    68 |   ↘   | Migrationspfade noch aufwendig    |
+| User Experience   |    75 |   ↗   | Positives Feedback from Community |
+| Sicherheit        |    82 |   ↗   | Regelmäßige Security-Audits       |
+
+---
+
+## Alternative: Feature- oder Status-Tabelle
+
+| Feature/Komponente | Status     | Version | Notizen                |
+| :----------------- | :--------- | :------ | :--------------------- |
+| API v2             | ✅ Stabil  | 2.1.0   | Produktiv, vollständig |
+| Mobile App         | ⚠️ Beta    | 0.9.0   | Betatest läuft noch    |
+| Web UI             | ✅ Stabil  | 3.2.1   | Voll funktional        |
+| CLI Tool           | ⚠️ Beta    | 1.0.0   | Feedback Request       |
+| Dokumentation      | ✅ Aktuell | 2024    | Komplett aktualisiert  |
+
+---
+
+**Tipps für Tabellen in News-Beiträgen:**
+
+- Halte Spalten-Anzahl ≤ 4–5 (bessere Lesbarkeit)
+- Nutze `:----:` für Zentrierung, `:---` für Links
+- Nutze Emojis (✅, ⚠️, ❌) für schnelle Erfassung
 
 ---
 
@@ -158,4 +184,4 @@ oder: _Diese News wird kontinuierlich aktualisiert._
 - **Blockquotes** für Zitate
 - **Code-Blöcke** (z.B. für technische Evidenz)
 - **Horizontale Linien** (`---`) zur Strukturierung
-- **Externe Markdown-Datei** importiert für Tabellen
+- **Tabellen** direkt in Markdown (kein externer Import nötig)
