@@ -1,6 +1,6 @@
-import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 import { useTranslation } from 'react-i18next';
 import { useTheme, type ThemeValue } from '../hooks/useTheme';
+import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function SettingsForm() {

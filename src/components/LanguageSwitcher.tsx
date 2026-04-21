@@ -1,5 +1,5 @@
-import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 import { useTranslation } from 'react-i18next';
+import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 
 const SUPPORTED_LANGUAGES = [
 	{ code: 'da', label: 'Dansk' },
