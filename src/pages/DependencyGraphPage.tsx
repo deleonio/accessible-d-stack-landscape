@@ -1,4 +1,4 @@
-import { KolSingleSelect } from '@public-ui/preact';
+import { AutoSingleSelect as KolSingleSelect } from '../components/AutoSingleSelect';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { DependencyGraph } from '../components/DependencyGraph';

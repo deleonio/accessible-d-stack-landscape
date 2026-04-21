@@ -1,4 +1,5 @@
-import { KolButton, KolInputCheckbox, KolInputText, KolSingleSelect } from '@public-ui/preact';
+import { KolButton, KolInputCheckbox, KolInputText } from '@public-ui/preact';
+import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 import { useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { FilterState, Item, Layer, ParticipantRole, Stack } from '../types';

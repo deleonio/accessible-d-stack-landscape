@@ -1,4 +1,4 @@
-import { KolSingleSelect } from '@public-ui/preact';
+import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 import { useTranslation } from 'react-i18next';
 import { useTheme, type ThemeValue } from '../hooks/useTheme';
 import { LanguageSwitcher } from './LanguageSwitcher';
