@@ -8,6 +8,7 @@ import { render } from 'preact';
 import App from './App';
 import { i18nReady } from './i18n';
 import { normalizeLanguage } from './i18n/language';
+import { LanguageCode } from './types';
 
 /**
  * Splash minimum display time (ms).
@@ -20,9 +21,37 @@ let splashDismissed = false;
 
 type KolibriLanguage = NonNullable<NonNullable<Parameters<typeof register>[2]>['translation']>['name'];
 
-function syncKoliBriLanguage(language: string): Promise<void[]> {
+const KOLIBRI_FALLBACK_LANGUAGE: KolibriLanguage = 'en';
+const APP_TO_KOLIBRI_LANGUAGE: Readonly<Record<LanguageCode, KolibriLanguage>> = {
+	da: 'da',
+	de: 'de',
+	en: 'en',
+	es: 'es',
+	fr: 'fr',
+	it: 'it',
+	no: 'no',
+	sv: 'sv',
+};
+const warnedKolibriFallbackLanguages = new Set<string>();
+
+function mapAppLanguageToKolibriLanguage(language: string): KolibriLanguage {
 	const normalizedLanguage = normalizeLanguage(language);
-	const kolibriLanguage = normalizedLanguage.split('-')[0] as KolibriLanguage;
+	const kolibriLanguage = APP_TO_KOLIBRI_LANGUAGE[normalizedLanguage] ?? KOLIBRI_FALLBACK_LANGUAGE;
+
+	if (kolibriLanguage === KOLIBRI_FALLBACK_LANGUAGE && normalizedLanguage !== KOLIBRI_FALLBACK_LANGUAGE) {
+		if (!warnedKolibriFallbackLanguages.has(normalizedLanguage)) {
+			warnedKolibriFallbackLanguages.add(normalizedLanguage);
+			console.warn(
+				`KoliBri locale fallback active: app language "${normalizedLanguage}" is not natively supported. Using "${KOLIBRI_FALLBACK_LANGUAGE}" for KoliBri translations.`,
+			);
+		}
+	}
+
+	return kolibriLanguage;
+}
+
+function syncKoliBriLanguage(language: string): Promise<void[]> {
+	const kolibriLanguage = mapAppLanguageToKolibriLanguage(language);
 	return register([KERN_V2, DEFAULT], defineCustomElements, { translation: { name: kolibriLanguage } });
 }
 
