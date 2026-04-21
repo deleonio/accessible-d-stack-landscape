@@ -2,17 +2,22 @@ import preact from '@preact/preset-vite';
 import UnoCSS from '@unocss/vite';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
+import taskLists from 'markdown-it-task-lists';
 import { readFileSync } from 'node:fs';
 import { defineConfig, type Plugin } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 function markdownItPlugin(): Plugin {
-	const md = new MarkdownIt({ html: true });
+	// html: true passes through raw HTML tags in content (safe: content is git-managed, not user-input)
+	// Note: relative image paths (e.g. ./img.png) are not processed by Vite's asset pipeline.
+	// All images in this project must use absolute URLs or paths relative to the public/ directory.
+	const md = new MarkdownIt({ html: true }).use(taskLists);
 	return {
 		name: 'vite-markdown-it',
 		enforce: 'pre',
 		transform(code, id) {
-			if (!id.match(/\.(md|mdx)$/)) return;
+			const [path] = id.split('?');
+			if (!path.endsWith('.md') && !path.endsWith('.mdx')) return;
 			const { data: frontmatter, content } = matter(code);
 			const html = md.render(content);
 			return {
