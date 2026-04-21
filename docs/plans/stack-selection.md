@@ -247,7 +247,52 @@ Gesamtscore =
 
 ---
 
-## 8. Mindestschwellen
+## 8. Lifecycle Governance
+
+Stack-Entscheidungen sind nicht dauerhaft statisch. Jedes Item benötigt einen klaren Governance-Lifecycle, der auf den Entscheidungsklassen aus **Abschnitt 7** aufsetzt.
+
+### 8.1 Regelmäßige Neubewertung
+
+Für jedes Item ist eine verpflichtende Neubewertung vorzusehen:
+
+* mindestens **jährlich**
+* zusätzlich bei jedem **Major-Release** des Items oder der zugrunde liegenden Spezifikation
+
+Die Neubewertung umfasst mindestens Ausschlussprüfung, Scorecard und Zuordnung zu einer Entscheidungsklasse gemäß Abschnitt 7.
+
+### 8.2 Trigger für Ad-hoc-Review
+
+Unabhängig vom Regeltermin wird ein sofortiges Review ausgelöst bei:
+
+* Sicherheitsvorfällen mit relevanter Auswirkung auf Vertraulichkeit, Integrität, Verfügbarkeit oder Compliance
+* wesentlichen Lizenzänderungen (z. B. Einschränkung von Nutzungsrechten, neue Copyleft-Pflichten, geänderte Betriebsrechte)
+* angekündigtem oder eingetretenem End-of-Life (EOL), End-of-Support oder Einstellung zentraler Maintainer-/Herstellerunterstützung
+
+### 8.3 Statusmodell
+
+Zur operativen Steuerung erhält jedes Item einen Lifecycle-Status:
+
+* **Kandidat:** Item ist in Bewertung oder Pilotierung; typischerweise Entscheidungsklasse „Beobachtung / Pilotierung“ (Abschnitt 7).
+* **Referenz:** Item ist als sinnvolle Referenz eingestuft; entspricht in der Regel „Referenzstack“ oder „Optionale Referenztechnologie“ (Abschnitt 7).
+* **Kernstack:** Item ist verbindlich oder stark empfohlen; entspricht „Kernstack“ (Abschnitt 7).
+* **Deprecated:** Item soll nicht mehr neu eingeführt werden; bestehende Nutzung wird befristet toleriert und aktiv abgebaut.
+* **Sunset:** Item ist zur Außerbetriebnahme freigegeben; Restnutzung nur mit genehmigter Ausnahme und klarer Exit-Planung.
+
+Hinweis: Der Lifecycle-Status ergänzt die Entscheidungsklasse aus Abschnitt 7 und ersetzt sie nicht.
+
+### 8.4 Verbindliche Exit-Artefakte
+
+Sobald ein Item auf **Deprecated** oder **Sunset** gesetzt wird, sind folgende Artefakte verpflichtend zu dokumentieren und freizugeben:
+
+* **Migrationspfad:** Zieltechnologie/Pattern, Migrationsstrategie, technische Übergabepunkte und Abnahmekriterien
+* **Fristen:** verbindliche Meilensteine (z. B. Stopp von Neueinführungen, Ende regulärer Änderungen, Abschalttermin)
+* **Verantwortliche:** benannte Rollen/Teams für Architekturentscheidung, Umsetzung, Betrieb und Risikofreigaben
+
+Ohne diese Exit-Artefakte darf kein finaler Übergang auf „Sunset“ erfolgen.
+
+---
+
+## 9. Mindestschwellen
 
 Zusätzlich zum Gesamtscore gelten harte Untergrenzen in kritischen Dimensionen:
 
@@ -256,13 +301,13 @@ Zusätzlich zum Gesamtscore gelten harte Untergrenzen in kritischen Dimensionen:
 * Souveränität **>= 3**
 * Betriebs-/Governance-Fähigkeit **>= 3**
 
-### 8.1 Regel bei Unterschreitung
+### 9.1 Regel bei Unterschreitung
 
 Wird eine dieser Mindestschwellen unterschritten, ist als maximale Entscheidungsklasse nur **„Beobachtung / Pilotierung“** zulässig – unabhängig vom erreichten Gesamtscore.
 
 ---
 
-## 9. Zusatzregel: Typabhängige Obergrenze
+## 10. Zusatzregel: Typabhängige Obergrenze
 
 Damit Produkte nicht versehentlich so hoch scoren wie offene Standards, gilt zusätzlich eine Obergrenze je Klasse.
 
@@ -276,7 +321,7 @@ Damit Produkte nicht versehentlich so hoch scoren wie offene Standards, gilt zus
 
 ---
 
-## 10. Pflicht-Metadaten pro Item
+## 11. Pflicht-Metadaten pro Item
 
 Jedes vorgeschlagene Item muss mit diesen Feldern eingereicht werden:
 
@@ -295,7 +340,7 @@ Jedes vorgeschlagene Item muss mit diesen Feldern eingereicht werden:
 
 ---
 
-## 11. Bewertungsbogen
+## 12. Bewertungsbogen
 
 ### Vorlage
 
@@ -338,7 +383,7 @@ Jedes vorgeschlagene Item muss mit diesen Feldern eingereicht werden:
 
 ---
 
-## 12. Kurzregel für Gremien
+## 13. Kurzregel für Gremien
 
 Für jedes neue Item müssen nacheinander diese Fragen beantwortet werden:
 
@@ -353,6 +398,6 @@ Wenn diese Fragen nicht sauber beantwortbar sind, gehört das Item nicht in den 
 
 ---
 
-## 13. Executive Summary
+## 14. Executive Summary
 
 **In den Kernstack kommen nur Items, die ein relevantes Pattern tragen, offen standardisiert, steuerbar, austauschbar, reif und governance-fähig sind.**
