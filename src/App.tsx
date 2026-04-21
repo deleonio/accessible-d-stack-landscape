@@ -1,4 +1,6 @@
 import { Route, Router, useLocation } from 'preact-iso';
+import { useState } from 'preact/hooks';
+import { BetaNoticeModal } from './components/BetaNoticeModal';
 import { Footer } from './components/Footer';
 import { HashLocationProvider } from './components/HashLocationProvider';
 import { Header } from './components/Header';
@@ -13,6 +15,7 @@ import { StackGalleryPage } from './pages/StackGalleryPage';
 
 function AppContent() {
 	const { path } = useLocation();
+	const [betaModalOpen, setBetaModalOpen] = useState(true);
 
 	return (
 		<div className="flex flex-col min-h-screen w-full">
@@ -34,6 +37,7 @@ function AppContent() {
 			</Router>
 			<Footer />
 			<PwaWrapper />
+			<BetaNoticeModal isOpen={betaModalOpen} onClose={() => setBetaModalOpen(false)} />
 		</div>
 	);
 }

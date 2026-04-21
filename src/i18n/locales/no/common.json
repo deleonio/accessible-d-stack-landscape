@@ -319,5 +319,10 @@
 				"scoringExplained": "Fokus: Scoring forklart"
 			}
 		}
+	},
+	"betaNotice": {
+		"title": "Betaversjon",
+		"description": "StackAtlas er i betaversjon. Kjernefunksjonene er tilgjengelige og optimaliseres og utvides kontinuerlig. Datagrunnlaget forbedres også stadig. Alle interesserte er velkomne til å bidra til prosjektet via GitHub!",
+		"closeButton": "Forstått"
 	}
 }

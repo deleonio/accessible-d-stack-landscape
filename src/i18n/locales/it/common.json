@@ -319,5 +319,10 @@
 				"scoringExplained": "Focus: Spiegazione del punteggio"
 			}
 		}
+	},
+	"betaNotice": {
+		"title": "Versione beta",
+		"description": "StackAtlas è in versione beta. Le funzionalità di base sono disponibili e vengono continuamente ottimizzate ed ampliate. Anche la base dati viene costantemente migliorata. Tutti gli interessati sono invitati a contribuire al progetto tramite GitHub!",
+		"closeButton": "Capito"
 	}
 }
