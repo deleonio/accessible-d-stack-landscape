@@ -286,10 +286,6 @@ main {
 	border-bottom: 4px solid var(--ds-color-accent);
 }
 
-.header__beta-banner {
-	border-bottom: 1px solid rgb(0 0 0 / 12%);
-}
-
 .header__inner {
 	display: flex;
 	flex-direction: column;
@@ -661,6 +657,75 @@ main {
 	to {
 		opacity: 1;
 		transform: translateX(-50%) translateY(0);
+	}
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Beta Notice Modal
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.beta-modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgb(0 0 0 / 50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9998;
+	padding: var(--ds-space-4);
+	animation: beta-modal-fade-in 0.2s ease;
+}
+
+.beta-modal {
+	background: var(--ds-color-bg-white);
+	color: var(--ds-color-text-default);
+	border-radius: 8px;
+	padding: var(--ds-space-5);
+	max-width: 480px;
+	width: 100%;
+	box-shadow: 0 10px 40px rgb(0 0 0 / 20%);
+	animation: beta-modal-slide-up 0.25s ease;
+}
+
+.beta-modal__title {
+	font-size: var(--ds-text-xl);
+	font-weight: 700;
+	margin: 0 0 var(--ds-space-3);
+}
+
+.beta-modal__description {
+	font-size: var(--ds-text-base);
+	line-height: 1.65;
+	margin: 0 0 var(--ds-space-4);
+	color: var(--ds-color-text-secondary);
+}
+
+.beta-modal__actions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+@keyframes beta-modal-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes beta-modal-slide-up {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.beta-modal-overlay,
+	.beta-modal {
+		animation: none;
 	}
 }
 
