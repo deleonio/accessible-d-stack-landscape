@@ -1,9 +1,8 @@
-export const metadata = {
-	focus: 'scoringExplained',
-	title: 'Warum hat MySQL Server nur 55 Punkte — und PostgreSQL deutlich mehr?',
-	summary:
-		'MySQL ist technisch souverän (88 Punkte), aber in nur einem einzigen Stack vertreten. Da 40 % des Overall Score aus der Adoption stammen, fällt das Ergebnis entsprechend aus.',
-};
+---
+focus: scoringExplained
+title: Warum hat MySQL Server nur 55 Punkte — und PostgreSQL deutlich mehr?
+summary: MySQL ist technisch souverän (88 Punkte), aber in nur einem einzigen Stack vertreten. Da 40 % des Overall Score aus der Adoption stammen, fällt das Ergebnis entsprechend aus.
+---
 
 import ScoringTables from '../reports/postgresql-vs-mysql-scoring.md';
 
