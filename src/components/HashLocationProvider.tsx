@@ -48,22 +48,22 @@ export function HashLocationProvider({ children }: HashLocationProviderProps) {
 
 	useEffect(() => {
 		const onHashChange = () => {
-			const canonicalRoute = getHashRoute();
-			const nextHash = `#${canonicalRoute}`;
-			if (window.location.hash !== nextHash) {
-				window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}${nextHash}`);
+			const currentRoute = normalizeRoute(window.location.hash);
+			const canonicalRoute = canonicalizeRoute(window.location.hash);
+			if (currentRoute !== canonicalRoute) {
+				window.location.replace(`${window.location.pathname}${window.location.search}#${canonicalRoute}`);
+				return;
 			}
-			setRoute(canonicalRoute);
+			setRoute(currentRoute);
 		};
 
 		window.addEventListener('hashchange', onHashChange);
 
 		if (!window.location.hash) {
 			window.location.replace(`${window.location.pathname}${window.location.search}#/`);
-			setRoute(getHashRoute());
-		} else {
-			onHashChange();
+			return () => window.removeEventListener('hashchange', onHashChange);
 		}
+		onHashChange();
 
 		return () => window.removeEventListener('hashchange', onHashChange);
 	}, []);
