@@ -57,10 +57,10 @@ function syncKoliBriLanguage(language: string): Promise<void[]> {
 
 function dismissSplash(): void {
 	if (splashDismissed) return;
-	splashDismissed = true;
 
 	const splash = document.getElementById('splash');
 	if (!splash) return;
+	splashDismissed = true;
 
 	const status = document.getElementById('splash-status');
 	if (status) status.textContent = 'Anwendung bereit';
@@ -84,7 +84,7 @@ function dismissSplash(): void {
 let renderApp: (() => void) | null = null;
 
 // Register click and keyboard handlers FIRST
-document.addEventListener('click', (e) => {
+document.addEventListener('pointerdown', (e) => {
 	const splash = document.getElementById('splash');
 	if (splash?.contains(e.target as HTMLElement)) {
 		dismissSplash();
