@@ -57,25 +57,21 @@ function syncKoliBriLanguage(language: string): Promise<void[]> {
 
 function dismissSplash(): void {
 	if (splashDismissed) return;
-	splashDismissed = true;
 
 	const splash = document.getElementById('splash');
-	if (!splash) return;
+	if (!splash || splash.dataset.dismissed === 'true') return;
+
+	splashDismissed = true;
+	splash.dataset.dismissed = 'true';
 
 	const status = document.getElementById('splash-status');
 	if (status) status.textContent = 'Anwendung bereit';
 
 	splash.classList.add('splash--exiting');
-	splash.style.display = 'none';
-	splash.style.visibility = 'hidden';
 	splash.style.pointerEvents = 'none';
 
 	const cleanup = () => {
-		try {
-			splash.remove();
-		} catch {
-			// ignore
-		}
+		splash.remove();
 	};
 	splash.addEventListener('transitionend', cleanup, { once: true });
 	setTimeout(cleanup, 600);
