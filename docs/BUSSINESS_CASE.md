@@ -53,6 +53,7 @@ StackAtlas macht digitale Souveraenitaet von Technologie-Stacks sichtbar, vergle
 
 - **Nur Items im Layer "Sovereign-Standards" sind echte Standards** — Offene Standards, Interoperabilitätsprinzipien, Datenschutz und Regulierungsanforderungen.
 - Sie sind die Grundlagen, auf denen alle anderen Abhängigkeiten aufgebaut sind.
+- Hinweis: Auch bei scheinbar neutralen Foundation-Strukturen koennen starke Konzerninteressen wirken; siehe Heise-Einordnung: https://www.heise.de/blog/Open-Source-ist-nicht-das-Problem-sondern-sein-Missbrauch-durch-Konzerne-11244125.html
 - Ein Stack zeigt seine **Verantwortung für Standards** durch die Rolle, die er beim Item annimmt:
   - **maintainer**: Der Stack entwickelt und wartet den Standard mit
   - **contributor**: Der Stack trägt aktiv zur Entwicklung bei
