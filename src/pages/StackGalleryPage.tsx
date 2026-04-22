@@ -86,14 +86,14 @@ export function StackGalleryPage() {
 	);
 
 	const stacksWithScores = useMemo(() => allStacks.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })), [allStacks]);
-	const rankedStacks = useMemo(() => {
+	const { builtInRankedStacks, customRankedStacks } = useMemo(() => {
 		const language = i18n.resolvedLanguage ?? i18n.language ?? 'de';
 		const customStacks = stacksWithScores
 			.filter(({ stack }) => isLocalStack(stack))
 			.sort((a, b) => getLocalizedText(a.stack.name, language).localeCompare(getLocalizedText(b.stack.name, language), language));
 		const builtInStacks = stacksWithScores.filter(({ stack }) => !isLocalStack(stack)).sort((a, b) => b.avgScore - a.avgScore);
 
-		return [...customStacks, ...builtInStacks];
+		return { builtInRankedStacks: builtInStacks, customRankedStacks: customStacks };
 	}, [i18n.language, i18n.resolvedLanguage, stacksWithScores]);
 
 	useEffect(() => {
@@ -180,7 +180,7 @@ export function StackGalleryPage() {
 			</section>
 
 			<ol className="stack-gallery__list" aria-label={t('stackGallery.listAria')}>
-				{rankedStacks.map(({ stack }, index) => {
+				{builtInRankedStacks.map(({ stack }, index) => {
 					const editable = isLocalStack(stack);
 
 					return (
@@ -200,6 +200,33 @@ export function StackGalleryPage() {
 					);
 				})}
 			</ol>
+			{customRankedStacks.length > 0 && (
+				<section className="stack-gallery__custom-section" aria-label={t('stackGallery.custom.manageAria')}>
+					<h2 className="stack-gallery__custom-title">{t('stackGallery.custom.manageAria')}</h2>
+					<ol className="stack-gallery__list" aria-label={t('stackGallery.custom.manageAria')}>
+						{customRankedStacks.map(({ stack }, index) => {
+							const editable = isLocalStack(stack);
+							const rank = builtInRankedStacks.length + index + 1;
+
+							return (
+								<li key={stack.id} className="stack-gallery__item" id={`stack-${stack.id}`}>
+									<StackExposeWithMetrics stack={stack} isTop={rank === 1} rank={rank}>
+										{editable && (
+											<KolButton
+												_label={t('stackGallery.custom.manageAria')}
+												_hideLabel
+												_icons={{ left: 'kolicon kolicon-cogwheel' }}
+												_variant="ghost"
+												_on={{ onClick: () => setStackIdInDrawer(stack.id) }}
+											/>
+										)}
+									</StackExposeWithMetrics>
+								</li>
+							);
+						})}
+					</ol>
+				</section>
+			)}
 
 			<KolDrawer
 				_label={t('stackGallery.custom.manageAria')}
