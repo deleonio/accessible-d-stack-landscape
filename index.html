@@ -505,40 +505,7 @@
 		</div>
 		<div id="app"></div>
 
-		<script>
-			(function () {
-				const FALLBACK_EXIT_MS = 10000;
-				const EXIT_TRANSITION_MS = 600;
-
-				const dismissSplash = () => {
-					const splash = document.getElementById('splash');
-					if (!splash || splash.dataset.dismissed === 'true') return;
-
-					splash.dataset.dismissed = 'true';
-					splash.classList.add('splash--exiting');
-					splash.style.pointerEvents = 'none';
-
-					window.setTimeout(() => {
-						splash.remove();
-					}, EXIT_TRANSITION_MS);
-				};
-
-				document.addEventListener('click', (event) => {
-					const splash = document.getElementById('splash');
-					if (splash?.contains(event.target)) {
-						dismissSplash();
-					}
-				});
-
-				document.addEventListener('keydown', (event) => {
-					if (event.key === 'Escape') {
-						dismissSplash();
-					}
-				});
-
-				window.setTimeout(dismissSplash, FALLBACK_EXIT_MS);
-			})();
-		</script>
+		<script type="module" src="/src/splash.main.ts"></script>
 		<script type="module" src="/src/main.ts"></script>
 	</body>
 </html>
