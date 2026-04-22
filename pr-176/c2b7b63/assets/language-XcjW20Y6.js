@@ -1,0 +1,1 @@
+function e(e,t,n){let r=e?.trim().toLowerCase();if(!r)return n;let i=t.find(e=>e===r);if(i)return i;let a=r.split(`-`)[0];return t.find(e=>e===a)??n}var t=[`da`,`de`,`en`,`es`,`fr`,`it`,`no`,`sv`];function n(n){return e(n,t,`de`)}export{n,t};
