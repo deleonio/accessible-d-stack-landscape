@@ -316,7 +316,8 @@
 				"openDataGovernance": "Enfoque: Gobernanza de datos abiertos",
 				"identityWalletInteroperability": "Enfoque: Interoperabilidad de Identity Wallet",
 				"reportTemplate": "Enfoque: Plantilla de informe",
-				"scoringExplained": "Enfoque: Explicación del scoring"
+				"scoringExplained": "Enfoque: Explicación del scoring",
+				"dataEntities": "Enfoque: Modelo de datos y entidades"
 			}
 		}
 	},
