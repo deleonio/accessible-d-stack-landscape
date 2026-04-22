@@ -36,8 +36,10 @@ function markdownItPlugin(): Plugin {
 const isPwaEnabled = process.env.VITE_ENABLE_PWA !== 'false';
 const { version: appVersion } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8')) as { version: string };
 
+const basePath = process.env.VITE_BASE_PATH || './';
+
 export default defineConfig({
-	base: './',
+	base: basePath,
 	build: {
 		dynamicImportVarsOptions: {
 			exclude: [],
