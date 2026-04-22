@@ -194,7 +194,7 @@
 		}
 	},
 	"stackGallery": {
-		"title": "Stack Gallery",
+		"title": "Stacks",
 		"subtitle": "Alla rankade teknikstackar rankas efter digital suveränitetspoäng – bäst till lägst.",
 		"listAria": "Teknikstackar rankade efter suveränitetspoäng",
 		"bestStack": "Högst rankad stack – guldplacering",

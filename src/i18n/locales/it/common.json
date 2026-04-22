@@ -194,7 +194,7 @@
 		}
 	},
 	"stackGallery": {
-		"title": "Galleria dello stack",
+		"title": "Stacks",
 		"subtitle": "Tutti gli stack tecnologici classificati in base al punteggio di sovranità digitale: dal migliore al più basso.",
 		"listAria": "Stack tecnologici classificati in base al punteggio di sovranità",
 		"bestStack": "Stack in cima alla classifica: posizionamento oro",

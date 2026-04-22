@@ -194,7 +194,7 @@
 		}
 	},
 	"stackGallery": {
-		"title": "Galería de pilas",
+		"title": "Stacks",
 		"subtitle": "Todas las pilas de tecnología clasificadas clasificadas según su puntuación de soberanía digital, de mejor a menor.",
 		"listAria": "Pilas de tecnología clasificadas por puntuación de soberanía",
 		"bestStack": "Pila mejor clasificada: ubicación en oro",

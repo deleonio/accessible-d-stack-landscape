@@ -1,11 +1,15 @@
+import { KolButton } from '@public-ui/preact';
 import { useLocation } from 'preact-iso';
 import { useEffect, useMemo } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
+import { LocalStackComposer } from '../components/LocalStackComposer';
 import { StackExpose } from '../components/StackExpose';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
+import { useLocalStacks } from '../hooks/useLocalStacks';
 import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 import { computeStackAvgScore, useStackMetrics } from '../hooks/useStackMetrics';
 import { Stack } from '../types';
+import { getLocalizedText } from '../utils';
 
 interface StackExposeWithMetricsProps {
 	stack: Stack;
@@ -23,14 +27,16 @@ function StackExposeWithMetrics({ stack, isTop, rank }: StackExposeWithMetricsPr
 }
 
 export function StackGalleryPage() {
-	const { t } = useTranslation();
+	const { i18n, t } = useTranslation();
 	const location = useLocation();
 	const selectedStackId = location.query.stack;
-	useRouteAnnouncement({ pageTitle: t('stackGallery.title') || 'Stack Gallery' });
+	const { allStacks: localStacks, createLocalStack, deleteLocalStack } = useLocalStacks(ITEMS);
+	useRouteAnnouncement({ pageTitle: t('stackGallery.title') || 'Stacks' });
 
-	const stacksWithScores = useMemo(() => STACKS.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })), []);
+	const allStacks = useMemo(() => [...STACKS, ...localStacks], [localStacks]);
 
-	// Stacks absteigend nach Ø-Score sortieren
+	const stacksWithScores = useMemo(() => allStacks.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })), [allStacks]);
+
 	const rankedStacks = useMemo(() => [...stacksWithScores].sort((a, b) => b.avgScore - a.avgScore), [stacksWithScores]);
 
 	useEffect(() => {
@@ -53,6 +59,20 @@ export function StackGalleryPage() {
 				</h1>
 				<p className="stack-gallery__subtitle">{t('stackGallery.subtitle')}</p>
 			</div>
+
+			<section className="mb-6" aria-label={t('stackGallery.custom.manageAria', 'Lokale Stacks verwalten')}>
+				<LocalStackComposer onCreate={createLocalStack} />
+				{localStacks.length > 0 && (
+					<ul className="mt-4 flex flex-col gap-2">
+						{localStacks.map((stack) => (
+							<li key={stack.id} className="flex items-center justify-between gap-3">
+								<span>{getLocalizedText(stack.name, i18n.language)}</span>
+								<KolButton _label={t('stackGallery.custom.delete', 'Löschen')} _variant="secondary" _on={{ onClick: () => deleteLocalStack(stack.id) }} />
+							</li>
+						))}
+					</ul>
+				)}
+			</section>
 
 			<ol className="stack-gallery__list" aria-label={t('stackGallery.listAria')}>
 				{rankedStacks.map(({ stack }, index) => (

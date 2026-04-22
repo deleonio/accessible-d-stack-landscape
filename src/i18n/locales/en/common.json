@@ -216,7 +216,7 @@
 		}
 	},
 	"stackGallery": {
-		"title": "Stack Gallery",
+		"title": "Stacks",
 		"subtitle": "All rated tech stacks ranked by digital sovereignty score – best to lowest.",
 		"listAria": "Tech stacks ranked by sovereignty score",
 		"bestStack": "Top-ranked stack – gold placement",
