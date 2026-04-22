@@ -1950,6 +1950,14 @@ kol-select {
 	color: var(--ds-color-text-muted);
 }
 
+.stack-gallery__custom-note {
+	margin: 0;
+	padding: var(--ds-space-2) 0;
+	text-align: center;
+	color: var(--ds-color-text-muted);
+	font-size: var(--ds-text-sm);
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    Stack Exposé – einzelne Karte
    ───────────────────────────────────────────────────────────────────────────── */

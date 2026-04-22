@@ -1,4 +1,4 @@
-import { KolAlert, KolButton, KolDialog, KolDrawer, KolInputText } from '@public-ui/preact';
+import { KolButton, KolDialog, KolDrawer, KolInputText } from '@public-ui/preact';
 import type { ComponentChildren } from 'preact';
 import { useLocation } from 'preact-iso';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
@@ -211,9 +211,9 @@ export function StackGalleryPage() {
 						const rankLabel = entry.rankStart === entry.rankEnd ? `#${entry.rankStart}` : `#${entry.rankStart}–#${entry.rankEnd}`;
 						return (
 							<li key={`custom-note-${entry.rankStart}-${entry.rankEnd}`} className="stack-gallery__item">
-								<KolAlert _label={rankLabel} _level={1} _variant="card" _type="info">
-									<p>{`Hier wäre ${entry.names.length > 1 ? 'die Custom Stacks' : 'der Custom Stack'} ${entry.names.join(', ')}.`}</p>
-								</KolAlert>
+								<p className="stack-gallery__custom-note">{`------ ${rankLabel}: Hier wäre ${
+									entry.names.length > 1 ? 'die Custom Stacks' : 'der Custom Stack'
+								} ${entry.names.join(', ')} ------`}</p>
 							</li>
 						);
 					}
