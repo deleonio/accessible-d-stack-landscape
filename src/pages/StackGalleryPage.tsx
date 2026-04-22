@@ -278,7 +278,12 @@ export function StackGalleryPage() {
 				)}
 			</KolDrawer>
 
-			<KolDialog ref={deleteDialogRef} _label={t('stackGallery.custom.deleteConfirmTitle')} _on={{ onClose: () => setStackIdPendingDelete(null) }}>
+			<KolDialog
+				ref={deleteDialogRef}
+				_label={t('stackGallery.custom.deleteConfirmTitle')}
+				_width="32rem"
+				_on={{ onClose: () => setStackIdPendingDelete(null) }}
+			>
 				<div className="p-4 flex flex-col gap-3">
 					<p>
 						{t('stackGallery.custom.deleteConfirmMessage', {
