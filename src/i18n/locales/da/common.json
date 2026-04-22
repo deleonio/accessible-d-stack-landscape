@@ -228,6 +228,7 @@
 			"deleteConfirmMessage": "Vil du virkelig slette stacken '{{name}}'?",
 			"deleteConfirmTitle": "Bekræft sletning",
 			"item": "Vælg dep",
+			"relation": "Relation",
 			"manageAria": "Administrer egne stacks",
 			"name": "Stack-navn",
 			"nameTaken": "Navnet findes allerede eller er ugyldigt.",

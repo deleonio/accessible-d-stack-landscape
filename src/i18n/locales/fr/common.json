@@ -233,6 +233,7 @@
 			"deleteConfirmMessage": "Voulez-vous vraiment supprimer le stack '{{name}}' ?",
 			"deleteConfirmTitle": "Confirmer la suppression",
 			"item": "Sélectionner une dépendance",
+			"relation": "Relation",
 			"manageAria": "Gérer les stacks personnalisés",
 			"name": "Nom du stack",
 			"nameTaken": "Le nom existe déjà ou est invalide.",

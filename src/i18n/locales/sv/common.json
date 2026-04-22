@@ -228,6 +228,7 @@
 			"deleteConfirmMessage": "Vill du verkligen ta bort stacken '{{name}}'?",
 			"deleteConfirmTitle": "Bekräfta borttagning",
 			"item": "Välj dep",
+			"relation": "Relation",
 			"manageAria": "Hantera egna stacks",
 			"name": "Stacknamn",
 			"nameTaken": "Namnet finns redan eller är ogiltigt.",

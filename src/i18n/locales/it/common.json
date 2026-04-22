@@ -228,6 +228,7 @@
 			"deleteConfirmMessage": "Vuoi davvero eliminare lo stack '{{name}}'?",
 			"deleteConfirmTitle": "Conferma eliminazione",
 			"item": "Seleziona dep",
+			"relation": "Relazione",
 			"manageAria": "Gestisci stack personalizzati",
 			"name": "Nome stack",
 			"nameTaken": "Il nome esiste già o non è valido.",

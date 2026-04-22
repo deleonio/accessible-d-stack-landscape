@@ -250,6 +250,7 @@
 			"deleteConfirmMessage": "Do you really want to delete the stack '{{name}}'?",
 			"deleteConfirmTitle": "Confirm deletion",
 			"item": "Select dep",
+			"relation": "Relation",
 			"manageAria": "Manage custom stacks",
 			"name": "Stack name",
 			"nameTaken": "Name already exists or is invalid.",

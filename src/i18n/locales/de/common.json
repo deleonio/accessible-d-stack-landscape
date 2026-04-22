@@ -250,6 +250,7 @@
 			"deleteConfirmMessage": "Möchtest du den Stack '{{name}}' wirklich löschen?",
 			"deleteConfirmTitle": "Löschen bestätigen",
 			"item": "Dep auswählen",
+			"relation": "Relation",
 			"manageAria": "Eigene Stacks verwalten",
 			"name": "Stack-Name",
 			"nameTaken": "Name bereits vergeben oder ungültig.",

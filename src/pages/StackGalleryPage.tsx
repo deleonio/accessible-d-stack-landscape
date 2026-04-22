@@ -49,6 +49,7 @@ export function StackGalleryPage() {
 	const [createMessage, setCreateMessage] = useState('');
 	const [renameValues, setRenameValues] = useState<Record<string, string>>({});
 	const [selectedItemByStack, setSelectedItemByStack] = useState<Record<string, string>>({});
+	const [selectedRelationByStack, setSelectedRelationByStack] = useState<Record<string, string>>({});
 	const [stackIdPendingDelete, setStackIdPendingDelete] = useState<string | null>(null);
 
 	useRouteAnnouncement({ pageTitle: t('stackGallery.title') || 'Stacks' });
@@ -58,11 +59,23 @@ export function StackGalleryPage() {
 
 	const itemOptions = useMemo(
 		() =>
-			ITEMS.map((item) => ({
-				label: getLocalizedText(item.name, i18n.language),
-				value: item.id,
-			})),
+			ITEMS.map((item) => {
+				const score = item.adoption?.overallScore ?? 0;
+				return {
+					label: `${getLocalizedText(item.name, i18n.language)} (${score})`,
+					value: item.id,
+				};
+			}),
 		[i18n.language],
+	);
+	const relationOptions = useMemo(
+		() => [
+			{ label: t('stack.roles.consumer'), value: 'consumer' },
+			{ label: t('stack.roles.contributor'), value: 'contributor' },
+			{ label: t('stack.roles.funder'), value: 'funder' },
+			{ label: t('stack.roles.maintainer'), value: 'maintainer' },
+		],
+		[t],
 	);
 
 	const stacksWithScores = useMemo(() => allStacks.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })), [allStacks]);
@@ -147,6 +160,7 @@ export function StackGalleryPage() {
 					const editable = isLocalStack(stack);
 					const rawLocalStack = localStackById.get(stack.id);
 					const selectedItemId = selectedItemByStack[stack.id] ?? '';
+					const selectedRelation = selectedRelationByStack[stack.id] ?? 'consumer';
 					const assignedItemIds = new Set(stack.items.map((item) => item.itemId));
 
 					return (
@@ -175,11 +189,23 @@ export function StackGalleryPage() {
 														setSelectedItemByStack((prev) => ({ ...prev, [stack.id]: typeof value === 'string' ? value : '' })),
 												}}
 											/>
+											<KolSingleSelect
+												_label={t('stackGallery.custom.relation')}
+												_options={relationOptions}
+												_value={selectedRelation}
+												_on={{
+													onChange: (_event: Event, value: unknown) =>
+														setSelectedRelationByStack((prev) => ({ ...prev, [stack.id]: typeof value === 'string' ? value : 'consumer' })),
+												}}
+											/>
 											<KolButton
 												_label={t('stackGallery.custom.addDep')}
 												_variant="secondary"
 												_disabled={!selectedItemId || assignedItemIds.has(selectedItemId)}
-												_on={{ onClick: () => addItemToLocalStack(stack.id, selectedItemId) }}
+												_on={{
+													onClick: () =>
+														addItemToLocalStack(stack.id, selectedItemId, selectedRelation as 'consumer' | 'contributor' | 'funder' | 'maintainer'),
+												}}
 											/>
 										</div>
 										{selectedItems(stack).length > 0 && (

@@ -276,7 +276,7 @@ export function useLocalStacks(allItems: Item[]) {
 		return renamed;
 	};
 
-	const addItemToLocalStack = (stackId: string, itemId: string) => {
+	const addItemToLocalStack = (stackId: string, itemId: string, role: ParticipantRole = DEFAULT_STACK_ITEM_ROLE) => {
 		if (!allItems.some((item) => item.id === itemId)) {
 			return;
 		}
@@ -290,7 +290,7 @@ export function useLocalStacks(allItems: Item[]) {
 				const now = new Date().toISOString();
 				return {
 					...stack,
-					items: [...stack.items, { addedAt: now, itemId, role: DEFAULT_STACK_ITEM_ROLE, status: DEFAULT_STACK_ITEM_STATUS }],
+					items: [...stack.items, { addedAt: now, itemId, role, status: DEFAULT_STACK_ITEM_STATUS }],
 					updatedAt: now,
 				};
 			});
