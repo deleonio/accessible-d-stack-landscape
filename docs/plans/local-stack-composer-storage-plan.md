@@ -27,16 +27,19 @@ Der Local Stack wird vollständig **clientseitig** im Browser-Storage gespeicher
 
 Neue lokale Domänentypen ergänzen (z. B. in `src/types/index.ts` oder dediziert):
 
-- `LocalStackItemRef`
+- `LocalStackItemRef` (kompatibel mit `StackItem`)
   - `itemId: string`
-  - `addedAt: string` (ISO)
-- `LocalStack`
+  - `addedAt: string` (ISO, entspricht `since`)
+  - `status: StackItemStatus` (z. B. `approved`)
+  - `role: ParticipantRole` (z. B. `consumer`)
+- `LocalStack` (kompatibel mit `Stack`)
   - `id: string` (z. B. `crypto.randomUUID()`)
   - `name: string`
   - `items: LocalStackItemRef[]`
   - `createdAt: string`
   - `updatedAt: string`
-- `LocalStackStore`
+  - `version: string` (z. B. `local`)
+- `LocalStackStore` (Storage-Wrapper)
   - `version: 1`
   - `stacks: LocalStack[]`
 
