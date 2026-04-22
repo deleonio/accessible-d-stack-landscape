@@ -259,7 +259,9 @@
 			"renameSave": "Namen speichern",
 			"save": "Stack anlegen",
 			"saved": "Stack gespeichert.",
-			"selectedAria": "Ausgewählte Deps"
+			"selectedAria": "Ausgewählte Deps",
+			"createSectionTitle": "Custom Stack anlegen",
+			"createSectionIntro": "Lege hier einen neuen Custom Stack an. Er wird lokal in deinem Browser gespeichert."
 		}
 	},
 	"pages": {

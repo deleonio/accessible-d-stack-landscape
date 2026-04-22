@@ -1938,6 +1938,12 @@ kol-select {
 	padding-top: var(--ds-space-6);
 }
 
+.stack-gallery__create-section {
+	margin-top: var(--ds-space-8);
+	border-top: 1px solid var(--ds-color-border);
+	padding-top: var(--ds-space-6);
+}
+
 .stack-gallery__custom-title {
 	margin: 0 0 var(--ds-space-4);
 	font-size: var(--ds-text-lg);

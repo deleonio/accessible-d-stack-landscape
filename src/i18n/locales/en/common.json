@@ -259,7 +259,9 @@
 			"renameSave": "Save name",
 			"save": "Create stack",
 			"saved": "Stack saved.",
-			"selectedAria": "Selected deps"
+			"selectedAria": "Selected deps",
+			"createSectionTitle": "Create custom stack",
+			"createSectionIntro": "Create a new custom stack here. It will be saved locally in your browser."
 		}
 	},
 	"pages": {

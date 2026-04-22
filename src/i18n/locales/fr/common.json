@@ -242,7 +242,9 @@
 			"renameSave": "Enregistrer le nom",
 			"save": "Créer le stack",
 			"saved": "Stack enregistré.",
-			"selectedAria": "Dépendances sélectionnées"
+			"selectedAria": "Dépendances sélectionnées",
+			"createSectionTitle": "Create custom stack",
+			"createSectionIntro": "Create a new custom stack here. It will be saved locally in your browser."
 		}
 	},
 	"pages": {

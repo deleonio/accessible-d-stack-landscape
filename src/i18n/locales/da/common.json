@@ -237,7 +237,9 @@
 			"renameSave": "Gem navn",
 			"save": "Opret stack",
 			"saved": "Stack gemt.",
-			"selectedAria": "Valgte deps"
+			"selectedAria": "Valgte deps",
+			"createSectionTitle": "Create custom stack",
+			"createSectionIntro": "Create a new custom stack here. It will be saved locally in your browser."
 		}
 	},
 	"pages": {
