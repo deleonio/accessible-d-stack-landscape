@@ -5,8 +5,6 @@ import { KERN_V2 } from '@public-ui/theme-kern';
 import i18next from 'i18next';
 
 import { render } from 'preact';
-import App from './App';
-import { i18nReady } from './i18n';
 import { normalizeLanguage } from './i18n/language';
 import { LanguageCode } from './types';
 
@@ -33,6 +31,9 @@ const APP_TO_KOLIBRI_LANGUAGE: Readonly<Record<LanguageCode, KolibriLanguage>> =
 	sv: 'sv',
 };
 const warnedKolibriFallbackLanguages = new Set<string>();
+
+const appModulePromise = import('./App');
+const i18nReadyPromise = import('./i18n').then(({ i18nReady }) => i18nReady);
 
 function mapAppLanguageToKolibriLanguage(language: string): KolibriLanguage {
 	const normalizedLanguage = normalizeLanguage(language);
@@ -106,19 +107,20 @@ i18next.on('languageChanged', (language: string) => {
 
 Promise.all([
 	Promise.race([
-		i18nReady.then(() => syncKoliBriLanguage(i18next.resolvedLanguage ?? i18next.language ?? globalThis.navigator.language)),
+		i18nReadyPromise.then(() => syncKoliBriLanguage(i18next.resolvedLanguage ?? i18next.language ?? globalThis.navigator.language)),
 		new Promise<void>((_, reject) => setTimeout(() => reject(new Error('KoliBri registration timeout')), 3000)),
 	]),
 	new Promise<void>((resolve) => {
 		renderApp = resolve;
 		setTimeout(resolve, SPLASH_MIN_MS);
 	}),
+	appModulePromise,
 ])
-	.then(() => {
+	.then(([, , appModule]) => {
 		renderApp = null;
 		const htmlElement: HTMLElement | null = document.querySelector<HTMLDivElement>('div#app');
 		if (htmlElement instanceof HTMLElement) {
-			render(<App />, htmlElement);
+			render(<appModule.default />, htmlElement);
 		}
 
 		const elapsed = performance.now() - splashStart;
@@ -127,10 +129,5 @@ Promise.all([
 	})
 	.catch((error) => {
 		console.error('Error during app initialization:', error);
-		// Force splash to disappear even if there's an error
 		dismissSplash();
-		const htmlElement: HTMLElement | null = document.querySelector<HTMLDivElement>('div#app');
-		if (htmlElement instanceof HTMLElement) {
-			render(<App />, htmlElement);
-		}
 	});
