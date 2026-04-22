@@ -228,6 +228,10 @@
 		"custom": {
 			"addDep": "Ajouter une dépendance",
 			"delete": "Supprimer le stack",
+			"deleteConfirmAccept": "Oui, supprimer",
+			"deleteConfirmCancel": "Annuler",
+			"deleteConfirmMessage": "Voulez-vous vraiment supprimer le stack '{{name}}' ?",
+			"deleteConfirmTitle": "Confirmer la suppression",
 			"item": "Sélectionner une dépendance",
 			"manageAria": "Gérer les stacks personnalisés",
 			"name": "Nom du stack",

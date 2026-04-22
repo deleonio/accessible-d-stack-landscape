@@ -223,6 +223,10 @@
 		"custom": {
 			"addDep": "Tilføj dep",
 			"delete": "Slet stack",
+			"deleteConfirmAccept": "Ja, slet",
+			"deleteConfirmCancel": "Annuller",
+			"deleteConfirmMessage": "Vil du virkelig slette stacken '{{name}}'?",
+			"deleteConfirmTitle": "Bekræft sletning",
 			"item": "Vælg dep",
 			"manageAria": "Administrer egne stacks",
 			"name": "Stack-navn",

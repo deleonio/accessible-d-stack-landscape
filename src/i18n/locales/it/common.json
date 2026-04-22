@@ -223,6 +223,10 @@
 		"custom": {
 			"addDep": "Aggiungi dep",
 			"delete": "Elimina stack",
+			"deleteConfirmAccept": "Sì, elimina",
+			"deleteConfirmCancel": "Annulla",
+			"deleteConfirmMessage": "Vuoi davvero eliminare lo stack '{{name}}'?",
+			"deleteConfirmTitle": "Conferma eliminazione",
 			"item": "Seleziona dep",
 			"manageAria": "Gestisci stack personalizzati",
 			"name": "Nome stack",

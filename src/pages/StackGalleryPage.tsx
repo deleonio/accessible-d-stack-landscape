@@ -1,4 +1,4 @@
-import { KolButton, KolInputText } from '@public-ui/preact';
+import { KolButton, KolInputText, KolModal } from '@public-ui/preact';
 import type { ComponentChildren } from 'preact';
 import { useLocation } from 'preact-iso';
 import { useEffect, useMemo, useState } from 'preact/hooks';
@@ -49,6 +49,7 @@ export function StackGalleryPage() {
 	const [createMessage, setCreateMessage] = useState('');
 	const [renameValues, setRenameValues] = useState<Record<string, string>>({});
 	const [selectedItemByStack, setSelectedItemByStack] = useState<Record<string, string>>({});
+	const [stackIdPendingDelete, setStackIdPendingDelete] = useState<string | null>(null);
 
 	useRouteAnnouncement({ pageTitle: t('stackGallery.title') || 'Stacks' });
 
@@ -108,6 +109,16 @@ export function StackGalleryPage() {
 	const selectedItems = (stack: Stack): Item[] => {
 		const itemIdSet = new Set(stack.items.map((item) => item.itemId));
 		return ITEMS.filter((item) => itemIdSet.has(item.id));
+	};
+
+	const stackNamePendingDelete = stackIdPendingDelete ? allStacks.find((stack) => stack.id === stackIdPendingDelete)?.name : null;
+
+	const confirmDeleteStack = () => {
+		if (!stackIdPendingDelete) {
+			return;
+		}
+		deleteLocalStack(stackIdPendingDelete);
+		setStackIdPendingDelete(null);
 	};
 
 	return (
@@ -185,7 +196,7 @@ export function StackGalleryPage() {
 												))}
 											</ul>
 										)}
-										<KolButton _label={t('stackGallery.custom.delete')} _variant="normal" _on={{ onClick: () => deleteLocalStack(stack.id) }} />
+										<KolButton _label={t('stackGallery.custom.delete')} _variant="normal" _on={{ onClick: () => setStackIdPendingDelete(stack.id) }} />
 									</div>
 								)}
 							</StackExposeWithMetrics>
@@ -193,6 +204,24 @@ export function StackGalleryPage() {
 					);
 				})}
 			</ol>
+
+			<KolModal
+				_open={Boolean(stackIdPendingDelete)}
+				_label={t('stackGallery.custom.deleteConfirmTitle')}
+				_on={{ onClose: () => setStackIdPendingDelete(null) }}
+			>
+				<div className="p-4 flex flex-col gap-3">
+					<p>
+						{t('stackGallery.custom.deleteConfirmMessage', {
+							name: stackNamePendingDelete ? getLocalizedText(stackNamePendingDelete, i18n.language) : '',
+						})}
+					</p>
+					<div className="flex gap-2">
+						<KolButton _label={t('stackGallery.custom.deleteConfirmCancel')} _variant="secondary" _on={{ onClick: () => setStackIdPendingDelete(null) }} />
+						<KolButton _label={t('stackGallery.custom.deleteConfirmAccept')} _variant="normal" _on={{ onClick: confirmDeleteStack }} />
+					</div>
+				</div>
+			</KolModal>
 		</main>
 	);
 }
