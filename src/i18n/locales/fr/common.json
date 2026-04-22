@@ -321,7 +321,8 @@
 				"openDataGovernance": "Focus : Open Data Governance",
 				"identityWalletInteroperability": "Focus : Identity Wallet Interoperability",
 				"reportTemplate": "Focus : Modèle de rapport",
-				"scoringExplained": "Focus : Explication du scoring"
+				"scoringExplained": "Focus : Explication du scoring",
+				"dataEntities": "Focus : Modèle de données & entités"
 			}
 		}
 	},

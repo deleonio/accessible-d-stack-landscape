@@ -316,7 +316,8 @@
 				"openDataGovernance": "Fokus: Open Data Governance",
 				"identityWalletInteroperability": "Fokus: Interoperabilitet for identitetslommebok",
 				"reportTemplate": "Fokus: Rapportmal",
-				"scoringExplained": "Fokus: Scoring forklart"
+				"scoringExplained": "Fokus: Scoring forklart",
+				"dataEntities": "Fokus: Datamodell & entiteter"
 			}
 		}
 	},
