@@ -1,7 +1,7 @@
 ---
 focus: scoringExplained
-title: Scoring nachvollziehen: Ein Rechenbeispiel über Relationen und Dependencies
-summary: Dieser Beitrag zeigt mit klaren Zahlen, wie sich required-, optional- und dev-Relationen sowie indirekte Abhängigkeiten auf den Stack-Score auswirken.
+title: 'Scoring nachvollziehen: Ein Rechenbeispiel über Relationen und Dependencies'
+summary: 'Dieser Beitrag zeigt mit klaren Zahlen, wie sich required-, optional- und dev-Relationen sowie indirekte Abhängigkeiten auf den Stack-Score auswirken.'
 ---
 
 # Scoring nachvollziehen: Ein Rechenbeispiel über Relationen und Dependencies
