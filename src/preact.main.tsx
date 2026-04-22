@@ -18,13 +18,7 @@ import { LanguageCode } from './types';
 const SPLASH_MIN_MS = 8500;
 const splashStart = performance.now();
 let splashDismissed = false;
-let splashDismissAnnounced = false;
-
-function notifySplashDismissed(): void {
-	if (splashDismissAnnounced) return;
-	splashDismissAnnounced = true;
-	window.dispatchEvent(new Event('stackatlas:splash-dismissed'));
-}
+let splashDismissPromise: Promise<void> | null = null;
 
 type KolibriLanguage = NonNullable<NonNullable<Parameters<typeof register>[2]>['translation']>['name'];
 
@@ -62,31 +56,44 @@ function syncKoliBriLanguage(language: string): Promise<void[]> {
 	return register([KERN_V2, DEFAULT], defineCustomElements, { translation: { name: kolibriLanguage } });
 }
 
-function dismissSplash(): void {
-	if (splashDismissed) return;
+function dismissSplash(): Promise<void> {
+	if (splashDismissPromise) return splashDismissPromise;
 
-	const splash = document.getElementById('splash');
-	if (!splash) return;
-	splashDismissed = true;
-
-	const status = document.getElementById('splash-status');
-	if (status) status.textContent = 'Anwendung bereit';
-
-	splash.classList.add('splash--exiting');
-	splash.style.display = 'none';
-	splash.style.visibility = 'hidden';
-	splash.style.pointerEvents = 'none';
-
-	const cleanup = () => {
-		try {
-			splash.remove();
-		} catch {
-			// ignore
+	splashDismissPromise = new Promise<void>((resolve) => {
+		if (splashDismissed) {
+			resolve();
+			return;
 		}
-		notifySplashDismissed();
-	};
-	splash.addEventListener('transitionend', cleanup, { once: true });
-	setTimeout(cleanup, 600);
+
+		const splash = document.getElementById('splash');
+		if (!splash) {
+			splashDismissed = true;
+			resolve();
+			return;
+		}
+		splashDismissed = true;
+
+		const status = document.getElementById('splash-status');
+		if (status) status.textContent = 'Anwendung bereit';
+
+		splash.classList.add('splash--exiting');
+		splash.style.display = 'none';
+		splash.style.visibility = 'hidden';
+		splash.style.pointerEvents = 'none';
+
+		const cleanup = () => {
+			try {
+				splash.remove();
+			} catch {
+				// ignore
+			}
+			resolve();
+		};
+		splash.addEventListener('transitionend', cleanup, { once: true });
+		setTimeout(cleanup, 600);
+	});
+
+	return splashDismissPromise;
 }
 
 let renderApp: (() => void) | null = null;
@@ -95,20 +102,22 @@ let renderApp: (() => void) | null = null;
 document.addEventListener('pointerdown', (e) => {
 	const splash = document.getElementById('splash');
 	if (splash?.contains(e.target as HTMLElement)) {
-		dismissSplash();
+		void dismissSplash();
 		renderApp?.();
 	}
 });
 
 document.addEventListener('keydown', (e: globalThis.KeyboardEvent) => {
 	if (e.key === 'Escape') {
-		dismissSplash();
+		void dismissSplash();
 		renderApp?.();
 	}
 });
 
 // Safety timeout to dismiss splash after max 10 seconds regardless
-setTimeout(dismissSplash, 10000);
+setTimeout(() => {
+	void dismissSplash();
+}, 10000);
 
 i18next.on('languageChanged', (language: string) => {
 	void syncKoliBriLanguage(language).catch((error: unknown) => {
@@ -126,21 +135,27 @@ Promise.all([
 		setTimeout(resolve, SPLASH_MIN_MS);
 	}),
 ])
-	.then(() => {
+	.then(async () => {
 		renderApp = null;
+		const elapsed = performance.now() - splashStart;
+		const remaining = Math.max(0, SPLASH_MIN_MS - elapsed);
+		if (remaining > 0) {
+			await new Promise<void>((resolve) => {
+				setTimeout(resolve, remaining);
+			});
+		}
+
+		await dismissSplash();
+
 		const htmlElement: HTMLElement | null = document.querySelector<HTMLDivElement>('div#app');
 		if (htmlElement instanceof HTMLElement) {
 			render(<App />, htmlElement);
 		}
-
-		const elapsed = performance.now() - splashStart;
-		const remaining = Math.max(0, SPLASH_MIN_MS - elapsed);
-		setTimeout(dismissSplash, remaining);
 	})
-	.catch((error) => {
+	.catch(async (error) => {
 		console.error('Error during app initialization:', error);
 		// Force splash to disappear even if there's an error
-		dismissSplash();
+		await dismissSplash();
 		const htmlElement: HTMLElement | null = document.querySelector<HTMLDivElement>('div#app');
 		if (htmlElement instanceof HTMLElement) {
 			render(<App />, htmlElement);
