@@ -1,5 +1,5 @@
 import { Route, Router, useLocation } from 'preact-iso';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { BetaNoticeModal } from './components/BetaNoticeModal';
 import { Footer } from './components/Footer';
 import { HashLocationProvider } from './components/HashLocationProvider';
@@ -15,7 +15,21 @@ import { StackGalleryPage } from './pages/StackGalleryPage';
 
 function AppContent() {
 	const { path } = useLocation();
-	const [betaModalOpen, setBetaModalOpen] = useState(true);
+	const [betaModalOpen, setBetaModalOpen] = useState(false);
+
+	useEffect(() => {
+		const openBetaModal = () => setBetaModalOpen(true);
+
+		if (!document.getElementById('splash')) {
+			openBetaModal();
+			return;
+		}
+
+		window.addEventListener('stackatlas:splash-dismissed', openBetaModal, { once: true });
+		return () => {
+			window.removeEventListener('stackatlas:splash-dismissed', openBetaModal);
+		};
+	}, []);
 
 	return (
 		<div className="flex flex-col min-h-screen w-full">

@@ -18,6 +18,13 @@ import { LanguageCode } from './types';
 const SPLASH_MIN_MS = 8500;
 const splashStart = performance.now();
 let splashDismissed = false;
+let splashDismissAnnounced = false;
+
+function notifySplashDismissed(): void {
+	if (splashDismissAnnounced) return;
+	splashDismissAnnounced = true;
+	window.dispatchEvent(new Event('stackatlas:splash-dismissed'));
+}
 
 type KolibriLanguage = NonNullable<NonNullable<Parameters<typeof register>[2]>['translation']>['name'];
 
@@ -76,6 +83,7 @@ function dismissSplash(): void {
 		} catch {
 			// ignore
 		}
+		notifySplashDismissed();
 	};
 	splash.addEventListener('transitionend', cleanup, { once: true });
 	setTimeout(cleanup, 600);
