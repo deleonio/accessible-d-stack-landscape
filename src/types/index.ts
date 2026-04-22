@@ -1,4 +1,29 @@
-export type LanguageCode = 'da' | 'de' | 'en' | 'es' | 'fr' | 'it' | 'no' | 'sv';
+export type LanguageCode =
+	| 'bg'
+	| 'cs'
+	| 'da'
+	| 'de'
+	| 'el'
+	| 'en'
+	| 'es'
+	| 'et'
+	| 'fi'
+	| 'fr'
+	| 'ga'
+	| 'hr'
+	| 'hu'
+	| 'it'
+	| 'lt'
+	| 'lv'
+	| 'mt'
+	| 'nl'
+	| 'no'
+	| 'pl'
+	| 'pt'
+	| 'ro'
+	| 'sk'
+	| 'sl'
+	| 'sv';
 
 export type LocalizedText = {
 	[K in LanguageCode]?: string;

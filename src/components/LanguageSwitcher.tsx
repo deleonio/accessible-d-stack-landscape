@@ -4,13 +4,30 @@ import { normalizeLanguage } from '../i18n/language';
 import { AutoSingleSelect as KolSingleSelect } from './AutoSingleSelect';
 
 const SUPPORTED_LANGUAGES = [
+	{ code: 'bg', label: 'Български' },
+	{ code: 'cs', label: 'Čeština' },
 	{ code: 'da', label: 'Dansk' },
 	{ code: 'de', label: 'Deutsch' },
+	{ code: 'el', label: 'Ελληνικά' },
 	{ code: 'en', label: 'English' },
 	{ code: 'es', label: 'Español' },
+	{ code: 'et', label: 'Eesti' },
+	{ code: 'fi', label: 'Suomi' },
 	{ code: 'fr', label: 'Français' },
+	{ code: 'ga', label: 'Gaeilge' },
+	{ code: 'hr', label: 'Hrvatski' },
+	{ code: 'hu', label: 'Magyar' },
 	{ code: 'it', label: 'Italiano' },
+	{ code: 'lt', label: 'Lietuvių' },
+	{ code: 'lv', label: 'Latviešu' },
+	{ code: 'mt', label: 'Malti' },
+	{ code: 'nl', label: 'Nederlands' },
 	{ code: 'no', label: 'Norsk' },
+	{ code: 'pl', label: 'Polski' },
+	{ code: 'pt', label: 'Português' },
+	{ code: 'ro', label: 'Română' },
+	{ code: 'sk', label: 'Slovenčina' },
+	{ code: 'sl', label: 'Slovenščina' },
 	{ code: 'sv', label: 'Svenska' },
 ] as const;
 
