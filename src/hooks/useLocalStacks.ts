@@ -37,6 +37,10 @@ type LegacyPersistedLocalStack = {
 	updatedAt?: unknown;
 };
 
+function normalizeStackName(name: string) {
+	return name.trim().toLocaleLowerCase();
+}
+
 function isStackItemStatus(value: unknown): value is StackItemStatus {
 	return value === 'approved' || value === 'deprecated' || value === 'recommended';
 }
@@ -61,6 +65,16 @@ function sanitizeStackItem(value: unknown, validItemIds: Set<string>, fallbackDa
 		role: isParticipantRole(candidate.role) ? candidate.role : DEFAULT_STACK_ITEM_ROLE,
 		status: isStackItemStatus(candidate.status) ? candidate.status : DEFAULT_STACK_ITEM_STATUS,
 	};
+}
+
+function uniqueItems(items: PersistedLocalStackItem[]): PersistedLocalStackItem[] {
+	const byId = new Map<string, PersistedLocalStackItem>();
+	for (const item of items) {
+		if (!byId.has(item.itemId)) {
+			byId.set(item.itemId, item);
+		}
+	}
+	return Array.from(byId.values());
 }
 
 function sanitizeStack(value: unknown, validItemIds: Set<string>): PersistedLocalStack | null {
@@ -118,16 +132,6 @@ function sanitizeLegacyStack(value: unknown, validItemIds: Set<string>): Persist
 		updatedAt,
 		version: LOCAL_STACK_VERSION_LABEL,
 	};
-}
-
-function uniqueItems(items: PersistedLocalStackItem[]): PersistedLocalStackItem[] {
-	const byId = new Map<string, PersistedLocalStackItem>();
-	for (const item of items) {
-		if (!byId.has(item.itemId)) {
-			byId.set(item.itemId, item);
-		}
-	}
-	return Array.from(byId.values());
 }
 
 function loadPersistedLocalStacks(allItems: Item[]): PersistedLocalStack[] {
@@ -194,8 +198,8 @@ function toStack(localStack: PersistedLocalStack): Stack {
 	};
 }
 
-function uniqueItemIds(itemIds: string[]) {
-	return Array.from(new Set(itemIds));
+function withoutLocalPrefix(stackId: string) {
+	return stackId.replace(/^local-/, '');
 }
 
 export function useLocalStacks(allItems: Item[]) {
@@ -205,54 +209,125 @@ export function useLocalStacks(allItems: Item[]) {
 		setLocalStacks(loadPersistedLocalStacks(allItems));
 	}, [allItems]);
 
-	const upsertLocalStack = (name: string, itemIds: string[]) => {
+	const saveAndReturn = (next: PersistedLocalStack[]) => {
+		savePersistedLocalStacks(next);
+		return next;
+	};
+
+	const createLocalStack = (name: string) => {
 		const trimmedName = name.trim();
 		if (!trimmedName) {
 			return false;
 		}
 
-		const validItemIds = new Set(allItems.map((item) => item.id));
-		const sanitizedItemIds = uniqueItemIds(itemIds.filter((itemId) => validItemIds.has(itemId)));
-		if (sanitizedItemIds.length === 0) {
-			return false;
-		}
-
+		let created = false;
 		setLocalStacks((previous) => {
+			const normalizedName = normalizeStackName(trimmedName);
+			if (previous.some((stack) => normalizeStackName(stack.name) === normalizedName)) {
+				created = false;
+				return previous;
+			}
+
 			const now = new Date().toISOString();
 			const nextEntry: PersistedLocalStack = {
 				createdAt: now,
 				id: globalThis.crypto.randomUUID(),
-				items: sanitizedItemIds.map((itemId) => ({
-					addedAt: now,
-					itemId,
-					role: DEFAULT_STACK_ITEM_ROLE,
-					status: DEFAULT_STACK_ITEM_STATUS,
-				})),
+				items: [],
 				name: trimmedName,
 				updatedAt: now,
 				version: LOCAL_STACK_VERSION_LABEL,
 			};
-			const next = [...previous, nextEntry];
-			savePersistedLocalStacks(next);
-			return next;
+			created = true;
+			return saveAndReturn([...previous, nextEntry]);
 		});
 
-		return true;
+		return created;
+	};
+
+	const renameLocalStack = (stackId: string, name: string) => {
+		const trimmedName = name.trim();
+		if (!trimmedName) {
+			return false;
+		}
+
+		const rawStackId = withoutLocalPrefix(stackId);
+		let renamed = false;
+		setLocalStacks((previous) => {
+			const normalizedName = normalizeStackName(trimmedName);
+			const hasDuplicate = previous.some((stack) => stack.id !== rawStackId && normalizeStackName(stack.name) === normalizedName);
+			if (hasDuplicate) {
+				renamed = false;
+				return previous;
+			}
+
+			const next = previous.map((stack) =>
+				stack.id === rawStackId
+					? {
+							...stack,
+							name: trimmedName,
+							updatedAt: new Date().toISOString(),
+						}
+					: stack,
+			);
+			renamed = true;
+			return saveAndReturn(next);
+		});
+
+		return renamed;
+	};
+
+	const addItemToLocalStack = (stackId: string, itemId: string) => {
+		if (!allItems.some((item) => item.id === itemId)) {
+			return;
+		}
+		const rawStackId = withoutLocalPrefix(stackId);
+		setLocalStacks((previous) => {
+			const next = previous.map((stack) => {
+				if (stack.id !== rawStackId || stack.items.some((item) => item.itemId === itemId)) {
+					return stack;
+				}
+
+				const now = new Date().toISOString();
+				return {
+					...stack,
+					items: [...stack.items, { addedAt: now, itemId, role: DEFAULT_STACK_ITEM_ROLE, status: DEFAULT_STACK_ITEM_STATUS }],
+					updatedAt: now,
+				};
+			});
+			return saveAndReturn(next);
+		});
+	};
+
+	const removeItemFromLocalStack = (stackId: string, itemId: string) => {
+		const rawStackId = withoutLocalPrefix(stackId);
+		setLocalStacks((previous) => {
+			const next = previous.map((stack) =>
+				stack.id === rawStackId
+					? {
+							...stack,
+							items: stack.items.filter((item) => item.itemId !== itemId),
+							updatedAt: new Date().toISOString(),
+						}
+					: stack,
+			);
+			return saveAndReturn(next);
+		});
 	};
 
 	const deleteLocalStack = (stackId: string) => {
-		setLocalStacks((previous) => {
-			const next = previous.filter((stack) => stack.id !== stackId.replace(/^local-/, ''));
-			savePersistedLocalStacks(next);
-			return next;
-		});
+		const rawStackId = withoutLocalPrefix(stackId);
+		setLocalStacks((previous) => saveAndReturn(previous.filter((stack) => stack.id !== rawStackId)));
 	};
 
 	const allStacks = useMemo(() => localStacks.map(toStack), [localStacks]);
 
 	return {
+		addItemToLocalStack,
 		allStacks,
-		createLocalStack: upsertLocalStack,
+		createLocalStack,
 		deleteLocalStack,
+		localStacks,
+		renameLocalStack,
+		removeItemFromLocalStack,
 	};
 }

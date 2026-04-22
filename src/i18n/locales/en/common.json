@@ -110,7 +110,7 @@
 		"list": "List",
 		"sort": {
 			"label": "Sort by",
-			"name": "Name",
+			"name": "Stack name",
 			"overall": "Overall Score",
 			"sovereignty": "Sovereignty",
 			"adoption": "Adoption",
@@ -241,6 +241,20 @@
 			"unknown": "Unknown",
 			"layerBreakdown": "Layer breakdown",
 			"roles": "Roles"
+		},
+		"custom": {
+			"addDep": "Add dep",
+			"delete": "Delete stack",
+			"item": "Select dep",
+			"manageAria": "Manage custom stacks",
+			"name": "Stack name",
+			"nameTaken": "Name already exists or is invalid.",
+			"removeDep": "Remove dep",
+			"rename": "Rename stack",
+			"renameSave": "Save name",
+			"save": "Create stack",
+			"saved": "Stack saved.",
+			"selectedAria": "Selected deps"
 		}
 	},
 	"pages": {
@@ -312,7 +326,7 @@
 					"sunset": "Sunset"
 				},
 				"stack": "Stack",
-				"item": "Item",
+				"item": "Select dep",
 				"saveSelection": "Save assessment for selected stack/item",
 				"saveHint": "Please select stack and item before saving.",
 				"saveSuccess": "Assessment saved locally for stack/item.",

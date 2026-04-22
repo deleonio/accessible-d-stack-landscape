@@ -1,42 +1,70 @@
-import { KolButton } from '@public-ui/preact';
+import { KolButton, KolInputText } from '@public-ui/preact';
+import type { ComponentChildren } from 'preact';
 import { useLocation } from 'preact-iso';
-import { useEffect, useMemo } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
-import { LocalStackComposer } from '../components/LocalStackComposer';
+import { AutoSingleSelect as KolSingleSelect } from '../components/AutoSingleSelect';
 import { StackExpose } from '../components/StackExpose';
 import { ITEMS, LAYERS, STACKS } from '../data/catalog';
 import { useLocalStacks } from '../hooks/useLocalStacks';
 import { useRouteAnnouncement } from '../hooks/useRouteAnnouncement';
 import { computeStackAvgScore, useStackMetrics } from '../hooks/useStackMetrics';
-import { Stack } from '../types';
+import { Item, Stack } from '../types';
 import { getLocalizedText } from '../utils';
 
 interface StackExposeWithMetricsProps {
+	children?: ComponentChildren;
 	stack: Stack;
 	isTop: boolean;
 	rank: number;
 }
 
-/**
- * Wrapper-Komponente, damit useStackMetrics nicht in einem map()-Callback aufgerufen wird.
- * Hooks müssen auf Component-Ebene aufgerufen werden.
- */
-function StackExposeWithMetrics({ stack, isTop, rank }: StackExposeWithMetricsProps) {
+function StackExposeWithMetrics({ stack, isTop, rank, children }: StackExposeWithMetricsProps) {
 	const metrics = useStackMetrics(stack, ITEMS, LAYERS);
-	return <StackExpose stack={stack} metrics={metrics} allLayers={LAYERS} isTop={isTop} rank={rank} />;
+	return (
+		<StackExpose stack={stack} metrics={metrics} allLayers={LAYERS} isTop={isTop} rank={rank}>
+			{children}
+		</StackExpose>
+	);
+}
+
+function isLocalStack(stack: Stack) {
+	return stack.id.startsWith('local-');
 }
 
 export function StackGalleryPage() {
 	const { i18n, t } = useTranslation();
 	const location = useLocation();
 	const selectedStackId = location.query.stack;
-	const { allStacks: localStacks, createLocalStack, deleteLocalStack } = useLocalStacks(ITEMS);
+	const {
+		allStacks: localStackCards,
+		localStacks,
+		createLocalStack,
+		deleteLocalStack,
+		renameLocalStack,
+		addItemToLocalStack,
+		removeItemFromLocalStack,
+	} = useLocalStacks(ITEMS);
+	const [newStackName, setNewStackName] = useState('');
+	const [createMessage, setCreateMessage] = useState('');
+	const [renameValues, setRenameValues] = useState<Record<string, string>>({});
+	const [selectedItemByStack, setSelectedItemByStack] = useState<Record<string, string>>({});
+
 	useRouteAnnouncement({ pageTitle: t('stackGallery.title') || 'Stacks' });
 
-	const allStacks = useMemo(() => [...STACKS, ...localStacks], [localStacks]);
+	const allStacks = useMemo(() => [...STACKS, ...localStackCards], [localStackCards]);
+	const localStackById = useMemo(() => new Map(localStacks.map((stack) => [`local-${stack.id}`, stack])), [localStacks]);
+
+	const itemOptions = useMemo(
+		() =>
+			ITEMS.map((item) => ({
+				label: getLocalizedText(item.name, i18n.language),
+				value: item.id,
+			})),
+		[i18n.language],
+	);
 
 	const stacksWithScores = useMemo(() => allStacks.map((stack) => ({ stack, avgScore: computeStackAvgScore(stack, ITEMS) })), [allStacks]);
-
 	const rankedStacks = useMemo(() => [...stacksWithScores].sort((a, b) => b.avgScore - a.avgScore), [stacksWithScores]);
 
 	useEffect(() => {
@@ -51,6 +79,29 @@ export function StackGalleryPage() {
 		});
 	}, [selectedStackId]);
 
+	const createStack = () => {
+		const created = createLocalStack(newStackName);
+		if (!created) {
+			setCreateMessage(t('stackGallery.custom.nameTaken'));
+			return;
+		}
+		setCreateMessage(t('stackGallery.custom.saved'));
+		setNewStackName('');
+	};
+
+	const renameStack = (stackId: string) => {
+		const nameValue = renameValues[stackId] ?? '';
+		const renamed = renameLocalStack(stackId, nameValue);
+		if (!renamed) {
+			setCreateMessage(t('stackGallery.custom.nameTaken'));
+		}
+	};
+
+	const selectedItems = (stack: Stack): Item[] => {
+		const itemIdSet = new Set(stack.items.map((item) => item.itemId));
+		return ITEMS.filter((item) => itemIdSet.has(item.id));
+	};
+
 	return (
 		<main id="main-content" className="stack-gallery" aria-labelledby="gallery-page-title">
 			<div className="stack-gallery__header">
@@ -60,26 +111,79 @@ export function StackGalleryPage() {
 				<p className="stack-gallery__subtitle">{t('stackGallery.subtitle')}</p>
 			</div>
 
-			<section className="mb-6" aria-label={t('stackGallery.custom.manageAria', 'Lokale Stacks verwalten')}>
-				<LocalStackComposer onCreate={createLocalStack} />
-				{localStacks.length > 0 && (
-					<ul className="mt-4 flex flex-col gap-2">
-						{localStacks.map((stack) => (
-							<li key={stack.id} className="flex items-center justify-between gap-3">
-								<span>{getLocalizedText(stack.name, i18n.language)}</span>
-								<KolButton _label={t('stackGallery.custom.delete', 'Löschen')} _variant="secondary" _on={{ onClick: () => deleteLocalStack(stack.id) }} />
-							</li>
-						))}
-					</ul>
-				)}
+			<section className="mb-6" aria-label={t('stackGallery.custom.manageAria')}>
+				<div className="flex items-end gap-2">
+					<KolInputText
+						_label={t('stackGallery.custom.name')}
+						_value={newStackName}
+						_on={{ onInput: (_event: Event, value: unknown) => setNewStackName(typeof value === 'string' ? value : '') }}
+					/>
+					<KolButton _label={t('stackGallery.custom.save')} _on={{ onClick: createStack }} />
+				</div>
+				{createMessage && <p className="mt-2">{createMessage}</p>}
 			</section>
 
 			<ol className="stack-gallery__list" aria-label={t('stackGallery.listAria')}>
-				{rankedStacks.map(({ stack }, index) => (
-					<li key={stack.id} className="stack-gallery__item" id={`stack-${stack.id}`}>
-						<StackExposeWithMetrics stack={stack} isTop={index === 0} rank={index + 1} />
-					</li>
-				))}
+				{rankedStacks.map(({ stack }, index) => {
+					const editable = isLocalStack(stack);
+					const rawLocalStack = localStackById.get(stack.id);
+					const selectedItemId = selectedItemByStack[stack.id] ?? '';
+					const assignedItemIds = new Set(stack.items.map((item) => item.itemId));
+
+					return (
+						<li key={stack.id} className="stack-gallery__item" id={`stack-${stack.id}`}>
+							<StackExposeWithMetrics stack={stack} isTop={index === 0} rank={index + 1}>
+								{editable && rawLocalStack && (
+									<div className="mt-4 flex flex-col gap-3" aria-label={t('stackGallery.custom.manageAria')}>
+										<div className="flex items-end gap-2">
+											<KolInputText
+												_label={t('stackGallery.custom.rename')}
+												_value={renameValues[stack.id] ?? rawLocalStack.name}
+												_on={{
+													onInput: (_event: Event, value: unknown) =>
+														setRenameValues((prev) => ({ ...prev, [stack.id]: typeof value === 'string' ? value : '' })),
+												}}
+											/>
+											<KolButton _label={t('stackGallery.custom.renameSave')} _variant="secondary" _on={{ onClick: () => renameStack(stack.id) }} />
+										</div>
+										<div className="flex items-end gap-2">
+											<KolSingleSelect
+												_label={t('stackGallery.custom.item')}
+												_options={itemOptions}
+												_value={selectedItemId}
+												_on={{
+													onChange: (_event: Event, value: unknown) =>
+														setSelectedItemByStack((prev) => ({ ...prev, [stack.id]: typeof value === 'string' ? value : '' })),
+												}}
+											/>
+											<KolButton
+												_label={t('stackGallery.custom.addDep')}
+												_variant="secondary"
+												_disabled={!selectedItemId || assignedItemIds.has(selectedItemId)}
+												_on={{ onClick: () => addItemToLocalStack(stack.id, selectedItemId) }}
+											/>
+										</div>
+										{selectedItems(stack).length > 0 && (
+											<ul className="flex flex-col gap-1" aria-label={t('stackGallery.custom.selectedAria')}>
+												{selectedItems(stack).map((item) => (
+													<li key={`${stack.id}-${item.id}`} className="flex items-center justify-between gap-2">
+														<span>{getLocalizedText(item.name, i18n.language)}</span>
+														<KolButton
+															_label={t('stackGallery.custom.removeDep')}
+															_variant="normal"
+															_on={{ onClick: () => removeItemFromLocalStack(stack.id, item.id) }}
+														/>
+													</li>
+												))}
+											</ul>
+										)}
+										<KolButton _label={t('stackGallery.custom.delete')} _variant="normal" _on={{ onClick: () => deleteLocalStack(stack.id) }} />
+									</div>
+								)}
+							</StackExposeWithMetrics>
+						</li>
+					);
+				})}
 			</ol>
 		</main>
 	);

@@ -91,7 +91,7 @@
 		"list": "Lista",
 		"sort": {
 			"label": "Ordenar por",
-			"name": "Nombre",
+			"name": "Nombre del stack",
 			"score": "Puntaje",
 			"asc": "↑ Ascendente",
 			"desc": "↓ Descendente"
@@ -219,6 +219,20 @@
 			"unknown": "Desconocido",
 			"layerBreakdown": "Desglose de capas",
 			"roles": "Roles"
+		},
+		"custom": {
+			"addDep": "Añadir dep",
+			"delete": "Eliminar stack",
+			"item": "Seleccionar dep",
+			"manageAria": "Gestionar stacks personalizados",
+			"name": "Nombre del stack",
+			"nameTaken": "El nombre ya existe o no es válido.",
+			"removeDep": "Quitar dep",
+			"rename": "Renombrar stack",
+			"renameSave": "Guardar nombre",
+			"save": "Crear stack",
+			"saved": "Stack guardado.",
+			"selectedAria": "Deps seleccionadas"
 		}
 	},
 	"pages": {
@@ -290,7 +304,7 @@
 					"sunset": "Sunset"
 				},
 				"stack": "Stack",
-				"item": "Item",
+				"item": "Seleccionar dep",
 				"saveSelection": "Save assessment for selected stack/item",
 				"saveHint": "Please select stack and item before saving.",
 				"saveSuccess": "Assessment saved locally for stack/item.",

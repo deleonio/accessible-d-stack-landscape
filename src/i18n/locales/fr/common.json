@@ -110,7 +110,7 @@
 		"list": "Liste",
 		"sort": {
 			"label": "Trier par",
-			"name": "Nom",
+			"name": "Nom du stack",
 			"score": "Score",
 			"asc": "↑ Croissant",
 			"desc": "↓ Décroissant"
@@ -224,6 +224,20 @@
 			"unknown": "Inconnu",
 			"layerBreakdown": "Répartition par couche",
 			"roles": "Rôles"
+		},
+		"custom": {
+			"addDep": "Ajouter une dépendance",
+			"delete": "Supprimer le stack",
+			"item": "Sélectionner une dépendance",
+			"manageAria": "Gérer les stacks personnalisés",
+			"name": "Nom du stack",
+			"nameTaken": "Le nom existe déjà ou est invalide.",
+			"removeDep": "Retirer la dépendance",
+			"rename": "Renommer le stack",
+			"renameSave": "Enregistrer le nom",
+			"save": "Créer le stack",
+			"saved": "Stack enregistré.",
+			"selectedAria": "Dépendances sélectionnées"
 		}
 	},
 	"pages": {
@@ -295,7 +309,7 @@
 					"sunset": "Sunset"
 				},
 				"stack": "Stack",
-				"item": "Item",
+				"item": "Sélectionner une dépendance",
 				"saveSelection": "Save assessment for selected stack/item",
 				"saveHint": "Please select stack and item before saving.",
 				"saveSuccess": "Assessment saved locally for stack/item.",
